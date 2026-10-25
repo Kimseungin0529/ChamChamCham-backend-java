@@ -1,0 +1,150 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: false
+    open-in-view: false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    auth-code-expiration-millis: 1800000
+    verified-state-expiration-millis: 1800000
+
+  ai:
+    model:
+      embedding: ollama
+    ollama:
+      base-url: ${OLLAMA_BASE_URL}
+      embedding:
+        model: ${RAG_EMBEDDING_MODEL:bge-m3}
+    vectorstore:
+      pgvector:
+        initialize-schema: false
+        schema-validation: true
+        schema-name: public
+        table-name: ${RAG_VECTOR_TABLE:vector_store}
+        dimensions: ${RAG_EMBEDDING_DIMENSION:1024}
+        distance-type: COSINE_DISTANCE
+        index-type: HNSW
+jwt:
+  secret: ${PROD_JWT_SECRET}
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
+
+app:
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS}
+  auth:
+    refresh-cookie-secure: ${REFRESH_COOKIE_SECURE:true}
+  voice-session:
+    max-rounds: ${VOICE_SESSION_MAX_ROUNDS:20}
+    max-duration-seconds: ${VOICE_SESSION_MAX_DURATION_SECONDS:330}
+  mail:
+    from-name: ${PROD_MAIL_FROM_NAME:Example}
+  media:
+    max-image-bytes: 10485760
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+  secure: true
+
+
+# 기상청 4개 서비스가 인증키/타임아웃을 공유하므로 base-url만 나눠 한 벌로 둔다.
+kma:
+  service-key: ${KMA_SERVICE_KEY}
+  connect-timeout-millis: ${KMA_CONNECT_TIMEOUT_MILLIS:2000}
+  read-timeout-millis: ${KMA_READ_TIMEOUT_MILLIS:2000}
+  base-url:
+    vilage-fcst: https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0
+    mid-fcst: https://apis.data.go.kr/1360000/MidFcstInfoService
+    asos: https://apis.data.go.kr/1360000/AsosDalyInfoService
+    uv: https://apis.data.go.kr/1360000/LivingWthrIdxServiceV5
+
+psis:
+  pesticide:
+    base-url: ${PSIS_PESTICIDE_BASE_URL:}
+    service-key: ${PSIS_PESTICIDE_SERVICE_KEY:}
+    timeout-millis: ${PSIS_PESTICIDE_TIMEOUT_MILLIS:10000}
+
+openai:
+  realtime:
+    api-key: ${OPENAI_API_KEY}
+    base-url: https://api.openai.com
+    model: gpt-realtime
+    voice: marin
+    connect-timeout-millis: ${OPENAI_CONNECT_TIMEOUT_MILLIS:3000}
+    read-timeout-millis: ${OPENAI_READ_TIMEOUT_MILLIS:8000}
+
+auth:
+  kakao:
+    oidc:
+      issuer: https://kauth.kakao.com
+      audience: ${KAKAO_NATIVE_APP_KEY}
+      discovery-uri: https://kauth.kakao.com/.well-known/openid-configuration
+      allowed-clock-skew-seconds: 60
+      nonce-replay-ttl-seconds: 600
+      user-info-uri: ${KAKAO_USER_INFO_URI:https://kapi.kakao.com/v1/oidc/userinfo}
+      connect-timeout-millis: ${KAKAO_CONNECT_TIMEOUT_MILLIS:2000}
+      read-timeout-millis: ${KAKAO_READ_TIMEOUT_MILLIS:2000}
+  apple:
+    oidc:
+      issuer: https://appleid.apple.com
+      audience: ${APPLE_CLIENT_ID}
+      jwks-uri: https://appleid.apple.com/auth/keys
+      allowed-clock-skew-seconds: 60
+  naver:
+    profile-uri: ${NAVER_PROFILE_URI:https://openapi.naver.com/v1/nid/me}
+    connect-timeout-millis: ${NAVER_CONNECT_TIMEOUT_MILLIS:2000}
+    read-timeout-millis: ${NAVER_READ_TIMEOUT_MILLIS:2000}
+
+rag:
+  embedding:
+    model: ${RAG_EMBEDDING_MODEL:bge-m3}
+  chat:
+    model: ${RAG_CHAT_MODEL:openclaw/agri-rag-coach}
+  retrieval:
+    top-k-default: ${RAG_TOP_K_DEFAULT:6}
+    top-k-max: ${RAG_TOP_K_MAX:20}
+    low-similarity-threshold: ${RAG_LOW_SIMILARITY_THRESHOLD:0.5}
+  execution:
+    core-pool-size: ${RAG_EXECUTOR_CORE_SIZE:2}
+    max-pool-size: ${RAG_EXECUTOR_MAX_SIZE:4}
+    queue-capacity: ${RAG_EXECUTOR_QUEUE_CAPACITY:32}
+    pending-timeout-millis: ${RAG_PENDING_TIMEOUT_MILLIS:240000}
+    scan-interval-millis: ${RAG_PENDING_SCAN_INTERVAL_MILLIS:60000}
+
+openclaw:
+  base-url: ${OPENCLAW_BASE_URL}
+  api-key: ${OPENCLAW_API_KEY}
+  agent-id: ${OPENCLAW_AGENT_ID:agri-rag-coach}
+  connect-timeout-millis: ${OPENCLAW_CONNECT_TIMEOUT_MILLIS:3000}
+  read-timeout-millis: ${OPENCLAW_READ_TIMEOUT_MILLIS:60000}
