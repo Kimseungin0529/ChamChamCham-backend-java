@@ -141,6 +141,21 @@ class MemberControllerTest(
     }
 
     @Test
+    fun `update profile reports experience level field above one hundred`() {
+        mockMvc.perform(
+            put("/api/v1/members/me/profile")
+                .with(authenticatedMember(memberId.toString()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(profileJson().replace("\"experienceLevel\":2", "\"experienceLevel\":101"))
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath("$.error.code", equalTo("COMMON_001")))
+            .andExpect(jsonPath("$.error.detail.field", equalTo("experienceLevel")))
+
+        verifyNoInteractions(memberProfileService)
+    }
+
+    @Test
     fun `update profile allows experience level up to one hundred when birthDate is absent`() {
         given(
             memberProfileService.updateMyProfile(

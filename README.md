@@ -11,7 +11,7 @@ ChamChamCham의 백엔드만 별도 개인 저장소에서 관리한다. 프런�
 
 현재 코드는 Kotlin 원본을 가져온 기준 상태다. Java 21 전환은 [전환 계획](docs/java-migration-plan.md)에 따라 진행한다. `*.gradle.kts`는 빌드 스크립트이며 애플리케이션 소스 전환과 별도로 판단한다.
 
-가져온 코드의 첫 전체 테스트에서는 378개 중 1개가 실패하고 1개가 건너뛰어졌다. `AuthControllerValidationTest`의 `experienceLevel` 오류 필드명 기대값과 실제 응답(`experienceLevelWithinAge`)이 다르다. Java 전환의 기준선을 만들기 전에 별도 변경으로 원인을 확인한다.
+가져온 코드의 첫 전체 테스트에서 `experienceLevel` 범위 검증과 나이 검증이 동시에 실패해 응답 필드명이 흔들리는 문제가 발견되었다. 이 검증 중복을 별도 변경으로 고친 후 `./gradlew test` 전체 실행이 통과했다. Java 전환은 이 기준선에서 시작한다.
 
 ## 구성
 

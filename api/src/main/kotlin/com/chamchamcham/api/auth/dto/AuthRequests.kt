@@ -97,8 +97,9 @@ object AuthRequests {
     ) {
         @AssertTrue(message = "귀농연차는 만 나이를 초과할 수 없습니다")
         fun isExperienceLevelWithinAge(): Boolean {
+            if (experienceLevel == null || experienceLevel !in 0..100) return true
             val age = birthDate?.let { Period.between(it, LocalDate.now()).years }
-            return age == null || experienceLevel == null || experienceLevel <= age
+            return age == null || experienceLevel <= age
         }
     }
 
