@@ -30,3 +30,9 @@ batch        예약·일괄 작업
 ```
 
 실행 전 로컬 DB·Redis·외부 서비스 설정을 확인한다. 원본 운영 서버, 운영 데이터베이스, 운영 API를 시험 대상으로 사용하지 않는다. 작업 규칙은 [AGENTS.md](AGENTS.md), 단계별 절차는 [AI 개발 절차](docs/ai-workflow.md)에 있다.
+
+## 브랜치 흐름
+
+`dev` → `feat/*` · `fix/*` · `refactor/*` · `chore/*` → PR → `dev` → 출시 PR → `main`
+
+`main`은 배포 서버용, `dev`는 개발 서버용 기준 브랜치다. 현재 CI는 테스트만 실행한다. 실제 서버 배포 연결은 아직 구성하지 않았다. 자세한 규칙은 [AGENTS.md](AGENTS.md), 현재 작업 인계는 [로컬 작업 인계](docs/local-workspace-handoff.md)를 따른다.
