@@ -97,7 +97,7 @@ class VoiceSessionServiceTest {
         `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
-            VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)
+            VoiceRecordSession(sessionId, toSave.member, toSave.status)
         }
 
         val result = service.create(VoiceSessionCommand.Create(memberId = memberId))
@@ -169,13 +169,13 @@ class VoiceSessionServiceTest {
         `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
-            VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)
+            VoiceRecordSession(sessionId, toSave.member, toSave.status)
         }
     }
 
     @Test
     fun `대화 턴 제출 시 세션은 확인대기 상태가 되고 누락필드를 계산한다`() {
-        val session = VoiceRecordSession(id = sessionId, member = member, status = VoiceSessionStatus.CREATED)
+        val session = VoiceRecordSession(sessionId, member, VoiceSessionStatus.CREATED)
         `when`(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session)
 
         val result = service.submitTurns(
@@ -194,7 +194,7 @@ class VoiceSessionServiceTest {
 
     @Test
     fun `확인대기 상태의 세션을 승인하면 영농일지를 생성하고 세션을 완료 처리한다`() {
-        val session = VoiceRecordSession(id = sessionId, member = member, status = VoiceSessionStatus.WAITING_CONFIRMATION)
+        val session = VoiceRecordSession(sessionId, member, VoiceSessionStatus.WAITING_CONFIRMATION)
         val record = FarmingRecord(
             recordId,
             member,
@@ -228,7 +228,7 @@ class VoiceSessionServiceTest {
 
     @Test
     fun `생성 상태가 아닌 세션에 대화 턴을 제출하려 하면 예외를 던진다`() {
-        val session = VoiceRecordSession(id = sessionId, member = member, status = VoiceSessionStatus.WAITING_CONFIRMATION)
+        val session = VoiceRecordSession(sessionId, member, VoiceSessionStatus.WAITING_CONFIRMATION)
         `when`(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session)
 
         val exception = assertThrows(BusinessException::class.java) {
@@ -247,7 +247,7 @@ class VoiceSessionServiceTest {
 
     @Test
     fun `확인대기 상태가 아닌 세션을 승인하려 하면 예외를 던진다`() {
-        val session = VoiceRecordSession(id = sessionId, member = member, status = VoiceSessionStatus.CREATED)
+        val session = VoiceRecordSession(sessionId, member, VoiceSessionStatus.CREATED)
         `when`(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session)
 
         val exception = assertThrows(BusinessException::class.java) {
@@ -259,7 +259,7 @@ class VoiceSessionServiceTest {
 
     @Test
     fun `완료된 세션은 취소할 수 없다`() {
-        val session = VoiceRecordSession(id = sessionId, member = member, status = VoiceSessionStatus.COMPLETED)
+        val session = VoiceRecordSession(sessionId, member, VoiceSessionStatus.COMPLETED)
         `when`(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session)
 
         val exception = assertThrows(BusinessException::class.java) {

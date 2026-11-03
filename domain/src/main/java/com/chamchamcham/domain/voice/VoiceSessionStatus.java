@@ -1,10 +1,9 @@
-package com.chamchamcham.domain.voice
+package com.chamchamcham.domain.voice;
 
-enum class VoiceSessionStatus {
+public enum VoiceSessionStatus {
     CREATED,
     PROCESSING,
     WAITING_CONFIRMATION,
     COMPLETED,
     CANCELLED,
-    FAILED,
-}
+    FAILED}
