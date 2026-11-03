@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 class PolicyRecommendationSortTest {
     @Test
     void exactKeysResolveToSort() {
-        assertThat(PolicyRecommendationSort.Companion.fromKey("RECOMMENDED"))
+        assertThat(PolicyRecommendationSort.fromKey("RECOMMENDED"))
             .isEqualTo(PolicyRecommendationSort.RECOMMENDED);
-        assertThat(PolicyRecommendationSort.Companion.fromKey("LATEST"))
+        assertThat(PolicyRecommendationSort.fromKey("LATEST"))
             .isEqualTo(PolicyRecommendationSort.LATEST);
     }
 
@@ -21,12 +21,12 @@ class PolicyRecommendationSortTest {
     @EmptySource
     @ValueSource(strings = {"BAD", "recommended", "latest", " RECOMMENDED", "LATEST "})
     void unknownOrNonExactKeysReturnNull(String key) {
-        assertThat(PolicyRecommendationSort.Companion.fromKey(key)).isNull();
+        assertThat(PolicyRecommendationSort.fromKey(key)).isNull();
     }
 
     @Test
     void nullKeyIsRejected() {
         assertThatNullPointerException()
-            .isThrownBy(() -> PolicyRecommendationSort.Companion.fromKey(null));
+            .isThrownBy(() -> PolicyRecommendationSort.fromKey(null));
     }
 }
