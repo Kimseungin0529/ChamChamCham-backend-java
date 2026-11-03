@@ -297,10 +297,10 @@ class PolicyRecommendationQueryRepositoryTest @Autowired constructor(
         )
         return persist(
             PolicyRecommendation(
-                member = member,
-                policyProgram = program,
-                score = BigDecimal(score),
-                reason = "추천 사유"
+                member,
+                program,
+                BigDecimal(score),
+                "추천 사유"
             ),
             createdAt
         )

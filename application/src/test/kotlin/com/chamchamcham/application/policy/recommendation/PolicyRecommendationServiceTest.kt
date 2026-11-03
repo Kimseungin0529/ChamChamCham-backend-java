@@ -894,11 +894,11 @@ class PolicyRecommendationServiceTest {
         createdAt: LocalDateTime = LocalDateTime.of(2026, 3, 15, 9, 0)
     ): PolicyRecommendation =
         PolicyRecommendation(
-            id = id,
-            member = member,
-            policyProgram = program,
-            score = score,
-            reason = "청년농 대상이고 재배 품목이 맞아요."
+            id,
+            member,
+            program,
+            score,
+            "청년농 대상이고 재배 품목이 맞아요."
         ).also { setCreatedAt(it, createdAt) }
 
     private fun setCreatedAt(entity: PolicyRecommendation, createdAt: LocalDateTime) {

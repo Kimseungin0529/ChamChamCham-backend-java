@@ -181,10 +181,10 @@ class PolicyRecommendationService(
                 return@mapNotNull null
             }
             PolicyRecommendation(
-                member = member,
-                policyProgram = program,
-                score = score.score,
-                reason = score.reason
+                member,
+                program,
+                score.score,
+                score.reason
             )
         }
 
