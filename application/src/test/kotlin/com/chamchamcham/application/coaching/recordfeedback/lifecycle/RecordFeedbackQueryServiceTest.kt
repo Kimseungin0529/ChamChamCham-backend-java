@@ -127,13 +127,17 @@ class RecordFeedbackQueryServiceTest {
 
     private fun readyFeedback(): RecordFeedback = feedback().also {
         it.markReady(
-            goodPointBasis = "점적관수",
-            goodPointText = "점적관수로 토양 수분을 확인한 점이 좋았어요.",
-            nextActions = listOf(
+            "점적관수",
+            "점적관수로 토양 수분을 확인한 점이 좋았어요.",
+            listOf(
                 RecordFeedbackNextActionDraft(RecordFeedbackActionDue.TODAY, RecordFeedbackActionCategory.IRRIGATION, "토양 표면", "오후에 토양 표면이 마르는지 한 번 더 확인하세요."),
                 RecordFeedbackNextActionDraft(RecordFeedbackActionDue.THIS_WEEK, RecordFeedbackActionCategory.CULTIVATION, "배수로", "이번 주 안에 배수로 주변의 막힌 흙을 정리하세요."),
             ),
-            citations = emptyList(), auditStatus = "PASS", auditWarnings = emptyList(), modelName = "chat", embeddingModel = "embed",
+            emptyList(),
+            "PASS",
+            emptyList(),
+            "chat",
+            "embed"
         )
     }
 
@@ -142,7 +146,7 @@ class RecordFeedbackQueryServiceTest {
         sourceRevision: Long = 3,
         failureCode: String? = null,
     ): RecordFeedback {
-        val feedback = RecordFeedback(id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = sourceRevision)
+        val feedback = RecordFeedback(UUID.randomUUID(), member, record, RecordFeedbackStatus.PENDING, sourceRevision)
         when (status) {
             RecordFeedbackStatus.FAILED -> feedback.markFailed(requireNotNull(failureCode))
             RecordFeedbackStatus.STALE -> feedback.markStale()

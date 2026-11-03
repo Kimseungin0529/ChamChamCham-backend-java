@@ -149,7 +149,7 @@ class RecordFeedbackGenerationProcessorTest {
 
     @Test
     fun `processor marks malformed snapshot as failed`() {
-        val feedback = RecordFeedback(id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = 3)
+        val feedback = RecordFeedback(UUID.randomUUID(), member, record, RecordFeedbackStatus.PENDING, 3)
         feedback.attachInputSnapshot(mapOf("schemaVersion" to "invalid"))
         val event = event(feedback)
         stubFeedback(event, feedback)
@@ -161,7 +161,11 @@ class RecordFeedbackGenerationProcessorTest {
     }
 
     private fun pendingFeedback(): RecordFeedback = RecordFeedback(
-        id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = 3,
+        UUID.randomUUID(),
+        member,
+        record,
+        RecordFeedbackStatus.PENDING,
+        3
     ).also { it.attachInputSnapshot(objectMapper.convertValue(context(), SNAPSHOT_TYPE)) }
 
     private fun event(feedback: RecordFeedback) = RecordFeedbackGenerationRequested(

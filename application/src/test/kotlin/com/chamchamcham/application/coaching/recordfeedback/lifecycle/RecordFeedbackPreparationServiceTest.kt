@@ -151,7 +151,11 @@ class RecordFeedbackPreparationServiceTest {
     )
 
     private fun feedback() = RecordFeedback(
-        id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = SOURCE_REVISION,
+        UUID.randomUUID(),
+        member,
+        record,
+        RecordFeedbackStatus.PENDING,
+        SOURCE_REVISION
     )
 
     private fun event(feedback: RecordFeedback) = RecordFeedbackPreparationRequested(

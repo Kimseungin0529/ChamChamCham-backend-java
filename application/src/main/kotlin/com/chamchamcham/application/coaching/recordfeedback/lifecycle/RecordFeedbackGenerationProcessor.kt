@@ -84,21 +84,16 @@ class RecordFeedbackGenerationProcessor(
             }
 
             feedback.markReady(
-                goodPointBasis = generationResult.content.goodPoint.basis,
-                goodPointText = generationResult.content.goodPoint.text,
-                nextActions = generationResult.content.nextActions.map {
-                    RecordFeedbackNextActionDraft(
-                        due = it.due,
-                        category = it.category,
-                        basis = it.basis,
-                        text = it.text,
-                    )
+                generationResult.content.goodPoint.basis,
+                generationResult.content.goodPoint.text,
+                generationResult.content.nextActions.map {
+                    RecordFeedbackNextActionDraft(it.due, it.category, it.basis, it.text)
                 },
-                citations = generationResult.citations,
-                auditStatus = generationResult.auditStatus(),
-                auditWarnings = generationResult.auditWarnings,
-                modelName = generationResult.modelInfo.chat,
-                embeddingModel = generationResult.modelInfo.embedding,
+                generationResult.citations,
+                generationResult.auditStatus(),
+                generationResult.auditWarnings,
+                generationResult.modelInfo.chat,
+                generationResult.modelInfo.embedding,
             )
         }
     }

@@ -112,7 +112,7 @@ class RecordFeedbackLifecycleServiceTest {
         status: RecordFeedbackStatus = RecordFeedbackStatus.PENDING,
         sourceRevision: Long = 1,
     ): RecordFeedback {
-        val feedback = RecordFeedback(id = id, member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = sourceRevision)
+        val feedback = RecordFeedback(id, member, record, RecordFeedbackStatus.PENDING, sourceRevision)
         if (status == RecordFeedbackStatus.READY) {
             feedback.markReady("관수 기록", "관수 기록이 구체적입니다.", actions(), emptyList(), "PASS", emptyList(), "chat", "embed")
         }
