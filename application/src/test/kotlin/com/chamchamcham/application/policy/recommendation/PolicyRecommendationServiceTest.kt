@@ -827,13 +827,19 @@ class PolicyRecommendationServiceTest {
 
     private fun syncJob(id: UUID): PolicySyncJob =
         PolicySyncJob(
-            id = id,
-            source = PolicySource.NONGUP_EZ,
-            targetYear = "2026",
-            triggerType = PolicySyncTriggerType.SCHEDULED,
-            status = PolicySyncJobStatus.SUCCEEDED,
-            startedAt = LocalDateTime.of(2026, 4, 1, 0, 0),
-            finishedAt = LocalDateTime.of(2026, 4, 1, 0, 1)
+            id,
+            PolicySource.NONGUP_EZ,
+            "2026",
+            PolicySyncTriggerType.SCHEDULED,
+            PolicySyncJobStatus.SUCCEEDED,
+            LocalDateTime.of(2026, 4, 1, 0, 0),
+            LocalDateTime.of(2026, 4, 1, 0, 1),
+            0,
+            0,
+            0,
+            0,
+            null,
+            null
         )
 
     private fun recommendableProgram(

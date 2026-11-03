@@ -135,19 +135,19 @@ class PolicySyncService(
             transactionTemplate.execute {
                 policySyncJobRepository.save(
                     PolicySyncJob(
-                        source = PolicySource.NONGUP_EZ,
-                        targetYear = targetYear,
-                        triggerType = triggerType,
-                        createdByMemberId = createdByMemberId
+                        PolicySource.NONGUP_EZ,
+                        targetYear,
+                        triggerType,
+                        createdByMemberId
                     )
                 )
             } ?: error("Transaction did not return a policy sync job")
         } catch (exception: Exception) {
             val failedJob = PolicySyncJob(
-                source = PolicySource.NONGUP_EZ,
-                targetYear = Year.now(clock).value.toString(),
-                triggerType = triggerType,
-                createdByMemberId = createdByMemberId
+                PolicySource.NONGUP_EZ,
+                Year.now(clock).value.toString(),
+                triggerType,
+                createdByMemberId
             )
             failedJob.fail(exception.message ?: exception.javaClass.simpleName)
             transactionTemplate.execute {
@@ -290,10 +290,10 @@ class PolicySyncService(
     ) {
         transactionTemplate.executeWithoutResult {
             findJob(jobId).succeed(
-                totalCount = totalCount,
-                syncedCount = syncedCount,
-                detailSuccessCount = detailSuccessCount,
-                detailFailureCount = detailFailureCount
+                totalCount,
+                syncedCount,
+                detailSuccessCount,
+                detailFailureCount
             )
         }
     }
