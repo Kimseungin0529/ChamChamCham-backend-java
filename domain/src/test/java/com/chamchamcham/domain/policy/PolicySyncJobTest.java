@@ -11,6 +11,24 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 class PolicySyncJobTest {
     @Test
+    void newJobUsesTheExistingDefaults() {
+        var before = LocalDateTime.now();
+
+        var job = new PolicySyncJob(PolicySource.NONGUP_EZ, "2026", PolicySyncTriggerType.SCHEDULED, null);
+
+        assertThat(job.getId()).isNull();
+        assertThat(job.getStatus()).isEqualTo(PolicySyncJobStatus.RUNNING);
+        assertThat(job.getStartedAt()).isBetween(before, LocalDateTime.now());
+        assertThat(job.getFinishedAt()).isNull();
+        assertThat(job.getTotalCount()).isZero();
+        assertThat(job.getSyncedCount()).isZero();
+        assertThat(job.getDetailSuccessCount()).isZero();
+        assertThat(job.getDetailFailureCount()).isZero();
+        assertThat(job.getErrorMessage()).isNull();
+        assertThat(job.getCreatedByMemberId()).isNull();
+    }
+
+    @Test
     void succeedRecordsAllCountersAndFinishedTimestamp() {
         var job = runningJob();
         var before = LocalDateTime.now();

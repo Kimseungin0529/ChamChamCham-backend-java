@@ -194,19 +194,19 @@ class PolicySyncServiceTest {
         `when`(policySyncJobRepository.save(any(PolicySyncJob::class.java))).thenAnswer { invocation ->
             val job = invocation.arguments[0] as PolicySyncJob
             persistedJob = PolicySyncJob(
-                id = jobId,
-                source = job.source,
-                targetYear = job.targetYear,
-                triggerType = job.triggerType,
-                status = job.status,
-                startedAt = job.startedAt,
-                finishedAt = job.finishedAt,
-                totalCount = job.totalCount,
-                syncedCount = job.syncedCount,
-                detailSuccessCount = job.detailSuccessCount,
-                detailFailureCount = job.detailFailureCount,
-                errorMessage = job.errorMessage,
-                createdByMemberId = job.createdByMemberId
+                jobId,
+                job.source,
+                job.targetYear,
+                job.triggerType,
+                job.status,
+                job.startedAt,
+                job.finishedAt,
+                job.totalCount,
+                job.syncedCount,
+                job.detailSuccessCount,
+                job.detailFailureCount,
+                job.errorMessage,
+                job.createdByMemberId
             )
             persistedJob
         }
@@ -221,13 +221,19 @@ class PolicySyncServiceTest {
         `when`(policySyncJobRepository.save(any(PolicySyncJob::class.java))).thenAnswer { invocation ->
             val job = invocation.arguments[0] as PolicySyncJob
             persistedJob = PolicySyncJob(
-                id = jobId,
-                source = job.source,
-                targetYear = job.targetYear,
-                triggerType = job.triggerType,
-                status = job.status,
-                startedAt = job.startedAt,
-                createdByMemberId = job.createdByMemberId
+                jobId,
+                job.source,
+                job.targetYear,
+                job.triggerType,
+                job.status,
+                job.startedAt,
+                null,
+                0,
+                0,
+                0,
+                0,
+                null,
+                job.createdByMemberId
             )
             persistedJob
         }
