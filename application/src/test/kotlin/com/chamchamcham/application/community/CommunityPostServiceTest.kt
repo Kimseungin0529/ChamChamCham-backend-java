@@ -688,10 +688,10 @@ class CommunityPostServiceTest {
         Member(id, "$id@example.com", null)
 
     private fun crop(id: UUID, name: String): Crop =
-        Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)
 
     private fun memberCrop(member: Member, crop: Crop): MemberCrop =
-        MemberCrop(member = member, farm = farm(member), crop = crop)
+        MemberCrop(member, farm(member), crop)
 
     private fun farmingRecord(member: Member, crop: Crop): FarmingRecord =
         FarmingRecord(

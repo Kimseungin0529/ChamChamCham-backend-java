@@ -40,7 +40,7 @@ class FarmingCycleReportSourceLoaderTest {
     private val cropId = uuid("00000000-0000-0000-0000-000000000103")
     private val member = Member(memberId, "member@example.com", null)
     private val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-    private val crop = Crop(id = cropId, externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+    private val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val scope = ReportScope(memberId = memberId, farmId = farmId, cropId = cropId)
 
     @Test

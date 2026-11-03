@@ -404,10 +404,10 @@ class MemberProfileServiceTest {
         )
 
     private fun crop(id: UUID, name: String): Crop =
-        Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)
 
     private fun memberCrop(farm: Farm, crop: Crop): MemberCrop =
-        MemberCrop(member = member, farm = farm, crop = crop)
+        MemberCrop(member, farm, crop)
 
     private fun updateCommand(
         profileMediaId: UUID?,

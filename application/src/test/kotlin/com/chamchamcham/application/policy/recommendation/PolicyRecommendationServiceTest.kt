@@ -797,18 +797,10 @@ class PolicyRecommendationServiceTest {
 
     private fun givenPolicyProfileData() {
         val farm = farm()
-        val crop = Crop(
-            externalNo = 1001,
-            name = "참당귀",
-            usePartCategory = CropUsePartCategory.ROOT_BARK
-        )
+        val crop = Crop(1001, "참당귀", CropUsePartCategory.ROOT_BARK)
         `when`(memberCropRepository.findAllWithCropByMemberId(memberId)).thenReturn(
             listOf(
-                MemberCrop(
-                    member = member,
-                    farm = farm,
-                    crop = crop
-                )
+                MemberCrop(member, farm, crop)
             )
         )
         `when`(farmRepository.findAllWithBoundaryCoordinatesByOwnerId(memberId)).thenReturn(listOf(farm))

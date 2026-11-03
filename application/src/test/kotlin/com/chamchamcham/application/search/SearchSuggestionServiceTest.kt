@@ -148,7 +148,7 @@ class SearchSuggestionServiceTest {
         agencies: List<String>,
     ) {
         `when`(cropRepository.findTop9ByNameContainingIgnoreCaseOrderByNameAsc(keyword))
-            .thenReturn(crops.map { Crop(externalNo = 0, name = it, usePartCategory = CropUsePartCategory.ROOT_BARK) })
+            .thenReturn(crops.map { Crop(0, it, CropUsePartCategory.ROOT_BARK) })
         `when`(
             pesticideQueryRepository.search(
                 PesticideQueryRepository.SearchCondition(keyword = keyword, cursor = null, size = 9)

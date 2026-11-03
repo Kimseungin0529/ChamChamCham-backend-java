@@ -61,7 +61,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
         otherMember = persist(Member("other@example.com", null), baseTime)
         farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), baseTime)
         crop = persist(
-            Crop(externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
             baseTime,
         )
     }
@@ -105,7 +105,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
             baseTime,
         )
         val otherCrop = persist(
-            Crop(externalNo = 423, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(423, "감초", CropUsePartCategory.ROOT_BARK),
             baseTime,
         )
         val newestAcrossScopes = persistCompleted(farm = farm, crop = crop, endedAt = day(40))
@@ -197,7 +197,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
             baseTime,
         )
         val otherCrop = persist(
-            Crop(externalNo = 423, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(423, "감초", CropUsePartCategory.ROOT_BARK),
             baseTime,
         )
         val latest = persistCompleted(

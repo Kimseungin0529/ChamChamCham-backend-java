@@ -54,12 +54,7 @@ class FarmingWorkReportQueryServiceTest {
 
     private val member = Member(memberId, "member@example.com", null)
     private val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-    private val crop = Crop(
-        id = cropId,
-        externalNo = 422,
-        name = "황기",
-        usePartCategory = CropUsePartCategory.ROOT_BARK,
-    )
+    private val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
 
     @Mock private lateinit var queryRepository: FarmingCycleReportQueryRepository
     @Mock private lateinit var sourceRepository: FarmingWorkReportSourceRepository
@@ -473,12 +468,7 @@ class FarmingWorkReportQueryServiceTest {
             name = "다른 농장",
             roadAddress = "서울시 서초구",
         )
-        val otherCrop = Crop(
-            id = id("202"),
-            externalNo = 423,
-            name = "감초",
-            usePartCategory = CropUsePartCategory.ROOT_BARK,
-        )
+        val otherCrop = Crop(id("202"), 423, "감초", CropUsePartCategory.ROOT_BARK)
         val firstFinalId = id("406")
         val secondFinalId = id("416")
         val firstItem = workItem(

@@ -219,12 +219,7 @@ class OnboardingServiceTest {
         externalNo: Int,
         name: String
     ): Crop {
-        return Crop(
-            id = id,
-            externalNo = externalNo,
-            name = name,
-            usePartCategory = CropUsePartCategory.ROOT_BARK
-        )
+        return Crop(id, externalNo, name, CropUsePartCategory.ROOT_BARK)
     }
 
     private fun completeOnboardingCommand(

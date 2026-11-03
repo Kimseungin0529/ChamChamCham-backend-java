@@ -29,12 +29,7 @@ class CropCatalogServiceTest {
         val cropId = UUID.fromString("20000000-0000-0000-0000-000000000001")
         `when`(cropRepository.findAllByOrderByNameAscExternalNoAsc()).thenReturn(
             listOf(
-                Crop(
-                    id = cropId,
-                    externalNo = 422,
-                    name = "참당귀",
-                    usePartCategory = CropUsePartCategory.ROOT_BARK
-                )
+                Crop(cropId, 422, "참당귀", CropUsePartCategory.ROOT_BARK)
             )
         )
 
@@ -67,12 +62,7 @@ class CropCatalogServiceTest {
         val cropId = UUID.fromString("20000000-0000-0000-0000-000000000002")
         `when`(cropRepository.findAllByUsePartCategoryOrderByNameAscExternalNoAsc(CropUsePartCategory.RHIZOME)).thenReturn(
             listOf(
-                Crop(
-                    id = cropId,
-                    externalNo = 107,
-                    name = "작약",
-                    usePartCategory = CropUsePartCategory.RHIZOME
-                )
+                Crop(cropId, 107, "작약", CropUsePartCategory.RHIZOME)
             )
         )
 

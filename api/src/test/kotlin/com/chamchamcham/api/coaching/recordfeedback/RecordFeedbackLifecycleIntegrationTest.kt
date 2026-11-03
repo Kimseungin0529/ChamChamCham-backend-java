@@ -102,9 +102,9 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         member = memberRepository.save(Member("feedback-lifecycle@example.com", null))
         farm = farmRepository.save(Farm(owner = member, name = "코칭 검증 밭", roadAddress = "강원도 평창군"))
         crop = cropRepository.save(
-            Crop(externalNo = 7101, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7101, "황기", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
         `when`(generationService.generate(anyContext(), org.mockito.Mockito.isNull())).thenReturn(generatedFeedback())
     }
 

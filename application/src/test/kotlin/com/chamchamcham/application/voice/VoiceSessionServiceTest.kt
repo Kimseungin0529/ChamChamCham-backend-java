@@ -87,14 +87,14 @@ class VoiceSessionServiceTest {
         )
         member = Member(memberId, "$memberId@example.com", null)
         farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-        crop = Crop(id = cropId, externalNo = cropId.hashCode(), name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        crop = Crop(cropId, cropId.hashCode(), "황기", CropUsePartCategory.ROOT_BARK)
     }
 
     @Test
     fun `세션 생성 시 회원의 농지-작물 정보를 함께 반환한다`() {
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findByOwnerId(memberId)).thenReturn(listOf(farm))
-        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member = member, farm = farm, crop = crop)))
+        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
             VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)
@@ -166,7 +166,7 @@ class VoiceSessionServiceTest {
     private fun stubCreateCollaborators() {
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findByOwnerId(memberId)).thenReturn(listOf(farm))
-        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member = member, farm = farm, crop = crop)))
+        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
             VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)

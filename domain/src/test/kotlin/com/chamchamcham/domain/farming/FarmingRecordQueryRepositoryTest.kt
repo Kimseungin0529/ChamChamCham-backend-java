@@ -540,7 +540,7 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
     }
 
     private fun crop(name: String, externalNo: Int): Crop =
-        Crop(externalNo = externalNo, name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(externalNo, name, CropUsePartCategory.ROOT_BARK)
 
     private fun condition(
         cropIds: List<UUID> = emptyList(),

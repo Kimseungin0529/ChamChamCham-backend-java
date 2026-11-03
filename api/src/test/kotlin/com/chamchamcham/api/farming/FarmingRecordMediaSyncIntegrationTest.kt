@@ -89,9 +89,9 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
         member = memberRepository.save(Member("media-sync-member@example.com", null))
         farm = farmRepository.save(Farm(owner = member, name = "미디어싱크농장", roadAddress = "충청북도 제천시"))
         crop = cropRepository.save(
-            Crop(externalNo = 7003, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7003, "감초", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
     }
 
     @Test

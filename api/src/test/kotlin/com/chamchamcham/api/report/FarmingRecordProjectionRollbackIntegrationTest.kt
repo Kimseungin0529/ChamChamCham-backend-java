@@ -91,9 +91,9 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
         member = memberRepository.save(Member("rollback-member@example.com", null))
         farm = farmRepository.save(Farm(owner = member, name = "롤백검증농장", roadAddress = "충청북도 제천시"))
         crop = cropRepository.save(
-            Crop(externalNo = 7002, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7002, "감초", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
         media = uploadedMediaRepository.save(
             UploadedMedia(
                 member,

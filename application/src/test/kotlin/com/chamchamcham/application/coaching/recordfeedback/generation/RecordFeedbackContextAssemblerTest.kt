@@ -533,12 +533,7 @@ class RecordFeedbackContextAssemblerTest {
             latitude = latitude,
             longitude = longitude,
         )
-        val crop = Crop(
-            id = cropId,
-            externalNo = 1001,
-            name = "참당귀",
-            usePartCategory = CropUsePartCategory.ROOT_BARK,
-        )
+        val crop = Crop(cropId, 1001, "참당귀", CropUsePartCategory.ROOT_BARK)
         record = FarmingRecord(
             id = recordId,
             member = member,

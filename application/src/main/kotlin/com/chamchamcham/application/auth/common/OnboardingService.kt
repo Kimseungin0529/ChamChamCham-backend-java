@@ -68,11 +68,7 @@ class OnboardingService(
         val farm = farmRepository.save(command.farm.toFarm(member))
         memberCropRepository.saveAll(
             crops.map { crop ->
-                MemberCrop(
-                    member = member,
-                    farm = farm,
-                    crop = crop
-                )
+                MemberCrop(member, farm, crop)
             }
         )
 

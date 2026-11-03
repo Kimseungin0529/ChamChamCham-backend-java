@@ -318,7 +318,7 @@ class ReportFeedbackContextAssemblerTest {
     ): FarmingCycleReport {
         val member = Member(memberId, "member@example.com", null)
         val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "강원도 평창군")
-        val crop = Crop(id = cropId, externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
         val harvest = FarmingRecord(
             id = finalHarvestId,
             member = member,

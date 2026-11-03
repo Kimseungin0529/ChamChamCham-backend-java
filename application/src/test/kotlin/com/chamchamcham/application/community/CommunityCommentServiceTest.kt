@@ -67,12 +67,7 @@ class CommunityCommentServiceTest {
         post = CommunityPost(
             id = postId,
             author = member,
-            crop = Crop(
-                id = UUID.fromString("00000000-0000-0000-0000-000000000301"),
-                externalNo = 422,
-                name = "황기",
-                usePartCategory = CropUsePartCategory.ROOT_BARK
-            ),
+            crop = Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기", CropUsePartCategory.ROOT_BARK),
             postType = CommunityPostType.QUESTION,
             title = "황기 발아율이 낮아요",
             body = "싹이 거의 올라오지 않아요."

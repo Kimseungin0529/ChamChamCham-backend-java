@@ -129,12 +129,7 @@ class CoachingContextProviderTest {
         roadAddress = "강원특별자치도 평창군 진부면 솔바람길 24"
     )
 
-    private fun crop() = Crop(
-        id = cropId,
-        externalNo = 422,
-        name = "참당귀",
-        usePartCategory = CropUsePartCategory.ROOT_BARK
-    )
+    private fun crop() = Crop(cropId, 422, "참당귀", CropUsePartCategory.ROOT_BARK)
 
     private fun record(member: Member, farm: Farm, crop: Crop) = FarmingRecord(
         id = recordId,

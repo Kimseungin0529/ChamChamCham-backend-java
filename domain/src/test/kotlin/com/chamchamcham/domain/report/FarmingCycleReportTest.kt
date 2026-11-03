@@ -16,12 +16,7 @@ class FarmingCycleReportTest {
     private val workedAt = LocalDateTime.of(2026, 6, 15, 8, 30)
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초농장", roadAddress = "강원도 평창군")
-    private val crop = Crop(
-        id = UUID.randomUUID(),
-        externalNo = 422,
-        name = "황기",
-        usePartCategory = CropUsePartCategory.ROOT_BARK,
-    )
+    private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val finalHarvest = FarmingRecord(
         id = UUID.randomUUID(),
         member = member,

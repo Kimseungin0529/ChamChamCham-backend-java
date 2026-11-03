@@ -441,7 +441,7 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
         )
 
     private fun crop(name: String, externalNo: Int): Crop =
-        Crop(externalNo = externalNo, name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(externalNo, name, CropUsePartCategory.ROOT_BARK)
 
     private fun <T : BaseTimeEntity> persist(entity: T, createdAt: LocalDateTime): T {
         setTimestamps(entity, createdAt)

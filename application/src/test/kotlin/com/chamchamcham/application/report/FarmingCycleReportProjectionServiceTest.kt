@@ -71,7 +71,7 @@ class FarmingCycleReportProjectionServiceTest {
         )
         member = Member(memberId, "$memberId@example.com", null)
         farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-        crop = Crop(id = cropId, externalNo = 1001, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        crop = Crop(cropId, 1001, "황기", CropUsePartCategory.ROOT_BARK)
     }
 
     @Test
