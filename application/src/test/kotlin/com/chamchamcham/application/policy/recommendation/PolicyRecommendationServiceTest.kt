@@ -385,10 +385,10 @@ class PolicyRecommendationServiceTest {
         val firstCondition = recommendationSearchCondition(size = 2)
         val cursorCondition = recommendationSearchCondition(
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = BigDecimal("96.0"),
-                applyStartsOn = null,
-                applyEndsOn = LocalDate.of(2026, 6, 30),
-                id = recommendationId
+                BigDecimal("96.0"),
+                null,
+                LocalDate.of(2026, 6, 30),
+                recommendationId
             ),
             size = 2
         )
@@ -434,10 +434,10 @@ class PolicyRecommendationServiceTest {
         val cursorCondition = recommendationSearchCondition(
             sort = PolicyRecommendationSort.LATEST,
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = null,
-                applyStartsOn = LocalDate.of(2026, 3, 1),
-                applyEndsOn = null,
-                id = recommendationId
+                null,
+                LocalDate.of(2026, 3, 1),
+                null,
+                recommendationId
             ),
             size = 2
         )
@@ -523,10 +523,10 @@ class PolicyRecommendationServiceTest {
         val expectedCondition = recommendationSearchCondition(
             sort = PolicyRecommendationSort.LATEST,
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = null,
-                applyStartsOn = null,
-                applyEndsOn = null,
-                id = recommendationId
+                null,
+                null,
+                null,
+                recommendationId
             )
         )
         `when`(policyRecommendationQueryRepository.findPage(expectedCondition))
@@ -747,13 +747,13 @@ class PolicyRecommendationServiceTest {
         size: Int = 21
     ): PolicyRecommendationQueryRepository.SearchCondition =
         PolicyRecommendationQueryRepository.SearchCondition(
-            memberId = memberId,
-            source = PolicySource.NONGUP_EZ,
-            sourceYear = "2026",
-            benefitSummary = benefitSummary,
-            sort = sort,
-            cursor = cursor,
-            size = size
+            memberId,
+            PolicySource.NONGUP_EZ,
+            "2026",
+            benefitSummary,
+            sort,
+            cursor,
+            size
         )
 
     private fun givenLatestSyncJob() {
