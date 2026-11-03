@@ -26,7 +26,7 @@ import java.util.UUID
 
 class ReportFeedbackTest {
     private val sourceFingerprint = "a".repeat(64)
-    private val member = Member(id = UUID.randomUUID(), email = "member@example.com", passwordHash = null)
+    private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초농장", roadAddress = "강원도 평창군")
     private val crop = Crop(
         id = UUID.randomUUID(),

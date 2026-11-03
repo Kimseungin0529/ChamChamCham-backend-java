@@ -116,14 +116,11 @@ class CoachingContextProviderTest {
         verify(farmingRecordRepository).findByIdAndMember_Id(recordId, memberId)
     }
 
-    private fun member() = Member(
-        id = memberId,
-        email = "farmer@example.com",
-        name = "박민서",
-        experienceLevel = 72,
-        managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-        passwordHash = null
-    )
+    private fun member() = Member(memberId, "farmer@example.com", null).also { migratedMember ->
+        migratedMember.name = "박민서"
+        migratedMember.experienceLevel = 72
+        migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+    }
 
     private fun farm(owner: Member) = Farm(
         id = farmId,

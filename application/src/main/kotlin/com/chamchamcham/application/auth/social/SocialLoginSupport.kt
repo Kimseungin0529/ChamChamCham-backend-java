@@ -67,21 +67,15 @@ class SocialLoginSupport(
         beforeSideEffects()
 
         val member = memberRepository.save(
-            Member(
-                email = availableEmailOrNull(email),
-                name = name,
-                phone = phone,
-                birthDate = birthDate,
-                passwordHash = null
-            )
+            Member(availableEmailOrNull(email), null).also { migratedMember ->
+                migratedMember.phone = phone
+                migratedMember.name = name
+                migratedMember.birthDate = birthDate
+            }
         )
 
         externalIdentityRepository.save(
-            ExternalIdentity(
-                member = member,
-                provider = provider,
-                providerSubject = providerSubject
-            )
+            ExternalIdentity(member, provider, providerSubject)
         )
 
         return member

@@ -132,7 +132,7 @@ class MediaUploadServiceTest {
     }
 
     private fun member(): Member =
-        Member(id = memberId, email = "farmer@example.com", passwordHash = null)
+        Member(memberId, "farmer@example.com", null)
 
     private fun capturedMedia(): UploadedMedia {
         val captor = ArgumentCaptor.forClass(UploadedMedia::class.java)

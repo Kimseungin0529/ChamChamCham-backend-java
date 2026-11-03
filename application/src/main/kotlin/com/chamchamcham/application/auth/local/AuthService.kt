@@ -80,10 +80,7 @@ class AuthService(
         }
 
         memberRepository.save(
-            Member(
-                email = command.email,
-                passwordHash = passwordEncoder.encode(command.password)
-            )
+            Member(command.email, passwordEncoder.encode(command.password))
         )
         emailVerificationRepository.deleteCode(command.email)
         emailVerificationRepository.deleteVerified(command.email)

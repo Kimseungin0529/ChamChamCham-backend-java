@@ -136,8 +136,8 @@ class FarmingRecordServiceTest {
         // 기존 create/update 해피패스는 등록된 (농장,작물) 조합을 전제하므로 기본 true로 둔다.
         // 미등록 거부 케이스는 별도 테스트에서 이 조합만 false로 덮어쓴다.
         lenient().`when`(memberCropRepository.existsByMemberIdAndFarmIdAndCropId(memberId, farmId, cropId)).thenReturn(true)
-        member = Member(id = memberId, email = "$memberId@example.com", passwordHash = null)
-        otherMember = Member(id = otherMemberId, email = "$otherMemberId@example.com", passwordHash = null)
+        member = Member(memberId, "$memberId@example.com", null)
+        otherMember = Member(otherMemberId, "$otherMemberId@example.com", null)
         farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
         crop = Crop(id = cropId, externalNo = cropId.hashCode(), name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
         media1 = uploadedMedia(mediaId1)

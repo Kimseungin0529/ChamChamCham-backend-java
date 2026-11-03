@@ -46,8 +46,8 @@ class FarmingWorkReportSourceRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), now)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), now)
+        member = persist(Member("member@example.com", null), now)
+        otherMember = persist(Member("other@example.com", null), now)
         farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), now)
         otherFarm = persist(Farm(owner = member, name = "다른 농장", roadAddress = "서울시 서초구"), now)
         crop = persist(Crop(externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK), now)

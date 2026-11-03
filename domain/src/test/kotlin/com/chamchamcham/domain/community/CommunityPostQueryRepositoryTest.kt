@@ -46,8 +46,8 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), now)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), now)
+        member = persist(Member("member@example.com", null), now)
+        otherMember = persist(Member("other@example.com", null), now)
         hwanggiCrop = persist(crop(name = "황기", externalNo = 422), now)
         ginsengCrop = persist(crop(name = "인삼", externalNo = 107), now)
     }
@@ -393,7 +393,7 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
 
     private fun persistLikeMember(): Member {
         return persist(
-            Member(email = "like-${UUID.randomUUID()}@example.com", passwordHash = null),
+            Member("like-${UUID.randomUUID()}@example.com", null),
             now
         )
     }

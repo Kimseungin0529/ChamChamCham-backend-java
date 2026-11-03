@@ -57,8 +57,8 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), baseTime)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), baseTime)
+        member = persist(Member("member@example.com", null), baseTime)
+        otherMember = persist(Member("other@example.com", null), baseTime)
         farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), baseTime)
         crop = persist(
             Crop(externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK),

@@ -40,7 +40,7 @@ class SearchPolicyIntegrationTest(
 
     @BeforeEach
     fun setUp() {
-        val member = memberRepository.save(Member(email = "policy-search-member@example.com", passwordHash = null))
+        val member = memberRepository.save(Member("policy-search-member@example.com", null))
         accessToken = signedTestToken(subject = member.id.toString(), tokenType = "access", role = "ROLE_USER")
 
         val programA = policyProgramRepository.save(

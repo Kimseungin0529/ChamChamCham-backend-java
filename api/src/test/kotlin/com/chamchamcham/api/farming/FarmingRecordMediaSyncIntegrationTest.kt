@@ -86,7 +86,7 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
         cropRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "media-sync-member@example.com", passwordHash = null))
+        member = memberRepository.save(Member("media-sync-member@example.com", null))
         farm = farmRepository.save(Farm(owner = member, name = "미디어싱크농장", roadAddress = "충청북도 제천시"))
         crop = cropRepository.save(
             Crop(externalNo = 7003, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),

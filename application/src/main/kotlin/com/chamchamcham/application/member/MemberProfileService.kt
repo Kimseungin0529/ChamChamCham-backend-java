@@ -89,12 +89,12 @@ class MemberProfileService(
         val member = findMember(command.memberId)
 
         member.completeOnboarding(
-            name = command.name,
-            phone = command.phone,
-            birthDate = command.birthDate,
-            nickname = command.nickname,
-            experienceLevel = command.experienceLevel,
-            managementType = command.managementType
+            command.name,
+            command.phone,
+            command.birthDate,
+            command.nickname,
+            command.experienceLevel,
+            command.managementType
         )
         syncProfileImage(member, command.profileMediaId)
 

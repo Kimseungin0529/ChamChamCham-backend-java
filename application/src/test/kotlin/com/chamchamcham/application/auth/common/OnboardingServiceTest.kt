@@ -189,11 +189,7 @@ class OnboardingServiceTest {
     @Test
     fun `complete rejects profile media owned by another member`() {
         val member = member()
-        val otherMember = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000099"),
-            email = "other@example.com",
-            passwordHash = null
-        )
+        val otherMember = Member(UUID.fromString("00000000-0000-0000-0000-000000000099"), "other@example.com", null)
         val media = UploadedMedia(
             id = UUID.fromString("00000000-0000-0000-0000-000000000501"),
             owner = otherMember,
@@ -215,11 +211,7 @@ class OnboardingServiceTest {
     }
 
     private fun member(): Member {
-        return Member(
-            id = memberId,
-            email = "user@example.com",
-            passwordHash = null
-        )
+        return Member(memberId, "user@example.com", null)
     }
 
     private fun crop(

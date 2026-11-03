@@ -62,8 +62,8 @@ class CommunityCommentServiceTest {
 
     @BeforeEach
     fun setUp() {
-        member = Member(id = memberId, email = "farmer@example.com", passwordHash = null)
-        otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
+        member = Member(memberId, "farmer@example.com", null)
+        otherMember = Member(otherMemberId, "other@example.com", null)
         post = CommunityPost(
             id = postId,
             author = member,

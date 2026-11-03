@@ -34,7 +34,7 @@ class RecordFeedbackQueryServiceTest {
     @Mock private lateinit var feedbackRepository: RecordFeedbackRepository
     @Mock private lateinit var lifecycleService: RecordFeedbackLifecycleService
 
-    private val member = Member(id = UUID.randomUUID(), email = "member@example.com", passwordHash = null)
+    private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초밭", roadAddress = "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
     private val record = FarmingRecord(

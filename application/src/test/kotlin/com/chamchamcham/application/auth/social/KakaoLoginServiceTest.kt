@@ -15,6 +15,7 @@ import com.chamchamcham.domain.member.AuthProvider
 import com.chamchamcham.domain.member.ExternalIdentity
 import com.chamchamcham.domain.member.ExternalIdentityRepository
 import com.chamchamcham.domain.member.Member
+import com.chamchamcham.domain.member.MemberStatus
 import com.chamchamcham.domain.member.MemberRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -84,18 +85,27 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login reuses existing external identity without requiring email`() {
-        val member = Member(id = memberId, email = "user@example.com", passwordHash = null, role = "ROLE_USER")
+        val member = Member(
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         val claims = claims(email = null, emailVerified = false)
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce")).thenReturn(claims)
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.KAKAO, "kakao-sub"))
             .thenReturn(
-                ExternalIdentity(
-                    id = externalIdentityId,
-                    member = member,
-                    provider = AuthProvider.KAKAO,
-                    providerSubject = "kakao-sub"
-                )
+                ExternalIdentity(externalIdentityId, member, AuthProvider.KAKAO, "kakao-sub")
             )
         `when`(tokenProvider.generateToken(memberId, "ROLE_USER"))
             .thenReturn(AuthResult.TokenPair("access-token", "refresh-token"))
@@ -111,7 +121,21 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login creates new member by provider subject without linking by email`() {
-        val savedMember = Member(id = newMemberId, email = "user@example.com", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         val claims = claims()
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce")).thenReturn(claims)
@@ -141,7 +165,21 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login creates new member with null password hash`() {
-        val savedMember = Member(id = newMemberId, email = "new@example.com", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            "new@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce")).thenReturn(claims(email = "new@example.com"))
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.KAKAO, "kakao-sub"))
@@ -165,7 +203,21 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login creates new member without email`() {
-        val savedMember = Member(id = newMemberId, email = null, passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce"))
             .thenReturn(claims(email = null, emailVerified = false))
@@ -201,19 +253,28 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login reserves nonce for token accepted within clock skew`() {
-        val member = Member(id = memberId, email = "user@example.com", passwordHash = null, role = "ROLE_USER")
+        val member = Member(
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce")).thenReturn(
             claims(expiresAt = Instant.now().minusSeconds(10))
         )
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.KAKAO, "kakao-sub"))
             .thenReturn(
-                ExternalIdentity(
-                    id = externalIdentityId,
-                    member = member,
-                    provider = AuthProvider.KAKAO,
-                    providerSubject = "kakao-sub"
-                )
+                ExternalIdentity(externalIdentityId, member, AuthProvider.KAKAO, "kakao-sub")
             )
         `when`(tokenProvider.generateToken(memberId, "ROLE_USER"))
             .thenReturn(AuthResult.TokenPair("access-token", "refresh-token"))
@@ -229,7 +290,21 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login creates new member without email when access token is absent and id token email is unavailable`() {
-        val savedMember = Member(id = newMemberId, email = null, passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce"))
             .thenReturn(claims(email = "user@example.com", emailVerified = false))
@@ -253,7 +328,21 @@ class KakaoLoginServiceTest {
 
     @Test
     fun `login prefills profile from userinfo when access token is present`() {
-        val savedMember = Member(id = newMemberId, email = "userinfo@example.com", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            "userinfo@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(kakaoOidcTokenVerifier.verify("id-token", "nonce"))
             .thenReturn(claims(email = "claims@example.com", emailVerified = true))

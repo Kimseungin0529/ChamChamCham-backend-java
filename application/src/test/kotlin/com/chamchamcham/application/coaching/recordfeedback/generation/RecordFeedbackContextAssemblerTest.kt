@@ -521,13 +521,10 @@ class RecordFeedbackContextAssemblerTest {
         longitude: Double? = 128.2,
         workedAt: LocalDateTime = LocalDateTime.of(2026, 7, 1, 8, 30),
     ) {
-        val member = Member(
-            id = memberId,
-            email = "farmer@example.test",
-            passwordHash = null,
-            experienceLevel = 3,
-            managementType = ManagementType.NON_REGISTERED_FARMER,
-        )
+        val member = Member(memberId, "farmer@example.test", null).also { migratedMember ->
+            migratedMember.experienceLevel = 3
+            migratedMember.managementType = ManagementType.NON_REGISTERED_FARMER
+        }
         val farm = Farm(
             id = farmId,
             owner = member,

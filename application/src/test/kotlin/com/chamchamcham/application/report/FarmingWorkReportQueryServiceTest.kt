@@ -52,7 +52,7 @@ class FarmingWorkReportQueryServiceTest {
     private val baseTime = LocalDateTime.of(2026, 1, 1, 9, 0)
     private val cursorCodec = OpaqueCursorCodec()
 
-    private val member = Member(id = memberId, email = "member@example.com", passwordHash = null)
+    private val member = Member(memberId, "member@example.com", null)
     private val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
     private val crop = Crop(
         id = cropId,

@@ -88,7 +88,7 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
         cropRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "rollback-member@example.com", passwordHash = null))
+        member = memberRepository.save(Member("rollback-member@example.com", null))
         farm = farmRepository.save(Farm(owner = member, name = "롤백검증농장", roadAddress = "충청북도 제천시"))
         crop = cropRepository.save(
             Crop(externalNo = 7002, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),

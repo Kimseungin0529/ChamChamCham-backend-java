@@ -52,7 +52,7 @@ class FarmServiceTest {
 
     @BeforeEach
     fun setUp() {
-        member = Member(id = memberId, email = "member@example.com", passwordHash = null)
+        member = Member(memberId, "member@example.com", null)
         farm = Farm(
             id = farmId,
             owner = member,

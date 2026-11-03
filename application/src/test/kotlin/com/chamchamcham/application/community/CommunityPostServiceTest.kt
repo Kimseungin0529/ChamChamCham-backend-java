@@ -685,7 +685,7 @@ class CommunityPostServiceTest {
     }
 
     private fun member(id: UUID): Member =
-        Member(id = id, email = "$id@example.com", passwordHash = null)
+        Member(id, "$id@example.com", null)
 
     private fun crop(id: UUID, name: String): Crop =
         Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)

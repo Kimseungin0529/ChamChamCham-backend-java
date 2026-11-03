@@ -49,7 +49,7 @@ class ReportFeedbackRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null))
+        member = persist(Member("member@example.com", null))
         val farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "강원도 평창군"))
         val crop = persist(
             Crop(externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK),

@@ -88,14 +88,11 @@ class PolicyRecommendationServiceTest {
             cursorCodec = cursorCodec,
             clock = Clock.fixed(Instant.parse("2026-04-01T00:00:00Z"), ZoneId.of("UTC"))
         )
-        member = Member(
-            id = memberId,
-            email = "member@example.com",
-            passwordHash = "hash",
-            birthDate = LocalDate.of(1995, 1, 1),
-            experienceLevel = 2,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
-        )
+        member = Member(memberId, "member@example.com", "hash").also { migratedMember ->
+            migratedMember.birthDate = LocalDate.of(1995, 1, 1)
+            migratedMember.experienceLevel = 2
+            migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+        }
         latestJob = syncJob(latestJobId)
     }
 

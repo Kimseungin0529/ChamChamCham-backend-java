@@ -9,6 +9,7 @@ import com.chamchamcham.domain.member.AuthProvider
 import com.chamchamcham.domain.member.ExternalIdentity
 import com.chamchamcham.domain.member.ExternalIdentityRepository
 import com.chamchamcham.domain.member.Member
+import com.chamchamcham.domain.member.MemberStatus
 import com.chamchamcham.domain.member.MemberRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -61,7 +62,21 @@ class NaverLoginServiceTest {
     @Test
     fun `login creates member and pre-fills profile from Naver`() {
         val birthDate = LocalDate.of(1990, 5, 12)
-        val savedMember = Member(id = memberId, email = "new@example.com", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            memberId,
+            "new@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         profileClient.profile = profile(email = "new@example.com", name = "네이버회원", phone = "010-1234-5678", birthDate = birthDate)
 
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.NAVER, "naver-sub"))
@@ -99,7 +114,21 @@ class NaverLoginServiceTest {
 
     @Test
     fun `login creates member without email for new identity`() {
-        val savedMember = Member(id = memberId, email = null, passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            memberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         profileClient.profile = profile(email = null, name = "네이버회원")
 
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.NAVER, "naver-sub"))
@@ -125,7 +154,21 @@ class NaverLoginServiceTest {
 
     @Test
     fun `login creates member without email when provider email already belongs to another member`() {
-        val savedMember = Member(id = memberId, email = null, passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            memberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         profileClient.profile = profile(email = "existing@example.com", name = "네이버회원")
 
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.NAVER, "naver-sub"))
@@ -152,17 +195,26 @@ class NaverLoginServiceTest {
 
     @Test
     fun `login reuses existing identity without requiring email`() {
-        val member = Member(id = existingMemberId, email = "existing@example.com", passwordHash = null, role = "ROLE_USER")
+        val member = Member(
+            existingMemberId,
+            "existing@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         profileClient.profile = profile(email = null, name = "네이버회원")
 
         `when`(externalIdentityRepository.findByProviderAndProviderSubject(AuthProvider.NAVER, "naver-sub"))
             .thenReturn(
-                ExternalIdentity(
-                    id = externalIdentityId,
-                    member = member,
-                    provider = AuthProvider.NAVER,
-                    providerSubject = "naver-sub"
-                )
+                ExternalIdentity(externalIdentityId, member, AuthProvider.NAVER, "naver-sub")
             )
         `when`(tokenProvider.generateToken(existingMemberId, "ROLE_USER"))
             .thenReturn(AuthResult.TokenPair("access-token", "refresh-token"))

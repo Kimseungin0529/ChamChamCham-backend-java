@@ -85,7 +85,7 @@ class VoiceSessionServiceTest {
             voiceSessionProperties = VoiceSessionProperties(maxRounds = 20, maxDurationSeconds = 330),
             pesticideQueryRepository = pesticideQueryRepository,
         )
-        member = Member(id = memberId, email = "$memberId@example.com", passwordHash = null)
+        member = Member(memberId, "$memberId@example.com", null)
         farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
         crop = Crop(id = cropId, externalNo = cropId.hashCode(), name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
     }

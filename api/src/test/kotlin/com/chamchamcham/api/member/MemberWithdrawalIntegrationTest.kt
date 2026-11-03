@@ -47,7 +47,7 @@ class MemberWithdrawalIntegrationTest @Autowired constructor(
         uploadedMediaRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "withdrawal-member@example.com", passwordHash = null))
+        member = memberRepository.save(Member("withdrawal-member@example.com", null))
         val profileMedia = uploadedMediaRepository.save(
             UploadedMedia(
                 owner = member,

@@ -275,7 +275,7 @@ class MemberProfileServiceTest {
 
     @Test
     fun `update my profile rejects another member farm`() {
-        val otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
+        val otherMember = Member(otherMemberId, "other@example.com", null)
         val otherFarm = Farm(id = farmId, owner = otherMember, name = "남의 농장", roadAddress = "서울특별시 강남구")
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findById(farmId)).thenReturn(Optional.of(otherFarm))
@@ -314,7 +314,7 @@ class MemberProfileServiceTest {
     @Test
     fun `update my profile rejects another member profile image`() {
         val otherMediaId = UUID.fromString("00000000-0000-0000-0000-000000000302")
-        val otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
+        val otherMember = Member(otherMemberId, "other@example.com", null)
         val otherMedia = profileMedia(otherMember, otherMediaId, status = UploadedMediaStatus.TEMP)
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(uploadedMediaRepository.findById(otherMediaId)).thenReturn(Optional.of(otherMedia))
@@ -361,7 +361,7 @@ class MemberProfileServiceTest {
     }
 
     private fun member(): Member =
-        Member(id = memberId, email = "hwanggi@example.com", passwordHash = null).also {
+        Member(memberId, "hwanggi@example.com", null).also {
             it.name = "이황기"
             it.phone = "010-1000-0001"
             it.birthDate = LocalDate.of(1986, 3, 12)

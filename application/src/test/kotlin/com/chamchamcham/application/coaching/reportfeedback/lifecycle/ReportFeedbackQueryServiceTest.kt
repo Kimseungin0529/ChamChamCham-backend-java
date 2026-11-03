@@ -59,7 +59,7 @@ class ReportFeedbackQueryServiceTest {
     @BeforeEach
     fun setUp() {
         service = ReportFeedbackQueryService(reportRepository, feedbackRepository, lifecycleService)
-        member = Member(id = memberId, email = "member@example.com", passwordHash = null)
+        member = Member(memberId, "member@example.com", null)
         completedReport = report(
             FarmingCycleReportStatus.COMPLETED,
             statisticsFor(WorkType.WATERING, WorkType.FERTILIZING, WorkType.HARVEST),
