@@ -142,7 +142,7 @@ class VoiceSessionServiceTest {
             pesticideQueryRepository.search(
                 PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
             )
-        ).thenReturn(listOf(Pesticide(itemName = "다이센엠-45", brandName = "농협케미컬")))
+        ).thenReturn(listOf(Pesticide("다이센엠-45", "농협케미컬")))
 
         service.create(VoiceSessionCommand.Create(memberId = memberId))
 
@@ -156,7 +156,7 @@ class VoiceSessionServiceTest {
             pesticideQueryRepository.search(
                 PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
             )
-        ).thenReturn((1..51).map { Pesticide(itemName = "농약$it", brandName = "제조사") })
+        ).thenReturn((1..51).map { Pesticide("농약$it", "제조사") })
 
         service.create(VoiceSessionCommand.Create(memberId = memberId))
 

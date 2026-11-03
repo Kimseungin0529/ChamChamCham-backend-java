@@ -199,19 +199,12 @@ class RecordFeedbackContextAssemblerTest {
         `when`(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(
             PestControlRecord(
                 record = record,
-                pesticide = Pesticide(
-                    id = UUID.fromString("00000000-0000-0000-0000-000000000010"),
-                    itemName = "만코제브 수화제",
-                    brandName = "가가방",
-                ),
+                pesticide = Pesticide(UUID.fromString("00000000-0000-0000-0000-000000000010"), "만코제브 수화제", "가가방"),
                 pesticideAmount = BigDecimal("120.0000"),
                 pesticideAmountUnit = PesticideAmountUnit.ML,
                 totalSprayAmount = BigDecimal("20.0000"),
                 totalSprayAmountUnit = SprayAmountUnit.ML,
-                pest = Pest(
-                    id = UUID.fromString("00000000-0000-0000-0000-000000000011"),
-                    name = "점무늬병",
-                ),
+                pest = Pest(UUID.fromString("00000000-0000-0000-0000-000000000011"), "점무늬병"),
             )
         )
         stubSharedContext()

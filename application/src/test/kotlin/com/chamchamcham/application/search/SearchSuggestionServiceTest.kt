@@ -153,7 +153,7 @@ class SearchSuggestionServiceTest {
             pesticideQueryRepository.search(
                 PesticideQueryRepository.SearchCondition(keyword = keyword, cursor = null, size = 9)
             )
-        ).thenReturn(pesticides.map { Pesticide(itemName = it, brandName = it) })
+        ).thenReturn(pesticides.map { Pesticide(it, it) })
         `when`(policyProgramRepository.findTitleSuggestions(keyword, PageRequest.of(0, 9)))
             .thenReturn(titles.map { policyProgram(title = it, agencyName = "기관") })
         `when`(policyProgramRepository.findAgencySuggestions(keyword, PageRequest.of(0, 9)))

@@ -509,7 +509,7 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
 
     private fun persistPestControlDetail(record: FarmingRecord, pesticideName: String, brandName: String = pesticideName) {
         val pesticide = persist(
-            Pesticide(itemName = pesticideName, brandName = brandName),
+            Pesticide(pesticideName, brandName),
             now
         )
         persist(

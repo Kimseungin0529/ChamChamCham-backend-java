@@ -78,20 +78,20 @@ class PesticideSyncService(
 
     private fun upsertPesticide(row: PsisPesticideRow): Pesticide {
         val existing = pesticideRepository.findByItemNameAndBrandName(row.itemName, row.brandName)
-        val pesticide = existing ?: Pesticide(itemName = row.itemName, brandName = row.brandName)
+        val pesticide = existing ?: Pesticide(row.itemName, row.brandName)
         pesticide.updateCatalogData(
-            activeIngredient = row.activeIngredient,
-            formulation = row.formulation,
-            usageCategory = row.usageCategory,
-            humanToxicity = row.humanToxicity,
-            fishToxicity = row.fishToxicity,
-            manufacturer = row.manufacturer,
+            row.activeIngredient,
+            row.formulation,
+            row.usageCategory,
+            row.humanToxicity,
+            row.fishToxicity,
+            row.manufacturer,
         )
         return pesticideRepository.save(pesticide)
     }
 
     private fun upsertPest(name: String): Pest {
-        return pestRepository.findByName(name) ?: pestRepository.save(Pest(name = name))
+        return pestRepository.findByName(name) ?: pestRepository.save(Pest(name))
     }
 
     private fun upsertApplication(pesticide: Pesticide, pest: Pest, row: PsisPesticideRow): Boolean {
@@ -102,24 +102,21 @@ class PesticideSyncService(
 
         if (existing != null) {
             existing.updateUsageDetails(
-                dilutionRate = row.dilutionRate,
-                usageAmount = row.usageAmount,
-                usageTiming = row.usageTiming,
-                maxUsageCount = row.maxUsageCount,
+                row.dilutionRate,
+                row.usageAmount,
+                row.usageTiming,
+                row.maxUsageCount,
             )
             return false
         }
 
         pesticideApplicationRepository.save(
-            PesticideApplication(
-                pesticide = pesticide,
-                pest = pest,
-                cropName = row.cropName,
-                dilutionRate = row.dilutionRate,
-                usageAmount = row.usageAmount,
-                usageTiming = row.usageTiming,
-                maxUsageCount = row.maxUsageCount,
-            )
+            PesticideApplication(pesticide, pest, row.cropName).also { migratedPesticideApplication ->
+                migratedPesticideApplication.dilutionRate = row.dilutionRate
+                migratedPesticideApplication.usageAmount = row.usageAmount
+                migratedPesticideApplication.usageTiming = row.usageTiming
+                migratedPesticideApplication.maxUsageCount = row.maxUsageCount
+            }
         )
         return true
     }

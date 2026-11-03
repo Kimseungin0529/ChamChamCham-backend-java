@@ -161,8 +161,8 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
     }
 
     private fun persistPestControl(record: FarmingRecord) {
-        val pesticide = persist(Pesticide(itemName = "살충제", brandName = "참참약"), now)
-        val pest = persist(Pest(name = "진딧물"), now)
+        val pesticide = persist(Pesticide("살충제", "참참약"), now)
+        val pest = persist(Pest("진딧물"), now)
         persist(
             PestControlRecord(
                 record = record,

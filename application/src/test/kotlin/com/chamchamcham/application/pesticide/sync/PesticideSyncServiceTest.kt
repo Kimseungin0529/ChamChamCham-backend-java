@@ -40,9 +40,9 @@ class PesticideSyncServiceTest {
     private val pesticideId = UUID.fromString("00000000-0000-0000-0000-0000000000a1")
     private val pestId1 = UUID.fromString("00000000-0000-0000-0000-0000000000b1")
     private val pestId2 = UUID.fromString("00000000-0000-0000-0000-0000000000b2")
-    private val savedPesticide = Pesticide(id = pesticideId, itemName = "만코제브 수화제", brandName = "가가방")
-    private val savedPest1 = Pest(id = pestId1, name = "역병")
-    private val savedPest2 = Pest(id = pestId2, name = "탄저병")
+    private val savedPesticide = Pesticide(pesticideId, "만코제브 수화제", "가가방")
+    private val savedPest1 = Pest(pestId1, "역병")
+    private val savedPest2 = Pest(pestId2, "탄저병")
 
     @BeforeEach
     fun setUp() {
@@ -114,7 +114,7 @@ class PesticideSyncServiceTest {
             pesticideApplicationRepository.findByPesticide_IdAndPest_IdAndCropName(pesticideId, pestId1, "감자")
         ).thenReturn(
             null,
-            PesticideApplication(pesticide = savedPesticide, pest = savedPest1, cropName = "감자")
+            PesticideApplication(savedPesticide, savedPest1, "감자")
         )
         `when`(transport.get(anyMap())).thenReturn(oneRowPageXml())
 

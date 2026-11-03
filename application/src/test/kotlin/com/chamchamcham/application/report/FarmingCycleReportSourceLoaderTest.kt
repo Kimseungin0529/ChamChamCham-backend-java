@@ -160,19 +160,12 @@ class FarmingCycleReportSourceLoaderTest {
             pestControlByRecordId = mapOf(
                 requireNotNull(pestControl.id) to PestControlRecord(
                     record = pestControl,
-                    pesticide = Pesticide(
-                        id = uuid("00000000-0000-0000-0000-000000000301"),
-                        itemName = "만코제브 수화제",
-                        brandName = "가가방",
-                    ),
+                    pesticide = Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"),
                     pesticideAmount = BigDecimal("30.0000"),
                     pesticideAmountUnit = PesticideAmountUnit.ML,
                     totalSprayAmount = BigDecimal("10000.0000"),
                     totalSprayAmountUnit = SprayAmountUnit.ML,
-                    pest = Pest(
-                        id = uuid("00000000-0000-0000-0000-000000000302"),
-                        name = "진딧물",
-                    ),
+                    pest = Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물"),
                 )
             ),
             weedingByRecordId = mapOf(
