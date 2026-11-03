@@ -70,7 +70,7 @@ class FarmingCycleReportProjectionServiceTest {
             reportFeedbackLifecycleService = reportFeedbackLifecycleService,
         )
         member = Member(memberId, "$memberId@example.com", null)
-        farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
+        farm = Farm(farmId, member, "약초농장", "서울시 강남구")
         crop = Crop(cropId, 1001, "황기", CropUsePartCategory.ROOT_BARK)
     }
 

@@ -46,7 +46,7 @@ class RecordFeedbackRepositoryTest @Autowired constructor(
     @BeforeEach
     fun setUp() {
         member = persist(Member("member@example.com", null))
-        val farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "강원도 평창군"))
+        val farm = persist(Farm(member, "약초농장", "강원도 평창군"))
         val crop = persist(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )

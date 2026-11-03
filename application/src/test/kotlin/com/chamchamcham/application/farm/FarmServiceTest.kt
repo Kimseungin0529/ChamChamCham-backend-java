@@ -53,14 +53,10 @@ class FarmServiceTest {
     @BeforeEach
     fun setUp() {
         member = Member(memberId, "member@example.com", null)
-        farm = Farm(
-            id = farmId,
-            owner = member,
-            name = "기존 농장",
-            roadAddress = "강원특별자치도 횡성군 둔내면 1",
-            latitude = 37.5,
-            longitude = 128.1
-        )
+        farm = Farm(farmId, member, "기존 농장", "강원특별자치도 횡성군 둔내면 1").also { migratedFarm ->
+            migratedFarm.latitude = 37.5
+            migratedFarm.longitude = 128.1
+        }
         crop = crop(cropId, "황기")
         oldCrop = crop(oldCropId, "당귀")
         newCrop = crop(newCropId, "작약")

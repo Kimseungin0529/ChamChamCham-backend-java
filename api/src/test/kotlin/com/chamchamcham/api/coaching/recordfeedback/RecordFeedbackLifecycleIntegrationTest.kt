@@ -100,7 +100,7 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         memberRepository.deleteAllInBatch()
 
         member = memberRepository.save(Member("feedback-lifecycle@example.com", null))
-        farm = farmRepository.save(Farm(owner = member, name = "코칭 검증 밭", roadAddress = "강원도 평창군"))
+        farm = farmRepository.save(Farm(member, "코칭 검증 밭", "강원도 평창군"))
         crop = cropRepository.save(
             Crop(7101, "황기", CropUsePartCategory.ROOT_BARK),
         )

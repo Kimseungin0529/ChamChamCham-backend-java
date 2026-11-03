@@ -525,14 +525,10 @@ class RecordFeedbackContextAssemblerTest {
             migratedMember.experienceLevel = 3
             migratedMember.managementType = ManagementType.NON_REGISTERED_FARMER
         }
-        val farm = Farm(
-            id = farmId,
-            owner = member,
-            name = "청년약초밭",
-            roadAddress = "강원특별자치도 평창군",
-            latitude = latitude,
-            longitude = longitude,
-        )
+        val farm = Farm(farmId, member, "청년약초밭", "강원특별자치도 평창군").also { migratedFarm ->
+            migratedFarm.latitude = latitude
+            migratedFarm.longitude = longitude
+        }
         val crop = Crop(cropId, 1001, "참당귀", CropUsePartCategory.ROOT_BARK)
         record = FarmingRecord(
             id = recordId,

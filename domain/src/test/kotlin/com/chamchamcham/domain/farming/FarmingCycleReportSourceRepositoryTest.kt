@@ -43,8 +43,8 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
     fun setUp() {
         member = persist(Member("member@example.com", null), now)
         otherMember = persist(Member("other@example.com", null), now)
-        farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), now)
-        otherFarm = persist(Farm(owner = member, name = "다른 농장", roadAddress = "서울시 서초구"), now)
+        farm = persist(Farm(member, "약초농장", "서울시 강남구"), now)
+        otherFarm = persist(Farm(member, "다른 농장", "서울시 서초구"), now)
         crop = persist(Crop(422, "황기", CropUsePartCategory.ROOT_BARK), now)
         otherCrop = persist(Crop(107, "인삼", CropUsePartCategory.ROOT_BARK), now)
     }

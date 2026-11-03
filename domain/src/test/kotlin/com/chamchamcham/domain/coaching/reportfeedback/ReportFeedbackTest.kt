@@ -27,7 +27,7 @@ import java.util.UUID
 class ReportFeedbackTest {
     private val sourceFingerprint = "a".repeat(64)
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
-    private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초농장", roadAddress = "강원도 평창군")
+    private val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val finishedAt = LocalDateTime.of(2026, 7, 13, 9, 0)
     private val finalHarvest = FarmingRecord(

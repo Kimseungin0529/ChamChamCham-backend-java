@@ -53,7 +53,7 @@ class FarmingWorkReportQueryServiceTest {
     private val cursorCodec = OpaqueCursorCodec()
 
     private val member = Member(memberId, "member@example.com", null)
-    private val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
+    private val farm = Farm(farmId, member, "약초농장", "서울시 강남구")
     private val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
 
     @Mock private lateinit var queryRepository: FarmingCycleReportQueryRepository
@@ -462,12 +462,7 @@ class FarmingWorkReportQueryServiceTest {
 
     @Test
     fun `list isolates thumbnails by exact farm and crop scope from cross product records`() {
-        val otherFarm = Farm(
-            id = id("102"),
-            owner = member,
-            name = "다른 농장",
-            roadAddress = "서울시 서초구",
-        )
+        val otherFarm = Farm(id("102"), member, "다른 농장", "서울시 서초구")
         val otherCrop = Crop(id("202"), 423, "감초", CropUsePartCategory.ROOT_BARK)
         val firstFinalId = id("406")
         val secondFinalId = id("416")

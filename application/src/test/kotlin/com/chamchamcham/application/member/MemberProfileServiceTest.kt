@@ -276,7 +276,7 @@ class MemberProfileServiceTest {
     @Test
     fun `update my profile rejects another member farm`() {
         val otherMember = Member(otherMemberId, "other@example.com", null)
-        val otherFarm = Farm(id = farmId, owner = otherMember, name = "남의 농장", roadAddress = "서울특별시 강남구")
+        val otherFarm = Farm(farmId, otherMember, "남의 농장", "서울특별시 강남구")
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findById(farmId)).thenReturn(Optional.of(otherFarm))
 
@@ -395,13 +395,9 @@ class MemberProfileServiceTest {
         roadAddress: String,
         jibunAddress: String? = "강원특별자치도 횡성군 둔내면 현천리 101"
     ): Farm =
-        Farm(
-            id = id,
-            owner = member,
-            name = "횡성 황기밭",
-            roadAddress = roadAddress,
-            jibunAddress = jibunAddress
-        )
+        Farm(id, member, "횡성 황기밭", roadAddress).also { migratedFarm ->
+            migratedFarm.jibunAddress = jibunAddress
+        }
 
     private fun crop(id: UUID, name: String): Crop =
         Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)

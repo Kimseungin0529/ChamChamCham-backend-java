@@ -48,7 +48,7 @@ class FarmingCycleReportRepositoryJsonTest @Autowired constructor(
     fun setUp() {
         member = persist(Member("member@example.com", null))
         otherMember = persist(Member("other@example.com", null))
-        farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "강원도 평창군"))
+        farm = persist(Farm(member, "약초농장", "강원도 평창군"))
         crop = persist(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )

@@ -807,12 +807,9 @@ class PolicyRecommendationServiceTest {
     }
 
     private fun farm(): Farm =
-        Farm(
-            owner = member,
-            name = "제천 약초밭",
-            roadAddress = "충청북도 제천시 청풍면 약초로 1",
-            jibunAddress = "충북 제천시 청풍면"
-        )
+        Farm(member, "제천 약초밭", "충청북도 제천시 청풍면 약초로 1").also { migratedFarm ->
+            migratedFarm.jibunAddress = "충북 제천시 청풍면"
+        }
 
     private fun syncJob(id: UUID): PolicySyncJob =
         PolicySyncJob(

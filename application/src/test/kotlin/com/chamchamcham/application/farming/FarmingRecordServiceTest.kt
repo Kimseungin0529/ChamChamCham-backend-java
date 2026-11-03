@@ -138,7 +138,7 @@ class FarmingRecordServiceTest {
         lenient().`when`(memberCropRepository.existsByMemberIdAndFarmIdAndCropId(memberId, farmId, cropId)).thenReturn(true)
         member = Member(memberId, "$memberId@example.com", null)
         otherMember = Member(otherMemberId, "$otherMemberId@example.com", null)
-        farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
+        farm = Farm(farmId, member, "약초농장", "서울시 강남구")
         crop = Crop(cropId, cropId.hashCode(), "황기", CropUsePartCategory.ROOT_BARK)
         media1 = uploadedMedia(mediaId1)
         replacementMedia = uploadedMedia(replacementMediaId)

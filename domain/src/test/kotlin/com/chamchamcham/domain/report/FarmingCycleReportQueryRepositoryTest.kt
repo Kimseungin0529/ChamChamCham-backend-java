@@ -59,7 +59,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     fun setUp() {
         member = persist(Member("member@example.com", null), baseTime)
         otherMember = persist(Member("other@example.com", null), baseTime)
-        farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), baseTime)
+        farm = persist(Farm(member, "약초농장", "서울시 강남구"), baseTime)
         crop = persist(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
             baseTime,
@@ -101,7 +101,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     @Test
     fun `completed list accepts member wide farm only crop only and combined filters`() {
         val otherFarm = persist(
-            Farm(owner = member, name = "다른 약초농장", roadAddress = "서울시 마포구"),
+            Farm(member, "다른 약초농장", "서울시 마포구"),
             baseTime,
         )
         val otherCrop = persist(
@@ -193,7 +193,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     @Test
     fun `work item projection includes active and completed positive statistics and orders report cards`() {
         val otherFarm = persist(
-            Farm(owner = member, name = "다른 약초농장", roadAddress = "서울시 마포구"),
+            Farm(member, "다른 약초농장", "서울시 마포구"),
             baseTime,
         )
         val otherCrop = persist(
@@ -406,7 +406,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
         statistics: CycleReportStatistics = CycleReportStatistics.empty(),
     ): FarmingCycleReport {
         val reportFarm = farm ?: if (owner === member) this.farm else persist(
-            Farm(owner = owner, name = "다른 농장", roadAddress = "서울시 서초구"),
+            Farm(owner, "다른 농장", "서울시 서초구"),
             baseTime,
         )
         val finalHarvest = persistFinalHarvest(
@@ -446,7 +446,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
         projection: FarmingCycleReportProjection,
     ): FarmingCycleReport {
         val reportFarm = farm ?: if (owner === member) this.farm else persist(
-            Farm(owner = owner, name = "다른 농장", roadAddress = "서울시 서초구"),
+            Farm(owner, "다른 농장", "서울시 서초구"),
             baseTime,
         )
         return persist(FarmingCycleReport.create(owner, reportFarm, crop, projection), baseTime)
@@ -459,7 +459,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
         workedAt: LocalDateTime,
     ): FarmingRecord {
         val recordFarm = farm ?: if (owner === member) this.farm else persist(
-            Farm(owner = owner, name = "다른 수확 농장", roadAddress = "서울시 송파구"),
+            Farm(owner, "다른 수확 농장", "서울시 송파구"),
             baseTime,
         )
         return persist(

@@ -187,30 +187,26 @@ class MemberProfileService(
 
     private fun upsertFarm(member: Member, command: MemberProfileCommand.Farm): Farm {
         val boundaryCoordinates = command.boundaryCoordinates.map {
-            FarmBoundaryCoordinate(latitude = it.latitude, longitude = it.longitude)
+            FarmBoundaryCoordinate(it.latitude, it.longitude)
         }
-        val dataSource = FarmDataSource(
-            address = command.dataSource.address,
-            coordinate = command.dataSource.coordinate,
-            parcel = command.dataSource.parcel,
-            landCharacteristic = command.dataSource.landCharacteristic
-        )
+        val dataSource = FarmDataSource(command.dataSource.address, command.dataSource.coordinate, command.dataSource.parcel, command.dataSource.landCharacteristic)
 
         if (command.farmId == null) {
             return farmRepository.save(
                 Farm(
-                    owner = member,
-                    name = command.name,
-                    roadAddress = command.roadAddress,
-                    jibunAddress = command.jibunAddress,
-                    latitude = command.latitude,
-                    longitude = command.longitude,
-                    pnu = command.pnu,
-                    landCategory = command.landCategory,
-                    areaSqm = command.areaSqm,
-                    areaIsManualEntry = command.areaIsManualEntry,
-                    boundaryCoordinates = boundaryCoordinates.toMutableList(),
-                    dataSource = dataSource
+                    null,
+                    member,
+                    command.name,
+                    command.roadAddress,
+                    command.jibunAddress,
+                    command.latitude,
+                    command.longitude,
+                    command.pnu,
+                    command.landCategory,
+                    command.areaSqm,
+                    command.areaIsManualEntry,
+                    boundaryCoordinates.toMutableList(),
+                    dataSource
                 )
             )
         }
@@ -222,17 +218,17 @@ class MemberProfileService(
             throw BusinessException(ErrorCode.RESOURCE_NOT_FOUND)
         }
         farm.updateProfile(
-            name = command.name,
-            roadAddress = command.roadAddress,
-            jibunAddress = command.jibunAddress,
-            latitude = command.latitude,
-            longitude = command.longitude,
-            pnu = command.pnu,
-            landCategory = command.landCategory,
-            areaSqm = command.areaSqm,
-            areaIsManualEntry = command.areaIsManualEntry,
-            boundaryCoordinates = boundaryCoordinates,
-            dataSource = dataSource
+            command.name,
+            command.roadAddress,
+            command.jibunAddress,
+            command.latitude,
+            command.longitude,
+            command.pnu,
+            command.landCategory,
+            command.areaSqm,
+            command.areaIsManualEntry,
+            boundaryCoordinates,
+            dataSource
         )
         return farm
     }

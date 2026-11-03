@@ -819,7 +819,7 @@ class CommunityPostServiceTest {
     }
 
     private fun farm(member: Member): Farm =
-        Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구")
+        Farm(member, "약초농장", "서울시 강남구")
 
     private fun setCreatedAt(entity: BaseTimeEntity, createdAt: LocalDateTime) {
         val field = BaseTimeEntity::class.java.getDeclaredField("createdAt")

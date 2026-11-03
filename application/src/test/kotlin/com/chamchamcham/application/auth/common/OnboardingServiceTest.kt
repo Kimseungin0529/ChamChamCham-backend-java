@@ -267,19 +267,15 @@ class OnboardingServiceTest {
     }
 
     private fun savedFarm(member: Member, farm: FarmCommand.Draft): Farm {
-        return Farm(
-            id = farmId,
-            owner = member,
-            name = farm.name,
-            roadAddress = farm.roadAddress,
-            jibunAddress = farm.jibunAddress,
-            latitude = farm.latitude,
-            longitude = farm.longitude,
-            pnu = farm.pnu,
-            landCategory = farm.landCategory,
-            areaSqm = farm.areaSqm,
-            areaIsManualEntry = farm.areaIsManualEntry
-        )
+        return Farm(farmId, member, farm.name, farm.roadAddress).also { migratedFarm ->
+            migratedFarm.jibunAddress = farm.jibunAddress
+            migratedFarm.latitude = farm.latitude
+            migratedFarm.longitude = farm.longitude
+            migratedFarm.pnu = farm.pnu
+            migratedFarm.landCategory = farm.landCategory
+            migratedFarm.areaSqm = farm.areaSqm
+            migratedFarm.areaIsManualEntry = farm.areaIsManualEntry
+        }
     }
 
     private fun capturedMemberCrops(): List<MemberCrop> {

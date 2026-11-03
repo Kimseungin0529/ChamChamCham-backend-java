@@ -86,7 +86,7 @@ class FarmingCycleReportIntegrationTest @Autowired constructor(
         memberRepository.deleteAllInBatch()
 
         member = memberRepository.save(Member("report-member@example.com", null))
-        farm = farmRepository.save(Farm(owner = member, name = "통합검증농장", roadAddress = "강원도 평창군"))
+        farm = farmRepository.save(Farm(member, "통합검증농장", "강원도 평창군"))
         crop = cropRepository.save(
             Crop(7001, "황기", CropUsePartCategory.ROOT_BARK),
         )

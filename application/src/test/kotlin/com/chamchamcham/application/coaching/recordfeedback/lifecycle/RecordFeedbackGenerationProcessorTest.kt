@@ -51,7 +51,7 @@ class RecordFeedbackGenerationProcessorTest {
 
     private val objectMapper: ObjectMapper = Jackson2ObjectMapperBuilder.json().build()
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
-    private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초밭", roadAddress = "강원도 평창군")
+    private val farm = Farm(UUID.randomUUID(), member, "약초밭", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
     private val record = FarmingRecord(
         id = UUID.randomUUID(), member = member, farm = farm, crop = crop, workType = WorkType.PRUNING,

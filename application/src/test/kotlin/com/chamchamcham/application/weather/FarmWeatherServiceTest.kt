@@ -46,15 +46,11 @@ class FarmWeatherServiceTest {
     @BeforeEach
     fun setUp() {
         member = Member(memberId, "member@example.com", null)
-        farm = Farm(
-            id = farmId,
-            owner = member,
-            name = "황기밭",
-            roadAddress = "서울 중구 세종대로 110",
-            latitude = 37.5,
-            longitude = 128.1,
-            pnu = "1114010300100010000"
-        )
+        farm = Farm(farmId, member, "황기밭", "서울 중구 세종대로 110").also { migratedFarm ->
+            migratedFarm.latitude = 37.5
+            migratedFarm.longitude = 128.1
+            migratedFarm.pnu = "1114010300100010000"
+        }
         service = FarmWeatherService(
             farmRepository = farmRepository,
             weatherParallelFetcher = weatherParallelFetcher,
@@ -97,14 +93,10 @@ class FarmWeatherServiceTest {
 
     @Test
     fun `좌표가 없으면 WEATHER_LOCATION_REQUIRED`() {
-        val farmWithoutCoordinate = Farm(
-            id = farmId,
-            owner = member,
-            name = "황기밭",
-            roadAddress = "서울 중구 세종대로 110",
-            latitude = null,
-            longitude = 37.5
-        )
+        val farmWithoutCoordinate = Farm(farmId, member, "황기밭", "서울 중구 세종대로 110").also { migratedFarm ->
+            migratedFarm.latitude = null
+            migratedFarm.longitude = 37.5
+        }
         given(farmRepository.findByIdAndOwnerId(farmId, memberId)).willReturn(farmWithoutCoordinate)
 
         val exception = assertThrows(BusinessException::class.java) {
