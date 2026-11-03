@@ -35,13 +35,7 @@ class CommunityCommentService(
         val media = command.mediaId?.let { validateMedia(command.memberId, it) }
 
         val comment = communityCommentRepository.save(
-            CommunityComment(
-                post = post,
-                parentComment = parentComment,
-                author = member,
-                body = command.body,
-                media = media
-            )
+            CommunityComment(null, post, parentComment, member, command.body, media, false)
         )
         media?.markAttached()
 
@@ -69,10 +63,10 @@ class CommunityCommentService(
             communityCommentRepository.findRootFirstPage(postId, pageable)
         } else {
             communityCommentRepository.findRootPageAfter(
-                postId = postId,
-                cursorCreatedAt = decodedCursor.createdAt,
-                cursorId = decodedCursor.id,
-                pageable = pageable
+                postId,
+                decodedCursor.createdAt,
+                decodedCursor.id,
+                pageable
             )
         }
         val visibleRoots = rootComments.take(size)

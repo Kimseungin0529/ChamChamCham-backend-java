@@ -1,13 +1,15 @@
-package com.chamchamcham.domain.community
+package com.chamchamcham.domain.community;
 
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
-import org.springframework.data.repository.query.Param
-import org.springframework.data.domain.Pageable
-import java.time.LocalDateTime
-import java.util.UUID
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-interface CommunityCommentRepository : JpaRepository<CommunityComment, UUID> {
+public interface CommunityCommentRepository extends JpaRepository<CommunityComment, UUID> {
     @Query(
         """
         select c
@@ -20,10 +22,7 @@ interface CommunityCommentRepository : JpaRepository<CommunityComment, UUID> {
         order by c.createdAt desc, c.id desc
         """
     )
-    fun findRootFirstPage(
-        @Param("postId") postId: UUID,
-        pageable: Pageable
-    ): List<CommunityComment>
+    List<CommunityComment> findRootFirstPage(@Param("postId") UUID postId, Pageable pageable);
 
     @Query(
         """
@@ -41,12 +40,7 @@ interface CommunityCommentRepository : JpaRepository<CommunityComment, UUID> {
         order by c.createdAt desc, c.id desc
         """
     )
-    fun findRootPageAfter(
-        @Param("postId") postId: UUID,
-        @Param("cursorCreatedAt") cursorCreatedAt: LocalDateTime,
-        @Param("cursorId") cursorId: UUID,
-        pageable: Pageable
-    ): List<CommunityComment>
+    List<CommunityComment> findRootPageAfter(@Param("postId") UUID postId, @Param("cursorCreatedAt") LocalDateTime cursorCreatedAt, @Param("cursorId") UUID cursorId, Pageable pageable);
 
     @Query(
         """
@@ -60,7 +54,7 @@ interface CommunityCommentRepository : JpaRepository<CommunityComment, UUID> {
         order by c.createdAt asc, c.id asc
         """
     )
-    fun findRepliesByParentIds(@Param("parentIds") parentIds: Collection<UUID>): List<CommunityComment>
+    List<CommunityComment> findRepliesByParentIds(@Param("parentIds") Collection<UUID> parentIds);
 
-    fun countByPostIdAndIsDeletedFalse(postId: UUID): Long
+    long countByPostIdAndIsDeletedFalse(UUID postId);
 }
