@@ -88,10 +88,10 @@ class SearchServiceTest {
         `when`(
             policyProgramQueryRepository.search(
                 PolicyProgramQueryRepository.SearchCondition(
-                    keyword = "정책",
-                    cursorCreatedAt = null,
-                    cursorId = null,
-                    size = 3,
+                    "정책",
+                    null,
+                    null,
+                    3,
                 )
             )
         ).thenReturn(programs)
@@ -113,10 +113,10 @@ class SearchServiceTest {
         `when`(
             policyProgramQueryRepository.search(
                 PolicyProgramQueryRepository.SearchCondition(
-                    keyword = null,
-                    cursorCreatedAt = null,
-                    cursorId = null,
-                    size = 21,
+                    null,
+                    null,
+                    null,
+                    21,
                 )
             )
         ).thenReturn(listOf(program))
@@ -137,10 +137,10 @@ class SearchServiceTest {
         `when`(
             policyProgramQueryRepository.search(
                 PolicyProgramQueryRepository.SearchCondition(
-                    keyword = null,
-                    cursorCreatedAt = cursorProgram.createdAt,
-                    cursorId = cursorProgram.id,
-                    size = 21,
+                    null,
+                    cursorProgram.createdAt,
+                    cursorProgram.id,
+                    21,
                 )
             )
         ).thenReturn(emptyList())
@@ -187,10 +187,10 @@ class SearchServiceTest {
         `when`(
             policyProgramQueryRepository.search(
                 PolicyProgramQueryRepository.SearchCondition(
-                    keyword = "황기",
-                    cursorCreatedAt = null,
-                    cursorId = null,
-                    size = 4,
+                    "황기",
+                    null,
+                    null,
+                    4,
                 )
             )
         ).thenReturn(listOf(program))
