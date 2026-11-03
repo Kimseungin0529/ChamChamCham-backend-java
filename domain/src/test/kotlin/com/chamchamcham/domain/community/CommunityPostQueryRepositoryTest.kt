@@ -46,8 +46,8 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), now)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), now)
+        member = persist(Member("member@example.com", null), now)
+        otherMember = persist(Member("other@example.com", null), now)
         hwanggiCrop = persist(crop(name = "황기", externalNo = 422), now)
         ginsengCrop = persist(crop(name = "인삼", externalNo = 107), now)
     }
@@ -393,7 +393,7 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
 
     private fun persistLikeMember(): Member {
         return persist(
-            Member(email = "like-${UUID.randomUUID()}@example.com", passwordHash = null),
+            Member("like-${UUID.randomUUID()}@example.com", null),
             now
         )
     }
@@ -401,13 +401,14 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
     private fun persistThumbnail(post: CommunityPost) {
         val media = persist(
             UploadedMedia(
-                owner = otherMember,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.COMMUNITY_POST,
-                fileUrl = "https://example.test/${post.title}.jpg",
-                cloudinaryPublicId = "community/${post.title}",
-                status = UploadedMediaStatus.ATTACHED
-            ),
+                otherMember,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.COMMUNITY_POST,
+                "https://example.test/${post.title}.jpg",
+                "community/${post.title}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             LocalDateTime.of(2026, 6, 12, 9, 50)
         )
         persist(CommunityPostMedia(post = post, uploadedMedia = media, displayOrder = 0), LocalDateTime.of(2026, 6, 12, 9, 51))
@@ -440,7 +441,7 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
         )
 
     private fun crop(name: String, externalNo: Int): Crop =
-        Crop(externalNo = externalNo, name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(externalNo, name, CropUsePartCategory.ROOT_BARK)
 
     private fun <T : BaseTimeEntity> persist(entity: T, createdAt: LocalDateTime): T {
         setTimestamps(entity, createdAt)

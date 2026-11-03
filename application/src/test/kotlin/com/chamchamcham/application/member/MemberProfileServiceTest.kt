@@ -275,8 +275,8 @@ class MemberProfileServiceTest {
 
     @Test
     fun `update my profile rejects another member farm`() {
-        val otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
-        val otherFarm = Farm(id = farmId, owner = otherMember, name = "남의 농장", roadAddress = "서울특별시 강남구")
+        val otherMember = Member(otherMemberId, "other@example.com", null)
+        val otherFarm = Farm(farmId, otherMember, "남의 농장", "서울특별시 강남구")
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findById(farmId)).thenReturn(Optional.of(otherFarm))
 
@@ -314,7 +314,7 @@ class MemberProfileServiceTest {
     @Test
     fun `update my profile rejects another member profile image`() {
         val otherMediaId = UUID.fromString("00000000-0000-0000-0000-000000000302")
-        val otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
+        val otherMember = Member(otherMemberId, "other@example.com", null)
         val otherMedia = profileMedia(otherMember, otherMediaId, status = UploadedMediaStatus.TEMP)
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(uploadedMediaRepository.findById(otherMediaId)).thenReturn(Optional.of(otherMedia))
@@ -361,7 +361,7 @@ class MemberProfileServiceTest {
     }
 
     private fun member(): Member =
-        Member(id = memberId, email = "hwanggi@example.com", passwordHash = null).also {
+        Member(memberId, "hwanggi@example.com", null).also {
             it.name = "이황기"
             it.phone = "010-1000-0001"
             it.birthDate = LocalDate.of(1986, 3, 12)
@@ -380,33 +380,30 @@ class MemberProfileServiceTest {
         status: UploadedMediaStatus = UploadedMediaStatus.ATTACHED
     ): UploadedMedia =
         UploadedMedia(
-            id = id,
-            owner = owner,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/$id.jpg",
-            cloudinaryPublicId = "profile/$id",
-            status = status
-        )
+            id,
+            owner,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/$id.jpg",
+            "profile/$id"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
 
     private fun farm(
         id: UUID,
         roadAddress: String,
         jibunAddress: String? = "강원특별자치도 횡성군 둔내면 현천리 101"
     ): Farm =
-        Farm(
-            id = id,
-            owner = member,
-            name = "횡성 황기밭",
-            roadAddress = roadAddress,
-            jibunAddress = jibunAddress
-        )
+        Farm(id, member, "횡성 황기밭", roadAddress).also { migratedFarm ->
+            migratedFarm.jibunAddress = jibunAddress
+        }
 
     private fun crop(id: UUID, name: String): Crop =
-        Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)
 
     private fun memberCrop(farm: Farm, crop: Crop): MemberCrop =
-        MemberCrop(member = member, farm = farm, crop = crop)
+        MemberCrop(member, farm, crop)
 
     private fun updateCommand(
         profileMediaId: UUID?,

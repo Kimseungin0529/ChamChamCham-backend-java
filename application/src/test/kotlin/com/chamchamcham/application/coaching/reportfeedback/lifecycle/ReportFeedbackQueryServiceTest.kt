@@ -59,7 +59,7 @@ class ReportFeedbackQueryServiceTest {
     @BeforeEach
     fun setUp() {
         service = ReportFeedbackQueryService(reportRepository, feedbackRepository, lifecycleService)
-        member = Member(id = memberId, email = "member@example.com", passwordHash = null)
+        member = Member(memberId, "member@example.com", null)
         completedReport = report(
             FarmingCycleReportStatus.COMPLETED,
             statisticsFor(WorkType.WATERING, WorkType.FERTILIZING, WorkType.HARVEST),
@@ -272,18 +272,8 @@ class ReportFeedbackQueryServiceTest {
         status: FarmingCycleReportStatus,
         statistics: CycleReportStatistics = CycleReportStatistics.empty(),
     ): FarmingCycleReport {
-        val farm = Farm(
-            id = uuid("000000000301"),
-            owner = member,
-            name = "약초농장",
-            roadAddress = "강원도 평창군",
-        )
-        val crop = Crop(
-            id = uuid("000000000401"),
-            externalNo = 422,
-            name = "황기",
-            usePartCategory = CropUsePartCategory.ROOT_BARK,
-        )
+        val farm = Farm(uuid("000000000301"), member, "약초농장", "강원도 평창군")
+        val crop = Crop(uuid("000000000401"), 422, "황기", CropUsePartCategory.ROOT_BARK)
         val finalHarvest = FarmingRecord(
             id = uuid("000000000501"),
             member = member,

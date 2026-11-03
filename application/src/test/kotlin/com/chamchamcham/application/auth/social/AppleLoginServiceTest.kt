@@ -14,6 +14,7 @@ import com.chamchamcham.domain.member.AuthProvider
 import com.chamchamcham.domain.member.ExternalIdentity
 import com.chamchamcham.domain.member.ExternalIdentityRepository
 import com.chamchamcham.domain.member.Member
+import com.chamchamcham.domain.member.MemberStatus
 import com.chamchamcham.domain.member.MemberRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -77,7 +78,21 @@ class AppleLoginServiceTest {
 
     @Test
     fun `login reuses existing external identity and reserves nonce hash`() {
-        val member = Member(id = memberId, email = "user@example.com", passwordHash = null, role = "ROLE_USER")
+        val member = Member(
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
         val claims = claims()
 
         `when`(appleOidcTokenVerifier.verify("identity-token", "raw-nonce")).thenReturn(claims)
@@ -97,7 +112,21 @@ class AppleLoginServiceTest {
 
     @Test
     fun `login reuses existing external identity without requiring verified email`() {
-        val member = Member(id = memberId, email = "user@example.com", passwordHash = null, role = "ROLE_USER")
+        val member = Member(
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(appleOidcTokenVerifier.verify("identity-token", "raw-nonce"))
             .thenReturn(claims(email = null, emailVerified = false))
@@ -128,7 +157,21 @@ class AppleLoginServiceTest {
 
     @Test
     fun `login creates member without email for new identity`() {
-        val savedMember = Member(id = newMemberId, email = null, passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(appleOidcTokenVerifier.verify("identity-token", "raw-nonce"))
             .thenReturn(claims(email = null, emailVerified = false))
@@ -152,7 +195,21 @@ class AppleLoginServiceTest {
 
     @Test
     fun `login forwards client-supplied name when creating a new member`() {
-        val savedMember = Member(id = newMemberId, email = null, name = "홍길동", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            null,
+            null,
+            MemberStatus.ACTIVE,
+            "홍길동",
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(appleOidcTokenVerifier.verify("identity-token", "raw-nonce"))
             .thenReturn(claims(email = null, emailVerified = false))
@@ -198,7 +255,21 @@ class AppleLoginServiceTest {
 
     @Test
     fun `login creates member for new identity with verified email`() {
-        val savedMember = Member(id = newMemberId, email = "new@example.com", passwordHash = null, role = "ROLE_USER")
+        val savedMember = Member(
+            newMemberId,
+            "new@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
+        )
 
         `when`(appleOidcTokenVerifier.verify("identity-token", "raw-nonce"))
             .thenReturn(claims(email = "new@example.com"))
@@ -230,12 +301,7 @@ class AppleLoginServiceTest {
     }
 
     private fun existingIdentity(member: Member): ExternalIdentity {
-        return ExternalIdentity(
-            id = externalIdentityId,
-            member = member,
-            provider = AuthProvider.APPLE,
-            providerSubject = "apple-sub"
-        )
+        return ExternalIdentity(externalIdentityId, member, AuthProvider.APPLE, "apple-sub")
     }
 
     private fun command(userIdentifier: String? = "apple-sub", name: String? = null): AuthCommand.AppleLogin {

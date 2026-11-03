@@ -47,14 +47,14 @@ class MemberWithdrawalIntegrationTest @Autowired constructor(
         uploadedMediaRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "withdrawal-member@example.com", passwordHash = null))
+        member = memberRepository.save(Member("withdrawal-member@example.com", null))
         val profileMedia = uploadedMediaRepository.save(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.PROFILE,
-                fileUrl = "https://example.test/profile.jpg",
-                cloudinaryPublicId = "profile/withdrawal-member",
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.PROFILE,
+                "https://example.test/profile.jpg",
+                "profile/withdrawal-member"
             ),
         )
         member.updateProfileMedia(profileMedia)

@@ -11,17 +11,14 @@ import java.util.UUID
 class OnboardingStatusResolverTest {
     @Test
     fun `resolve returns missing fields for incomplete member`() {
-        val member = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-            email = null,
-            name = null,
-            phone = null,
-            birthDate = null,
-            nickname = null,
-            experienceLevel = null,
-            managementType = null,
-            passwordHash = null
-        )
+        val member = Member(UUID.fromString("00000000-0000-0000-0000-000000000001"), null, null).also { migratedMember ->
+            migratedMember.phone = null
+            migratedMember.name = null
+            migratedMember.birthDate = null
+            migratedMember.nickname = null
+            migratedMember.experienceLevel = null
+            migratedMember.managementType = null
+        }
 
         val result = OnboardingStatusResolver().resolve(member)
 
@@ -37,17 +34,14 @@ class OnboardingStatusResolverTest {
 
     @Test
     fun `resolve is complete even when optional profile fields are absent`() {
-        val member = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-            email = null,
-            name = null,
-            phone = null,
-            birthDate = null,
-            nickname = null,
-            experienceLevel = 3,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-            passwordHash = null
-        )
+        val member = Member(UUID.fromString("00000000-0000-0000-0000-000000000001"), null, null).also { migratedMember ->
+            migratedMember.phone = null
+            migratedMember.name = null
+            migratedMember.birthDate = null
+            migratedMember.nickname = null
+            migratedMember.experienceLevel = 3
+            migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+        }
 
         val result = OnboardingStatusResolver().resolve(member)
 
@@ -57,17 +51,14 @@ class OnboardingStatusResolverTest {
 
     @Test
     fun `resolve returns complete when all required onboarding fields exist`() {
-        val member = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-            email = null,
-            name = "홍길동",
-            phone = "010-1234-5678",
-            birthDate = LocalDate.of(1998, 3, 12),
-            nickname = "농부",
-            experienceLevel = 72,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-            passwordHash = null
-        )
+        val member = Member(UUID.fromString("00000000-0000-0000-0000-000000000001"), null, null).also { migratedMember ->
+            migratedMember.phone = "010-1234-5678"
+            migratedMember.name = "홍길동"
+            migratedMember.birthDate = LocalDate.of(1998, 3, 12)
+            migratedMember.nickname = "농부"
+            migratedMember.experienceLevel = 72
+            migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+        }
 
         val result = OnboardingStatusResolver().resolve(member)
 
@@ -77,17 +68,14 @@ class OnboardingStatusResolverTest {
 
     @Test
     fun `resolve requires management type`() {
-        val member = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-            email = null,
-            name = "홍길동",
-            phone = "010-1234-5678",
-            birthDate = LocalDate.of(1998, 3, 12),
-            nickname = "농부",
-            experienceLevel = 72,
-            managementType = null,
-            passwordHash = null
-        )
+        val member = Member(UUID.fromString("00000000-0000-0000-0000-000000000001"), null, null).also { migratedMember ->
+            migratedMember.phone = "010-1234-5678"
+            migratedMember.name = "홍길동"
+            migratedMember.birthDate = LocalDate.of(1998, 3, 12)
+            migratedMember.nickname = "농부"
+            migratedMember.experienceLevel = 72
+            migratedMember.managementType = null
+        }
 
         val result = OnboardingStatusResolver().resolve(member)
 

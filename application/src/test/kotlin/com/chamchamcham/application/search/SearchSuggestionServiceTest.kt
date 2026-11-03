@@ -148,12 +148,12 @@ class SearchSuggestionServiceTest {
         agencies: List<String>,
     ) {
         `when`(cropRepository.findTop9ByNameContainingIgnoreCaseOrderByNameAsc(keyword))
-            .thenReturn(crops.map { Crop(externalNo = 0, name = it, usePartCategory = CropUsePartCategory.ROOT_BARK) })
+            .thenReturn(crops.map { Crop(0, it, CropUsePartCategory.ROOT_BARK) })
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = keyword, cursor = null, size = 9)
+                PesticideQueryRepository.SearchCondition(keyword, null, 9)
             )
-        ).thenReturn(pesticides.map { Pesticide(itemName = it, brandName = it) })
+        ).thenReturn(pesticides.map { Pesticide(it, it) })
         `when`(policyProgramRepository.findTitleSuggestions(keyword, PageRequest.of(0, 9)))
             .thenReturn(titles.map { policyProgram(title = it, agencyName = "기관") })
         `when`(policyProgramRepository.findAgencySuggestions(keyword, PageRequest.of(0, 9)))

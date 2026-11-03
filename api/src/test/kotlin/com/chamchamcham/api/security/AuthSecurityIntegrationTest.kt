@@ -218,7 +218,7 @@ class AuthSecurityIntegrationTest(
     @Test
     fun `protected endpoint accepts valid jwt`() {
         val existingMember = memberRepository.saveAndFlush(
-            Member(email = "security-${UUID.randomUUID()}@example.com", passwordHash = null)
+            Member("security-${UUID.randomUUID()}@example.com", null)
         )
         val existingMemberId = requireNotNull(existingMember.id)
         val accessToken = tokenProvider.createAccessToken(existingMemberId, "ROLE_USER")

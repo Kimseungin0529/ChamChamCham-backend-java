@@ -32,11 +32,7 @@ class MedicinalCropSeedRunner(
         val crops = seedRows.map { row ->
             existingByExternalNo[row.externalNo]?.apply {
                 updateCatalogData(row.name, row.usePartCategory)
-            } ?: Crop(
-                externalNo = row.externalNo,
-                name = row.name,
-                usePartCategory = row.usePartCategory
-            )
+            } ?: Crop(row.externalNo, row.name, row.usePartCategory)
         }
 
         cropRepository.saveAll(crops)

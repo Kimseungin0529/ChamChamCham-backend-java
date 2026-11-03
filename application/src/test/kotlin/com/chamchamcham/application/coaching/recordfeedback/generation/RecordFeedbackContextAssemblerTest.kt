@@ -199,19 +199,12 @@ class RecordFeedbackContextAssemblerTest {
         `when`(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(
             PestControlRecord(
                 record = record,
-                pesticide = Pesticide(
-                    id = UUID.fromString("00000000-0000-0000-0000-000000000010"),
-                    itemName = "만코제브 수화제",
-                    brandName = "가가방",
-                ),
+                pesticide = Pesticide(UUID.fromString("00000000-0000-0000-0000-000000000010"), "만코제브 수화제", "가가방"),
                 pesticideAmount = BigDecimal("120.0000"),
                 pesticideAmountUnit = PesticideAmountUnit.ML,
                 totalSprayAmount = BigDecimal("20.0000"),
                 totalSprayAmountUnit = SprayAmountUnit.ML,
-                pest = Pest(
-                    id = UUID.fromString("00000000-0000-0000-0000-000000000011"),
-                    name = "점무늬병",
-                ),
+                pest = Pest(UUID.fromString("00000000-0000-0000-0000-000000000011"), "점무늬병"),
             )
         )
         stubSharedContext()
@@ -521,27 +514,15 @@ class RecordFeedbackContextAssemblerTest {
         longitude: Double? = 128.2,
         workedAt: LocalDateTime = LocalDateTime.of(2026, 7, 1, 8, 30),
     ) {
-        val member = Member(
-            id = memberId,
-            email = "farmer@example.test",
-            passwordHash = null,
-            experienceLevel = 3,
-            managementType = ManagementType.NON_REGISTERED_FARMER,
-        )
-        val farm = Farm(
-            id = farmId,
-            owner = member,
-            name = "청년약초밭",
-            roadAddress = "강원특별자치도 평창군",
-            latitude = latitude,
-            longitude = longitude,
-        )
-        val crop = Crop(
-            id = cropId,
-            externalNo = 1001,
-            name = "참당귀",
-            usePartCategory = CropUsePartCategory.ROOT_BARK,
-        )
+        val member = Member(memberId, "farmer@example.test", null).also { migratedMember ->
+            migratedMember.experienceLevel = 3
+            migratedMember.managementType = ManagementType.NON_REGISTERED_FARMER
+        }
+        val farm = Farm(farmId, member, "청년약초밭", "강원특별자치도 평창군").also { migratedFarm ->
+            migratedFarm.latitude = latitude
+            migratedFarm.longitude = longitude
+        }
+        val crop = Crop(cropId, 1001, "참당귀", CropUsePartCategory.ROOT_BARK)
         record = FarmingRecord(
             id = recordId,
             member = member,

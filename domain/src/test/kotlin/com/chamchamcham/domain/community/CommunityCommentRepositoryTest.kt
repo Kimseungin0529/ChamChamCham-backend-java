@@ -74,13 +74,9 @@ class CommunityCommentRepositoryTest @Autowired constructor(
 
     private fun persistPostFixture(): Fixture {
         val createdAt = LocalDateTime.of(2026, 6, 12, 8, 0)
-        val member = persist(Member(email = "member-${UUID.randomUUID()}@example.com", passwordHash = null), createdAt)
+        val member = persist(Member("member-${UUID.randomUUID()}@example.com", null), createdAt)
         val crop = persist(
-            Crop(
-                externalNo = 422,
-                name = "황기",
-                usePartCategory = CropUsePartCategory.ROOT_BARK
-            ),
+            Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
             createdAt
         )
         val post = persist(

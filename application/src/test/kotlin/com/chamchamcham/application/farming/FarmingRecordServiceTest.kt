@@ -136,10 +136,10 @@ class FarmingRecordServiceTest {
         // 기존 create/update 해피패스는 등록된 (농장,작물) 조합을 전제하므로 기본 true로 둔다.
         // 미등록 거부 케이스는 별도 테스트에서 이 조합만 false로 덮어쓴다.
         lenient().`when`(memberCropRepository.existsByMemberIdAndFarmIdAndCropId(memberId, farmId, cropId)).thenReturn(true)
-        member = Member(id = memberId, email = "$memberId@example.com", passwordHash = null)
-        otherMember = Member(id = otherMemberId, email = "$otherMemberId@example.com", passwordHash = null)
-        farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-        crop = Crop(id = cropId, externalNo = cropId.hashCode(), name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        member = Member(memberId, "$memberId@example.com", null)
+        otherMember = Member(otherMemberId, "$otherMemberId@example.com", null)
+        farm = Farm(farmId, member, "약초농장", "서울시 강남구")
+        crop = Crop(cropId, cropId.hashCode(), "황기", CropUsePartCategory.ROOT_BARK)
         media1 = uploadedMedia(mediaId1)
         replacementMedia = uploadedMedia(replacementMediaId)
     }
@@ -208,14 +208,15 @@ class FarmingRecordServiceTest {
         usageType: UploadedMediaUsageType = UploadedMediaUsageType.FARMING_RECORD,
         status: UploadedMediaStatus = UploadedMediaStatus.TEMP,
     ): UploadedMedia = UploadedMedia(
-        id = id,
-        owner = member,
-        mediaType = UploadedMediaType.IMAGE,
-        usageType = usageType,
-        fileUrl = "https://example.test/$id.jpg",
-        cloudinaryPublicId = "farming/$id",
-        status = status,
-    )
+        id,
+        member,
+        UploadedMediaType.IMAGE,
+        usageType,
+        "https://example.test/$id.jpg",
+        "farming/$id"
+    ).also { migratedUploadedMedia ->
+        migratedUploadedMedia.status = status
+    }
 
     private fun stubFarmingRecordSave() {
         `when`(farmingRecordRepository.save(any(FarmingRecord::class.java))).thenAnswer { invocation ->
@@ -287,8 +288,8 @@ class FarmingRecordServiceTest {
         `when`(cropRepository.findById(cropId)).thenReturn(Optional.of(crop))
         val pesticideId = UUID.randomUUID()
         val pestId = UUID.randomUUID()
-        val pesticide = Pesticide(id = pesticideId, itemName = "만코제브 수화제", brandName = "가가방")
-        val pest = Pest(id = pestId, name = "역병")
+        val pesticide = Pesticide(pesticideId, "만코제브 수화제", "가가방")
+        val pest = Pest(pestId, "역병")
         `when`(pesticideRepository.findById(pesticideId)).thenReturn(Optional.of(pesticide))
         `when`(pestRepository.findById(pestId)).thenReturn(Optional.of(pest))
         stubFarmingRecordSave()
@@ -817,7 +818,7 @@ class FarmingRecordServiceTest {
         val record = existingRecord(workType = WorkType.PEST_CONTROL)
         setTimestamps(record, LocalDateTime.of(2026, 6, 1, 9, 0))
         val pesticideId = UUID.randomUUID()
-        val pesticide = Pesticide(id = pesticideId, itemName = "만코제브 수화제", brandName = "빔")
+        val pesticide = Pesticide(pesticideId, "만코제브 수화제", "빔")
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(farmingRecordMediaRepository.findByRecord_Id(recordId)).thenReturn(emptyList())
         `when`(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(

@@ -72,9 +72,9 @@ class FarmingCycleReportQueryServiceTest {
             queryRepository = queryRepository,
             cursorCodec = cursorCodec,
         )
-        member = Member(id = memberId, email = "member@example.com", passwordHash = null)
-        farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-        crop = Crop(id = cropId, externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        member = Member(memberId, "member@example.com", null)
+        farm = Farm(farmId, member, "약초농장", "서울시 강남구")
+        crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
         typedStatistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 1))
         active = activeReport(id = activeReportId)
         selectedCompleted = completedReport(id = reportId, finalRecordId = finalHarvestRecordId, endedAt = day(30))

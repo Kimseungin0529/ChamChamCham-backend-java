@@ -55,44 +55,40 @@ object FarmCommand {
 
 fun FarmCommand.Draft.toFarm(owner: Member): Farm =
     Farm(
-        owner = owner,
-        name = name,
-        roadAddress = roadAddress,
-        jibunAddress = jibunAddress,
-        latitude = latitude,
-        longitude = longitude,
-        pnu = pnu,
-        landCategory = landCategory,
-        areaSqm = areaSqm,
-        areaIsManualEntry = areaIsManualEntry,
-        boundaryCoordinates = boundaryCoordinates.map {
-            FarmBoundaryCoordinate(latitude = it.latitude, longitude = it.longitude)
+        null,
+        owner,
+        name,
+        roadAddress,
+        jibunAddress,
+        latitude,
+        longitude,
+        pnu,
+        landCategory,
+        areaSqm,
+        areaIsManualEntry,
+        boundaryCoordinates.map {
+            FarmBoundaryCoordinate(it.latitude, it.longitude)
         }.toMutableList(),
-        dataSource = dataSource.toDomain()
+        dataSource.toDomain()
     )
 
 fun Farm.apply(draft: FarmCommand.Draft) {
     updateProfile(
-        name = draft.name,
-        roadAddress = draft.roadAddress,
-        jibunAddress = draft.jibunAddress,
-        latitude = draft.latitude,
-        longitude = draft.longitude,
-        pnu = draft.pnu,
-        landCategory = draft.landCategory,
-        areaSqm = draft.areaSqm,
-        areaIsManualEntry = draft.areaIsManualEntry,
-        boundaryCoordinates = draft.boundaryCoordinates.map {
-            FarmBoundaryCoordinate(latitude = it.latitude, longitude = it.longitude)
+        draft.name,
+        draft.roadAddress,
+        draft.jibunAddress,
+        draft.latitude,
+        draft.longitude,
+        draft.pnu,
+        draft.landCategory,
+        draft.areaSqm,
+        draft.areaIsManualEntry,
+        draft.boundaryCoordinates.map {
+            FarmBoundaryCoordinate(it.latitude, it.longitude)
         },
-        dataSource = draft.dataSource.toDomain()
+        draft.dataSource.toDomain()
     )
 }
 
 private fun FarmCommand.DataSource.toDomain(): FarmDataSource =
-    FarmDataSource(
-        address = address,
-        coordinate = coordinate,
-        parcel = parcel,
-        landCharacteristic = landCharacteristic
-    )
+    FarmDataSource(address, coordinate, parcel, landCharacteristic)

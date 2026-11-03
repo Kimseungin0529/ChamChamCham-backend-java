@@ -62,17 +62,12 @@ class CommunityCommentServiceTest {
 
     @BeforeEach
     fun setUp() {
-        member = Member(id = memberId, email = "farmer@example.com", passwordHash = null)
-        otherMember = Member(id = otherMemberId, email = "other@example.com", passwordHash = null)
+        member = Member(memberId, "farmer@example.com", null)
+        otherMember = Member(otherMemberId, "other@example.com", null)
         post = CommunityPost(
             id = postId,
             author = member,
-            crop = Crop(
-                id = UUID.fromString("00000000-0000-0000-0000-000000000301"),
-                externalNo = 422,
-                name = "황기",
-                usePartCategory = CropUsePartCategory.ROOT_BARK
-            ),
+            crop = Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기", CropUsePartCategory.ROOT_BARK),
             postType = CommunityPostType.QUESTION,
             title = "황기 발아율이 낮아요",
             body = "싹이 거의 올라오지 않아요."
@@ -369,14 +364,15 @@ class CommunityCommentServiceTest {
         status: UploadedMediaStatus = UploadedMediaStatus.TEMP
     ): UploadedMedia =
         UploadedMedia(
-            id = id,
-            owner = owner,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/comment.jpg",
-            cloudinaryPublicId = "community/comment",
-            status = status
-        )
+            id,
+            owner,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/comment.jpg",
+            "community/comment"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
 
     private fun capturedComment(): CommunityComment {
         val captor = ArgumentCaptor.forClass(CommunityComment::class.java)

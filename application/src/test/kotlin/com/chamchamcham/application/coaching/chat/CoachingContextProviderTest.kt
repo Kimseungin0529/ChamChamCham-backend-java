@@ -116,28 +116,15 @@ class CoachingContextProviderTest {
         verify(farmingRecordRepository).findByIdAndMember_Id(recordId, memberId)
     }
 
-    private fun member() = Member(
-        id = memberId,
-        email = "farmer@example.com",
-        name = "박민서",
-        experienceLevel = 72,
-        managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-        passwordHash = null
-    )
+    private fun member() = Member(memberId, "farmer@example.com", null).also { migratedMember ->
+        migratedMember.name = "박민서"
+        migratedMember.experienceLevel = 72
+        migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+    }
 
-    private fun farm(owner: Member) = Farm(
-        id = farmId,
-        owner = owner,
-        name = "하늘들 약초농장",
-        roadAddress = "강원특별자치도 평창군 진부면 솔바람길 24"
-    )
+    private fun farm(owner: Member) = Farm(farmId, owner, "하늘들 약초농장", "강원특별자치도 평창군 진부면 솔바람길 24")
 
-    private fun crop() = Crop(
-        id = cropId,
-        externalNo = 422,
-        name = "참당귀",
-        usePartCategory = CropUsePartCategory.ROOT_BARK
-    )
+    private fun crop() = Crop(cropId, 422, "참당귀", CropUsePartCategory.ROOT_BARK)
 
     private fun record(member: Member, farm: Farm, crop: Crop) = FarmingRecord(
         id = recordId,

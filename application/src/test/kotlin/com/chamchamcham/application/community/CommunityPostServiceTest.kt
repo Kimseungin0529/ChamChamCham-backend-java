@@ -685,13 +685,13 @@ class CommunityPostServiceTest {
     }
 
     private fun member(id: UUID): Member =
-        Member(id = id, email = "$id@example.com", passwordHash = null)
+        Member(id, "$id@example.com", null)
 
     private fun crop(id: UUID, name: String): Crop =
-        Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)
 
     private fun memberCrop(member: Member, crop: Crop): MemberCrop =
-        MemberCrop(member = member, farm = farm(member), crop = crop)
+        MemberCrop(member, farm(member), crop)
 
     private fun farmingRecord(member: Member, crop: Crop): FarmingRecord =
         FarmingRecord(
@@ -715,14 +715,15 @@ class CommunityPostServiceTest {
     ): UploadedMedia {
         val index = if (id == mediaId2) "2" else "1"
         return UploadedMedia(
-            id = id,
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/$index.jpg",
-            cloudinaryPublicId = "community/$index",
-            status = status
-        )
+            id,
+            member,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/$index.jpg",
+            "community/$index"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
     }
 
     private fun existingPost(author: Member, crop: Crop, id: UUID = postId): CommunityPost =
@@ -818,7 +819,7 @@ class CommunityPostServiceTest {
     }
 
     private fun farm(member: Member): Farm =
-        Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구")
+        Farm(member, "약초농장", "서울시 강남구")
 
     private fun setCreatedAt(entity: BaseTimeEntity, createdAt: LocalDateTime) {
         val field = BaseTimeEntity::class.java.getDeclaredField("createdAt")

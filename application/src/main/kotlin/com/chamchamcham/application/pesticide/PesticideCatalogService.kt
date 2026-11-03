@@ -26,9 +26,9 @@ class PesticideCatalogService(
         val decodedCursor = decodeCursor(cursor)
         val rows = pesticideQueryRepository.search(
             PesticideQueryRepository.SearchCondition(
-                keyword = keyword,
-                cursor = decodedCursor,
-                size = size + 1
+                keyword,
+                decodedCursor,
+                size + 1
             )
         )
         val visibleRows = rows.take(size)
@@ -56,7 +56,7 @@ class PesticideCatalogService(
             return null
         }
         val payload = cursorCodec.decode(cursor, PesticideCursorPayload::class.java)
-        return PesticideQueryRepository.Cursor(brandName = payload.brandName, id = payload.id)
+        return PesticideQueryRepository.Cursor(payload.brandName, payload.id)
     }
 
     private fun encodeCursor(pesticide: Pesticide): String =

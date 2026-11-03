@@ -88,19 +88,19 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
         cropRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "rollback-member@example.com", passwordHash = null))
-        farm = farmRepository.save(Farm(owner = member, name = "롤백검증농장", roadAddress = "충청북도 제천시"))
+        member = memberRepository.save(Member("rollback-member@example.com", null))
+        farm = farmRepository.save(Farm(member, "롤백검증농장", "충청북도 제천시"))
         crop = cropRepository.save(
-            Crop(externalNo = 7002, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7002, "감초", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
         media = uploadedMediaRepository.save(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = "https://example.com/farming-record.jpg",
-                cloudinaryPublicId = "farming-record-test",
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                "https://example.com/farming-record.jpg",
+                "farming-record-test"
             ),
         )
     }

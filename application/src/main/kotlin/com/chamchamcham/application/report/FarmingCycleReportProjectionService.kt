@@ -28,8 +28,8 @@ class FarmingCycleReportProjectionService(
 ) {
     fun rebuild(scope: ReportScope) {
         val farm = farmRepository.findOwnedByIdForReportUpdate(
-            farmId = scope.farmId,
-            memberId = scope.memberId,
+            scope.farmId,
+            scope.memberId,
         ) ?: throw BusinessException(ErrorCode.FARM_NOT_FOUND)
         val crop = cropRepository.findById(scope.cropId).orElseThrow {
             BusinessException(ErrorCode.CROP_NOT_FOUND)

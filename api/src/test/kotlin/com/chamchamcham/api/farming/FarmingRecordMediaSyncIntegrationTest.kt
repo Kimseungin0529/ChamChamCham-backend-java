@@ -86,12 +86,12 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
         cropRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "media-sync-member@example.com", passwordHash = null))
-        farm = farmRepository.save(Farm(owner = member, name = "미디어싱크농장", roadAddress = "충청북도 제천시"))
+        member = memberRepository.save(Member("media-sync-member@example.com", null))
+        farm = farmRepository.save(Farm(member, "미디어싱크농장", "충청북도 제천시"))
         crop = cropRepository.save(
-            Crop(externalNo = 7003, name = "감초", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7003, "감초", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
     }
 
     @Test
@@ -166,11 +166,11 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
 
     private fun newMedia(): UploadedMedia = uploadedMediaRepository.save(
         UploadedMedia(
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.FARMING_RECORD,
-            fileUrl = "https://example.com/farming-record-${UUID.randomUUID()}.jpg",
-            cloudinaryPublicId = "farming-record-test-${UUID.randomUUID()}",
+            member,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.FARMING_RECORD,
+            "https://example.com/farming-record-${UUID.randomUUID()}.jpg",
+            "farming-record-test-${UUID.randomUUID()}"
         ),
     )
 

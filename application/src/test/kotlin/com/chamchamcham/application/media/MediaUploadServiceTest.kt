@@ -57,14 +57,15 @@ class MediaUploadServiceTest {
             .thenAnswer { invocation ->
                 val media = invocation.arguments[0] as UploadedMedia
                 UploadedMedia(
-                    id = mediaId,
-                    owner = media.owner,
-                    mediaType = media.mediaType,
-                    usageType = media.usageType,
-                    fileUrl = media.fileUrl,
-                    cloudinaryPublicId = media.cloudinaryPublicId,
-                    status = media.status
-                )
+                    mediaId,
+                    media.owner,
+                    media.mediaType,
+                    media.usageType,
+                    media.fileUrl,
+                    media.cloudinaryPublicId
+                ).also { migratedUploadedMedia ->
+                    migratedUploadedMedia.status = media.status
+                }
             }
 
         val result = service.upload(
@@ -132,7 +133,7 @@ class MediaUploadServiceTest {
     }
 
     private fun member(): Member =
-        Member(id = memberId, email = "farmer@example.com", passwordHash = null)
+        Member(memberId, "farmer@example.com", null)
 
     private fun capturedMedia(): UploadedMedia {
         val captor = ArgumentCaptor.forClass(UploadedMedia::class.java)

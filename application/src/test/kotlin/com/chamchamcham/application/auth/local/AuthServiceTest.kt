@@ -11,6 +11,7 @@ import com.chamchamcham.application.security.TokenProvider
 import com.chamchamcham.application.testsupport.signedTestToken
 import com.chamchamcham.application.testsupport.testTokenProvider
 import com.chamchamcham.domain.member.Member
+import com.chamchamcham.domain.member.MemberStatus
 import com.chamchamcham.domain.member.MemberRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -94,10 +95,19 @@ class AuthServiceTest {
     @Test
     fun `login stores refresh token and returns tokens`() {
         val member = Member(
-            id = memberId,
-            email = "user@example.com",
-            passwordHash = "hashed",
-            role = "ROLE_USER"
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "hashed",
+            "ROLE_USER",
+            null,
+            null
         )
         val tokenPair = AuthResult.TokenPair("access-token", "refresh-token")
 
@@ -115,10 +125,19 @@ class AuthServiceTest {
     @Test
     fun `login rejects social-only member without password hash`() {
         val member = Member(
-            id = memberId,
-            email = "user@example.com",
-            passwordHash = null,
-            role = "ROLE_USER"
+            memberId,
+            "user@example.com",
+            null,
+            MemberStatus.ACTIVE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "ROLE_USER",
+            null,
+            null
         )
 
         `when`(memberRepository.findByEmail("user@example.com")).thenReturn(member)

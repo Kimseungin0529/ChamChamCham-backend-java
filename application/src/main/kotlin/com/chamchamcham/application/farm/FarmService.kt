@@ -45,7 +45,7 @@ class FarmService(
         val farm = farmRepository.save(command.draft.toFarm(member))
         memberCropRepository.saveAll(
             crops.map { crop ->
-                MemberCrop(member = member, farm = farm, crop = crop)
+                MemberCrop(member, farm, crop)
             }
         )
         return FarmResult.Detail.from(farm, crops.map(CropResult.CropSummary::from))
@@ -68,7 +68,7 @@ class FarmService(
         val addedLinks = requestedCrops
             .filter { requireNotNull(it.id) !in currentCropIds }
             .map { crop ->
-                MemberCrop(member = farm.owner, farm = farm, crop = crop)
+                MemberCrop(farm.owner, farm, crop)
             }
         if (addedLinks.isNotEmpty()) {
             memberCropRepository.saveAll(addedLinks)

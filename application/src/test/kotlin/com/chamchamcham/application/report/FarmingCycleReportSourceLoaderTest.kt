@@ -38,9 +38,9 @@ class FarmingCycleReportSourceLoaderTest {
     private val memberId = uuid("00000000-0000-0000-0000-000000000101")
     private val farmId = uuid("00000000-0000-0000-0000-000000000102")
     private val cropId = uuid("00000000-0000-0000-0000-000000000103")
-    private val member = Member(id = memberId, email = "member@example.com", passwordHash = null)
-    private val farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-    private val crop = Crop(id = cropId, externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+    private val member = Member(memberId, "member@example.com", null)
+    private val farm = Farm(farmId, member, "약초농장", "서울시 강남구")
+    private val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val scope = ReportScope(memberId = memberId, farmId = farmId, cropId = cropId)
 
     @Test
@@ -160,19 +160,12 @@ class FarmingCycleReportSourceLoaderTest {
             pestControlByRecordId = mapOf(
                 requireNotNull(pestControl.id) to PestControlRecord(
                     record = pestControl,
-                    pesticide = Pesticide(
-                        id = uuid("00000000-0000-0000-0000-000000000301"),
-                        itemName = "만코제브 수화제",
-                        brandName = "가가방",
-                    ),
+                    pesticide = Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"),
                     pesticideAmount = BigDecimal("30.0000"),
                     pesticideAmountUnit = PesticideAmountUnit.ML,
                     totalSprayAmount = BigDecimal("10000.0000"),
                     totalSprayAmountUnit = SprayAmountUnit.ML,
-                    pest = Pest(
-                        id = uuid("00000000-0000-0000-0000-000000000302"),
-                        name = "진딧물",
-                    ),
+                    pest = Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물"),
                 )
             ),
             weedingByRecordId = mapOf(

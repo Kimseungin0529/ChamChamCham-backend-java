@@ -44,11 +44,11 @@ class MediaUploadService(
 
         val media = uploadedMediaRepository.save(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = command.usageType,
-                fileUrl = uploaded.imageUrl,
-                cloudinaryPublicId = uploaded.cloudinaryPublicId
+                member,
+                UploadedMediaType.IMAGE,
+                command.usageType,
+                uploaded.imageUrl,
+                uploaded.cloudinaryPublicId
             )
         )
 

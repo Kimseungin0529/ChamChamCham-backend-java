@@ -85,12 +85,12 @@ class FarmingCycleReportIntegrationTest @Autowired constructor(
         cropRepository.deleteAllInBatch()
         memberRepository.deleteAllInBatch()
 
-        member = memberRepository.save(Member(email = "report-member@example.com", passwordHash = null))
-        farm = farmRepository.save(Farm(owner = member, name = "통합검증농장", roadAddress = "강원도 평창군"))
+        member = memberRepository.save(Member("report-member@example.com", null))
+        farm = farmRepository.save(Farm(member, "통합검증농장", "강원도 평창군"))
         crop = cropRepository.save(
-            Crop(externalNo = 7001, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK),
+            Crop(7001, "황기", CropUsePartCategory.ROOT_BARK),
         )
-        memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
+        memberCropRepository.save(MemberCrop(member, farm, crop))
     }
 
     @Test

@@ -88,14 +88,11 @@ class PolicyRecommendationServiceTest {
             cursorCodec = cursorCodec,
             clock = Clock.fixed(Instant.parse("2026-04-01T00:00:00Z"), ZoneId.of("UTC"))
         )
-        member = Member(
-            id = memberId,
-            email = "member@example.com",
-            passwordHash = "hash",
-            birthDate = LocalDate.of(1995, 1, 1),
-            experienceLevel = 2,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
-        )
+        member = Member(memberId, "member@example.com", "hash").also { migratedMember ->
+            migratedMember.birthDate = LocalDate.of(1995, 1, 1)
+            migratedMember.experienceLevel = 2
+            migratedMember.managementType = ManagementType.AGRICULTURAL_INDIVIDUAL
+        }
         latestJob = syncJob(latestJobId)
     }
 
@@ -800,30 +797,19 @@ class PolicyRecommendationServiceTest {
 
     private fun givenPolicyProfileData() {
         val farm = farm()
-        val crop = Crop(
-            externalNo = 1001,
-            name = "참당귀",
-            usePartCategory = CropUsePartCategory.ROOT_BARK
-        )
+        val crop = Crop(1001, "참당귀", CropUsePartCategory.ROOT_BARK)
         `when`(memberCropRepository.findAllWithCropByMemberId(memberId)).thenReturn(
             listOf(
-                MemberCrop(
-                    member = member,
-                    farm = farm,
-                    crop = crop
-                )
+                MemberCrop(member, farm, crop)
             )
         )
         `when`(farmRepository.findAllWithBoundaryCoordinatesByOwnerId(memberId)).thenReturn(listOf(farm))
     }
 
     private fun farm(): Farm =
-        Farm(
-            owner = member,
-            name = "제천 약초밭",
-            roadAddress = "충청북도 제천시 청풍면 약초로 1",
-            jibunAddress = "충북 제천시 청풍면"
-        )
+        Farm(member, "제천 약초밭", "충청북도 제천시 청풍면 약초로 1").also { migratedFarm ->
+            migratedFarm.jibunAddress = "충북 제천시 청풍면"
+        }
 
     private fun syncJob(id: UUID): PolicySyncJob =
         PolicySyncJob(

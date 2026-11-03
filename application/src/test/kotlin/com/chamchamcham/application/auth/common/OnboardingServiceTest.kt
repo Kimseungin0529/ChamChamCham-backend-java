@@ -189,18 +189,14 @@ class OnboardingServiceTest {
     @Test
     fun `complete rejects profile media owned by another member`() {
         val member = member()
-        val otherMember = Member(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000099"),
-            email = "other@example.com",
-            passwordHash = null
-        )
+        val otherMember = Member(UUID.fromString("00000000-0000-0000-0000-000000000099"), "other@example.com", null)
         val media = UploadedMedia(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000501"),
-            owner = otherMember,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.PROFILE,
-            fileUrl = "https://example.test/profile.jpg",
-            cloudinaryPublicId = "profiles/profile"
+            UUID.fromString("00000000-0000-0000-0000-000000000501"),
+            otherMember,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.PROFILE,
+            "https://example.test/profile.jpg",
+            "profiles/profile"
         )
 
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
@@ -215,11 +211,7 @@ class OnboardingServiceTest {
     }
 
     private fun member(): Member {
-        return Member(
-            id = memberId,
-            email = "user@example.com",
-            passwordHash = null
-        )
+        return Member(memberId, "user@example.com", null)
     }
 
     private fun crop(
@@ -227,12 +219,7 @@ class OnboardingServiceTest {
         externalNo: Int,
         name: String
     ): Crop {
-        return Crop(
-            id = id,
-            externalNo = externalNo,
-            name = name,
-            usePartCategory = CropUsePartCategory.ROOT_BARK
-        )
+        return Crop(id, externalNo, name, CropUsePartCategory.ROOT_BARK)
     }
 
     private fun completeOnboardingCommand(
@@ -280,19 +267,15 @@ class OnboardingServiceTest {
     }
 
     private fun savedFarm(member: Member, farm: FarmCommand.Draft): Farm {
-        return Farm(
-            id = farmId,
-            owner = member,
-            name = farm.name,
-            roadAddress = farm.roadAddress,
-            jibunAddress = farm.jibunAddress,
-            latitude = farm.latitude,
-            longitude = farm.longitude,
-            pnu = farm.pnu,
-            landCategory = farm.landCategory,
-            areaSqm = farm.areaSqm,
-            areaIsManualEntry = farm.areaIsManualEntry
-        )
+        return Farm(farmId, member, farm.name, farm.roadAddress).also { migratedFarm ->
+            migratedFarm.jibunAddress = farm.jibunAddress
+            migratedFarm.latitude = farm.latitude
+            migratedFarm.longitude = farm.longitude
+            migratedFarm.pnu = farm.pnu
+            migratedFarm.landCategory = farm.landCategory
+            migratedFarm.areaSqm = farm.areaSqm
+            migratedFarm.areaIsManualEntry = farm.areaIsManualEntry
+        }
     }
 
     private fun capturedMemberCrops(): List<MemberCrop> {
@@ -304,12 +287,12 @@ class OnboardingServiceTest {
 
     private fun profileMedia(member: Member): UploadedMedia {
         return UploadedMedia(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000501"),
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.PROFILE,
-            fileUrl = "https://example.test/profile.jpg",
-            cloudinaryPublicId = "profiles/profile"
+            UUID.fromString("00000000-0000-0000-0000-000000000501"),
+            member,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.PROFILE,
+            "https://example.test/profile.jpg",
+            "profiles/profile"
         )
     }
 }

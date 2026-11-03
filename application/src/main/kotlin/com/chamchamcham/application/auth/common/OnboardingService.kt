@@ -53,13 +53,13 @@ class OnboardingService(
         val crops = requestedCropIds.map { cropsById.getValue(it) }
 
         member.completeOnboarding(
-            name = command.name,
-            phone = command.phone,
-            birthDate = command.birthDate,
-            nickname = command.nickname?.trim()?.takeUnless { it.isBlank() }
+            command.name,
+            command.phone,
+            command.birthDate,
+            command.nickname?.trim()?.takeUnless { it.isBlank() }
                 ?: command.name?.trim()?.takeUnless { it.isBlank() },
-            experienceLevel = command.experienceLevel,
-            managementType = command.managementType
+            command.experienceLevel,
+            command.managementType
         )
         profileMedia?.let {
             member.updateProfileMedia(it)
@@ -68,11 +68,7 @@ class OnboardingService(
         val farm = farmRepository.save(command.farm.toFarm(member))
         memberCropRepository.saveAll(
             crops.map { crop ->
-                MemberCrop(
-                    member = member,
-                    farm = farm,
-                    crop = crop
-                )
+                MemberCrop(member, farm, crop)
             }
         )
 

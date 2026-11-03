@@ -13,14 +13,9 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class RecordFeedbackTest {
-    private val member = Member(id = UUID.randomUUID(), email = "member@example.com", passwordHash = null)
-    private val farm = Farm(id = UUID.randomUUID(), owner = member, name = "약초농장", roadAddress = "강원도 평창군")
-    private val crop = Crop(
-        id = UUID.randomUUID(),
-        externalNo = 422,
-        name = "황기",
-        usePartCategory = CropUsePartCategory.ROOT_BARK,
-    )
+    private val member = Member(UUID.randomUUID(), "member@example.com", null)
+    private val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
+    private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val record = FarmingRecord(
         id = UUID.randomUUID(),
         member = member,

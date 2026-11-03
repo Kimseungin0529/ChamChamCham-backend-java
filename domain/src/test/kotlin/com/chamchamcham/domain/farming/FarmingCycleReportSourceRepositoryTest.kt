@@ -41,12 +41,12 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), now)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), now)
-        farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), now)
-        otherFarm = persist(Farm(owner = member, name = "다른 농장", roadAddress = "서울시 서초구"), now)
-        crop = persist(Crop(externalNo = 422, name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK), now)
-        otherCrop = persist(Crop(externalNo = 107, name = "인삼", usePartCategory = CropUsePartCategory.ROOT_BARK), now)
+        member = persist(Member("member@example.com", null), now)
+        otherMember = persist(Member("other@example.com", null), now)
+        farm = persist(Farm(member, "약초농장", "서울시 강남구"), now)
+        otherFarm = persist(Farm(member, "다른 농장", "서울시 서초구"), now)
+        crop = persist(Crop(422, "황기", CropUsePartCategory.ROOT_BARK), now)
+        otherCrop = persist(Crop(107, "인삼", CropUsePartCategory.ROOT_BARK), now)
     }
 
     @Test
@@ -161,8 +161,8 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
     }
 
     private fun persistPestControl(record: FarmingRecord) {
-        val pesticide = persist(Pesticide(itemName = "살충제", brandName = "참참약"), now)
-        val pest = persist(Pest(name = "진딧물"), now)
+        val pesticide = persist(Pesticide("살충제", "참참약"), now)
+        val pest = persist(Pest("진딧물"), now)
         persist(
             PestControlRecord(
                 record = record,
@@ -198,13 +198,14 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
     private fun persistMedia(record: FarmingRecord, displayOrder: Int) {
         val media = persist(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = "https://example.test/$displayOrder.jpg",
-                cloudinaryPublicId = "farming/${UUID.randomUUID()}",
-                status = UploadedMediaStatus.ATTACHED,
-            ),
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                "https://example.test/$displayOrder.jpg",
+                "farming/${UUID.randomUUID()}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             now,
         )
         persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)

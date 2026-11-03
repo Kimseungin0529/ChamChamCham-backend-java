@@ -41,7 +41,7 @@ class VoiceSessionService(
             .map { FarmOption(farmId = requireNotNull(it.id), name = it.name) }
 
         val cropsByFarm: Map<String, List<CropOption>> = memberCropRepository.findByMemberId(command.memberId)
-            .groupBy { it.farm.id.toString() }
+            .groupBy { it.farm.id?.toString() ?: "null" }
             .mapValues { (_, memberCrops) ->
                 memberCrops.map { CropOption(cropId = requireNotNull(it.crop.id), name = it.crop.name) }
                     .distinctBy { it.cropId }
@@ -160,7 +160,7 @@ class VoiceSessionService(
         }
 
         val smallCatalog = pesticideQueryRepository.search(
-            PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = MAX_PESTICIDE_OPTIONS + 1)
+            PesticideQueryRepository.SearchCondition(null, null, MAX_PESTICIDE_OPTIONS + 1)
         )
         if (smallCatalog.isEmpty() || smallCatalog.size > MAX_PESTICIDE_OPTIONS) return emptyList()
         return smallCatalog.map { VoicePesticideOption(name = "${it.itemName}(${it.brandName})", pests = emptyList()) }

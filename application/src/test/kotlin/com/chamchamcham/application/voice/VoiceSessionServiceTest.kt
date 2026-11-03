@@ -85,16 +85,16 @@ class VoiceSessionServiceTest {
             voiceSessionProperties = VoiceSessionProperties(maxRounds = 20, maxDurationSeconds = 330),
             pesticideQueryRepository = pesticideQueryRepository,
         )
-        member = Member(id = memberId, email = "$memberId@example.com", passwordHash = null)
-        farm = Farm(id = farmId, owner = member, name = "약초농장", roadAddress = "서울시 강남구")
-        crop = Crop(id = cropId, externalNo = cropId.hashCode(), name = "황기", usePartCategory = CropUsePartCategory.ROOT_BARK)
+        member = Member(memberId, "$memberId@example.com", null)
+        farm = Farm(farmId, member, "약초농장", "서울시 강남구")
+        crop = Crop(cropId, cropId.hashCode(), "황기", CropUsePartCategory.ROOT_BARK)
     }
 
     @Test
     fun `세션 생성 시 회원의 농지-작물 정보를 함께 반환한다`() {
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findByOwnerId(memberId)).thenReturn(listOf(farm))
-        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member = member, farm = farm, crop = crop)))
+        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
             VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)
@@ -124,8 +124,8 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(pesticideQueryRepository.findByCropNames(listOf("황기"), 200)).thenReturn(
             listOf(
-                PesticideQueryRepository.VoiceCatalogRow(itemName = "코니도", brandName = "바이엘", pestName = "진딧물"),
-                PesticideQueryRepository.VoiceCatalogRow(itemName = "코니도", brandName = "바이엘", pestName = "총채벌레"),
+                PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "진딧물"),
+                PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "총채벌레"),
             )
         )
 
@@ -140,9 +140,9 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
+                PesticideQueryRepository.SearchCondition(null, null, 51)
             )
-        ).thenReturn(listOf(Pesticide(itemName = "다이센엠-45", brandName = "농협케미컬")))
+        ).thenReturn(listOf(Pesticide("다이센엠-45", "농협케미컬")))
 
         service.create(VoiceSessionCommand.Create(memberId = memberId))
 
@@ -154,9 +154,9 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
+                PesticideQueryRepository.SearchCondition(null, null, 51)
             )
-        ).thenReturn((1..51).map { Pesticide(itemName = "농약$it", brandName = "제조사") })
+        ).thenReturn((1..51).map { Pesticide("농약$it", "제조사") })
 
         service.create(VoiceSessionCommand.Create(memberId = memberId))
 
@@ -166,7 +166,7 @@ class VoiceSessionServiceTest {
     private fun stubCreateCollaborators() {
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
         `when`(farmRepository.findByOwnerId(memberId)).thenReturn(listOf(farm))
-        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member = member, farm = farm, crop = crop)))
+        `when`(memberCropRepository.findByMemberId(memberId)).thenReturn(listOf(MemberCrop(member, farm, crop)))
         `when`(voiceRecordSessionRepository.save(any(VoiceRecordSession::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as VoiceRecordSession
             VoiceRecordSession(id = sessionId, member = toSave.member, status = toSave.status)

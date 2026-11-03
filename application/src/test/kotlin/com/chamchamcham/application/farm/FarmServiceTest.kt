@@ -52,15 +52,11 @@ class FarmServiceTest {
 
     @BeforeEach
     fun setUp() {
-        member = Member(id = memberId, email = "member@example.com", passwordHash = null)
-        farm = Farm(
-            id = farmId,
-            owner = member,
-            name = "기존 농장",
-            roadAddress = "강원특별자치도 횡성군 둔내면 1",
-            latitude = 37.5,
-            longitude = 128.1
-        )
+        member = Member(memberId, "member@example.com", null)
+        farm = Farm(farmId, member, "기존 농장", "강원특별자치도 횡성군 둔내면 1").also { migratedFarm ->
+            migratedFarm.latitude = 37.5
+            migratedFarm.longitude = 128.1
+        }
         crop = crop(cropId, "황기")
         oldCrop = crop(oldCropId, "당귀")
         newCrop = crop(newCropId, "작약")
@@ -181,10 +177,10 @@ class FarmServiceTest {
         )
 
     private fun crop(id: UUID, name: String): Crop =
-        Crop(id = id, externalNo = id.hashCode(), name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(id, id.hashCode(), name, CropUsePartCategory.ROOT_BARK)
 
     private fun memberCrop(farm: Farm, crop: Crop): MemberCrop =
-        MemberCrop(member = member, farm = farm, crop = crop)
+        MemberCrop(member, farm, crop)
 
     private fun capturedSavedMemberCrops(): List<MemberCrop> {
         @Suppress("UNCHECKED_CAST")

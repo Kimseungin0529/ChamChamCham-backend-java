@@ -50,9 +50,9 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        member = persist(Member(email = "member@example.com", passwordHash = null), now)
-        otherMember = persist(Member(email = "other@example.com", passwordHash = null), now)
-        farm = persist(Farm(owner = member, name = "약초농장", roadAddress = "서울시 강남구"), now)
+        member = persist(Member("member@example.com", null), now)
+        otherMember = persist(Member("other@example.com", null), now)
+        farm = persist(Farm(member, "약초농장", "서울시 강남구"), now)
         hwanggiCrop = persist(crop(name = "황기", externalNo = 422), now)
         ginsengCrop = persist(crop(name = "인삼", externalNo = 107), now)
     }
@@ -461,13 +461,14 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
     private fun persistMedia(record: FarmingRecord, displayOrder: Int, url: String) {
         val media = persist(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = url,
-                cloudinaryPublicId = "farming/${UUID.randomUUID()}",
-                status = UploadedMediaStatus.ATTACHED,
-            ),
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                url,
+                "farming/${UUID.randomUUID()}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             now
         )
         persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)
@@ -508,7 +509,7 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
 
     private fun persistPestControlDetail(record: FarmingRecord, pesticideName: String, brandName: String = pesticideName) {
         val pesticide = persist(
-            Pesticide(itemName = pesticideName, brandName = brandName),
+            Pesticide(pesticideName, brandName),
             now
         )
         persist(
@@ -539,7 +540,7 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
     }
 
     private fun crop(name: String, externalNo: Int): Crop =
-        Crop(externalNo = externalNo, name = name, usePartCategory = CropUsePartCategory.ROOT_BARK)
+        Crop(externalNo, name, CropUsePartCategory.ROOT_BARK)
 
     private fun condition(
         cropIds: List<UUID> = emptyList(),

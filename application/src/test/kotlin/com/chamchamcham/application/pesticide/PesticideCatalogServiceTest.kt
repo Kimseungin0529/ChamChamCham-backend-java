@@ -39,9 +39,9 @@ class PesticideCatalogServiceTest {
 
     @Test
     fun `search returns no next cursor when results fit within the page`() {
-        val pesticide = Pesticide(id = UUID.randomUUID(), itemName = "만코제브 수화제", brandName = "가가방")
+        val pesticide = Pesticide(UUID.randomUUID(), "만코제브 수화제", "가가방")
         `when`(
-            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 21))
+            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(null, null, 21))
         ).thenReturn(listOf(pesticide))
 
         val result = service.search(keyword = null, cursor = null, size = 20)
@@ -54,10 +54,10 @@ class PesticideCatalogServiceTest {
     @Test
     fun `search returns a next cursor when more rows exist than the page size`() {
         val pesticides = (1..3).map {
-            Pesticide(id = UUID.randomUUID(), itemName = "품목$it", brandName = "상표$it")
+            Pesticide(UUID.randomUUID(), "품목$it", "상표$it")
         }
         `when`(
-            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 3))
+            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(null, null, 3))
         ).thenReturn(pesticides)
 
         val result = service.search(keyword = null, cursor = null, size = 2)
@@ -92,7 +92,7 @@ class PesticideCatalogServiceTest {
         val pesticideId = UUID.randomUUID()
         `when`(pesticideRepository.existsById(pesticideId)).thenReturn(true)
         `when`(pesticideApplicationRepository.findDistinctPestsByPesticideId(pesticideId))
-            .thenReturn(listOf(Pest(id = UUID.randomUUID(), name = "역병")))
+            .thenReturn(listOf(Pest(UUID.randomUUID(), "역병")))
 
         val result = service.listPestsByPesticide(pesticideId)
 
