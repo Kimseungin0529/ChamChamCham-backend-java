@@ -40,19 +40,19 @@ class FarmingWorkReportQueryService(
     fun list(condition: FarmingWorkReportSearchCondition): FarmingWorkReportResult.Page {
         val result = queryRepository.searchWorkItems(
             FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-                memberId = condition.memberId,
-                farmIds = condition.farmIds,
-                cropIds = condition.cropIds,
-                workTypes = condition.workTypes,
-                cursor = decodeCursor(condition.cursor),
-                size = condition.size + 1,
+                condition.memberId,
+                condition.farmIds,
+                condition.cropIds,
+                condition.workTypes,
+                decodeCursor(condition.cursor),
+                condition.size + 1,
             ),
         )
         val visibleRows = result.rows.take(condition.size)
         val snapshot = sourceRepository.load(
-            memberId = condition.memberId,
-            farmIds = visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::farmId),
-            cropIds = visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::cropId),
+            condition.memberId,
+            visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::farmId),
+            visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::cropId),
         )
         val slicesByScope = buildSlicesByScope(visibleRows, snapshot)
 
@@ -159,13 +159,7 @@ class FarmingWorkReportQueryService(
         if (payload.version != FarmingWorkReportCursorPayload.CURRENT_VERSION) {
             throw BusinessException(ErrorCode.INVALID_CURSOR)
         }
-        return FarmingCycleReportQueryRepository.WorkItemCursor(
-            lastWorkedOn = payload.lastWorkedOn,
-            status = payload.status,
-            sortAt = payload.sortAt,
-            reportId = payload.reportId,
-            workType = payload.workType,
-        )
+        return FarmingCycleReportQueryRepository.WorkItemCursor(payload.lastWorkedOn, payload.status, payload.sortAt, payload.reportId, payload.workType)
     }
 
     private fun encodeCursor(row: FarmingCycleReportQueryRepository.WorkItem): String =
@@ -351,13 +345,13 @@ private fun common(
     weatherDistribution: List<com.chamchamcham.domain.report.CountDistribution>,
     averageTemperatureC: BigDecimal?,
 ) = CommonOnlyStatistics(
-    recordCount = recordCount,
-    firstWorkedOn = firstWorkedOn,
-    lastWorkedOn = lastWorkedOn,
-    workedDayCount = workedDayCount,
-    averageIntervalDays = averageIntervalDays,
-    photoAttachedRecordCount = photoAttachedRecordCount,
-    photoAttachmentRatePct = photoAttachmentRatePct,
-    weatherDistribution = weatherDistribution,
-    averageTemperatureC = averageTemperatureC,
+    recordCount,
+    firstWorkedOn,
+    lastWorkedOn,
+    workedDayCount,
+    averageIntervalDays,
+    photoAttachedRecordCount,
+    photoAttachmentRatePct,
+    weatherDistribution,
+    averageTemperatureC,
 )

@@ -1,5 +1,11 @@
 package com.chamchamcham.application.coaching.reportfeedback.lifecycle
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.FertilizingStatistics
+import com.chamchamcham.domain.report.HarvestStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.coaching.reportfeedback.generation.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContext
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextAssembler
@@ -71,25 +77,28 @@ class ReportFeedbackLifecycleServiceTest {
         member = Member(memberId, "member@example.com", null)
         val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
         val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
-        val finalHarvest = FarmingRecord(
-            id = UUID.randomUUID(), member = member, farm = farm, crop = crop,
-            workType = WorkType.HARVEST, workedAt = LocalDateTime.of(2026, 7, 1, 9, 0),
-            weatherCondition = "맑음", weatherTemperature = 24, memo = "최종 수확", entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, LocalDateTime.of(2026, 7, 1, 9, 0), "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = finalHarvest.workedAt.minusMonths(5),
-                endsAt = finalHarvest.workedAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = finalHarvest,
-                statisticsSchemaVersion = 1,
-                statistics = CycleReportStatistics(
-                    watering = WateringStatistics(recordCount = 1),
-                ),
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                finalHarvest.workedAt.minusMonths(5),
+                finalHarvest.workedAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                finalHarvest,
+                1,
+                CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
             ),
         ).also { setId(it, reportId) }
         service = ReportFeedbackLifecycleService(
@@ -119,11 +128,11 @@ class ReportFeedbackLifecycleServiceTest {
 
         val feedbacks = service.reconcile(report, setOf(WorkType.HARVEST, WorkType.WATERING))
 
-        assertThat(feedbacks.map(ReportFeedback::workType))
+        assertThat(feedbacks.map(ReportFeedback::getWorkType))
             .containsExactly(WorkType.WATERING, WorkType.HARVEST)
-        assertThat(feedbacks.map(ReportFeedback::status))
+        assertThat(feedbacks.map(ReportFeedback::getStatus))
             .containsOnly(ReportFeedbackStatus.PENDING)
-        assertThat(feedbacks.map(ReportFeedback::sourceFingerprint))
+        assertThat(feedbacks.map(ReportFeedback::getSourceFingerprint))
             .containsExactly(wateringFingerprint, harvestFingerprint)
         val events = ArgumentCaptor.forClass(ReportFeedbackPreparationRequested::class.java)
         verify(eventPublisher, times(2)).publishEvent(events.capture())
@@ -382,32 +391,32 @@ class ReportFeedbackLifecycleServiceTest {
         setId(it, id)
         it.attachInputSnapshot(mapOf("sourceRevision" to 1))
         it.markReady(
-            summary = "${workType.label} 요약",
-            items = emptyList(),
-            citations = emptyList(),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "test-chat",
-            embeddingModel = "test-embedding",
+            "${workType.label} 요약",
+            emptyList(),
+            emptyList(),
+            "PASS",
+            emptyList(),
+            "test-chat",
+            "test-embedding",
         )
     }
 
     private fun legacyReadyFeedback(snapshot: Map<String, Any?>?): ReportFeedback = ReportFeedback(
-        id = wateringFeedbackId,
-        member = member,
-        report = report,
-        workType = WorkType.WATERING,
-        status = ReportFeedbackStatus.PENDING,
+        wateringFeedbackId,
+        member,
+        report,
+        WorkType.WATERING,
+        ReportFeedbackStatus.PENDING
     ).also { feedback ->
         snapshot?.let(feedback::attachInputSnapshot)
         feedback.markReady(
-            summary = "관수 작업 요약",
-            items = emptyList(),
-            citations = emptyList(),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "test-chat",
-            embeddingModel = "test-embedding",
+            "관수 작업 요약",
+            emptyList(),
+            emptyList(),
+            "PASS",
+            emptyList(),
+            "test-chat",
+            "test-embedding",
         )
     }
 

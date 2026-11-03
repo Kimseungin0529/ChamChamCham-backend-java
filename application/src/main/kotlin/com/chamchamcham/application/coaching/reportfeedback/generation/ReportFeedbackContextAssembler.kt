@@ -68,11 +68,11 @@ class ReportFeedbackContextAssembler(
             throw ReportFeedbackGenerationFailure(ReportFeedbackFailureCode.INVALID_CONTEXT)
         }
         val previous = reportQueryRepository.findPreviousCompleted(
-            memberId = memberId,
-            farmId = requireNotNull(report.farm.id),
-            cropId = requireNotNull(report.crop.id),
-            endsAt = requireNotNull(report.endsAt),
-            finalHarvestRecordId = requireNotNull(report.finalHarvestRecord?.id),
+            memberId,
+            requireNotNull(report.farm.id),
+            requireNotNull(report.crop.id),
+            requireNotNull(report.endsAt),
+            requireNotNull(report.finalHarvestRecord?.id),
         )
 
         val previousContext = previous?.toPreviousReport(workType)

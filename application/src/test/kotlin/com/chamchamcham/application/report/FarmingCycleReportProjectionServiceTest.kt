@@ -371,13 +371,13 @@ class FarmingCycleReportProjectionServiceTest {
     ): FarmingCycleReport = persistedReport(
         id = id,
         projection = FarmingCycleReportProjection(
-            status = FarmingCycleReportStatus.ACTIVE,
-            startsAt = startsAt,
-            endsAt = null,
-            startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-            finalHarvestRecord = null,
-            statisticsSchemaVersion = 1,
-            statistics = CycleReportStatisticsCalculator().calculate(listOf(wateringRecord(day = 1))),
+            FarmingCycleReportStatus.ACTIVE,
+            startsAt,
+            null,
+            FarmingCycleStartBasis.FIRST_RECORD,
+            null,
+            1,
+            CycleReportStatisticsCalculator().calculate(listOf(wateringRecord(day = 1))),
         ),
     )
 
@@ -390,13 +390,13 @@ class FarmingCycleReportProjectionServiceTest {
     ): FarmingCycleReport = persistedReport(
         id = id,
         projection = FarmingCycleReportProjection(
-            status = FarmingCycleReportStatus.COMPLETED,
-            startsAt = startsAt,
-            endsAt = endsAt,
-            startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-            finalHarvestRecord = referenceRecord(finalRecordId, day = 10),
-            statisticsSchemaVersion = statisticsSchemaVersion,
-            statistics = CycleReportStatisticsCalculator().calculate(
+            FarmingCycleReportStatus.COMPLETED,
+            startsAt,
+            endsAt,
+            FarmingCycleStartBasis.FIRST_RECORD,
+            referenceRecord(finalRecordId, day = 10),
+            statisticsSchemaVersion,
+            CycleReportStatisticsCalculator().calculate(
                 listOf(wateringRecord(day = 1), finalHarvestRecord(finalRecordId, day = 10)),
             ),
         ),
@@ -416,16 +416,17 @@ class FarmingCycleReportProjectionServiceTest {
 
     private fun referenceRecord(id: UUID, day: Long = 10): FarmingRecord =
         FarmingRecord(
-            id = id,
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = baseTime.plusDays(day),
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "memo",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
+            id,
+            member,
+            farm,
+            crop,
+            WorkType.HARVEST,
+            baseTime.plusDays(day),
+            "맑음",
+            20,
+            "memo",
+            com.chamchamcham.domain.farming.EntryMode.MANUAL,
+            false,
         )
 
     private fun capturedSavedReports(): List<FarmingCycleReport> {

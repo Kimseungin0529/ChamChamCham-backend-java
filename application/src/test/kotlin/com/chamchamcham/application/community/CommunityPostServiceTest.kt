@@ -100,7 +100,7 @@ class CommunityPostServiceTest {
         media2 = uploadedMedia(member, mediaId2)
         replacementMedia = uploadedMedia(member, replacementMediaId)
         existingPost = existingPost(member, crop)
-        existingLike = CommunityPostLike(id = UUID.randomUUID(), post = existingPost, member = member)
+        existingLike = CommunityPostLike(UUID.randomUUID(), existingPost, member)
 
         service = CommunityPostService(
             memberRepository = memberRepository,
@@ -126,13 +126,14 @@ class CommunityPostServiceTest {
         `when`(communityPostRepository.save(any(CommunityPost::class.java))).thenAnswer { invocation ->
             val post = invocation.arguments[0] as CommunityPost
             CommunityPost(
-                id = postId,
-                author = post.author,
-                crop = post.crop,
-                farmingRecord = post.farmingRecord,
-                postType = post.postType,
-                title = post.title,
-                body = post.body
+                postId,
+                post.author,
+                post.crop,
+                post.farmingRecord,
+                post.postType,
+                post.title,
+                post.body,
+                false
             )
         }
 
@@ -192,7 +193,7 @@ class CommunityPostServiceTest {
         val secondRecord = farmingRecord(member, secondCrop)
         val existingMedia = uploadedMedia(member, mediaId1, status = UploadedMediaStatus.ATTACHED)
         val newMedia = uploadedMedia(member, replacementMediaId)
-        val existingPostMedia = CommunityPostMedia(post = existingPost, uploadedMedia = existingMedia, displayOrder = 0)
+        val existingPostMedia = CommunityPostMedia(existingPost, existingMedia, 0)
         `when`(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(existingPost)
         `when`(cropRepository.findById(secondCropId)).thenReturn(Optional.of(secondCrop))
         `when`(farmingRecordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(secondRecord)
@@ -218,8 +219,8 @@ class CommunityPostServiceTest {
         val secondRecord = farmingRecord(member, secondCrop)
         val keptMedia = uploadedMedia(member, mediaId1, status = UploadedMediaStatus.ATTACHED)
         val removedMedia = uploadedMedia(member, mediaId2, status = UploadedMediaStatus.ATTACHED)
-        val keptPostMedia = CommunityPostMedia(post = existingPost, uploadedMedia = keptMedia, displayOrder = 0)
-        val removedPostMedia = CommunityPostMedia(post = existingPost, uploadedMedia = removedMedia, displayOrder = 1)
+        val keptPostMedia = CommunityPostMedia(existingPost, keptMedia, 0)
+        val removedPostMedia = CommunityPostMedia(existingPost, removedMedia, 1)
         `when`(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(existingPost)
         `when`(cropRepository.findById(secondCropId)).thenReturn(Optional.of(secondCrop))
         `when`(farmingRecordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(secondRecord)
@@ -241,7 +242,7 @@ class CommunityPostServiceTest {
         val secondRecord = farmingRecord(member, secondCrop)
         val otherPost = existingPost(member, crop, secondPostId)
         val otherPostMedia = uploadedMedia(member, mediaId1, status = UploadedMediaStatus.ATTACHED)
-        val otherPostMediaRow = CommunityPostMedia(post = otherPost, uploadedMedia = otherPostMedia, displayOrder = 0)
+        val otherPostMediaRow = CommunityPostMedia(otherPost, otherPostMedia, 0)
         `when`(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(existingPost)
         `when`(cropRepository.findById(secondCropId)).thenReturn(Optional.of(secondCrop))
         `when`(farmingRecordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(secondRecord)
@@ -337,8 +338,8 @@ class CommunityPostServiceTest {
         `when`(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(existingPost)
         `when`(communityPostMediaRepository.findByPostIdOrderByDisplayOrderAsc(postId)).thenReturn(
             listOf(
-                CommunityPostMedia(post = existingPost, uploadedMedia = media1, displayOrder = 0),
-                CommunityPostMedia(post = existingPost, uploadedMedia = media2, displayOrder = 1)
+                CommunityPostMedia(existingPost, media1, 0),
+                CommunityPostMedia(existingPost, media2, 1)
             )
         )
         `when`(communityCommentRepository.countByPostIdAndIsDeletedFalse(postId)).thenReturn(3L)
@@ -378,24 +379,24 @@ class CommunityPostServiceTest {
         `when`(
             communityPostQueryRepository.search(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    authorMemberId = otherMemberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LATEST,
-                    cursor = null,
-                    size = requestedSize + 1
+                    memberId,
+                    otherMemberId,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LATEST,
+                    null,
+                    requestedSize + 1
                 )
             )
         ).thenReturn(
             CommunityPostQueryRepository.SearchResult(
-                rows = listOf(
+                listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg"),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg")
-                )
+                ),
             )
         )
 
@@ -429,16 +430,16 @@ class CommunityPostServiceTest {
         `when`(
             communityPostQueryRepository.search(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = null,
-                    authorMemberId = otherMemberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LATEST,
-                    cursor = null,
-                    size = 21
+                    null,
+                    otherMemberId,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LATEST,
+                    null,
+                    21
                 )
             )
         ).thenReturn(CommunityPostQueryRepository.SearchResult(emptyList()))
@@ -478,23 +479,24 @@ class CommunityPostServiceTest {
         `when`(
             communityPostQueryRepository.search(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LIKE,
-                    cursor = null,
-                    size = requestedSize + 1
+                    memberId,
+                    null,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LIKE,
+                    null,
+                    requestedSize + 1
                 )
             )
         ).thenReturn(
             CommunityPostQueryRepository.SearchResult(
-                rows = listOf(
+                listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg", score = 8),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg", score = 7)
-                )
+                ),
             )
         )
 
@@ -518,23 +520,24 @@ class CommunityPostServiceTest {
         `when`(
             communityPostQueryRepository.search(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LIKE,
-                    cursor = null,
-                    size = requestedSize + 1
+                    memberId,
+                    null,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LIKE,
+                    null,
+                    requestedSize + 1
                 )
             )
         ).thenReturn(
             CommunityPostQueryRepository.SearchResult(
-                rows = listOf(
+                listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg", score = null),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg", score = 7)
-                )
+                ),
             )
         )
 
@@ -553,27 +556,23 @@ class CommunityPostServiceTest {
                 id = postId
             )
         )
-        val decodedCursor = CommunityPostQueryRepository.Cursor(
-            sort = CommunityPostSort.LIKE,
-            score = 8,
-            createdAt = postCreatedAt,
-            id = postId
-        )
+        val decodedCursor = CommunityPostQueryRepository.Cursor(CommunityPostSort.LIKE, 8, postCreatedAt, postId)
         `when`(
             communityPostQueryRepository.search(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LIKE,
-                    cursor = decodedCursor,
-                    size = 21
+                    memberId,
+                    null,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LIKE,
+                    decodedCursor,
+                    21
                 )
             )
-        ).thenReturn(CommunityPostQueryRepository.SearchResult(rows = emptyList()))
+        ).thenReturn(CommunityPostQueryRepository.SearchResult(emptyList()))
 
         val page = service.search(searchCondition(sort = CommunityPostSort.LIKE, cursor = cursor))
 
@@ -664,16 +663,16 @@ class CommunityPostServiceTest {
         `when`(
             communityPostQueryRepository.count(
                 CommunityPostQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    authorMemberId = otherMemberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "발아",
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LATEST,
-                    cursor = null,
-                    size = 1
+                    memberId,
+                    otherMemberId,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "발아",
+                    false,
+                    false,
+                    CommunityPostSort.LATEST,
+                    null,
+                    1
                 )
             )
         ).thenReturn(5L)
@@ -695,16 +694,17 @@ class CommunityPostServiceTest {
 
     private fun farmingRecord(member: Member, crop: Crop): FarmingRecord =
         FarmingRecord(
-            id = recordId,
-            member = member,
-            farm = farm(member),
-            crop = crop,
-            workType = WorkType.PLANTING,
-            workedAt = LocalDateTime.of(2026, 6, 1, 9, 0),
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "memo",
-            entryMode = EntryMode.MANUAL
+            recordId,
+            member,
+            farm(member),
+            crop,
+            WorkType.PLANTING,
+            LocalDateTime.of(2026, 6, 1, 9, 0),
+            "맑음",
+            20,
+            "memo",
+            EntryMode.MANUAL,
+            false,
         )
 
     private fun uploadedMedia(
@@ -727,15 +727,7 @@ class CommunityPostServiceTest {
     }
 
     private fun existingPost(author: Member, crop: Crop, id: UUID = postId): CommunityPost =
-        CommunityPost(
-            id = id,
-            author = author,
-            crop = crop,
-            farmingRecord = record,
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율이 낮아요",
-            body = "싹이 거의 올라오지 않아요."
-        )
+        CommunityPost(id, author, crop, record, CommunityPostType.QUESTION, "황기 발아율이 낮아요", "싹이 거의 올라오지 않아요.", false)
 
     private fun searchCondition(
         memberId: UUID? = this.memberId,
@@ -797,12 +789,12 @@ class CommunityPostServiceTest {
         score: Long? = null
     ): CommunityPostQueryRepository.Row =
         CommunityPostQueryRepository.Row(
-            post = post,
-            thumbnailUrl = thumbnailUrl,
-            commentCount = commentCount,
-            likeCount = likeCount,
-            likedByMe = likedByMe,
-            score = score
+            post,
+            thumbnailUrl,
+            commentCount,
+            likeCount,
+            likedByMe,
+            score
         )
 
     private fun capturedPost(): CommunityPost {

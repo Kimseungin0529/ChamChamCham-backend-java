@@ -1,5 +1,7 @@
 package com.chamchamcham.application.coaching.reportfeedback.generation
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.domain.farming.WorkType
 import com.chamchamcham.domain.report.AmountByUnit
 import com.chamchamcham.domain.report.Coverage
@@ -20,20 +22,24 @@ class ReportFeedbackComparisonCalculatorTest {
     @Test
     fun `common metrics use stable order and deterministic differences`() {
         val current = CycleReportStatistics(
-            watering = WateringStatistics(
-                recordCount = 6,
-                workedDayCount = 5,
-                averageIntervalDays = decimal("2.5"),
-                photoAttachmentRatePct = decimal("75.0"),
-            ),
+            PlantingStatistics.empty(),
+            WateringStatistics(6, null, null, 5, decimal("2.5"), 0, decimal("75.0"), emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
         val previous = CycleReportStatistics(
-            watering = WateringStatistics(
-                recordCount = 4,
-                workedDayCount = 4,
-                averageIntervalDays = decimal("4.0"),
-                photoAttachmentRatePct = decimal("50.0"),
-            ),
+            PlantingStatistics.empty(),
+            WateringStatistics(4, null, null, 4, decimal("4.0"), 0, decimal("50.0"), emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
 
         val comparisons = calculator.calculate(WorkType.WATERING, current, previous)
@@ -53,20 +59,24 @@ class ReportFeedbackComparisonCalculatorTest {
     @Test
     fun `previous zero omits relative percentage and null metrics are omitted`() {
         val current = CycleReportStatistics(
-            watering = WateringStatistics(
-                recordCount = 2,
-                workedDayCount = 2,
-                averageIntervalDays = null,
-                photoAttachmentRatePct = decimal("40"),
-            ),
+            PlantingStatistics.empty(),
+            WateringStatistics(2, null, null, 2, null, 0, decimal("40"), emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
         val previous = CycleReportStatistics(
-            watering = WateringStatistics(
-                recordCount = 0,
-                workedDayCount = 0,
-                averageIntervalDays = decimal("3"),
-                photoAttachmentRatePct = null,
-            ),
+            PlantingStatistics.empty(),
+            WateringStatistics(0, null, null, 0, decimal("3"), 0, null, emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
 
         val comparisons = calculator.calculate(WorkType.WATERING, current, previous)
@@ -78,27 +88,57 @@ class ReportFeedbackComparisonCalculatorTest {
 
     @Test
     fun `planting compares the same propagation and unit and preserves coverage`() {
-        val currentCoverage = Coverage(recordedCount = 2, targetCount = 3)
-        val previousCoverage = Coverage(recordedCount = 1, targetCount = 2)
+        val currentCoverage = Coverage(2, 3)
+        val previousCoverage = Coverage(1, 2)
         val current = CycleReportStatistics(
-            planting = PlantingStatistics(
-                recordCount = 3,
-                workedDayCount = 2,
-                propagationMethods = listOf(
+            PlantingStatistics(
+            3,
+            null,
+            null,
+            2,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            emptyList(),
+            listOf(
                     propagation("SEEDLING", "모종", "12", "JU", currentCoverage),
                     propagation("SEED", "씨앗", "300", "G", Coverage(1, 1)),
                 ),
-            ),
+        ),
+            WateringStatistics.empty(),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
         val previous = CycleReportStatistics(
-            planting = PlantingStatistics(
-                recordCount = 2,
-                workedDayCount = 2,
-                propagationMethods = listOf(
+            PlantingStatistics(
+            2,
+            null,
+            null,
+            2,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            emptyList(),
+            listOf(
                     propagation("SEED", "씨앗", "250", "ML", Coverage(1, 1)),
                     propagation("SEEDLING", "모종", "10", "JU", previousCoverage),
                 ),
-            ),
+        ),
+            WateringStatistics.empty(),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
 
         val comparisons = calculator.calculate(WorkType.PLANTING, current, previous)
@@ -117,32 +157,96 @@ class ReportFeedbackComparisonCalculatorTest {
     @Test
     fun `fertilizing and harvest compare normalized kilograms only for the selected work`() {
         val current = CycleReportStatistics(
-            fertilizing = FertilizingStatistics(
-                recordCount = 2,
-                workedDayCount = 2,
-                totalAmountKg = decimal("1.5000"),
-                amountCoverage = Coverage(2, 3),
+            PlantingStatistics.empty(),
+            WateringStatistics.empty(),
+            FertilizingStatistics(
+                2,
+                null,
+                null,
+                2,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                decimal("1.5000"),
+                null,
+                Coverage(2, 3),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
             ),
-            harvest = HarvestStatistics(
-                recordCount = 4,
-                workedDayCount = 3,
-                totalAmountKg = decimal("18.0000"),
-                amountCoverage = Coverage(3, 4),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics(
+                4,
+                null,
+                null,
+                3,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                decimal("18.0000"),
+                null,
+                Coverage(3, 4),
+                null,
+                null,
+                emptyList(),
+                null,
+                null,
+                emptyList(),
             ),
+            CommonOnlyStatistics.empty(),
         )
         val previous = CycleReportStatistics(
-            fertilizing = FertilizingStatistics(
-                recordCount = 1,
-                workedDayCount = 1,
-                totalAmountKg = decimal("1.0000"),
-                amountCoverage = Coverage(1, 2),
+            PlantingStatistics.empty(),
+            WateringStatistics.empty(),
+            FertilizingStatistics(
+                1,
+                null,
+                null,
+                1,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                decimal("1.0000"),
+                null,
+                Coverage(1, 2),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
             ),
-            harvest = HarvestStatistics(
-                recordCount = 3,
-                workedDayCount = 3,
-                totalAmountKg = decimal("12.0000"),
-                amountCoverage = Coverage(3, 3),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics(
+                3,
+                null,
+                null,
+                3,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                decimal("12.0000"),
+                null,
+                Coverage(3, 3),
+                null,
+                null,
+                emptyList(),
+                null,
+                null,
+                emptyList(),
             ),
+            CommonOnlyStatistics.empty(),
         )
 
         val fertilizing = calculator.calculate(WorkType.FERTILIZING, current, previous)
@@ -170,28 +274,62 @@ class ReportFeedbackComparisonCalculatorTest {
     @Test
     fun `pest control matches pesticide units and preserves spray coverage`() {
         val current = CycleReportStatistics(
-            pestControl = PestControlStatistics(
-                recordCount = 3,
-                workedDayCount = 3,
-                pesticideAmounts = listOf(
+            PlantingStatistics.empty(),
+            WateringStatistics.empty(),
+            FertilizingStatistics.empty(),
+            PestControlStatistics(
+                3,
+                null,
+                null,
+                3,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                emptyList(),
+                listOf(
                     AmountByUnit("ML", decimal("120"), Coverage(2, 3)),
                     AmountByUnit("G", decimal("40"), Coverage(1, 3)),
                 ),
-                totalSprayAmountLiters = decimal("30"),
-                sprayAmountCoverage = Coverage(3, 3),
+                emptyList(),
+                decimal("30"),
+                Coverage(3, 3),
+                emptyList(),
             ),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
         val previous = CycleReportStatistics(
-            pestControl = PestControlStatistics(
-                recordCount = 2,
-                workedDayCount = 2,
-                pesticideAmounts = listOf(
+            PlantingStatistics.empty(),
+            WateringStatistics.empty(),
+            FertilizingStatistics.empty(),
+            PestControlStatistics(
+                2,
+                null,
+                null,
+                2,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                emptyList(),
+                listOf(
                     AmountByUnit("G", decimal("35"), Coverage(1, 2)),
                     AmountByUnit("L", decimal("1"), Coverage(1, 2)),
                 ),
-                totalSprayAmountLiters = decimal("24"),
-                sprayAmountCoverage = Coverage(2, 2),
+                emptyList(),
+                decimal("24"),
+                Coverage(2, 2),
+                emptyList(),
             ),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         )
 
         val comparisons = calculator.calculate(WorkType.PEST_CONTROL, current, previous)
@@ -220,15 +358,7 @@ class ReportFeedbackComparisonCalculatorTest {
         quantity: String,
         unit: String,
         coverage: Coverage,
-    ) = PropagationStatistics(
-        code = code,
-        label = label,
-        recordCount = coverage.targetCount,
-        recordRatePct = decimal("100"),
-        totalQuantity = decimal(quantity),
-        quantityUnit = unit,
-        quantityCoverage = coverage,
-    )
+    ) = PropagationStatistics(code, label, coverage.targetCount, decimal("100"), decimal(quantity), unit, coverage)
 
     private fun assertComparison(
         actual: ReportFeedbackComparison,

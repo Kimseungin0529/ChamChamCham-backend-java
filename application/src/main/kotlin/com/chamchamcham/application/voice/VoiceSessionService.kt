@@ -66,7 +66,7 @@ class VoiceSessionService(
         )
 
         val session = voiceRecordSessionRepository.save(
-            VoiceRecordSession(member = member, status = VoiceSessionStatus.CREATED)
+            VoiceRecordSession(member, VoiceSessionStatus.CREATED)
         )
 
         return VoiceSessionResult.Created(
@@ -89,12 +89,7 @@ class VoiceSessionService(
 
         command.turns.forEach { turn ->
             voiceRecordTurnRepository.save(
-                VoiceRecordTurn(
-                    session = session,
-                    role = turn.role,
-                    content = turn.content,
-                    extractedFields = turn.extractedFields,
-                )
+                VoiceRecordTurn(null, session, turn.role, turn.content, turn.extractedFields)
             )
         }
 
@@ -119,7 +114,7 @@ class VoiceSessionService(
         val record = farmingRecordRepository.findById(createResult.id)
             .orElseThrow { BusinessException(ErrorCode.FARMING_RECORD_NOT_FOUND) }
 
-        session.confirm(record = record, confirmedAt = LocalDateTime.now())
+        session.confirm(record, LocalDateTime.now())
 
         return VoiceSessionResult.Confirmed(
             sessionId = requireNotNull(session.id),

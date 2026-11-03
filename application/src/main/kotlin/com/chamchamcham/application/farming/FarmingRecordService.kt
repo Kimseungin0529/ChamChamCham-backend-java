@@ -79,15 +79,17 @@ class FarmingRecordService(
 
         val record = farmingRecordRepository.save(
             FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = command.workType,
-                workedAt = command.workedAt,
-                weatherCondition = command.weatherCondition,
-                weatherTemperature = command.weatherTemperature,
-                memo = command.memo,
-                entryMode = command.entryMode,
+                null,
+                member,
+                farm,
+                crop,
+                command.workType,
+                command.workedAt,
+                command.weatherCondition,
+                command.weatherTemperature,
+                command.memo,
+                command.entryMode,
+                false,
             )
         )
 
@@ -132,16 +134,16 @@ class FarmingRecordService(
     ): FarmingRecordQueryRepository.SearchCondition {
         val trimmedKeyword = condition.keyword?.trim()?.takeIf(String::isNotEmpty)
         return FarmingRecordQueryRepository.SearchCondition(
-            memberId = condition.memberId,
-            cropIds = condition.cropIds,
-            workTypes = condition.workTypes,
-            workedAtFrom = condition.startDate?.atStartOfDay(),
-            workedAtTo = condition.endDate?.plusDays(1)?.atStartOfDay(),
-            keyword = trimmedKeyword,
-            matchedWorkTypes = matchedWorkTypes(trimmedKeyword),
-            matchedParts = matchedParts(trimmedKeyword),
-            cursor = cursor,
-            size = size
+            condition.memberId,
+            condition.cropIds,
+            condition.workTypes,
+            condition.startDate?.atStartOfDay(),
+            condition.endDate?.plusDays(1)?.atStartOfDay(),
+            trimmedKeyword,
+            matchedWorkTypes(trimmedKeyword),
+            matchedParts(trimmedKeyword),
+            cursor,
+            size,
         )
     }
 
@@ -176,13 +178,13 @@ class FarmingRecordService(
         )
         val previousWorkType = record.workType
         record.update(
-            farm = farm,
-            crop = crop,
-            workType = command.workType,
-            workedAt = command.workedAt,
-            weatherCondition = command.weatherCondition,
-            weatherTemperature = command.weatherTemperature,
-            memo = command.memo,
+            farm,
+            crop,
+            command.workType,
+            command.workedAt,
+            command.weatherCondition,
+            command.weatherTemperature,
+            command.memo,
         )
         deleteExistingDetail(record, previousWorkType)
         farmingRecordRepository.flush()
@@ -219,37 +221,28 @@ class FarmingRecordService(
                 val detail = payload.planting ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 plantingRecordRepository.save(
                     PlantingRecord(
-                        record = record,
-                        plantingMethod = detail.plantingMethod,
-                        seedAmount = detail.seedAmount,
-                        seedAmountUnit = detail.seedAmountUnit,
-                        seedlingCount = detail.seedlingCount,
-                        seedlingUnit = detail.seedlingUnit,
-                        propagationMethod = detail.propagationMethod,
+                        null,
+                        record,
+                        detail.plantingMethod,
+                        detail.seedAmount,
+                        detail.seedAmountUnit,
+                        detail.seedlingCount,
+                        detail.seedlingUnit,
+                        detail.propagationMethod,
                     )
                 )
             }
 
             WorkType.WATERING -> payload.watering?.let { detail ->
                 wateringRecordRepository.save(
-                    WateringRecord(
-                        record = record,
-                        irrigationAmount = detail.irrigationAmount,
-                        irrigationMethod = detail.irrigationMethod,
-                    )
+                    WateringRecord(null, record, detail.irrigationAmount, detail.irrigationMethod)
                 )
             }
 
             WorkType.FERTILIZING -> {
                 val detail = payload.fertilizing ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 fertilizingRecordRepository.save(
-                    FertilizingRecord(
-                        record = record,
-                        materialName = detail.materialName,
-                        amount = detail.amount,
-                        amountUnit = detail.amountUnit,
-                        applicationMethod = detail.applicationMethod,
-                    )
+                    FertilizingRecord(null, record, detail.materialName, detail.amount, detail.amountUnit, detail.applicationMethod)
                 )
             }
 
@@ -257,19 +250,20 @@ class FarmingRecordService(
                 val detail = payload.pestControl ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 pestControlRecordRepository.save(
                     PestControlRecord(
-                        record = record,
-                        pesticide = findPesticide(detail.pesticideId),
-                        pesticideAmount = detail.pesticideAmount,
-                        pesticideAmountUnit = detail.pesticideAmountUnit,
-                        totalSprayAmount = detail.totalSprayAmount,
-                        totalSprayAmountUnit = detail.totalSprayAmountUnit,
-                        pest = detail.pestId?.let(::findPest),
+                        null,
+                        record,
+                        findPesticide(detail.pesticideId),
+                        detail.pesticideAmount,
+                        detail.pesticideAmountUnit,
+                        detail.totalSprayAmount,
+                        detail.totalSprayAmountUnit,
+                        detail.pestId?.let(::findPest),
                     )
                 )
             }
 
             WorkType.WEEDING -> payload.weeding?.let { detail ->
-                weedingRecordRepository.save(WeedingRecord(record = record, weedingMethod = detail.weedingMethod))
+                weedingRecordRepository.save(WeedingRecord(null, record, detail.weedingMethod))
             }
 
             WorkType.PRUNING -> Unit
@@ -278,12 +272,13 @@ class FarmingRecordService(
                 val detail = payload.harvest ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 harvestRecordRepository.save(
                     HarvestRecord(
-                        record = record,
-                        harvestAmount = detail.harvestAmount.takeUnless { detail.amountUnknown },
-                        medicinalPart = detail.medicinalPart,
-                        harvestSource = detail.harvestSource,
-                        growthPeriod = detail.growthPeriod,
-                        isLastHarvest = detail.isLastHarvest,
+                        null,
+                        record,
+                        detail.harvestAmount.takeUnless { detail.amountUnknown },
+                        detail.medicinalPart,
+                        detail.harvestSource,
+                        detail.growthPeriod,
+                        detail.isLastHarvest,
                     )
                 )
             }
@@ -501,11 +496,7 @@ class FarmingRecordService(
         media.forEach(UploadedMedia::markAttached)
         farmingRecordMediaRepository.saveAll(
             media.mapIndexed { index, uploadedMedia ->
-                FarmingRecordMedia(
-                    record = record,
-                    uploadedMedia = uploadedMedia,
-                    displayOrder = index
-                )
+                FarmingRecordMedia(null, record, uploadedMedia, index)
             }
         )
     }
@@ -542,7 +533,7 @@ class FarmingRecordService(
             return null
         }
         val payload = cursorCodec.decode(cursor, FarmingRecordCursorPayload::class.java)
-        return FarmingRecordQueryRepository.Cursor(workedAt = payload.workedAt, id = payload.id)
+        return FarmingRecordQueryRepository.Cursor(payload.workedAt, payload.id)
     }
 
     private fun encodeCursor(row: FarmingRecordQueryRepository.Row): String {

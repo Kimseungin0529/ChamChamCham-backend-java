@@ -69,30 +69,19 @@ class ReportFeedbackGenerationHandlerTest {
         member = Member(memberId, "member@example.com", null)
         val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
         val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
-        val finalHarvest = FarmingRecord(
-            id = UUID.randomUUID(),
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = endsAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            memo = "최종 수확",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, endsAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = startsAt,
-                endsAt = endsAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = finalHarvest,
-                statisticsSchemaVersion = 1,
-                statistics = CycleReportStatistics.empty(),
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                startsAt,
+                endsAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                finalHarvest,
+                1,
+                CycleReportStatistics.empty(),
             ),
         ).also { setId(it, reportId) }
         handler = ReportFeedbackGenerationHandler(
@@ -300,12 +289,19 @@ class ReportFeedbackGenerationHandlerTest {
     @Test
     fun `malformed target snapshot fails only that row`() {
         val target = ReportFeedback(
-            id = feedbackId,
-            member = member,
-            report = report,
-            workType = WorkType.WATERING,
-            status = ReportFeedbackStatus.PENDING,
-            sourceFingerprint = sourceFingerprint,
+            feedbackId,
+            member,
+            report,
+            WorkType.WATERING,
+            ReportFeedbackStatus.PENDING,
+            null,
+            sourceFingerprint,
+            emptyList(),
+            null,
+            emptyList(),
+            null,
+            null,
+            null
         ).also { it.attachInputSnapshot(mapOf("schemaVersion" to "invalid")) }
         val sibling = pendingFeedback(WorkType.FERTILIZING, UUID.randomUUID(), context(WorkType.FERTILIZING))
         val event = generationEvent(WorkType.WATERING)
@@ -340,12 +336,19 @@ class ReportFeedbackGenerationHandlerTest {
         id: UUID = feedbackId,
         context: ReportFeedbackContext = context(workType),
     ) = ReportFeedback(
-        id = id,
-        member = member,
-        report = report,
-        workType = workType,
-        status = ReportFeedbackStatus.PENDING,
-        sourceFingerprint = sourceFingerprint,
+        id,
+        member,
+        report,
+        workType,
+        ReportFeedbackStatus.PENDING,
+        null,
+        sourceFingerprint,
+        emptyList(),
+        null,
+        emptyList(),
+        null,
+        null,
+        null
     ).also { it.attachInputSnapshot(snapshot(context)) }
 
     private fun generationEvent(

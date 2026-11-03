@@ -78,16 +78,16 @@ class CommunityPostService(
         val cursor = decodeCursor(condition.sort, condition.cursor)
         val result = communityPostQueryRepository.search(
             CommunityPostQueryRepository.SearchCondition(
-                memberId = condition.memberId,
-                authorMemberId = condition.authorMemberId,
-                cropIds = condition.cropIds,
-                postType = condition.postType,
-                keyword = condition.keyword,
-                likedOnly = condition.likedOnly,
-                mineOnly = condition.mineOnly,
-                sort = condition.sort,
-                cursor = cursor,
-                size = condition.size + 1
+                condition.memberId,
+                condition.authorMemberId,
+                condition.cropIds,
+                condition.postType,
+                condition.keyword,
+                condition.likedOnly,
+                condition.mineOnly,
+                condition.sort,
+                cursor,
+                condition.size + 1
             )
         )
         val visibleRows = result.rows.take(condition.size)
@@ -106,16 +106,16 @@ class CommunityPostService(
     fun count(condition: CommunityPostSearchCondition): Long {
         return communityPostQueryRepository.count(
             CommunityPostQueryRepository.SearchCondition(
-                memberId = condition.memberId,
-                authorMemberId = condition.authorMemberId,
-                cropIds = condition.cropIds,
-                postType = condition.postType,
-                keyword = condition.keyword,
-                likedOnly = condition.likedOnly,
-                mineOnly = condition.mineOnly,
-                sort = condition.sort,
-                cursor = null,
-                size = COUNT_QUERY_SIZE
+                condition.memberId,
+                condition.authorMemberId,
+                condition.cropIds,
+                condition.postType,
+                condition.keyword,
+                condition.likedOnly,
+                condition.mineOnly,
+                condition.sort,
+                null,
+                COUNT_QUERY_SIZE
             )
         )
     }
@@ -157,14 +157,7 @@ class CommunityPostService(
         val media = validateNewMedia(command.memberId, command.mediaIds)
 
         val post = communityPostRepository.save(
-            CommunityPost(
-                author = member,
-                crop = crop,
-                farmingRecord = farmingRecord,
-                postType = command.postType,
-                title = command.title,
-                body = command.body
-            )
+            CommunityPost(null, member, crop, farmingRecord, command.postType, command.title, command.body, false)
         )
 
         attachMedia(post, media)
@@ -180,11 +173,11 @@ class CommunityPostService(
         val media = validateUpdatedMedia(post, command.memberId, command.mediaIds)
 
         post.update(
-            crop = crop,
-            farmingRecord = farmingRecord,
-            postType = command.postType,
-            title = command.title,
-            body = command.body
+            crop,
+            farmingRecord,
+            command.postType,
+            command.title,
+            command.body
         )
         syncMedia(post, existingPostMedia, media)
 
@@ -202,7 +195,7 @@ class CommunityPostService(
         val existing = communityPostLikeRepository.findByPostIdAndMemberId(command.postId, command.memberId)
         val liked = if (existing == null) {
             val member = findMember(command.memberId)
-            communityPostLikeRepository.save(CommunityPostLike(post = post, member = member))
+            communityPostLikeRepository.save(CommunityPostLike(post, member))
             true
         } else {
             communityPostLikeRepository.delete(existing)
@@ -312,11 +305,7 @@ class CommunityPostService(
         media.forEach(UploadedMedia::markAttached)
         communityPostMediaRepository.saveAll(
             media.mapIndexed { index, uploadedMedia ->
-                CommunityPostMedia(
-                    post = post,
-                    uploadedMedia = uploadedMedia,
-                    displayOrder = index
-                )
+                CommunityPostMedia(post, uploadedMedia, index)
             }
         )
     }
@@ -368,12 +357,7 @@ class CommunityPostService(
             throw BusinessException(ErrorCode.INVALID_CURSOR)
         }
 
-        return CommunityPostQueryRepository.Cursor(
-            sort = payload.sort,
-            score = payload.score,
-            createdAt = payload.createdAt,
-            id = payload.id
-        )
+        return CommunityPostQueryRepository.Cursor(payload.sort, payload.score, payload.createdAt, payload.id)
     }
 
     private fun encodeCursor(

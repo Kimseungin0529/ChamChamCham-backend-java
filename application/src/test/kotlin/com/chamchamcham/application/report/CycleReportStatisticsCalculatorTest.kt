@@ -101,7 +101,7 @@ class CycleReportStatisticsCalculatorTest {
         ).fertilizing
 
         assertThat(result.totalAmountKg).isEqualByComparingTo("0.5000")
-        assertThat(result.amountCoverage).isEqualTo(Coverage(recordedCount = 1, targetCount = 2))
+        assertThat(result.amountCoverage).isEqualTo(Coverage(1, 2))
         assertThat(result.materialDistribution.map { it.label to it.count })
             .containsExactlyInAnyOrder("유기질비료" to 1, "액상비료" to 1)
     }

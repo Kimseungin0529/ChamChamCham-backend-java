@@ -214,15 +214,17 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
     fun `concurrent first enqueue allocates distinct feedback revisions`() {
         val record = farmingRecordRepository.saveAndFlush(
             FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = WorkType.WATERING,
-                workedAt = LocalDateTime.of(2026, 7, 13, 8, 30),
-                weatherCondition = "맑음",
-                weatherTemperature = 23,
-                memo = "동시 코칭 생성 검증 기록입니다.",
-                entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
+                null,
+                member,
+                farm,
+                crop,
+                WorkType.WATERING,
+                LocalDateTime.of(2026, 7, 13, 8, 30),
+                "맑음",
+                23,
+                "동시 코칭 생성 검증 기록입니다.",
+                com.chamchamcham.domain.farming.EntryMode.MANUAL,
+                false,
             ),
         )
         val recordId = requireNotNull(record.id)

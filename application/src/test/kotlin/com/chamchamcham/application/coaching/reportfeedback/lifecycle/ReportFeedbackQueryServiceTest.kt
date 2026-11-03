@@ -1,5 +1,10 @@
 package com.chamchamcham.application.coaching.reportfeedback.lifecycle
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.Coverage
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.exception.ErrorCode
 import com.chamchamcham.application.exception.business.BusinessException
 import com.chamchamcham.domain.coaching.reportfeedback.ReportFeedback
@@ -223,8 +228,8 @@ class ReportFeedbackQueryServiceTest {
     ).also {
         it.attachInputSnapshot(mapOf("schemaVersion" to 2))
         it.markReady(
-            summary = "관수 작업 요약",
-            items = listOf(
+            "관수 작업 요약",
+            listOf(
                 ReportFeedbackItemDraft(
                     ReportFeedbackItemSection.COMPARISON,
                     "직전보다 기록 1회 증가",
@@ -234,11 +239,11 @@ class ReportFeedbackQueryServiceTest {
                 ReportFeedbackItemDraft(ReportFeedbackItemSection.IMPROVEMENT, "통계 근거", "관수 간격도 함께 비교해 보세요."),
                 ReportFeedbackItemDraft(ReportFeedbackItemSection.NEXT_ACTION, "기록 근거", "내일 토양 수분을 다시 확인하세요."),
             ),
-            citations = listOf(mapOf("kind" to "record", "id" to "internal-only")),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "chat-model",
-            embeddingModel = "embedding-model",
+            listOf(mapOf("kind" to "record", "id" to "internal-only")),
+            "PASS",
+            emptyList(),
+            "chat-model",
+            "embedding-model",
         )
     }
 
@@ -257,12 +262,19 @@ class ReportFeedbackQueryServiceTest {
 
     private fun feedback(id: UUID, workType: WorkType): ReportFeedback =
         ReportFeedback(
-            id = id,
-            member = member,
-            report = completedReport,
-            workType = workType,
-            status = ReportFeedbackStatus.PENDING,
-            sourceFingerprint = "${workType.ordinal + 1}".repeat(64).take(64),
+            id,
+            member,
+            completedReport,
+            workType,
+            ReportFeedbackStatus.PENDING,
+            null,
+            "${workType.ordinal + 1}".repeat(64).take(64),
+            emptyList(),
+            null,
+            emptyList(),
+            null,
+            null,
+            null
         ).also {
             ReflectionTestUtils.setField(it, "createdAt", createdAt)
             ReflectionTestUtils.setField(it, "updatedAt", updatedAt)
@@ -274,35 +286,24 @@ class ReportFeedbackQueryServiceTest {
     ): FarmingCycleReport {
         val farm = Farm(uuid("000000000301"), member, "약초농장", "강원도 평창군")
         val crop = Crop(uuid("000000000401"), 422, "황기", CropUsePartCategory.ROOT_BARK)
-        val finalHarvest = FarmingRecord(
-            id = uuid("000000000501"),
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = LocalDateTime.of(2026, 7, 1, 9, 0),
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            memo = "최종 수확",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        val finalHarvest = FarmingRecord(uuid("000000000501"), member, farm, crop, WorkType.HARVEST, LocalDateTime.of(2026, 7, 1, 9, 0), "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         val sourceStatus = if (status == FarmingCycleReportStatus.ACTIVE) {
             FarmingCycleReportStatus.ACTIVE
         } else {
             FarmingCycleReportStatus.COMPLETED
         }
         val report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = sourceStatus,
-                startsAt = LocalDateTime.of(2026, 2, 1, 9, 0),
-                endsAt = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest.workedAt else null,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest else null,
-                statisticsSchemaVersion = 1,
-                statistics = statistics,
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                sourceStatus,
+                LocalDateTime.of(2026, 2, 1, 9, 0),
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest.workedAt else null,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest else null,
+                1,
+                statistics,
             ),
         )
         ReflectionTestUtils.setField(report, "id", reportId)
@@ -313,18 +314,62 @@ class ReportFeedbackQueryServiceTest {
     }
 
     private fun statisticsFor(vararg workTypes: WorkType) = CycleReportStatistics(
-        watering = WateringStatistics(
-            recordCount = WorkType.WATERING.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 2),
+        PlantingStatistics.empty(),
+        WateringStatistics(
+            WorkType.WATERING.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 2),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            emptyList(),
+            emptyList(),
         ),
-        fertilizing = FertilizingStatistics(
-            recordCount = WorkType.FERTILIZING.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 1),
+        FertilizingStatistics(
+            WorkType.FERTILIZING.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 1),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            null,
+            null,
+            Coverage(0, 0),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
         ),
-        harvest = HarvestStatistics(
-            recordCount = WorkType.HARVEST.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 3),
+        PestControlStatistics.empty(),
+        WeedingStatistics.empty(),
+        CommonOnlyStatistics.empty(),
+        HarvestStatistics(
+            WorkType.HARVEST.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 3),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            null,
+            null,
+            Coverage(0, 0),
+            null,
+            null,
+            emptyList(),
+            null,
+            null,
+            emptyList(),
         ),
+        CommonOnlyStatistics.empty(),
     )
 
     private fun WorkType.countIn(workTypes: Array<out WorkType>): Int =

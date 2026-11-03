@@ -11,6 +11,7 @@ import com.chamchamcham.domain.member.Member
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -53,17 +54,7 @@ class FarmingCycleReportRepositoryJsonTest @Autowired constructor(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )
         finalHarvest = persist(
-            FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = WorkType.HARVEST,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "최종 수확",
-                entryMode = EntryMode.MANUAL,
-            ),
+            FarmingRecord(null, member, farm, crop, WorkType.HARVEST, workedAt, "맑음", 24, "최종 수확", EntryMode.MANUAL, false),
         )
     }
 
@@ -92,6 +83,30 @@ class FarmingCycleReportRepositoryJsonTest @Autowired constructor(
     }
 
     @Test
+    fun `statistics JSON rejects explicit null for non nullable default fields`() {
+        val mapper = jacksonObjectMapper()
+        listOf(
+            """{"planting":null}""",
+            """{"planting":{"weatherDistribution":null}}""",
+            """{"harvest":{"amountCoverage":null}}""",
+        ).forEach { json ->
+            assertThatThrownBy { mapper.readValue<CycleReportStatistics>(json) }
+                .isInstanceOf(com.fasterxml.jackson.databind.JsonMappingException::class.java)
+        }
+    }
+
+    @Test
+    fun `statistics JSON preserves empty arrays and nullable fields`() {
+        val statistics = jacksonObjectMapper().readValue<CycleReportStatistics>(
+            """{"planting":{"weatherDistribution":[],"firstWorkedOn":null},"harvest":{"totalAmountKg":null}}""",
+        )
+        assertThat(statistics.planting.weatherDistribution).isEmpty()
+        assertThat(statistics.planting.firstWorkedOn).isNull()
+        assertThat(statistics.harvest.totalAmountKg).isNull()
+        assertThat(statistics.watering).isEqualTo(WateringStatistics.empty())
+    }
+
+    @Test
     fun `member scoped lookup does not expose another members report`() {
         val report = repository.saveAndFlush(completedReport())
 
@@ -103,133 +118,123 @@ class FarmingCycleReportRepositoryJsonTest @Autowired constructor(
         statistics: CycleReportStatistics = CycleReportStatistics.empty(),
     ): FarmingCycleReport {
         return FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = workedAt.minusMonths(6),
-                endsAt = workedAt,
-                startBasis = FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST,
-                finalHarvestRecord = finalHarvest,
-                statisticsSchemaVersion = 1,
-                statistics = statistics,
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                workedAt.minusMonths(6),
+                workedAt,
+                FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST,
+                finalHarvest,
+                1,
+                statistics,
             ),
         ).also { setTimestamps(it, workedAt) }
     }
 
     private fun statisticsWithEveryWorkType(): CycleReportStatistics {
         return CycleReportStatistics(
-            planting = PlantingStatistics(
-                recordCount = 1,
-                firstWorkedOn = LocalDate.of(2026, 1, 1),
-                lastWorkedOn = LocalDate.of(2026, 1, 1),
-                workedDayCount = 1,
-                photoAttachedRecordCount = 1,
-                plantingMethodDistribution = listOf(distribution("SEED", "씨앗 심기", 1)),
-                propagationMethods = listOf(
-                    PropagationStatistics(
-                        code = "SEED",
-                        label = "종자",
-                        recordCount = 1,
-                        recordRatePct = BigDecimal("100"),
-                        totalQuantity = BigDecimal("10"),
-                        quantityUnit = "g",
-                        quantityCoverage = Coverage(1, 1),
-                    ),
+            PlantingStatistics(
+                1,
+                LocalDate.of(2026, 1, 1),
+                LocalDate.of(2026, 1, 1),
+                1,
+                null,
+                1,
+                null,
+                emptyList(),
+                null,
+                listOf(distribution("SEED", "씨앗 심기", 1)),
+                listOf(
+                    PropagationStatistics("SEED", "종자", 1, BigDecimal("100"), BigDecimal("10"), "g", Coverage(1, 1)),
                 ),
             ),
-            watering = WateringStatistics(
-                recordCount = 2,
-                amountDistribution = listOf(distribution("ENOUGH", "충분", 2)),
-                methodDistribution = listOf(distribution("SPRINKLE", "살수", 2)),
+            WateringStatistics(
+                2,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                listOf(distribution("ENOUGH", "충분", 2)),
+                listOf(distribution("SPRINKLE", "살수", 2)),
             ),
-            fertilizing = FertilizingStatistics(
-                recordCount = 3,
-                totalAmountKg = BigDecimal("3"),
-                averageAmountKg = BigDecimal("1"),
-                amountCoverage = Coverage(3, 3),
-                materialCategories = listOf(
-                    MaterialCategoryStatistics(
-                        code = "ORGANIC_FERTILIZER",
-                        label = "유기질비료",
-                        recordCount = 3,
-                        recordRatePct = BigDecimal("100"),
-                        amountKg = BigDecimal("3"),
-                        amountRatePct = BigDecimal("100"),
-                    ),
+            FertilizingStatistics(
+                3,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                BigDecimal("3"),
+                BigDecimal("1"),
+                Coverage(3, 3),
+                emptyList(),
+                listOf(
+                    MaterialCategoryStatistics("ORGANIC_FERTILIZER", "유기질비료", 3, BigDecimal("100"), BigDecimal("3"), BigDecimal("100")),
                 ),
-                methodDistribution = listOf(distribution("SOIL", "토양시비", 3)),
-                categoryMethods = listOf(
-                    CategoryMethodStatistics(
-                        categoryCode = "ORGANIC_FERTILIZER",
-                        categoryLabel = "유기질비료",
-                        methodCode = "SOIL",
-                        methodLabel = "토양시비",
-                        recordCount = 3,
-                        recordRatePct = BigDecimal("100"),
-                    ),
+                listOf(distribution("SOIL", "토양시비", 3)),
+                listOf(
+                    CategoryMethodStatistics("ORGANIC_FERTILIZER", "유기질비료", "SOIL", "토양시비", 3, BigDecimal("100")),
                 ),
             ),
-            pestControl = PestControlStatistics(
-                recordCount = 4,
-                weatherDistribution = listOf(distribution("SUNNY", "맑음", 4)),
-                categoryDistribution = listOf(distribution("FUNGICIDE", "살균제", 4)),
-                pesticideAmounts = listOf(
-                    AmountByUnit(unit = "ml", amount = BigDecimal("40"), coverage = Coverage(4, 4)),
+            PestControlStatistics(
+                4,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                listOf(distribution("SUNNY", "맑음", 4)),
+                null,
+                listOf(distribution("FUNGICIDE", "살균제", 4)),
+                listOf(
+                    AmountByUnit("ml", BigDecimal("40"), Coverage(4, 4)),
                 ),
-                categoryAmounts = listOf(
-                    CategoryAmountByUnit(
-                        categoryCode = "FUNGICIDE",
-                        categoryLabel = "살균제",
-                        unit = "ml",
-                        recordCount = 4,
-                        amount = BigDecimal("40"),
-                        coverage = Coverage(4, 4),
-                    ),
+                listOf(
+                    CategoryAmountByUnit("FUNGICIDE", "살균제", "ml", 4, BigDecimal("40"), Coverage(4, 4)),
                 ),
-                totalSprayAmountLiters = BigDecimal("20"),
-                sprayAmountCoverage = Coverage(4, 4),
-                targets = listOf(TargetCount(target = "진딧물", count = 4)),
+                BigDecimal("20"),
+                Coverage(4, 4),
+                listOf(TargetCount("진딧물", 4)),
             ),
-            weeding = WeedingStatistics(
-                recordCount = 5,
-                methodDistribution = listOf(distribution("HAND", "손제초", 5)),
-            ),
-            pruning = CommonOnlyStatistics(recordCount = 6),
-            harvest = HarvestStatistics(
-                recordCount = 7,
-                totalAmountKg = BigDecimal("70"),
-                averageAmountKg = BigDecimal("10"),
-                amountCoverage = Coverage(7, 7),
-                firstHarvestedOn = LocalDate.of(2026, 6, 1),
-                lastHarvestedOn = LocalDate.of(2026, 6, 15),
-                medicinalParts = listOf(
-                    HarvestPartStatistics(
-                        code = "ROOT_BARK",
-                        label = "뿌리·껍질",
-                        recordCount = 7,
-                        recordRatePct = BigDecimal("100"),
-                        knownAmountKg = BigDecimal("70"),
-                        amountRatePct = BigDecimal("100"),
-                        amountCoverage = Coverage(7, 7),
-                    ),
+            WeedingStatistics(5, null, null, 0, null, 0, null, emptyList(), null, listOf(distribution("HAND", "손제초", 5))),
+            CommonOnlyStatistics(6, null, null, 0, null, 0, null, emptyList(), null),
+            HarvestStatistics(
+                7,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                BigDecimal("70"),
+                BigDecimal("10"),
+                Coverage(7, 7),
+                LocalDate.of(2026, 6, 1),
+                LocalDate.of(2026, 6, 15),
+                listOf(
+                    HarvestPartStatistics("ROOT_BARK", "뿌리·껍질", 7, BigDecimal("100"), BigDecimal("70"), BigDecimal("100"), Coverage(7, 7)),
                 ),
-                finalGrowthPeriodMonths = 6,
-                growthPeriodRangeMonths = GrowthPeriodRange(5, 7),
-                growthPeriodDistribution = listOf(distribution("6", "6개월", 7)),
+                6,
+                GrowthPeriodRange(5, 7),
+                listOf(distribution("6", "6개월", 7)),
             ),
-            etc = CommonOnlyStatistics(recordCount = 8),
+            CommonOnlyStatistics(8, null, null, 0, null, 0, null, emptyList(), null),
         )
     }
-
     private fun distribution(code: String, label: String, count: Int): CountDistribution {
-        return CountDistribution(
-            code = code,
-            label = label,
-            count = count,
-            ratePct = BigDecimal("100"),
-        )
+        return CountDistribution(code, label, count, BigDecimal("100"))
     }
 
     private fun <T : BaseTimeEntity> persist(entity: T): T {

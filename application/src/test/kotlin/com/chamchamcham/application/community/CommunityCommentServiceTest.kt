@@ -65,12 +65,12 @@ class CommunityCommentServiceTest {
         member = Member(memberId, "farmer@example.com", null)
         otherMember = Member(otherMemberId, "other@example.com", null)
         post = CommunityPost(
-            id = postId,
-            author = member,
-            crop = Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기", CropUsePartCategory.ROOT_BARK),
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율이 낮아요",
-            body = "싹이 거의 올라오지 않아요."
+            postId,
+            member,
+            Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기", CropUsePartCategory.ROOT_BARK),
+            CommunityPostType.QUESTION,
+            "황기 발아율이 낮아요",
+            "싹이 거의 올라오지 않아요."
         )
         rootComment = comment(id = rootCommentId, parent = null, author = member, body = "저도 궁금해요")
         replyComment = comment(id = replyCommentId, parent = rootComment, author = otherMember, body = "스크래치 작업을 해보세요")
@@ -347,15 +347,7 @@ class CommunityCommentServiceTest {
         media: UploadedMedia? = null,
         isDeleted: Boolean = false
     ): CommunityComment =
-        CommunityComment(
-            id = id,
-            post = post,
-            parentComment = parent,
-            author = author,
-            body = body,
-            media = media,
-            isDeleted = isDeleted
-        )
+        CommunityComment(id, post, parent, author, body, media, isDeleted)
 
     private fun uploadedMedia(
         id: UUID,

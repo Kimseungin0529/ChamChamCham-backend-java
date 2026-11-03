@@ -97,13 +97,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `planting maps planting method and optional propagation fields`() {
         stubOwnedRecord(WorkType.PLANTING)
         `when`(plantingRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            PlantingRecord(
-                record = record,
-                plantingMethod = PlantingMethod.SEEDLING,
-                seedlingCount = 18,
-                seedlingUnit = SeedlingUnit.JU,
-                propagationMethod = PropagationMethod.CUTTING,
-            )
+            PlantingRecord(null, record, PlantingMethod.SEEDLING, null, null, 18, SeedlingUnit.JU, PropagationMethod.CUTTING)
         )
         stubSharedContext()
 
@@ -129,11 +123,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `watering maps nullable amount and method and missing row becomes empty detail`() {
         stubOwnedRecord(WorkType.WATERING)
         `when`(wateringRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            WateringRecord(
-                record = record,
-                irrigationAmount = IrrigationAmount.NORMAL,
-                irrigationMethod = IrrigationMethod.DRIP,
-            )
+            WateringRecord(null, record, IrrigationAmount.NORMAL, IrrigationMethod.DRIP)
         )
         stubSharedContext()
 
@@ -164,13 +154,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `fertilizing maps actual material amount unit and method without statistics`() {
         stubOwnedRecord(WorkType.FERTILIZING)
         `when`(fertilizingRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            FertilizingRecord(
-                record = record,
-                materialName = "유기질비료",
-                amount = BigDecimal("2500.0000"),
-                amountUnit = FertilizerAmountUnit.G,
-                applicationMethod = FertilizingMethod.SOIL,
-            )
+            FertilizingRecord(null, record, "유기질비료", BigDecimal("2500.0000"), FertilizerAmountUnit.G, FertilizingMethod.SOIL)
         )
         stubSharedContext(photoCount = 2)
 
@@ -197,15 +181,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `pest control maps pesticide amounts spray amount and pest`() {
         stubOwnedRecord(WorkType.PEST_CONTROL)
         `when`(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            PestControlRecord(
-                record = record,
-                pesticide = Pesticide(UUID.fromString("00000000-0000-0000-0000-000000000010"), "만코제브 수화제", "가가방"),
-                pesticideAmount = BigDecimal("120.0000"),
-                pesticideAmountUnit = PesticideAmountUnit.ML,
-                totalSprayAmount = BigDecimal("20.0000"),
-                totalSprayAmountUnit = SprayAmountUnit.ML,
-                pest = Pest(UUID.fromString("00000000-0000-0000-0000-000000000011"), "점무늬병"),
-            )
+            PestControlRecord(null, record, Pesticide(UUID.fromString("00000000-0000-0000-0000-000000000010"), "만코제브 수화제", "가가방"), BigDecimal("120.0000"), PesticideAmountUnit.ML, BigDecimal("20.0000"), SprayAmountUnit.ML, Pest(UUID.fromString("00000000-0000-0000-0000-000000000011"), "점무늬병"))
         )
         stubSharedContext()
 
@@ -230,7 +206,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `weeding maps nullable method and missing row becomes empty detail`() {
         stubOwnedRecord(WorkType.WEEDING)
         `when`(weedingRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            WeedingRecord(record = record, weedingMethod = WeedingMethod.HAND)
+            WeedingRecord(null, record, WeedingMethod.HAND)
         )
         stubSharedContext()
 
@@ -271,14 +247,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `harvest maps amount part source growth period and final flag`() {
         stubOwnedRecord(WorkType.HARVEST)
         `when`(harvestRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            HarvestRecord(
-                record = record,
-                harvestAmount = BigDecimal("4.2000"),
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 18,
-                isLastHarvest = true,
-            )
+            HarvestRecord(null, record, BigDecimal("4.2000"), CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 18, true)
         )
         stubSharedContext()
 
@@ -304,14 +273,7 @@ class RecordFeedbackContextAssemblerTest {
     fun `harvest null amount marks amount unknown while keeping required growth period`() {
         stubOwnedRecord(WorkType.HARVEST)
         `when`(harvestRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            HarvestRecord(
-                record = record,
-                harvestAmount = null,
-                medicinalPart = null,
-                harvestSource = HarvestSource.FORAGED,
-                growthPeriod = 12,
-                isLastHarvest = false,
-            )
+            HarvestRecord(null, record, null, null, HarvestSource.FORAGED, 12, false)
         )
         stubSharedContext()
 
@@ -523,19 +485,7 @@ class RecordFeedbackContextAssemblerTest {
             migratedFarm.longitude = longitude
         }
         val crop = Crop(cropId, 1001, "참당귀", CropUsePartCategory.ROOT_BARK)
-        record = FarmingRecord(
-            id = recordId,
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = workType,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 27,
-            memo = "오전 작업 기록",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-            isDeleted = false,
-        )
+        record = FarmingRecord(recordId, member, farm, crop, workType, workedAt, "맑음", 27, "오전 작업 기록", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         `when`(recordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(record)
     }
 

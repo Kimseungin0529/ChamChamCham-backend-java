@@ -35,9 +35,9 @@ class FarmingCycleReportProjectionService(
             BusinessException(ErrorCode.CROP_NOT_FOUND)
         }
         val existing = reportRepository.findAllCurrent(
-            memberId = scope.memberId,
-            farmId = scope.farmId,
-            cropId = scope.cropId,
+            scope.memberId,
+            scope.farmId,
+            scope.cropId,
         )
         val slices = partitioner.partition(sourceLoader.load(scope))
         val unmatched = existing.associateBy { requireNotNull(it.id) }.toMutableMap()
@@ -106,14 +106,14 @@ class FarmingCycleReportProjectionService(
     private fun toProjection(slice: CycleSlice): FarmingCycleReportProjection {
         val completed = slice.status == FarmingCycleReportStatus.COMPLETED
         return FarmingCycleReportProjection(
-            status = slice.status,
-            startsAt = slice.records.first().workedAt,
-            endsAt = slice.records.last().workedAt.takeIf { completed },
-            startBasis = slice.startBasis,
-            finalHarvestRecord = slice.finalHarvestRecordId
+            slice.status,
+            slice.records.first().workedAt,
+            slice.records.last().workedAt.takeIf { completed },
+            slice.startBasis,
+            slice.finalHarvestRecordId
                 ?.let(farmingRecordRepository::getReferenceById),
-            statisticsSchemaVersion = STATISTICS_SCHEMA_VERSION,
-            statistics = statisticsCalculator.calculate(slice.records),
+            STATISTICS_SCHEMA_VERSION,
+            statisticsCalculator.calculate(slice.records),
         )
     }
 

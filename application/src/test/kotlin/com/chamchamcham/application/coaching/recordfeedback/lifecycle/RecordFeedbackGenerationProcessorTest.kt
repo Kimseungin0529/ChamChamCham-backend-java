@@ -54,9 +54,17 @@ class RecordFeedbackGenerationProcessorTest {
     private val farm = Farm(UUID.randomUUID(), member, "약초밭", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
     private val record = FarmingRecord(
-        id = UUID.randomUUID(), member = member, farm = farm, crop = crop, workType = WorkType.PRUNING,
-        workedAt = LocalDateTime.of(2026, 7, 11, 9, 0), weatherCondition = "맑음", weatherTemperature = 25,
-        memo = "웃자란 가지를 정리했습니다.", entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        UUID.randomUUID(),
+        member,
+        farm,
+        crop,
+        WorkType.PRUNING,
+        LocalDateTime.of(2026, 7, 11, 9, 0),
+        "맑음",
+        25,
+        "웃자란 가지를 정리했습니다.",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
     )
     private lateinit var processor: RecordFeedbackGenerationProcessor
 
@@ -141,7 +149,7 @@ class RecordFeedbackGenerationProcessorTest {
 
     @Test
     fun `processor marks malformed snapshot as failed`() {
-        val feedback = RecordFeedback(id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = 3)
+        val feedback = RecordFeedback(UUID.randomUUID(), member, record, RecordFeedbackStatus.PENDING, 3)
         feedback.attachInputSnapshot(mapOf("schemaVersion" to "invalid"))
         val event = event(feedback)
         stubFeedback(event, feedback)
@@ -153,7 +161,11 @@ class RecordFeedbackGenerationProcessorTest {
     }
 
     private fun pendingFeedback(): RecordFeedback = RecordFeedback(
-        id = UUID.randomUUID(), member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = 3,
+        UUID.randomUUID(),
+        member,
+        record,
+        RecordFeedbackStatus.PENDING,
+        3
     ).also { it.attachInputSnapshot(objectMapper.convertValue(context(), SNAPSHOT_TYPE)) }
 
     private fun event(feedback: RecordFeedback) = RecordFeedbackGenerationRequested(

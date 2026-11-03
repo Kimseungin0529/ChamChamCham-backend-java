@@ -175,8 +175,8 @@ class ReportFeedbackPromptBuilderTest {
     fun `comparison coverage calls the prior period last cultivation`() {
         val base = context()
         val comparison = base.comparisons.single().copy(
-            currentCoverage = Coverage(recordedCount = 3, targetCount = 4),
-            previousCoverage = Coverage(recordedCount = 2, targetCount = 3),
+            currentCoverage = Coverage(3, 4),
+            previousCoverage = Coverage(2, 3),
         )
 
         val prompt = ReportFeedbackPromptBuilder().build(

@@ -28,9 +28,9 @@ class RecordFeedbackLifecycleService(
 
         val saved = feedbackRepository.save(
             RecordFeedback.pending(
-                member = revisionParent.member,
-                record = revisionParent,
-                sourceRevision = nextRevision,
+                revisionParent.member,
+                revisionParent,
+                nextRevision,
             ),
         )
         publishPreparation(saved)

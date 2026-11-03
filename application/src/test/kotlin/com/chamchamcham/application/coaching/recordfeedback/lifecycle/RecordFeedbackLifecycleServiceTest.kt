@@ -32,9 +32,17 @@ class RecordFeedbackLifecycleServiceTest {
     private val farm = Farm(UUID.randomUUID(), member, "약초밭", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
     private val record = FarmingRecord(
-        id = UUID.randomUUID(), member = member, farm = farm, crop = crop, workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 7, 11, 9, 0), weatherCondition = "맑음", weatherTemperature = 25,
-        memo = "관수 기록", entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        UUID.randomUUID(),
+        member,
+        farm,
+        crop,
+        WorkType.WATERING,
+        LocalDateTime.of(2026, 7, 11, 9, 0),
+        "맑음",
+        25,
+        "관수 기록",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
     )
 
     private val service by lazy { RecordFeedbackLifecycleService(feedbackRepository, eventPublisher) }
@@ -104,7 +112,7 @@ class RecordFeedbackLifecycleServiceTest {
         status: RecordFeedbackStatus = RecordFeedbackStatus.PENDING,
         sourceRevision: Long = 1,
     ): RecordFeedback {
-        val feedback = RecordFeedback(id = id, member = member, record = record, status = RecordFeedbackStatus.PENDING, sourceRevision = sourceRevision)
+        val feedback = RecordFeedback(id, member, record, RecordFeedbackStatus.PENDING, sourceRevision)
         if (status == RecordFeedbackStatus.READY) {
             feedback.markReady("관수 기록", "관수 기록이 구체적입니다.", actions(), emptyList(), "PASS", emptyList(), "chat", "embed")
         }
