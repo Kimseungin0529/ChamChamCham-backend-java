@@ -3,7 +3,6 @@ package com.chamchamcham.application.auth.common
 import com.chamchamcham.application.crop.CropResult
 import com.chamchamcham.application.exception.ErrorCode
 import com.chamchamcham.application.exception.business.BusinessException
-import com.chamchamcham.application.farm.toFarm
 import com.chamchamcham.domain.crop.CropRepository
 import com.chamchamcham.domain.crop.MemberCrop
 import com.chamchamcham.domain.crop.MemberCropRepository

@@ -96,7 +96,7 @@ class FarmControllerTest(
                 .with(authenticatedMember(memberId.toString()))
         ).andExpect(status().isNoContent)
 
-        verify(farmService).delete(FarmCommand.Delete(memberId = memberId, farmId = farmId))
+        verify(farmService).delete(FarmCommand.Delete(memberId, farmId))
     }
 
     @Test
@@ -145,7 +145,7 @@ class FarmControllerTest(
     fun `maps farm in use to conflict`() {
         willThrow(BusinessException(ErrorCode.FARM_IN_USE))
             .given(farmService)
-            .delete(FarmCommand.Delete(memberId = memberId, farmId = farmId))
+            .delete(FarmCommand.Delete(memberId, farmId))
 
         mockMvc.perform(
             delete("/api/v1/farms/{farmId}", farmId)
@@ -175,57 +175,57 @@ class FarmControllerTest(
 
     private fun farmDetail(): FarmResult.Detail =
         FarmResult.Detail(
-            farmId = farmId,
-            name = "횡성 황기밭",
-            roadAddress = "강원특별자치도 횡성군 둔내면 1",
-            jibunAddress = "강원특별자치도 횡성군 둔내면 현천리 101",
-            latitude = 37.5,
-            longitude = 128.1,
-            pnu = "4273031021101010000",
-            landCategory = "전",
-            areaSqm = BigDecimal("1200.5"),
-            areaIsManualEntry = false,
-            boundaryCoordinates = listOf(FarmResult.BoundaryCoordinate(37.5, 128.1)),
-            dataSource = FarmResult.DataSource("JUSO", "VWORLD", "VWORLD", "VWORLD"),
-            crops = listOf(
+            farmId,
+            "횡성 황기밭",
+            "강원특별자치도 횡성군 둔내면 1",
+            "강원특별자치도 횡성군 둔내면 현천리 101",
+            37.5,
+            128.1,
+            "4273031021101010000",
+            "전",
+            BigDecimal("1200.5"),
+            false,
+            listOf(FarmResult.BoundaryCoordinate(37.5, 128.1)),
+            FarmResult.DataSource("JUSO", "VWORLD", "VWORLD", "VWORLD"),
+            listOf(
                 CropResult.CropSummary(
-                    id = cropId,
-                    externalNo = 422,
-                    name = "황기",
-                    usePartCategory = "ROOT_BARK",
-                    usePartCategoryLabel = "뿌리·껍질"
+                    cropId,
+                    422,
+                    "황기",
+                    "ROOT_BARK",
+                    "뿌리·껍질"
                 )
             )
         )
 
     private fun expectedCreateCommand(): FarmCommand.Create =
         FarmCommand.Create(
-            memberId = memberId,
-            draft = expectedDraft(),
-            cropIds = listOf(cropId)
+            memberId,
+            expectedDraft(),
+            listOf(cropId)
         )
 
     private fun expectedReplaceCommand(): FarmCommand.Replace =
         FarmCommand.Replace(
-            memberId = memberId,
-            farmId = farmId,
-            draft = expectedDraft(),
-            cropIds = listOf(cropId)
+            memberId,
+            farmId,
+            expectedDraft(),
+            listOf(cropId)
         )
 
     private fun expectedDraft(): FarmCommand.Draft =
         FarmCommand.Draft(
-            name = "횡성 황기밭",
-            roadAddress = "강원특별자치도 횡성군 둔내면 1",
-            jibunAddress = "강원특별자치도 횡성군 둔내면 현천리 101",
-            latitude = 37.5,
-            longitude = 128.1,
-            pnu = "4273031021101010000",
-            landCategory = "전",
-            areaSqm = BigDecimal("1200.5"),
-            areaIsManualEntry = false,
-            boundaryCoordinates = listOf(FarmCommand.BoundaryCoordinate(37.5, 128.1)),
-            dataSource = FarmCommand.DataSource("JUSO", "VWORLD", "VWORLD", "VWORLD")
+            "횡성 황기밭",
+            "강원특별자치도 횡성군 둔내면 1",
+            "강원특별자치도 횡성군 둔내면 현천리 101",
+            37.5,
+            128.1,
+            "4273031021101010000",
+            "전",
+            BigDecimal("1200.5"),
+            false,
+            listOf(FarmCommand.BoundaryCoordinate(37.5, 128.1)),
+            FarmCommand.DataSource("JUSO", "VWORLD", "VWORLD", "VWORLD")
         )
 
     private fun validFarmJson(): String =

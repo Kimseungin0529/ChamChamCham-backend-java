@@ -244,24 +244,24 @@ class OnboardingServiceTest {
 
     private fun farmCommand(): FarmCommand.Draft {
         return FarmCommand.Draft(
-            name = "서울 약초농장",
-            roadAddress = "서울특별시 강남구 테헤란로 1",
-            jibunAddress = "서울특별시 강남구 역삼동 1",
-            latitude = 35.8465,
-            longitude = 127.1292,
-            pnu = "4511310200101230004",
-            landCategory = "전",
-            areaSqm = BigDecimal("1200.5"),
-            areaIsManualEntry = false,
-            boundaryCoordinates = listOf(
-                FarmCommand.BoundaryCoordinate(latitude = 35.8461, longitude = 127.1289),
-                FarmCommand.BoundaryCoordinate(latitude = 35.8463, longitude = 127.1295)
+            "서울 약초농장",
+            "서울특별시 강남구 테헤란로 1",
+            "서울특별시 강남구 역삼동 1",
+            35.8465,
+            127.1292,
+            "4511310200101230004",
+            "전",
+            BigDecimal("1200.5"),
+            false,
+            listOf(
+                FarmCommand.BoundaryCoordinate(35.8461, 127.1289),
+                FarmCommand.BoundaryCoordinate(35.8463, 127.1295)
             ),
-            dataSource = FarmCommand.DataSource(
-                address = "JUSO",
-                coordinate = "V_WORLD_ADDRESS",
-                parcel = "V_WORLD_CADASTRAL",
-                landCharacteristic = "V_WORLD_LAND_CHARACTERISTIC"
+            FarmCommand.DataSource(
+                "JUSO",
+                "V_WORLD_ADDRESS",
+                "V_WORLD_CADASTRAL",
+                "V_WORLD_LAND_CHARACTERISTIC"
             )
         )
     }

@@ -44,9 +44,9 @@ class FarmController(
     ): ResponseEntity<ApiResponse<FarmResponses.FarmResponse>> {
         val result = farmService.create(
             FarmCommand.Create(
-                memberId = parseMemberId(memberId),
-                draft = request.toCommandDraft(),
-                cropIds = request.cropIds
+                parseMemberId(memberId),
+                request.toCommandDraft(),
+                request.cropIds
             )
         )
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.ok(FarmResponses.FarmResponse.from(result)))
@@ -60,10 +60,10 @@ class FarmController(
     ): ResponseEntity<ApiResponse<FarmResponses.FarmResponse>> {
         val result = farmService.replace(
             FarmCommand.Replace(
-                memberId = parseMemberId(memberId),
-                farmId = farmId,
-                draft = request.toCommandDraft(),
-                cropIds = request.cropIds
+                parseMemberId(memberId),
+                farmId,
+                request.toCommandDraft(),
+                request.cropIds
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(FarmResponses.FarmResponse.from(result)))
@@ -74,7 +74,7 @@ class FarmController(
         @AuthenticationPrincipal memberId: String?,
         @PathVariable farmId: UUID
     ): ResponseEntity<Void> {
-        farmService.delete(FarmCommand.Delete(memberId = parseMemberId(memberId), farmId = farmId))
+        farmService.delete(FarmCommand.Delete(parseMemberId(memberId), farmId))
         return ResponseEntity.noContent().build()
     }
 

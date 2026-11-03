@@ -88,50 +88,50 @@ object FarmRequests {
 
 fun FarmRequests.FarmDraftRequest.toCommandDraft(): FarmCommand.Draft =
     FarmCommand.Draft(
-        name = name,
-        roadAddress = roadAddress,
-        jibunAddress = jibunAddress,
-        latitude = requireNotNull(latitude),
-        longitude = requireNotNull(longitude),
-        pnu = pnu,
-        landCategory = landCategory,
-        areaSqm = areaSqm,
-        areaIsManualEntry = areaIsManualEntry,
-        boundaryCoordinates = boundaryCoordinates.map {
+        name,
+        roadAddress,
+        jibunAddress,
+        requireNotNull(latitude),
+        requireNotNull(longitude),
+        pnu,
+        landCategory,
+        areaSqm,
+        areaIsManualEntry,
+        boundaryCoordinates.map {
             FarmCommand.BoundaryCoordinate(
-                latitude = requireNotNull(it.latitude),
-                longitude = requireNotNull(it.longitude)
+                requireNotNull(it.latitude),
+                requireNotNull(it.longitude)
             )
         },
-        dataSource = FarmCommand.DataSource(
-            address = dataSource.address,
-            coordinate = dataSource.coordinate,
-            parcel = dataSource.parcel,
-            landCharacteristic = dataSource.landCharacteristic
+        FarmCommand.DataSource(
+            dataSource.address,
+            dataSource.coordinate,
+            dataSource.parcel,
+            dataSource.landCharacteristic
         )
     )
 
 fun FarmRequests.SaveFarmRequest.toCommandDraft(): FarmCommand.Draft =
     FarmCommand.Draft(
-        name = name,
-        roadAddress = roadAddress,
-        jibunAddress = jibunAddress,
-        latitude = requireNotNull(latitude),
-        longitude = requireNotNull(longitude),
-        pnu = pnu,
-        landCategory = landCategory,
-        areaSqm = areaSqm,
-        areaIsManualEntry = areaIsManualEntry,
-        boundaryCoordinates = boundaryCoordinates.map {
+        name,
+        roadAddress,
+        jibunAddress,
+        requireNotNull(latitude),
+        requireNotNull(longitude),
+        pnu,
+        landCategory,
+        areaSqm,
+        areaIsManualEntry,
+        boundaryCoordinates.map {
             FarmCommand.BoundaryCoordinate(
-                latitude = requireNotNull(it.latitude),
-                longitude = requireNotNull(it.longitude)
+                requireNotNull(it.latitude),
+                requireNotNull(it.longitude)
             )
         },
-        dataSource = FarmCommand.DataSource(
-            address = dataSource.address,
-            coordinate = dataSource.coordinate,
-            parcel = dataSource.parcel,
-            landCharacteristic = dataSource.landCharacteristic
+        FarmCommand.DataSource(
+            dataSource.address,
+            dataSource.coordinate,
+            dataSource.parcel,
+            dataSource.landCharacteristic
         )
     )
