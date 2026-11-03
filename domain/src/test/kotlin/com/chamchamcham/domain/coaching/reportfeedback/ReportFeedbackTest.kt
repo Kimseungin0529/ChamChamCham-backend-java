@@ -30,18 +30,7 @@ class ReportFeedbackTest {
     private val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val finishedAt = LocalDateTime.of(2026, 7, 13, 9, 0)
-    private val finalHarvest = FarmingRecord(
-        id = UUID.randomUUID(),
-        member = member,
-        farm = farm,
-        crop = crop,
-        workType = WorkType.HARVEST,
-        workedAt = finishedAt,
-        weatherCondition = "맑음",
-        weatherTemperature = 24,
-        memo = "최종 수확",
-        entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-    )
+    private val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, finishedAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
     private val report = FarmingCycleReport.create(
         member = member,
         farm = farm,

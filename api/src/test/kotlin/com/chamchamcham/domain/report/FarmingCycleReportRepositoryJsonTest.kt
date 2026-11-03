@@ -53,17 +53,7 @@ class FarmingCycleReportRepositoryJsonTest @Autowired constructor(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )
         finalHarvest = persist(
-            FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = WorkType.HARVEST,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "최종 수확",
-                entryMode = EntryMode.MANUAL,
-            ),
+            FarmingRecord(null, member, farm, crop, WorkType.HARVEST, workedAt, "맑음", 24, "최종 수확", EntryMode.MANUAL, false),
         )
     }
 

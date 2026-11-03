@@ -64,13 +64,7 @@ class FarmingWorkReportSourceRepositoryTest @Autowired constructor(
             workedAt = now.plusHours(2),
         )
         persist(
-            HarvestRecord(
-                record = finalHarvest,
-                harvestAmount = BigDecimal.ONE,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                growthPeriod = 12,
-                isLastHarvest = true,
-            ),
+            HarvestRecord(null, finalHarvest, BigDecimal.ONE, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 12, true),
             now,
         )
         val secondScopeRecord = persistRecord(farm = otherFarm, crop = otherCrop, workedAt = now.plusHours(3))
@@ -152,18 +146,7 @@ class FarmingWorkReportSourceRepositoryTest @Autowired constructor(
         isDeleted: Boolean = false,
     ): FarmingRecord =
         persist(
-            FarmingRecord(
-                member = owner,
-                farm = farm,
-                crop = crop,
-                workType = workType,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "memo",
-                entryMode = EntryMode.MANUAL,
-                isDeleted = isDeleted,
-            ),
+            FarmingRecord(null, owner, farm, crop, workType, workedAt, "맑음", 24, "memo", EntryMode.MANUAL, isDeleted),
             now,
         )
 
@@ -186,11 +169,7 @@ class FarmingWorkReportSourceRepositoryTest @Autowired constructor(
             now,
         )
         return persist(
-            FarmingRecordMedia(
-                record = record,
-                uploadedMedia = media,
-                displayOrder = displayOrder,
-            ),
+            FarmingRecordMedia(null, record, media, displayOrder),
             now,
         )
     }

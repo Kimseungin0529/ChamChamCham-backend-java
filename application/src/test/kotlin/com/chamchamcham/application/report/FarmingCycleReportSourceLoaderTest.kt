@@ -89,13 +89,7 @@ class FarmingCycleReportSourceLoaderTest {
         val fertilizing = record("00000000-0000-0000-0000-000000000209", WorkType.FERTILIZING, hour = 9)
         val snapshot = emptySnapshot(records = listOf(fertilizing)).copy(
             fertilizingByRecordId = mapOf(
-                requireNotNull(fertilizing.id) to FertilizingRecord(
-                    record = fertilizing,
-                    materialName = "유기질비료",
-                    amount = BigDecimal("0.01"),
-                    amountUnit = FertilizerAmountUnit.G,
-                    applicationMethod = null,
-                ),
+                requireNotNull(fertilizing.id) to FertilizingRecord(null, fertilizing, "유기질비료", BigDecimal("0.01"), FertilizerAmountUnit.G, null),
             ),
         )
 
@@ -134,55 +128,22 @@ class FarmingCycleReportSourceLoaderTest {
         return FarmingCycleReportSourceSnapshot(
             records = listOf(planting, watering, fertilizing, pestControl, weeding, pruning, harvest, etc),
             plantingByRecordId = mapOf(
-                requireNotNull(planting.id) to PlantingRecord(
-                    record = planting,
-                    plantingMethod = PlantingMethod.SEED,
-                    seedAmount = BigDecimal("1250.0000"),
-                    seedAmountUnit = SeedAmountUnit.G,
-                )
+                requireNotNull(planting.id) to PlantingRecord(null, planting, PlantingMethod.SEED, BigDecimal("1250.0000"), SeedAmountUnit.G, null, null, null)
             ),
             wateringByRecordId = mapOf(
-                requireNotNull(watering.id) to WateringRecord(
-                    record = watering,
-                    irrigationAmount = IrrigationAmount.NORMAL,
-                    irrigationMethod = IrrigationMethod.DRIP,
-                )
+                requireNotNull(watering.id) to WateringRecord(null, watering, IrrigationAmount.NORMAL, IrrigationMethod.DRIP)
             ),
             fertilizingByRecordId = mapOf(
-                requireNotNull(fertilizing.id) to FertilizingRecord(
-                    record = fertilizing,
-                    materialName = "유기질비료",
-                    amount = BigDecimal("250.0000"),
-                    amountUnit = FertilizerAmountUnit.ML,
-                    applicationMethod = FertilizingMethod.SOIL,
-                )
+                requireNotNull(fertilizing.id) to FertilizingRecord(null, fertilizing, "유기질비료", BigDecimal("250.0000"), FertilizerAmountUnit.ML, FertilizingMethod.SOIL)
             ),
             pestControlByRecordId = mapOf(
-                requireNotNull(pestControl.id) to PestControlRecord(
-                    record = pestControl,
-                    pesticide = Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"),
-                    pesticideAmount = BigDecimal("30.0000"),
-                    pesticideAmountUnit = PesticideAmountUnit.ML,
-                    totalSprayAmount = BigDecimal("10000.0000"),
-                    totalSprayAmountUnit = SprayAmountUnit.ML,
-                    pest = Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물"),
-                )
+                requireNotNull(pestControl.id) to PestControlRecord(null, pestControl, Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"), BigDecimal("30.0000"), PesticideAmountUnit.ML, BigDecimal("10000.0000"), SprayAmountUnit.ML, Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물"))
             ),
             weedingByRecordId = mapOf(
-                requireNotNull(weeding.id) to WeedingRecord(
-                    record = weeding,
-                    weedingMethod = WeedingMethod.HAND,
-                )
+                requireNotNull(weeding.id) to WeedingRecord(null, weeding, WeedingMethod.HAND)
             ),
             harvestByRecordId = mapOf(
-                requireNotNull(harvest.id) to HarvestRecord(
-                    record = harvest,
-                    harvestAmount = null,
-                    medicinalPart = CropUsePartCategory.ROOT_BARK,
-                    harvestSource = HarvestSource.CULTIVATED,
-                    growthPeriod = 24,
-                    isLastHarvest = true,
-                )
+                requireNotNull(harvest.id) to HarvestRecord(null, harvest, null, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 24, true)
             ),
             mediaRecordIds = setOf(requireNotNull(etc.id)),
         )
@@ -201,18 +162,7 @@ class FarmingCycleReportSourceLoaderTest {
         )
 
     private fun record(id: String, workType: WorkType, hour: Long): FarmingRecord =
-        FarmingRecord(
-            id = uuid(id),
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = workType,
-            workedAt = LocalDateTime.of(2026, 7, 1, 8, 0).plusHours(hour),
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            memo = "memo",
-            entryMode = EntryMode.MANUAL,
-        ).also { record ->
+        FarmingRecord(uuid(id), member, farm, crop, workType, LocalDateTime.of(2026, 7, 1, 8, 0).plusHours(hour), "맑음", 24, "memo", EntryMode.MANUAL, false).also { record ->
             com.chamchamcham.domain.common.BaseTimeEntity::class.java
                 .getDeclaredField("createdAt")
                 .apply { isAccessible = true }

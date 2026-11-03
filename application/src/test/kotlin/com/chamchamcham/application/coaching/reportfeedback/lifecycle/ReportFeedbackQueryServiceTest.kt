@@ -274,18 +274,7 @@ class ReportFeedbackQueryServiceTest {
     ): FarmingCycleReport {
         val farm = Farm(uuid("000000000301"), member, "약초농장", "강원도 평창군")
         val crop = Crop(uuid("000000000401"), 422, "황기", CropUsePartCategory.ROOT_BARK)
-        val finalHarvest = FarmingRecord(
-            id = uuid("000000000501"),
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = LocalDateTime.of(2026, 7, 1, 9, 0),
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            memo = "최종 수확",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        val finalHarvest = FarmingRecord(uuid("000000000501"), member, farm, crop, WorkType.HARVEST, LocalDateTime.of(2026, 7, 1, 9, 0), "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         val sourceStatus = if (status == FarmingCycleReportStatus.ACTIVE) {
             FarmingCycleReportStatus.ACTIVE
         } else {

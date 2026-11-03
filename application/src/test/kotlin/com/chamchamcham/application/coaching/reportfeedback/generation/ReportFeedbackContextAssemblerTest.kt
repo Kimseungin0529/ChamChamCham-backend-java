@@ -319,18 +319,7 @@ class ReportFeedbackContextAssemblerTest {
         val member = Member(memberId, "member@example.com", null)
         val farm = Farm(farmId, member, "약초농장", "강원도 평창군")
         val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
-        val harvest = FarmingRecord(
-            id = finalHarvestId,
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = endsAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            memo = "최종 수확",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        val harvest = FarmingRecord(finalHarvestId, member, farm, crop, WorkType.HARVEST, endsAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         return FarmingCycleReport.create(
             member = member,
             farm = farm,

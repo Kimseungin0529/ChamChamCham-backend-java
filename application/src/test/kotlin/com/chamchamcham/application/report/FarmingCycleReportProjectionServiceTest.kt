@@ -415,18 +415,7 @@ class FarmingCycleReportProjectionServiceTest {
     }
 
     private fun referenceRecord(id: UUID, day: Long = 10): FarmingRecord =
-        FarmingRecord(
-            id = id,
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = baseTime.plusDays(day),
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "memo",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        FarmingRecord(id, member, farm, crop, WorkType.HARVEST, baseTime.plusDays(day), "맑음", 20, "memo", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
 
     private fun capturedSavedReports(): List<FarmingCycleReport> {
         val captor = ArgumentCaptor.forClass(FarmingCycleReport::class.java)

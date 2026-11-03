@@ -16,18 +16,7 @@ class RecordFeedbackTest {
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
-    private val record = FarmingRecord(
-        id = UUID.randomUUID(),
-        member = member,
-        farm = farm,
-        crop = crop,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 6, 15, 8, 30),
-        weatherCondition = "맑음",
-        weatherTemperature = 24,
-        memo = "배수 확인",
-        entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-    )
+    private val record = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.WATERING, LocalDateTime.of(2026, 6, 15, 8, 30), "맑음", 24, "배수 확인", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
 
     @Test
     fun `ready feedback stores a good point and ordered next actions`() {

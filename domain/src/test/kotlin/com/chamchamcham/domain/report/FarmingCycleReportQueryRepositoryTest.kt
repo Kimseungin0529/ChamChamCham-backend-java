@@ -463,17 +463,7 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
             baseTime,
         )
         return persist(
-            FarmingRecord(
-                member = owner,
-                farm = recordFarm,
-                crop = crop,
-                workType = WorkType.HARVEST,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 20,
-                memo = "최종 수확",
-                entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-            ),
+            FarmingRecord(null, owner, recordFarm, crop, WorkType.HARVEST, workedAt, "맑음", 20, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false),
             baseTime,
         )
     }

@@ -51,17 +51,7 @@ class RecordFeedbackRepositoryTest @Autowired constructor(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )
         record = persist(
-            FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = WorkType.WATERING,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "물을 줬습니다.",
-                entryMode = EntryMode.MANUAL,
-            ),
+            FarmingRecord(null, member, farm, crop, WorkType.WATERING, workedAt, "맑음", 24, "물을 줬습니다.", EntryMode.MANUAL, false),
         )
     }
 

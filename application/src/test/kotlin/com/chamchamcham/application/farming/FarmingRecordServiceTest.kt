@@ -190,18 +190,7 @@ class FarmingRecordServiceTest {
         owner: Member = member,
         workType: WorkType = WorkType.PRUNING,
         workedAt: LocalDateTime = LocalDateTime.of(2026, 6, 1, 9, 0),
-    ): FarmingRecord = FarmingRecord(
-        id = id,
-        member = owner,
-        farm = farm,
-        crop = crop,
-        workType = workType,
-        workedAt = workedAt,
-        weatherCondition = "맑음",
-        weatherTemperature = 20,
-        memo = "memo",
-        entryMode = EntryMode.MANUAL,
-    )
+    ): FarmingRecord = FarmingRecord(id, owner, farm, crop, workType, workedAt, "맑음", 20, "memo", EntryMode.MANUAL, false)
 
     private fun uploadedMedia(
         id: UUID,
@@ -221,18 +210,7 @@ class FarmingRecordServiceTest {
     private fun stubFarmingRecordSave() {
         `when`(farmingRecordRepository.save(any(FarmingRecord::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as FarmingRecord
-            FarmingRecord(
-                id = UUID.randomUUID(),
-                member = toSave.member,
-                farm = toSave.farm,
-                crop = toSave.crop,
-                workType = toSave.workType,
-                workedAt = toSave.workedAt,
-                weatherCondition = toSave.weatherCondition,
-                weatherTemperature = toSave.weatherTemperature,
-                memo = toSave.memo,
-                entryMode = toSave.entryMode,
-            )
+            FarmingRecord(UUID.randomUUID(), toSave.member, toSave.farm, toSave.crop, toSave.workType, toSave.workedAt, toSave.weatherCondition, toSave.weatherTemperature, toSave.memo, toSave.entryMode, false)
         }
     }
 
@@ -637,7 +615,7 @@ class FarmingRecordServiceTest {
         // unchanged photo) must not be rejected just because its status is ATTACHED rather than TEMP.
         val record = existingRecord(workType = WorkType.PRUNING)
         val alreadyAttached = uploadedMedia(mediaId1, status = UploadedMediaStatus.ATTACHED)
-        val ownRecordMedia = FarmingRecordMedia(record = record, uploadedMedia = alreadyAttached, displayOrder = 0)
+        val ownRecordMedia = FarmingRecordMedia(null, record, alreadyAttached, 0)
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm)
         `when`(cropRepository.findById(cropId)).thenReturn(Optional.of(crop))
@@ -655,7 +633,7 @@ class FarmingRecordServiceTest {
         val record = existingRecord(workType = WorkType.PRUNING)
         val otherRecord = existingRecord(id = secondRecordId, workType = WorkType.PRUNING)
         val attachedElsewhere = uploadedMedia(mediaId1, status = UploadedMediaStatus.ATTACHED)
-        val otherRecordMedia = FarmingRecordMedia(record = otherRecord, uploadedMedia = attachedElsewhere, displayOrder = 0)
+        val otherRecordMedia = FarmingRecordMedia(null, otherRecord, attachedElsewhere, 0)
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm)
         `when`(cropRepository.findById(cropId)).thenReturn(Optional.of(crop))
@@ -674,8 +652,8 @@ class FarmingRecordServiceTest {
         val record = existingRecord(workType = WorkType.PRUNING)
         val kept = media1
         val dropped = replacementMedia
-        val keptRecordMedia = FarmingRecordMedia(record = record, uploadedMedia = kept, displayOrder = 0)
-        val droppedRecordMedia = FarmingRecordMedia(record = record, uploadedMedia = dropped, displayOrder = 1)
+        val keptRecordMedia = FarmingRecordMedia(null, record, kept, 0)
+        val droppedRecordMedia = FarmingRecordMedia(null, record, dropped, 1)
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm)
         `when`(cropRepository.findById(cropId)).thenReturn(Optional.of(crop))
@@ -787,17 +765,10 @@ class FarmingRecordServiceTest {
         setTimestamps(record, LocalDateTime.of(2026, 6, 1, 9, 0))
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(harvestRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            HarvestRecord(
-                record = record,
-                harvestAmount = BigDecimal.TEN,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            )
+            HarvestRecord(null, record, BigDecimal.TEN, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, true)
         )
         `when`(farmingRecordMediaRepository.findByRecord_Id(recordId)).thenReturn(
-            listOf(FarmingRecordMedia(record = record, uploadedMedia = media1, displayOrder = 0))
+            listOf(FarmingRecordMedia(null, record, media1, 0))
         )
 
         val detail = service.getDetail(memberId, recordId)
@@ -822,14 +793,7 @@ class FarmingRecordServiceTest {
         `when`(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record)
         `when`(farmingRecordMediaRepository.findByRecord_Id(recordId)).thenReturn(emptyList())
         `when`(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(
-            PestControlRecord(
-                record = record,
-                pesticide = pesticide,
-                pesticideAmount = BigDecimal.ONE,
-                pesticideAmountUnit = PesticideAmountUnit.ML,
-                totalSprayAmount = BigDecimal.TEN,
-                totalSprayAmountUnit = SprayAmountUnit.ML,
-            )
+            PestControlRecord(null, record, pesticide, BigDecimal.ONE, PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null)
         )
 
         val detail = service.getDetail(memberId, recordId)

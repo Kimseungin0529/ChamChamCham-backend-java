@@ -365,18 +365,7 @@ class FarmingCycleReportQueryServiceTest {
     }
 
     private fun finalHarvestRecord(id: UUID, workedAt: LocalDateTime): FarmingRecord =
-        FarmingRecord(
-            id = id,
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "최종 수확",
-            entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-        )
+        FarmingRecord(id, member, farm, crop, WorkType.HARVEST, workedAt, "맑음", 20, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
 
     private fun day(day: Long): LocalDateTime = baseTime.plusDays(day)
 

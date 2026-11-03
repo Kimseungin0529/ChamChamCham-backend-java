@@ -109,53 +109,27 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
         isDeleted: Boolean = false,
     ): FarmingRecord =
         persist(
-            FarmingRecord(
-                member = owner,
-                farm = farm,
-                crop = crop,
-                workType = workType,
-                workedAt = workedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "memo",
-                entryMode = EntryMode.MANUAL,
-                isDeleted = isDeleted,
-            ),
+            FarmingRecord(null, owner, farm, crop, workType, workedAt, "맑음", 24, "memo", EntryMode.MANUAL, isDeleted),
             now,
         )
 
     private fun persistPlanting(record: FarmingRecord) {
         persist(
-            PlantingRecord(
-                record = record,
-                plantingMethod = PlantingMethod.SEED,
-                seedAmount = BigDecimal("1.2500"),
-                seedAmountUnit = SeedAmountUnit.G,
-            ),
+            PlantingRecord(null, record, PlantingMethod.SEED, BigDecimal("1.2500"), SeedAmountUnit.G, null, null, null),
             now,
         )
     }
 
     private fun persistWatering(record: FarmingRecord) {
         persist(
-            WateringRecord(
-                record = record,
-                irrigationAmount = IrrigationAmount.NORMAL,
-                irrigationMethod = IrrigationMethod.DRIP,
-            ),
+            WateringRecord(null, record, IrrigationAmount.NORMAL, IrrigationMethod.DRIP),
             now,
         )
     }
 
     private fun persistFertilizing(record: FarmingRecord) {
         persist(
-            FertilizingRecord(
-                record = record,
-                materialName = "유기질 비료",
-                amount = BigDecimal("3.0000"),
-                amountUnit = FertilizerAmountUnit.G,
-                applicationMethod = FertilizingMethod.SOIL,
-            ),
+            FertilizingRecord(null, record, "유기질 비료", BigDecimal("3.0000"), FertilizerAmountUnit.G, FertilizingMethod.SOIL),
             now,
         )
     }
@@ -164,33 +138,18 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
         val pesticide = persist(Pesticide("살충제", "참참약"), now)
         val pest = persist(Pest("진딧물"), now)
         persist(
-            PestControlRecord(
-                record = record,
-                pesticide = pesticide,
-                pesticideAmount = BigDecimal("30.0000"),
-                pesticideAmountUnit = PesticideAmountUnit.ML,
-                totalSprayAmount = BigDecimal("10000.0000"),
-                totalSprayAmountUnit = SprayAmountUnit.ML,
-                pest = pest,
-            ),
+            PestControlRecord(null, record, pesticide, BigDecimal("30.0000"), PesticideAmountUnit.ML, BigDecimal("10000.0000"), SprayAmountUnit.ML, pest),
             now,
         )
     }
 
     private fun persistWeeding(record: FarmingRecord) {
-        persist(WeedingRecord(record = record, weedingMethod = WeedingMethod.HAND), now)
+        persist(WeedingRecord(null, record, WeedingMethod.HAND), now)
     }
 
     private fun persistHarvest(record: FarmingRecord, isLastHarvest: Boolean) {
         persist(
-            HarvestRecord(
-                record = record,
-                harvestAmount = BigDecimal("5.0000"),
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 24,
-                isLastHarvest = isLastHarvest,
-            ),
+            HarvestRecord(null, record, BigDecimal("5.0000"), CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 24, isLastHarvest),
             now,
         )
     }
@@ -208,7 +167,7 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
             },
             now,
         )
-        persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)
+        persist(FarmingRecordMedia(null, record, media, displayOrder), now)
     }
 
     private fun <T : BaseTimeEntity> persist(entity: T, createdAt: LocalDateTime): T {

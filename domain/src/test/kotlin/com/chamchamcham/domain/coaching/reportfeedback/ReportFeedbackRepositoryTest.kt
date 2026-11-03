@@ -55,17 +55,7 @@ class ReportFeedbackRepositoryTest @Autowired constructor(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )
         val finalHarvest = persist(
-            FarmingRecord(
-                member = member,
-                farm = farm,
-                crop = crop,
-                workType = WorkType.HARVEST,
-                workedAt = completedAt,
-                weatherCondition = "맑음",
-                weatherTemperature = 24,
-                memo = "최종 수확",
-                entryMode = com.chamchamcham.domain.farming.EntryMode.MANUAL,
-            ),
+            FarmingRecord(null, member, farm, crop, WorkType.HARVEST, completedAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false),
         )
         report = persist(
             FarmingCycleReport.create(

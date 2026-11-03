@@ -719,18 +719,7 @@ class FarmingWorkReportQueryServiceTest {
         farm: Farm = this.farm,
         crop: Crop = this.crop,
     ): FarmingRecord =
-        FarmingRecord(
-            id = id(suffix),
-            member = member,
-            farm = farm,
-            crop = crop,
-            workType = workType,
-            workedAt = day(day),
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "memo",
-            entryMode = EntryMode.MANUAL,
-        ).also { entity -> setCreatedAt(entity, day(day).plusMinutes(createdMinute)) }
+        FarmingRecord(id(suffix), member, farm, crop, workType, day(day), "맑음", 20, "memo", EntryMode.MANUAL, false).also { entity -> setCreatedAt(entity, day(day).plusMinutes(createdMinute)) }
 
     private fun setCreatedAt(entity: BaseTimeEntity, createdAt: LocalDateTime) {
         BaseTimeEntity::class.java.getDeclaredField("createdAt").apply {

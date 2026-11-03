@@ -694,18 +694,7 @@ class CommunityPostServiceTest {
         MemberCrop(member, farm(member), crop)
 
     private fun farmingRecord(member: Member, crop: Crop): FarmingRecord =
-        FarmingRecord(
-            id = recordId,
-            member = member,
-            farm = farm(member),
-            crop = crop,
-            workType = WorkType.PLANTING,
-            workedAt = LocalDateTime.of(2026, 6, 1, 9, 0),
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = "memo",
-            entryMode = EntryMode.MANUAL
-        )
+        FarmingRecord(recordId, member, farm(member), crop, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", EntryMode.MANUAL, false)
 
     private fun uploadedMedia(
         member: Member,

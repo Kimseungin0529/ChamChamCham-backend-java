@@ -443,18 +443,7 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
         memo: String = "memo",
         isDeleted: Boolean = false,
     ): FarmingRecord {
-        val record = FarmingRecord(
-            member = owner,
-            farm = farm,
-            crop = crop,
-            workType = workType,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 20,
-            memo = memo,
-            entryMode = EntryMode.MANUAL,
-            isDeleted = isDeleted,
-        )
+        val record = FarmingRecord(null, owner, farm, crop, workType, workedAt, "맑음", 20, memo, EntryMode.MANUAL, isDeleted)
         return persist(record, now)
     }
 
@@ -471,38 +460,33 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
             },
             now
         )
-        persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)
+        persist(FarmingRecordMedia(null, record, media, displayOrder), now)
     }
 
     private fun persistPlantingDetail(record: FarmingRecord, plantingMethod: PlantingMethod) {
         persist(
-            PlantingRecord(record = record, plantingMethod = plantingMethod),
+            PlantingRecord(null, record, plantingMethod, null, null, null, null, null),
             now
         )
     }
 
     private fun persistWateringDetail(record: FarmingRecord, irrigationMethod: IrrigationMethod) {
         persist(
-            WateringRecord(record = record, irrigationMethod = irrigationMethod),
+            WateringRecord(null, record, null, irrigationMethod),
             now
         )
     }
 
     private fun persistWeedingDetail(record: FarmingRecord, weedingMethod: WeedingMethod) {
         persist(
-            WeedingRecord(record = record, weedingMethod = weedingMethod),
+            WeedingRecord(null, record, weedingMethod),
             now
         )
     }
 
     private fun persistFertilizingDetail(record: FarmingRecord, materialName: String) {
         persist(
-            FertilizingRecord(
-                record = record,
-                materialName = materialName,
-                amount = BigDecimal.TEN,
-                amountUnit = FertilizerAmountUnit.G,
-            ),
+            FertilizingRecord(null, record, materialName, BigDecimal.TEN, FertilizerAmountUnit.G, null),
             now
         )
     }
@@ -513,28 +497,14 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
             now
         )
         persist(
-            PestControlRecord(
-                record = record,
-                pesticide = pesticide,
-                pesticideAmount = BigDecimal.ONE,
-                pesticideAmountUnit = PesticideAmountUnit.ML,
-                totalSprayAmount = BigDecimal.TEN,
-                totalSprayAmountUnit = SprayAmountUnit.ML,
-            ),
+            PestControlRecord(null, record, pesticide, BigDecimal.ONE, PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null),
             now
         )
     }
 
     private fun persistHarvestDetail(record: FarmingRecord, medicinalPart: CropUsePartCategory) {
         persist(
-            HarvestRecord(
-                record = record,
-                harvestAmount = BigDecimal.TEN,
-                medicinalPart = medicinalPart,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 1,
-                isLastHarvest = false,
-            ),
+            HarvestRecord(null, record, BigDecimal.TEN, medicinalPart, HarvestSource.CULTIVATED, 1, false),
             now
         )
     }
