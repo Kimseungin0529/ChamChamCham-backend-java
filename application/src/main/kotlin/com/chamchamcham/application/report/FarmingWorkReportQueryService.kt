@@ -50,9 +50,9 @@ class FarmingWorkReportQueryService(
         )
         val visibleRows = result.rows.take(condition.size)
         val snapshot = sourceRepository.load(
-            memberId = condition.memberId,
-            farmIds = visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::farmId),
-            cropIds = visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::cropId),
+            condition.memberId,
+            visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::farmId),
+            visibleRows.mapTo(mutableSetOf(), FarmingCycleReportQueryRepository.WorkItem::cropId),
         )
         val slicesByScope = buildSlicesByScope(visibleRows, snapshot)
 

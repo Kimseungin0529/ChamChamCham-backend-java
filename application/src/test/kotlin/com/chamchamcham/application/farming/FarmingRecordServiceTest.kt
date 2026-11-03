@@ -828,23 +828,13 @@ class FarmingRecordServiceTest {
 
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    workTypes = listOf(WorkType.PRUNING),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    cursor = null,
-                    size = requestedSize + 1
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, listOf(cropId), listOf(WorkType.PRUNING), null, null, null, emptyList(), emptyList(), null, requestedSize + 1)
             )
         ).thenReturn(
-            FarmingRecordQueryRepository.SearchResult(
-                rows = listOf(
-                    FarmingRecordQueryRepository.Row(record = newestRecord, thumbnailUrl = "https://example.test/1.jpg"),
-                    FarmingRecordQueryRepository.Row(record = overflowRecord, thumbnailUrl = null),
-                )
-            )
+            FarmingRecordQueryRepository.SearchResult(listOf(
+                    FarmingRecordQueryRepository.Row(newestRecord, "https://example.test/1.jpg", null, null, null, null, null, null),
+                    FarmingRecordQueryRepository.Row(overflowRecord, null, null, null, null, null, null, null),
+                ))
         )
 
         val page = service.search(
@@ -873,31 +863,12 @@ class FarmingRecordServiceTest {
 
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    cursor = null,
-                    size = 21
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, null, emptyList(), emptyList(), null, 21)
             )
         ).thenReturn(
-            FarmingRecordQueryRepository.SearchResult(
-                rows = listOf(
-                    FarmingRecordQueryRepository.Row(
-                        record = record,
-                        thumbnailUrl = null,
-                        irrigationMethod = IrrigationMethod.DRIP,
-                        harvestAmount = BigDecimal.TEN,
-                        pesticideName = "친환경약제",
-                        weedingMethod = WeedingMethod.HAND,
-                        plantingMethod = PlantingMethod.SEEDLING,
-                        materialName = "유박비료",
-                    ),
-                )
-            )
+            FarmingRecordQueryRepository.SearchResult(listOf(
+                    FarmingRecordQueryRepository.Row(record, null, IrrigationMethod.DRIP, BigDecimal.TEN, "친환경약제", WeedingMethod.HAND, PlantingMethod.SEEDLING, "유박비료"),
+                ))
         )
 
         val page = service.search(
@@ -925,15 +896,7 @@ class FarmingRecordServiceTest {
     fun `search converts start and end date to datetime bounds`() {
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = LocalDateTime.of(2026, 6, 1, 0, 0),
-                    workedAtTo = LocalDateTime.of(2026, 7, 1, 0, 0),
-                    cursor = null,
-                    size = 21
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), LocalDateTime.of(2026, 6, 1, 0, 0), LocalDateTime.of(2026, 7, 1, 0, 0), null, emptyList(), emptyList(), null, 21)
             )
         ).thenReturn(FarmingRecordQueryRepository.SearchResult(emptyList()))
 
@@ -996,18 +959,7 @@ class FarmingRecordServiceTest {
     fun `search resolves keyword into matched work type label`() {
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    keyword = "수확",
-                    matchedWorkTypes = listOf(WorkType.HARVEST),
-                    matchedParts = emptyList(),
-                    cursor = null,
-                    size = 21
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, "수확", listOf(WorkType.HARVEST), emptyList(), null, 21)
             )
         ).thenReturn(FarmingRecordQueryRepository.SearchResult(emptyList()))
 
@@ -1020,18 +972,7 @@ class FarmingRecordServiceTest {
     fun `search resolves keyword into matched harvest part label`() {
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    keyword = "잎",
-                    matchedWorkTypes = emptyList(),
-                    matchedParts = listOf(CropUsePartCategory.LEAF),
-                    cursor = null,
-                    size = 21
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, "잎", emptyList(), listOf(CropUsePartCategory.LEAF), null, 21)
             )
         ).thenReturn(FarmingRecordQueryRepository.SearchResult(emptyList()))
 
@@ -1044,18 +985,7 @@ class FarmingRecordServiceTest {
     fun `search passes blank keyword as null with no matched labels`() {
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    keyword = null,
-                    matchedWorkTypes = emptyList(),
-                    matchedParts = emptyList(),
-                    cursor = null,
-                    size = 21
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, null, emptyList(), emptyList(), null, 21)
             )
         ).thenReturn(FarmingRecordQueryRepository.SearchResult(emptyList()))
 
@@ -1068,18 +998,7 @@ class FarmingRecordServiceTest {
     fun `count delegates to query repository with derived matched labels and no cursor`() {
         `when`(
             farmingRecordQueryRepository.count(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    keyword = "수확",
-                    matchedWorkTypes = listOf(WorkType.HARVEST),
-                    matchedParts = emptyList(),
-                    cursor = null,
-                    size = 1
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, listOf(cropId), emptyList(), null, null, "수확", listOf(WorkType.HARVEST), emptyList(), null, 1)
             )
         ).thenReturn(7L)
 
@@ -1093,18 +1012,7 @@ class FarmingRecordServiceTest {
     fun `count passes blank keyword as null with no matched labels`() {
         `when`(
             farmingRecordQueryRepository.count(
-                FarmingRecordQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    workedAtFrom = null,
-                    workedAtTo = null,
-                    keyword = null,
-                    matchedWorkTypes = emptyList(),
-                    matchedParts = emptyList(),
-                    cursor = null,
-                    size = 1
-                )
+                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, null, emptyList(), emptyList(), null, 1)
             )
         ).thenReturn(0L)
 

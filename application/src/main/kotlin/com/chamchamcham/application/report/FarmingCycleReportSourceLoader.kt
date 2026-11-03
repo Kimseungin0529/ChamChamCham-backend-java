@@ -31,9 +31,9 @@ class FarmingCycleReportSourceLoader(
     @Transactional(readOnly = true)
     fun load(scope: ReportScope): List<CycleReportSourceRecord> {
         val snapshot = repository.load(
-            memberId = scope.memberId,
-            farmId = scope.farmId,
-            cropId = scope.cropId,
+            scope.memberId,
+            scope.farmId,
+            scope.cropId,
         )
         return snapshot.records.map { record ->
             val recordId = requireNotNull(record.id) { "Persisted farming record id is required" }

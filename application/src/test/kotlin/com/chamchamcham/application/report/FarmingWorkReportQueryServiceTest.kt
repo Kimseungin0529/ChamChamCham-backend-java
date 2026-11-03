@@ -271,8 +271,7 @@ class FarmingWorkReportQueryServiceTest {
         val adjacentWatering = record("407", WorkType.WATERING, day = 6)
         val adjacentFinal = record("408", WorkType.HARVEST, day = 7)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = listOf(
+            FarmingWorkReportSourceSnapshot(listOf(
                     adjacentFinal,
                     latestWateringWithoutPhoto,
                     targetFinal,
@@ -281,20 +280,17 @@ class FarmingWorkReportQueryServiceTest {
                     picturedWatering,
                     previousWatering,
                     otherWorkType,
-                ),
-                finalHarvestRecordIds = setOf(
+                ), setOf(
                     requireNotNull(previousFinal.id),
                     requireNotNull(targetFinal.id),
                     requireNotNull(adjacentFinal.id),
-                ),
-                firstImageUrlByRecordId = mapOf(
+                ), mapOf(
                     requireNotNull(previousWatering.id) to "https://img/previous-cycle.jpg",
                     requireNotNull(picturedWatering.id) to "https://img/watering.jpg",
                     requireNotNull(otherWorkType.id) to "https://img/other-work-type.jpg",
                     requireNotNull(targetFinal.id) to "https://img/harvest.jpg",
                     requireNotNull(adjacentWatering.id) to "https://img/adjacent-cycle.jpg",
-                ),
-            ),
+                )),
         )
 
         val page = service.list(
@@ -348,13 +344,9 @@ class FarmingWorkReportQueryServiceTest {
         )
         val picturedWatering = record("403", WorkType.WATERING, day = 3)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = listOf(picturedWatering),
-                finalHarvestRecordIds = emptySet(),
-                firstImageUrlByRecordId = mapOf(
+            FarmingWorkReportSourceSnapshot(listOf(picturedWatering), emptySet(), mapOf(
                     requireNotNull(picturedWatering.id) to "https://img/active-watering.jpg",
-                ),
-            ),
+                )),
         )
 
         val page = service.list(
@@ -407,11 +399,7 @@ class FarmingWorkReportQueryServiceTest {
         val matchingRecord = record("405", WorkType.PEST_CONTROL, day = 4)
         val targetFinal = record("406", WorkType.HARVEST, day = 5)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = listOf(matchingRecord, targetFinal),
-                finalHarvestRecordIds = setOf(requireNotNull(targetFinal.id)),
-                firstImageUrlByRecordId = emptyMap(),
-            ),
+            FarmingWorkReportSourceSnapshot(listOf(matchingRecord, targetFinal), setOf(requireNotNull(targetFinal.id)), emptyMap()),
         )
 
         val page = service.list(
@@ -502,24 +490,20 @@ class FarmingWorkReportQueryServiceTest {
         val farmIds = setOf(requireNotNull(farm.id), requireNotNull(otherFarm.id))
         val cropIds = setOf(requireNotNull(crop.id), requireNotNull(otherCrop.id))
         `when`(sourceRepository.load(memberId, farmIds, cropIds)).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = listOf(
+            FarmingWorkReportSourceSnapshot(listOf(
                     secondFinal,
                     temptingCrossProduct,
                     firstPictured,
                     secondPictured,
                     firstFinal,
-                ),
-                finalHarvestRecordIds = setOf(
+                ), setOf(
                     requireNotNull(firstFinal.id),
                     requireNotNull(secondFinal.id),
-                ),
-                firstImageUrlByRecordId = mapOf(
+                ), mapOf(
                     requireNotNull(firstPictured.id) to "https://img/first-scope.jpg",
                     requireNotNull(secondPictured.id) to "https://img/second-scope.jpg",
                     requireNotNull(temptingCrossProduct.id) to "https://img/cross-product-newer.jpg",
-                ),
-            ),
+                )),
         )
 
         val page = service.list(
@@ -559,15 +543,11 @@ class FarmingWorkReportQueryServiceTest {
         val higherTiedId = record("452", WorkType.WATERING, day = 3, createdMinute = 2)
         val targetFinal = record("406", WorkType.HARVEST, day = 5)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = listOf(targetFinal, higherTiedId, higherIdButOlderCreated, lowerTiedId),
-                finalHarvestRecordIds = setOf(requireNotNull(targetFinal.id)),
-                firstImageUrlByRecordId = mapOf(
+            FarmingWorkReportSourceSnapshot(listOf(targetFinal, higherTiedId, higherIdButOlderCreated, lowerTiedId), setOf(requireNotNull(targetFinal.id)), mapOf(
                     requireNotNull(higherIdButOlderCreated.id) to "https://img/higher-id-older-created.jpg",
                     requireNotNull(lowerTiedId.id) to "https://img/lower-tied-id.jpg",
                     requireNotNull(higherTiedId.id) to "https://img/higher-tied-id.jpg",
-                ),
-            ),
+                )),
         )
 
         val page = service.list(
@@ -600,11 +580,7 @@ class FarmingWorkReportQueryServiceTest {
             FarmingCycleReportQueryRepository.WorkItemSearchResult(emptyList()),
         )
         `when`(sourceRepository.load(memberId, emptySet(), emptySet())).thenReturn(
-            FarmingWorkReportSourceSnapshot(
-                records = emptyList(),
-                finalHarvestRecordIds = emptySet(),
-                firstImageUrlByRecordId = emptyMap(),
-            ),
+            FarmingWorkReportSourceSnapshot(emptyList(), emptySet(), emptyMap()),
         )
 
         val page = service.list(
