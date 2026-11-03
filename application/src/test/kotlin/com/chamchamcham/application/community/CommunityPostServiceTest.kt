@@ -387,7 +387,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LATEST,
                     cursor = null,
-                    size = requestedSize + 1
+                    size = requestedSize + 1,
                 )
             )
         ).thenReturn(
@@ -395,7 +395,7 @@ class CommunityPostServiceTest {
                 rows = listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg"),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg")
-                )
+                ),
             )
         )
 
@@ -438,7 +438,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LATEST,
                     cursor = null,
-                    size = 21
+                    size = 21,
                 )
             )
         ).thenReturn(CommunityPostQueryRepository.SearchResult(emptyList()))
@@ -486,7 +486,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LIKE,
                     cursor = null,
-                    size = requestedSize + 1
+                    size = requestedSize + 1,
                 )
             )
         ).thenReturn(
@@ -494,7 +494,7 @@ class CommunityPostServiceTest {
                 rows = listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg", score = 8),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg", score = 7)
-                )
+                ),
             )
         )
 
@@ -526,7 +526,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LIKE,
                     cursor = null,
-                    size = requestedSize + 1
+                    size = requestedSize + 1,
                 )
             )
         ).thenReturn(
@@ -534,7 +534,7 @@ class CommunityPostServiceTest {
                 rows = listOf(
                     queryRow(existingPost, thumbnailUrl = "https://example.test/1.jpg", score = null),
                     queryRow(overflowPost, thumbnailUrl = "https://example.test/2.jpg", score = 7)
-                )
+                ),
             )
         )
 
@@ -557,7 +557,7 @@ class CommunityPostServiceTest {
             sort = CommunityPostSort.LIKE,
             score = 8,
             createdAt = postCreatedAt,
-            id = postId
+            id = postId,
         )
         `when`(
             communityPostQueryRepository.search(
@@ -570,7 +570,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LIKE,
                     cursor = decodedCursor,
-                    size = 21
+                    size = 21,
                 )
             )
         ).thenReturn(CommunityPostQueryRepository.SearchResult(rows = emptyList()))
@@ -673,7 +673,7 @@ class CommunityPostServiceTest {
                     mineOnly = false,
                     sort = CommunityPostSort.LATEST,
                     cursor = null,
-                    size = 1
+                    size = 1,
                 )
             )
         ).thenReturn(5L)
@@ -694,7 +694,19 @@ class CommunityPostServiceTest {
         MemberCrop(member, farm(member), crop)
 
     private fun farmingRecord(member: Member, crop: Crop): FarmingRecord =
-        FarmingRecord(recordId, member, farm(member), crop, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", EntryMode.MANUAL, false)
+        FarmingRecord(
+            recordId,
+            member,
+            farm(member),
+            crop,
+            WorkType.PLANTING,
+            LocalDateTime.of(2026, 6, 1, 9, 0),
+            "맑음",
+            20,
+            "memo",
+            EntryMode.MANUAL,
+            false,
+        )
 
     private fun uploadedMedia(
         member: Member,
@@ -791,7 +803,7 @@ class CommunityPostServiceTest {
             commentCount = commentCount,
             likeCount = likeCount,
             likedByMe = likedByMe,
-            score = score
+            score = score,
         )
 
     private fun capturedPost(): CommunityPost {

@@ -1,5 +1,10 @@
 package com.chamchamcham.application.coaching.reportfeedback.generation
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.HarvestStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.coaching.reportfeedback.ReportFeedbackFailureCode
 import com.chamchamcham.application.coaching.reportfeedback.ReportFeedbackGenerationFailure
 import com.chamchamcham.application.report.CategoryRef
@@ -64,12 +69,14 @@ class ReportFeedbackContextAssemblerTest {
             startsAt = startsAt,
             endsAt = endsAt,
             statistics = CycleReportStatistics(
-                watering = WateringStatistics(
-                    recordCount = 4,
-                    workedDayCount = 3,
-                    averageIntervalDays = BigDecimal("2.5"),
-                    photoAttachmentRatePct = BigDecimal("75"),
-                ),
+                PlantingStatistics.empty(),
+                WateringStatistics(4, null, null, 3, BigDecimal("2.5"), 0, BigDecimal("75"), emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         ).also { setSourceRevision(it, 7) }
         val previous = completedReport(
@@ -78,12 +85,14 @@ class ReportFeedbackContextAssemblerTest {
             startsAt = startsAt.minusYears(1),
             endsAt = endsAt.minusYears(1),
             statistics = CycleReportStatistics(
-                watering = WateringStatistics(
-                    recordCount = 3,
-                    workedDayCount = 2,
-                    averageIntervalDays = BigDecimal("4"),
-                    photoAttachmentRatePct = BigDecimal("50"),
-                ),
+                PlantingStatistics.empty(),
+                WateringStatistics(3, null, null, 2, BigDecimal("4"), 0, BigDecimal("50"), emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         ).also { setSourceRevision(it, 3) }
         stubReports(report, previous)
@@ -119,7 +128,16 @@ class ReportFeedbackContextAssemblerTest {
             finalHarvestId = targetFinalHarvestId,
             startsAt = startsAt,
             endsAt = endsAt,
-            statistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 1)),
+            statistics = CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
         )
         val previous = completedReport(
             id = previousReportId,
@@ -145,7 +163,16 @@ class ReportFeedbackContextAssemblerTest {
             finalHarvestId = targetFinalHarvestId,
             startsAt = startsAt,
             endsAt = endsAt,
-            statistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 1)),
+            statistics = CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
         )
         stubReports(report, null)
         `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
@@ -165,12 +192,31 @@ class ReportFeedbackContextAssemblerTest {
             startsAt = startsAt,
             endsAt = endsAt,
             statistics = CycleReportStatistics(
-                fertilizing = FertilizingStatistics(
-                    recordCount = 2,
-                    workedDayCount = 2,
-                    totalAmountKg = BigDecimal("1.5000"),
-                    amountCoverage = Coverage(1, 2),
+                PlantingStatistics.empty(),
+                WateringStatistics.empty(),
+                FertilizingStatistics(
+                    2,
+                    null,
+                    null,
+                    2,
+                    null,
+                    0,
+                    null,
+                    emptyList(),
+                    null,
+                    BigDecimal("1.5000"),
+                    null,
+                    Coverage(1, 2),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
                 ),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         )
         val previous = completedReport(
@@ -179,12 +225,31 @@ class ReportFeedbackContextAssemblerTest {
             startsAt = startsAt.minusYears(1),
             endsAt = endsAt.minusYears(1),
             statistics = CycleReportStatistics(
-                fertilizing = FertilizingStatistics(
-                    recordCount = 1,
-                    workedDayCount = 1,
-                    totalAmountKg = BigDecimal("1.0000"),
-                    amountCoverage = Coverage(1, 1),
+                PlantingStatistics.empty(),
+                WateringStatistics.empty(),
+                FertilizingStatistics(
+                    1,
+                    null,
+                    null,
+                    1,
+                    null,
+                    0,
+                    null,
+                    emptyList(),
+                    null,
+                    BigDecimal("1.0000"),
+                    null,
+                    Coverage(1, 1),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
                 ),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         )
         stubReports(report, previous)
@@ -205,14 +270,32 @@ class ReportFeedbackContextAssemblerTest {
             finalHarvestId = targetFinalHarvestId,
             startsAt = startsAt,
             endsAt = endsAt,
-            statistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 1)),
+            statistics = CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
         )
         val previous = completedReport(
             id = previousReportId,
             finalHarvestId = previousFinalHarvestId,
             startsAt = startsAt.minusYears(1),
             endsAt = endsAt,
-            statistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 2)),
+            statistics = CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(2, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
         )
         stubReports(report, previous)
         `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
@@ -321,17 +404,17 @@ class ReportFeedbackContextAssemblerTest {
         val crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
         val harvest = FarmingRecord(finalHarvestId, member, farm, crop, WorkType.HARVEST, endsAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         return FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = startsAt,
-                endsAt = endsAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = harvest,
-                statisticsSchemaVersion = 1,
-                statistics = statistics,
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                startsAt,
+                endsAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                harvest,
+                1,
+                statistics,
             ),
         ).also { setId(it, id) }
     }

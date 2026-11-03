@@ -1,5 +1,6 @@
 package com.chamchamcham.domain.coaching.reportfeedback
 
+import com.chamchamcham.domain.report.Coverage
 import com.chamchamcham.domain.crop.Crop
 import com.chamchamcham.domain.crop.CropUsePartCategory
 import com.chamchamcham.domain.farm.Farm
@@ -30,19 +31,31 @@ class ReportFeedbackTest {
     private val farm = Farm(UUID.randomUUID(), member, "약초농장", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
     private val finishedAt = LocalDateTime.of(2026, 7, 13, 9, 0)
-    private val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, finishedAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
+    private val finalHarvest = FarmingRecord(
+        UUID.randomUUID(),
+        member,
+        farm,
+        crop,
+        WorkType.HARVEST,
+        finishedAt,
+        "맑음",
+        24,
+        "최종 수확",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
+    )
     private val report = FarmingCycleReport.create(
-        member = member,
-        farm = farm,
-        crop = crop,
-        projection = FarmingCycleReportProjection(
-            status = FarmingCycleReportStatus.COMPLETED,
-            startsAt = finishedAt.minusMonths(5),
-            endsAt = finishedAt,
-            startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-            finalHarvestRecord = finalHarvest,
-            statisticsSchemaVersion = 1,
-            statistics = CycleReportStatistics.empty(),
+        member,
+        farm,
+        crop,
+        FarmingCycleReportProjection(
+            FarmingCycleReportStatus.COMPLETED,
+            finishedAt.minusMonths(5),
+            finishedAt,
+            FarmingCycleStartBasis.FIRST_RECORD,
+            finalHarvest,
+            1,
+            CycleReportStatistics.empty(),
         ),
     )
 
@@ -238,14 +251,66 @@ class ReportFeedbackTest {
     @Test
     fun `statistics returns the record count for every work type`() {
         val statistics = CycleReportStatistics(
-            planting = PlantingStatistics(recordCount = 1),
-            watering = WateringStatistics(recordCount = 2),
-            fertilizing = FertilizingStatistics(recordCount = 3),
-            pestControl = PestControlStatistics(recordCount = 4),
-            weeding = WeedingStatistics(recordCount = 5),
-            pruning = CommonOnlyStatistics(recordCount = 6),
-            harvest = HarvestStatistics(recordCount = 7),
-            etc = CommonOnlyStatistics(recordCount = 8),
+            PlantingStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            WateringStatistics(2, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics(
+                3,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                null,
+                null,
+                Coverage(0, 0),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+            ),
+            PestControlStatistics(
+                4,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                null,
+                Coverage(0, 0),
+                emptyList(),
+            ),
+            WeedingStatistics(5, null, null, 0, null, 0, null, emptyList(), null, emptyList()),
+            CommonOnlyStatistics(6, null, null, 0, null, 0, null, emptyList(), null),
+            HarvestStatistics(
+                7,
+                null,
+                null,
+                0,
+                null,
+                0,
+                null,
+                emptyList(),
+                null,
+                null,
+                null,
+                Coverage(0, 0),
+                null,
+                null,
+                emptyList(),
+                null,
+                null,
+                emptyList(),
+            ),
+            CommonOnlyStatistics(8, null, null, 0, null, 0, null, emptyList(), null),
         )
 
         assertThat(WorkType.entries.map(statistics::recordCountFor))

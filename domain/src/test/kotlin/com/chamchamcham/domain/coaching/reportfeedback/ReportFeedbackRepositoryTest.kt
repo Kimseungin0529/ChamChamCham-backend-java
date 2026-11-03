@@ -55,21 +55,33 @@ class ReportFeedbackRepositoryTest @Autowired constructor(
             Crop(422, "황기", CropUsePartCategory.ROOT_BARK),
         )
         val finalHarvest = persist(
-            FarmingRecord(null, member, farm, crop, WorkType.HARVEST, completedAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false),
+            FarmingRecord(
+                null,
+                member,
+                farm,
+                crop,
+                WorkType.HARVEST,
+                completedAt,
+                "맑음",
+                24,
+                "최종 수확",
+                com.chamchamcham.domain.farming.EntryMode.MANUAL,
+                false,
+            ),
         )
         report = persist(
             FarmingCycleReport.create(
-                member = member,
-                farm = farm,
-                crop = crop,
-                projection = FarmingCycleReportProjection(
-                    status = FarmingCycleReportStatus.COMPLETED,
-                    startsAt = completedAt.minusMonths(6),
-                    endsAt = completedAt,
-                    startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                    finalHarvestRecord = finalHarvest,
-                    statisticsSchemaVersion = 1,
-                    statistics = CycleReportStatistics.empty(),
+                member,
+                farm,
+                crop,
+                FarmingCycleReportProjection(
+                    FarmingCycleReportStatus.COMPLETED,
+                    completedAt.minusMonths(6),
+                    completedAt,
+                    FarmingCycleStartBasis.FIRST_RECORD,
+                    finalHarvest,
+                    1,
+                    CycleReportStatistics.empty(),
                 ),
             ),
         )

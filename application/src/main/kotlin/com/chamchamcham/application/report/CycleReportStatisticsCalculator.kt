@@ -29,14 +29,14 @@ class CycleReportStatisticsCalculator {
     fun calculate(records: List<CycleReportSourceRecord>): CycleReportStatistics {
         val grouped = records.groupBy { it.workType }
         return CycleReportStatistics(
-            planting = calculatePlanting(grouped[WorkType.PLANTING].orEmpty()),
-            watering = calculateWatering(grouped[WorkType.WATERING].orEmpty()),
-            fertilizing = calculateFertilizing(grouped[WorkType.FERTILIZING].orEmpty()),
-            pestControl = calculatePestControl(grouped[WorkType.PEST_CONTROL].orEmpty()),
-            weeding = calculateWeeding(grouped[WorkType.WEEDING].orEmpty()),
-            pruning = commonOnly(grouped[WorkType.PRUNING].orEmpty()),
-            harvest = calculateHarvest(grouped[WorkType.HARVEST].orEmpty()),
-            etc = commonOnly(grouped[WorkType.ETC].orEmpty()),
+            calculatePlanting(grouped[WorkType.PLANTING].orEmpty()),
+            calculateWatering(grouped[WorkType.WATERING].orEmpty()),
+            calculateFertilizing(grouped[WorkType.FERTILIZING].orEmpty()),
+            calculatePestControl(grouped[WorkType.PEST_CONTROL].orEmpty()),
+            calculateWeeding(grouped[WorkType.WEEDING].orEmpty()),
+            commonOnly(grouped[WorkType.PRUNING].orEmpty()),
+            calculateHarvest(grouped[WorkType.HARVEST].orEmpty()),
+            commonOnly(grouped[WorkType.ETC].orEmpty()),
         )
     }
 
@@ -44,31 +44,31 @@ class CycleReportStatisticsCalculator {
         val common = common(records)
         val details = records.mapNotNull { it.planting }
         return PlantingStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            plantingMethodDistribution = distribution(
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            distribution(
                 values = details.map(PlantingReportSource::plantingMethod),
                 denominator = records.size,
             ),
-            propagationMethods = details
+            details
                 .groupBy { it.propagationMethod ?: it.plantingMethod }
                 .map { (method, items) ->
                     val knownQuantities = items.mapNotNull { it.quantity }
                     PropagationStatistics(
-                        code = method.code,
-                        label = method.label,
-                        recordCount = items.size,
-                        recordRatePct = requireNotNull(StatisticsMath.percentage(items.size, records.size)),
-                        totalQuantity = knownQuantities.sumOrNullScale4(),
-                        quantityUnit = items.mapNotNull { it.quantityUnit }.distinct().singleOrNull(),
-                        quantityCoverage = Coverage(knownQuantities.size, items.size),
+                        method.code,
+                        method.label,
+                        items.size,
+                        requireNotNull(StatisticsMath.percentage(items.size, records.size)),
+                        knownQuantities.sumOrNullScale4(),
+                        items.mapNotNull { it.quantityUnit }.distinct().singleOrNull(),
+                        Coverage(knownQuantities.size, items.size),
                     )
                 }
                 .sortedWith(compareByDescending<PropagationStatistics> { it.recordCount }.thenBy { it.code }),
@@ -78,17 +78,17 @@ class CycleReportStatisticsCalculator {
     private fun calculateWatering(records: List<CycleReportSourceRecord>): WateringStatistics {
         val common = common(records)
         return WateringStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            amountDistribution = distribution(records.map { it.watering?.amount }, records.size),
-            methodDistribution = distribution(records.map { it.watering?.method }, records.size),
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            distribution(records.map { it.watering?.amount }, records.size),
+            distribution(records.map { it.watering?.method }, records.size),
         )
     }
 
@@ -98,25 +98,25 @@ class CycleReportStatisticsCalculator {
         val knownAmounts = details.mapNotNull { it.amountKg }
         val totalAmount = knownAmounts.sumOrNullScale4()
         return FertilizingStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            totalAmountKg = totalAmount,
-            averageAmountKg = StatisticsMath.average(knownAmounts),
-            amountCoverage = Coverage(knownAmounts.size, records.size),
-            materialDistribution = distribution(
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            totalAmount,
+            StatisticsMath.average(knownAmounts),
+            Coverage(knownAmounts.size, records.size),
+            distribution(
                 details.map { CategoryRef(it.materialName, it.materialName) },
                 records.size,
             ),
-            materialCategories = calculateMaterialCategories(details, records.size, totalAmount),
-            methodDistribution = distribution(records.map { it.fertilizing?.applicationMethod }, records.size),
-            categoryMethods = calculateCategoryMethods(details),
+            calculateMaterialCategories(details, records.size, totalAmount),
+            distribution(records.map { it.fertilizing?.applicationMethod }, records.size),
+            calculateCategoryMethods(details),
         )
     }
 
@@ -125,48 +125,44 @@ class CycleReportStatisticsCalculator {
         val details = records.mapNotNull { it.pestControl }
         val knownSprayAmounts = details.mapNotNull { it.totalSprayAmountLiters }
         return PestControlStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            categoryDistribution = distribution(
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            distribution(
                 details.map { CategoryRef(it.pesticideId.toString(), it.pesticideName) },
                 records.size,
             ),
-            pesticideAmounts = details
+            details
                 .groupBy { it.pesticideAmountUnit }
                 .map { (unit, items) ->
                     val knownAmounts = items.mapNotNull { it.pesticideAmount }
-                    AmountByUnit(
-                        unit = unit,
-                        amount = knownAmounts.sumScale4(),
-                        coverage = Coverage(knownAmounts.size, items.size),
-                    )
+                    AmountByUnit(unit, knownAmounts.sumScale4(), Coverage(knownAmounts.size, items.size))
                 }
                 .sortedBy { it.unit },
-            categoryAmounts = details
+            details
                 .groupBy { CategoryRef(it.pesticideId.toString(), it.pesticideName) to it.pesticideAmountUnit }
                 .map { (key, items) ->
                     val (category, unit) = key
                     val knownAmounts = items.mapNotNull { it.pesticideAmount }
                     CategoryAmountByUnit(
-                        categoryCode = category.code,
-                        categoryLabel = category.label,
-                        unit = unit,
-                        recordCount = items.size,
-                        amount = knownAmounts.sumScale4(),
-                        coverage = Coverage(knownAmounts.size, items.size),
+                        category.code,
+                        category.label,
+                        unit,
+                        items.size,
+                        knownAmounts.sumScale4(),
+                        Coverage(knownAmounts.size, items.size),
                     )
                 }
                 .sortedWith(compareBy<CategoryAmountByUnit> { it.categoryCode }.thenBy { it.unit }),
-            totalSprayAmountLiters = knownSprayAmounts.sumOrNullScale4(),
-            sprayAmountCoverage = Coverage(knownSprayAmounts.size, records.size),
-            targets = details
+            knownSprayAmounts.sumOrNullScale4(),
+            Coverage(knownSprayAmounts.size, records.size),
+            details
                 .mapNotNull { it.pestName?.trim()?.takeIf(String::isNotEmpty) }
                 .groupingBy { it }
                 .eachCount()
@@ -178,16 +174,16 @@ class CycleReportStatisticsCalculator {
     private fun calculateWeeding(records: List<CycleReportSourceRecord>): WeedingStatistics {
         val common = common(records)
         return WeedingStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            methodDistribution = distribution(records.map { it.weeding?.method }, records.size),
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            distribution(records.map { it.weeding?.method }, records.size),
         )
     }
 
@@ -198,31 +194,31 @@ class CycleReportStatisticsCalculator {
         val totalAmount = knownAmounts.sumOrNullScale4()
         val harvestDates = records.map { it.workedAt.toLocalDate() }
         return HarvestStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
-            totalAmountKg = totalAmount,
-            averageAmountKg = StatisticsMath.average(knownAmounts),
-            amountCoverage = Coverage(knownAmounts.size, records.size),
-            firstHarvestedOn = harvestDates.minOrNull(),
-            lastHarvestedOn = harvestDates.maxOrNull(),
-            medicinalParts = calculateHarvestParts(details, records.size, totalAmount),
-            finalGrowthPeriodMonths = records
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
+            totalAmount,
+            StatisticsMath.average(knownAmounts),
+            Coverage(knownAmounts.size, records.size),
+            harvestDates.minOrNull(),
+            harvestDates.maxOrNull(),
+            calculateHarvestParts(details, records.size, totalAmount),
+            records
                 .sortedWith(compareBy(CycleReportSourceRecord::workedAt, CycleReportSourceRecord::id))
                 .mapNotNull { it.harvest }
                 .lastOrNull { it.isLastHarvest }
                 ?.growthPeriodMonths,
-            growthPeriodRangeMonths = details
+            details
                 .mapNotNull { it.growthPeriodMonths }
                 .takeIf { it.isNotEmpty() }
                 ?.let { GrowthPeriodRange(requireNotNull(it.minOrNull()), requireNotNull(it.maxOrNull())) },
-            growthPeriodDistribution = distribution(
+            distribution(
                 values = details.mapNotNull { detail ->
                     detail.growthPeriodMonths?.let { months ->
                         CategoryRef(code = months.toString(), label = "${months}개월")
@@ -236,15 +232,15 @@ class CycleReportStatisticsCalculator {
     private fun commonOnly(records: List<CycleReportSourceRecord>): CommonOnlyStatistics {
         val common = common(records)
         return CommonOnlyStatistics(
-            recordCount = common.recordCount,
-            firstWorkedOn = common.firstWorkedOn,
-            lastWorkedOn = common.lastWorkedOn,
-            workedDayCount = common.workedDayCount,
-            averageIntervalDays = common.averageIntervalDays,
-            photoAttachedRecordCount = common.photoAttachedRecordCount,
-            photoAttachmentRatePct = common.photoAttachmentRatePct,
-            weatherDistribution = common.weatherDistribution,
-            averageTemperatureC = common.averageTemperatureC,
+            common.recordCount,
+            common.firstWorkedOn,
+            common.lastWorkedOn,
+            common.workedDayCount,
+            common.averageIntervalDays,
+            common.photoAttachedRecordCount,
+            common.photoAttachmentRatePct,
+            common.weatherDistribution,
+            common.averageTemperatureC,
         )
     }
 
@@ -260,12 +256,12 @@ class CycleReportStatisticsCalculator {
             .map { (materialName, items) ->
                 val amount = items.mapNotNull { it.amountKg }.sumScale4()
                 MaterialCategoryStatistics(
-                    code = materialName,
-                    label = materialName,
-                    recordCount = items.size,
-                    recordRatePct = requireNotNull(StatisticsMath.percentage(items.size, recordCount)),
-                    amountKg = amount,
-                    amountRatePct = requireNotNull(StatisticsMath.percentage(amount, totalAmount)),
+                    materialName,
+                    materialName,
+                    items.size,
+                    requireNotNull(StatisticsMath.percentage(items.size, recordCount)),
+                    amount,
+                    requireNotNull(StatisticsMath.percentage(amount, totalAmount)),
                 )
             }
             .sortedWith(compareByDescending<MaterialCategoryStatistics> { it.recordCount }.thenBy { it.code })
@@ -284,12 +280,12 @@ class CycleReportStatisticsCalculator {
                     .eachCount()
                     .map { (method, count) ->
                         CategoryMethodStatistics(
-                            categoryCode = materialName,
-                            categoryLabel = materialName,
-                            methodCode = method.code,
-                            methodLabel = method.label,
-                            recordCount = count,
-                            recordRatePct = requireNotNull(StatisticsMath.percentage(count, materialItems.size)),
+                            materialName,
+                            materialName,
+                            method.code,
+                            method.label,
+                            count,
+                            requireNotNull(StatisticsMath.percentage(count, materialItems.size)),
                         )
                     }
                     .sortedBy { it.methodCode }
@@ -307,17 +303,17 @@ class CycleReportStatisticsCalculator {
                 val knownAmounts = items.mapNotNull { it.amountKg }
                 val partAmount = knownAmounts.sumOrNullScale4()
                 HarvestPartStatistics(
-                    code = part.code,
-                    label = part.label,
-                    recordCount = items.size,
-                    recordRatePct = requireNotNull(StatisticsMath.percentage(items.size, recordCount)),
-                    knownAmountKg = partAmount,
-                    amountRatePct = partAmount?.let { amount ->
+                    part.code,
+                    part.label,
+                    items.size,
+                    requireNotNull(StatisticsMath.percentage(items.size, recordCount)),
+                    partAmount,
+                    partAmount?.let { amount ->
                         totalAmount?.takeIf { it.compareTo(BigDecimal.ZERO) != 0 }?.let {
                             StatisticsMath.percentage(amount, it)
                         }
                     },
-                    amountCoverage = Coverage(knownAmounts.size, items.size),
+                    Coverage(knownAmounts.size, items.size),
                 )
             }
             .sortedWith(compareByDescending<HarvestPartStatistics> { it.recordCount }.thenBy { it.code })
@@ -351,12 +347,7 @@ class CycleReportStatisticsCalculator {
             .groupingBy { it }
             .eachCount()
             .map { (item, count) ->
-                CountDistribution(
-                    code = item.code,
-                    label = item.label,
-                    count = count,
-                    ratePct = requireNotNull(StatisticsMath.percentage(count, denominator)),
-                )
+                CountDistribution(item.code, item.label, count, requireNotNull(StatisticsMath.percentage(count, denominator)))
             }
             .sortedWith(compareByDescending<CountDistribution> { it.count }.thenBy { it.code })
 

@@ -24,9 +24,7 @@ class FarmingCycleReportTest {
         val initial = activeProjection(CycleReportStatistics.empty())
         val report = FarmingCycleReport.create(member, farm, crop, initial)
         val changed = initial.copy(
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
 
         assertThat(report.sourceRevision).isEqualTo(1)
@@ -54,7 +52,7 @@ class FarmingCycleReportTest {
     @Test
     fun `supersede preserves statistics and increments once`() {
         val report = activeReport(
-            CycleReportStatistics(watering = WateringStatistics(recordCount = 1)),
+            CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         val revision = report.sourceRevision
 

@@ -126,5 +126,17 @@ class CoachingContextProviderTest {
 
     private fun crop() = Crop(cropId, 422, "참당귀", CropUsePartCategory.ROOT_BARK)
 
-    private fun record(member: Member, farm: Farm, crop: Crop) = FarmingRecord(recordId, member, farm, crop, WorkType.WATERING, LocalDateTime.of(2026, 6, 22, 7, 50), "맑음", 24, "점적 관수를 진행했다.", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
+    private fun record(member: Member, farm: Farm, crop: Crop) = FarmingRecord(
+        recordId,
+        member,
+        farm,
+        crop,
+        WorkType.WATERING,
+        LocalDateTime.of(2026, 6, 22, 7, 50),
+        "맑음",
+        24,
+        "점적 관수를 진행했다.",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
+    )
 }

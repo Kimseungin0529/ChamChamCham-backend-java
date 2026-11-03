@@ -53,7 +53,19 @@ class RecordFeedbackGenerationProcessorTest {
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(UUID.randomUUID(), member, "약초밭", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
-    private val record = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.PRUNING, LocalDateTime.of(2026, 7, 11, 9, 0), "맑음", 25, "웃자란 가지를 정리했습니다.", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
+    private val record = FarmingRecord(
+        UUID.randomUUID(),
+        member,
+        farm,
+        crop,
+        WorkType.PRUNING,
+        LocalDateTime.of(2026, 7, 11, 9, 0),
+        "맑음",
+        25,
+        "웃자란 가지를 정리했습니다.",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
+    )
     private lateinit var processor: RecordFeedbackGenerationProcessor
 
     @BeforeEach

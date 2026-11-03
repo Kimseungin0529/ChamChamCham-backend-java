@@ -210,7 +210,19 @@ class FarmingRecordServiceTest {
     private fun stubFarmingRecordSave() {
         `when`(farmingRecordRepository.save(any(FarmingRecord::class.java))).thenAnswer { invocation ->
             val toSave = invocation.arguments[0] as FarmingRecord
-            FarmingRecord(UUID.randomUUID(), toSave.member, toSave.farm, toSave.crop, toSave.workType, toSave.workedAt, toSave.weatherCondition, toSave.weatherTemperature, toSave.memo, toSave.entryMode, false)
+            FarmingRecord(
+                UUID.randomUUID(),
+                toSave.member,
+                toSave.farm,
+                toSave.crop,
+                toSave.workType,
+                toSave.workedAt,
+                toSave.weatherCondition,
+                toSave.weatherTemperature,
+                toSave.memo,
+                toSave.entryMode,
+                false,
+            )
         }
     }
 
@@ -828,13 +840,26 @@ class FarmingRecordServiceTest {
 
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(memberId, listOf(cropId), listOf(WorkType.PRUNING), null, null, null, emptyList(), emptyList(), null, requestedSize + 1)
+                FarmingRecordQueryRepository.SearchCondition(
+                    memberId,
+                    listOf(cropId),
+                    listOf(WorkType.PRUNING),
+                    null,
+                    null,
+                    null,
+                    emptyList(),
+                    emptyList(),
+                    null,
+                    requestedSize + 1,
+                )
             )
         ).thenReturn(
-            FarmingRecordQueryRepository.SearchResult(listOf(
+            FarmingRecordQueryRepository.SearchResult(
+                listOf(
                     FarmingRecordQueryRepository.Row(newestRecord, "https://example.test/1.jpg", null, null, null, null, null, null),
                     FarmingRecordQueryRepository.Row(overflowRecord, null, null, null, null, null, null, null),
-                ))
+                ),
+            )
         )
 
         val page = service.search(
@@ -866,9 +891,11 @@ class FarmingRecordServiceTest {
                 FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), null, null, null, emptyList(), emptyList(), null, 21)
             )
         ).thenReturn(
-            FarmingRecordQueryRepository.SearchResult(listOf(
+            FarmingRecordQueryRepository.SearchResult(
+                listOf(
                     FarmingRecordQueryRepository.Row(record, null, IrrigationMethod.DRIP, BigDecimal.TEN, "친환경약제", WeedingMethod.HAND, PlantingMethod.SEEDLING, "유박비료"),
-                ))
+                ),
+            )
         )
 
         val page = service.search(
@@ -896,7 +923,18 @@ class FarmingRecordServiceTest {
     fun `search converts start and end date to datetime bounds`() {
         `when`(
             farmingRecordQueryRepository.search(
-                FarmingRecordQueryRepository.SearchCondition(memberId, emptyList(), emptyList(), LocalDateTime.of(2026, 6, 1, 0, 0), LocalDateTime.of(2026, 7, 1, 0, 0), null, emptyList(), emptyList(), null, 21)
+                FarmingRecordQueryRepository.SearchCondition(
+                    memberId,
+                    emptyList(),
+                    emptyList(),
+                    LocalDateTime.of(2026, 6, 1, 0, 0),
+                    LocalDateTime.of(2026, 7, 1, 0, 0),
+                    null,
+                    emptyList(),
+                    emptyList(),
+                    null,
+                    21,
+                )
             )
         ).thenReturn(FarmingRecordQueryRepository.SearchResult(emptyList()))
 

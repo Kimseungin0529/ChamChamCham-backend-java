@@ -254,7 +254,7 @@ class FarmingWorkReportControllerTest(
             detail(
                 statistics = FarmingWorkReportResult.WorkStatistics(
                     common = common(recordCount = 3),
-                    watering = WateringStatistics(recordCount = 3, workedDayCount = 2),
+                    watering = WateringStatistics(3, null, null, 2, null, 0, null, emptyList(), null, emptyList(), emptyList()),
                 ),
                 feedback = readyFeedback(),
             ),
@@ -424,7 +424,7 @@ class FarmingWorkReportControllerTest(
         workTypeLabel: String = "물 주기",
         statistics: FarmingWorkReportResult.WorkStatistics = FarmingWorkReportResult.WorkStatistics(
             common = common(recordCount = 3),
-            watering = WateringStatistics(recordCount = 3),
+            watering = WateringStatistics(3, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
         ),
         status: FarmingCycleReportStatus = FarmingCycleReportStatus.COMPLETED,
         endsAt: LocalDateTime? = this.endsAt,
@@ -455,10 +455,7 @@ class FarmingWorkReportControllerTest(
         ),
     )
 
-    private fun common(recordCount: Int) = CommonOnlyStatistics(
-        recordCount = recordCount,
-        workedDayCount = recordCount,
-    )
+    private fun common(recordCount: Int) = CommonOnlyStatistics(recordCount, null, null, recordCount, null, 0, null, emptyList(), null)
 
     private fun authenticatedMember(id: String): RequestPostProcessor = RequestPostProcessor { request ->
         SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(

@@ -1,5 +1,11 @@
 package com.chamchamcham.application.coaching.reportfeedback.lifecycle
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.FertilizingStatistics
+import com.chamchamcham.domain.report.HarvestStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.coaching.reportfeedback.generation.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContext
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextAssembler
@@ -73,19 +79,26 @@ class ReportFeedbackLifecycleServiceTest {
         val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
         val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, LocalDateTime.of(2026, 7, 1, 9, 0), "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = finalHarvest.workedAt.minusMonths(5),
-                endsAt = finalHarvest.workedAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = finalHarvest,
-                statisticsSchemaVersion = 1,
-                statistics = CycleReportStatistics(
-                    watering = WateringStatistics(recordCount = 1),
-                ),
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                finalHarvest.workedAt.minusMonths(5),
+                finalHarvest.workedAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                finalHarvest,
+                1,
+                CycleReportStatistics(
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+            ),
             ),
         ).also { setId(it, reportId) }
         service = ReportFeedbackLifecycleService(

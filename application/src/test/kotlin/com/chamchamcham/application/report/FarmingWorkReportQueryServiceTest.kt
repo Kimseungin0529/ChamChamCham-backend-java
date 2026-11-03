@@ -1,5 +1,11 @@
 package com.chamchamcham.application.report
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.FertilizingStatistics
+import com.chamchamcham.domain.report.HarvestStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.common.OpaqueCursorCodec
 import com.chamchamcham.application.coaching.reportfeedback.lifecycle.ReportFeedbackDetailResult
 import com.chamchamcham.application.coaching.reportfeedback.lifecycle.ReportFeedbackItemResult
@@ -80,12 +86,26 @@ class FarmingWorkReportQueryServiceTest {
         val report = report(
             status = FarmingCycleReportStatus.COMPLETED,
             statistics = CycleReportStatistics(
-                watering = WateringStatistics(
-                    recordCount = 3,
-                    firstWorkedOn = LocalDate.of(2026, 1, 2),
-                    lastWorkedOn = LocalDate.of(2026, 1, 4),
-                    workedDayCount = 3,
+                PlantingStatistics.empty(),
+                WateringStatistics(
+                    3,
+                    LocalDate.of(2026, 1, 2),
+                    LocalDate.of(2026, 1, 4),
+                    3,
+                    null,
+                    0,
+                    null,
+                    emptyList(),
+                    null,
+                    emptyList(),
+                    emptyList(),
                 ),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         )
         val feedbackContent = ReportFeedbackResultContent(
@@ -148,7 +168,14 @@ class FarmingWorkReportQueryServiceTest {
             report(
                 status = FarmingCycleReportStatus.ACTIVE,
                 statistics = CycleReportStatistics(
-                    watering = WateringStatistics(recordCount = 2, workedDayCount = 2),
+                    PlantingStatistics.empty(),
+                    WateringStatistics(2, null, null, 2, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                    FertilizingStatistics.empty(),
+                    PestControlStatistics.empty(),
+                    WeedingStatistics.empty(),
+                    CommonOnlyStatistics.empty(),
+                    HarvestStatistics.empty(),
+                    CommonOnlyStatistics.empty(),
                 ),
             ),
         )
@@ -193,10 +220,14 @@ class FarmingWorkReportQueryServiceTest {
         val report = report(
             status = FarmingCycleReportStatus.COMPLETED,
             statistics = CycleReportStatistics(
-                pruning = com.chamchamcham.domain.report.CommonOnlyStatistics(
-                    recordCount = 2,
-                    workedDayCount = 2,
-                ),
+                PlantingStatistics.empty(),
+                WateringStatistics.empty(),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                com.chamchamcham.domain.report.CommonOnlyStatistics(2, null, null, 2, null, 0, null, emptyList(), null),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         )
         `when`(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(report)
@@ -219,7 +250,14 @@ class FarmingWorkReportQueryServiceTest {
         val report = report(
             status = FarmingCycleReportStatus.COMPLETED,
             statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1),
+                PlantingStatistics.empty(),
+                WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+                FertilizingStatistics.empty(),
+                PestControlStatistics.empty(),
+                WeedingStatistics.empty(),
+                CommonOnlyStatistics.empty(),
+                HarvestStatistics.empty(),
+                CommonOnlyStatistics.empty(),
             ),
         )
         `when`(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(report)
@@ -247,14 +285,7 @@ class FarmingWorkReportQueryServiceTest {
 
     @Test
     fun `list uses lookahead and exact cycle thumbnails with latest pictured fallback`() {
-        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            workTypes = emptyList(),
-            cursor = null,
-            size = 3,
-        )
+        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(memberId, setOf(farmId), setOf(cropId), emptyList(), null, 3)
         val watering = workItem(WorkType.WATERING, recordCount = 2)
         val harvest = workItem(WorkType.HARVEST, recordCount = 1)
         val lookahead = workItem(WorkType.ETC, recordCount = 1)
@@ -271,7 +302,8 @@ class FarmingWorkReportQueryServiceTest {
         val adjacentWatering = record("407", WorkType.WATERING, day = 6)
         val adjacentFinal = record("408", WorkType.HARVEST, day = 7)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(listOf(
+            FarmingWorkReportSourceSnapshot(
+                listOf(
                     adjacentFinal,
                     latestWateringWithoutPhoto,
                     targetFinal,
@@ -280,17 +312,20 @@ class FarmingWorkReportQueryServiceTest {
                     picturedWatering,
                     previousWatering,
                     otherWorkType,
-                ), setOf(
+                ),
+                setOf(
                     requireNotNull(previousFinal.id),
                     requireNotNull(targetFinal.id),
                     requireNotNull(adjacentFinal.id),
-                ), mapOf(
+                ),
+                mapOf(
                     requireNotNull(previousWatering.id) to "https://img/previous-cycle.jpg",
                     requireNotNull(picturedWatering.id) to "https://img/watering.jpg",
                     requireNotNull(otherWorkType.id) to "https://img/other-work-type.jpg",
                     requireNotNull(targetFinal.id) to "https://img/harvest.jpg",
                     requireNotNull(adjacentWatering.id) to "https://img/adjacent-cycle.jpg",
-                )),
+                ),
+            ),
         )
 
         val page = service.list(
@@ -324,14 +359,7 @@ class FarmingWorkReportQueryServiceTest {
 
     @Test
     fun `list resolves active cycle thumbnail without a final harvest`() {
-        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            workTypes = listOf(WorkType.WATERING),
-            cursor = null,
-            size = 2,
-        )
+        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(memberId, setOf(farmId), setOf(cropId), listOf(WorkType.WATERING), null, 2)
         val activeItem = workItem(
             workType = WorkType.WATERING,
             recordCount = 2,
@@ -344,9 +372,13 @@ class FarmingWorkReportQueryServiceTest {
         )
         val picturedWatering = record("403", WorkType.WATERING, day = 3)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(listOf(picturedWatering), emptySet(), mapOf(
+            FarmingWorkReportSourceSnapshot(
+                listOf(picturedWatering),
+                emptySet(),
+                mapOf(
                     requireNotNull(picturedWatering.id) to "https://img/active-watering.jpg",
-                )),
+                ),
+            ),
         )
 
         val page = service.list(
@@ -379,18 +411,18 @@ class FarmingWorkReportQueryServiceTest {
         )
         val cursor = cursorCodec.encode(cursorPayload)
         val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = listOf(WorkType.PEST_CONTROL),
-            cursor = FarmingCycleReportQueryRepository.WorkItemCursor(
-                lastWorkedOn = cursorPayload.lastWorkedOn,
-                status = cursorPayload.status,
-                sortAt = cursorPayload.sortAt,
-                reportId = cursorPayload.reportId,
-                workType = cursorPayload.workType,
+            memberId,
+            emptySet(),
+            emptySet(),
+            listOf(WorkType.PEST_CONTROL),
+            FarmingCycleReportQueryRepository.WorkItemCursor(
+                cursorPayload.lastWorkedOn,
+                cursorPayload.status,
+                cursorPayload.sortAt,
+                cursorPayload.reportId,
+                cursorPayload.workType,
             ),
-            size = 2,
+            2,
         )
         val pestControl = workItem(WorkType.PEST_CONTROL, recordCount = 1)
         `when`(queryRepository.searchWorkItems(expectedCondition)).thenReturn(
@@ -470,14 +502,7 @@ class FarmingWorkReportQueryServiceTest {
             crop = otherCrop,
             finalHarvestRecordId = secondFinalId,
         )
-        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = listOf(WorkType.WATERING),
-            cursor = null,
-            size = 3,
-        )
+        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(memberId, emptySet(), emptySet(), listOf(WorkType.WATERING), null, 3)
         `when`(queryRepository.searchWorkItems(expectedCondition)).thenReturn(
             FarmingCycleReportQueryRepository.WorkItemSearchResult(listOf(firstItem, secondItem)),
         )
@@ -490,20 +515,24 @@ class FarmingWorkReportQueryServiceTest {
         val farmIds = setOf(requireNotNull(farm.id), requireNotNull(otherFarm.id))
         val cropIds = setOf(requireNotNull(crop.id), requireNotNull(otherCrop.id))
         `when`(sourceRepository.load(memberId, farmIds, cropIds)).thenReturn(
-            FarmingWorkReportSourceSnapshot(listOf(
+            FarmingWorkReportSourceSnapshot(
+                listOf(
                     secondFinal,
                     temptingCrossProduct,
                     firstPictured,
                     secondPictured,
                     firstFinal,
-                ), setOf(
+                ),
+                setOf(
                     requireNotNull(firstFinal.id),
                     requireNotNull(secondFinal.id),
-                ), mapOf(
+                ),
+                mapOf(
                     requireNotNull(firstPictured.id) to "https://img/first-scope.jpg",
                     requireNotNull(secondPictured.id) to "https://img/second-scope.jpg",
                     requireNotNull(temptingCrossProduct.id) to "https://img/cross-product-newer.jpg",
-                )),
+                ),
+            ),
         )
 
         val page = service.list(
@@ -526,14 +555,7 @@ class FarmingWorkReportQueryServiceTest {
 
     @Test
     fun `list resolves tied pictured records by created time then record id`() {
-        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            workTypes = listOf(WorkType.WATERING),
-            cursor = null,
-            size = 2,
-        )
+        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(memberId, setOf(farmId), setOf(cropId), listOf(WorkType.WATERING), null, 2)
         val item = workItem(WorkType.WATERING, recordCount = 3)
         `when`(queryRepository.searchWorkItems(expectedCondition)).thenReturn(
             FarmingCycleReportQueryRepository.WorkItemSearchResult(listOf(item)),
@@ -543,11 +565,15 @@ class FarmingWorkReportQueryServiceTest {
         val higherTiedId = record("452", WorkType.WATERING, day = 3, createdMinute = 2)
         val targetFinal = record("406", WorkType.HARVEST, day = 5)
         `when`(sourceRepository.load(memberId, setOf(farmId), setOf(cropId))).thenReturn(
-            FarmingWorkReportSourceSnapshot(listOf(targetFinal, higherTiedId, higherIdButOlderCreated, lowerTiedId), setOf(requireNotNull(targetFinal.id)), mapOf(
+            FarmingWorkReportSourceSnapshot(
+                listOf(targetFinal, higherTiedId, higherIdButOlderCreated, lowerTiedId),
+                setOf(requireNotNull(targetFinal.id)),
+                mapOf(
                     requireNotNull(higherIdButOlderCreated.id) to "https://img/higher-id-older-created.jpg",
                     requireNotNull(lowerTiedId.id) to "https://img/lower-tied-id.jpg",
                     requireNotNull(higherTiedId.id) to "https://img/higher-tied-id.jpg",
-                )),
+                ),
+            ),
         )
 
         val page = service.list(
@@ -568,14 +594,7 @@ class FarmingWorkReportQueryServiceTest {
 
     @Test
     fun `empty projection still performs one fixed source load with empty scopes`() {
-        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = emptyList(),
-            cursor = null,
-            size = 11,
-        )
+        val expectedCondition = FarmingCycleReportQueryRepository.WorkItemSearchCondition(memberId, emptySet(), emptySet(), emptyList(), null, 11)
         `when`(queryRepository.searchWorkItems(expectedCondition)).thenReturn(
             FarmingCycleReportQueryRepository.WorkItemSearchResult(emptyList()),
         )
@@ -612,18 +631,18 @@ class FarmingWorkReportQueryServiceTest {
         finalHarvestRecordId: UUID? = finalHarvestId,
     ): FarmingCycleReportQueryRepository.WorkItem =
         FarmingCycleReportQueryRepository.WorkItem(
-            reportId = reportId,
-            status = status,
-            farmId = requireNotNull(farm.id),
-            farmName = farm.name,
-            cropId = requireNotNull(crop.id),
-            cropName = crop.name,
-            startsAt = day(1),
-            endsAt = endsAt,
-            finalHarvestRecordId = finalHarvestRecordId,
-            workType = workType,
-            recordCount = recordCount,
-            lastWorkedOn = LocalDate.of(2026, 1, 5),
+            reportId,
+            status,
+            requireNotNull(farm.id),
+            farm.name,
+            requireNotNull(crop.id),
+            crop.name,
+            day(1),
+            endsAt,
+            finalHarvestRecordId,
+            workType,
+            recordCount,
+            LocalDate.of(2026, 1, 5),
         )
 
     private fun assertDetailError(workType: WorkType, expected: ErrorCode) {
@@ -636,7 +655,14 @@ class FarmingWorkReportQueryServiceTest {
     private fun report(
         status: FarmingCycleReportStatus,
         statistics: CycleReportStatistics = CycleReportStatistics(
-            watering = WateringStatistics(recordCount = 1),
+            PlantingStatistics.empty(),
+            WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
         ),
     ): FarmingCycleReport {
         val sourceStatus = if (status == FarmingCycleReportStatus.ACTIVE) {
@@ -645,21 +671,21 @@ class FarmingWorkReportQueryServiceTest {
             FarmingCycleReportStatus.COMPLETED
         }
         return FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = sourceStatus,
-                startsAt = day(1),
-                endsAt = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) day(5) else null,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) {
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                sourceStatus,
+                day(1),
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) day(5) else null,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) {
                     record("406", WorkType.HARVEST, day = 5)
                 } else {
                     null
                 },
-                statisticsSchemaVersion = 1,
-                statistics = statistics,
+                1,
+                statistics,
             ),
         ).also { report ->
             org.springframework.test.util.ReflectionTestUtils.setField(report, "id", reportId)

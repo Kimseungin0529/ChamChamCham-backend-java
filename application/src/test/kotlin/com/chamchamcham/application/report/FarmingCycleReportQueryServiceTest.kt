@@ -1,5 +1,11 @@
 package com.chamchamcham.application.report
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.FertilizingStatistics
+import com.chamchamcham.domain.report.HarvestStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.common.OpaqueCursorCodec
 import com.chamchamcham.application.exception.ErrorCode
 import com.chamchamcham.application.exception.business.BusinessException
@@ -75,7 +81,16 @@ class FarmingCycleReportQueryServiceTest {
         member = Member(memberId, "member@example.com", null)
         farm = Farm(farmId, member, "약초농장", "서울시 강남구")
         crop = Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK)
-        typedStatistics = CycleReportStatistics(watering = WateringStatistics(recordCount = 1))
+        typedStatistics = CycleReportStatistics(
+            PlantingStatistics.empty(),
+            WateringStatistics(1, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            FertilizingStatistics.empty(),
+            PestControlStatistics.empty(),
+            WeedingStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(),
+            CommonOnlyStatistics.empty(),
+        )
         active = activeReport(id = activeReportId)
         selectedCompleted = completedReport(id = reportId, finalRecordId = finalHarvestRecordId, endedAt = day(30))
         previous = completedReport(id = previousReportId, finalRecordId = previousFinalHarvestRecordId, endedAt = day(20))
@@ -134,13 +149,7 @@ class FarmingCycleReportQueryServiceTest {
         val newest = completedReport(id = uuid("000000000305"), finalRecordId = uuid("000000000405"), endedAt = day(40))
         `when`(
             queryRepository.searchCompleted(
-                FarmingCycleReportQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    farmIds = setOf(farmId),
-                    cropIds = setOf(cropId),
-                    cursor = null,
-                    size = 3,
-                ),
+                FarmingCycleReportQueryRepository.SearchCondition(memberId, setOf(farmId), setOf(cropId), null, 3),
             ),
         ).thenReturn(FarmingCycleReportQueryRepository.SearchResult(listOf(newest, selectedCompleted, previous)))
 
@@ -159,26 +168,14 @@ class FarmingCycleReportQueryServiceTest {
         stubScope()
         `when`(
             queryRepository.searchCompleted(
-                FarmingCycleReportQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    farmIds = setOf(farmId),
-                    cropIds = setOf(cropId),
-                    cursor = null,
-                    size = 11,
-                ),
+                FarmingCycleReportQueryRepository.SearchCondition(memberId, setOf(farmId), setOf(cropId), null, 11),
             ),
         ).thenReturn(FarmingCycleReportQueryRepository.SearchResult(emptyList()))
 
         service.listCompleted(searchCondition(cursor = "   ", size = 10))
 
         verify(queryRepository).searchCompleted(
-            FarmingCycleReportQueryRepository.SearchCondition(
-                memberId = memberId,
-                farmIds = setOf(farmId),
-                cropIds = setOf(cropId),
-                cursor = null,
-                size = 11,
-            ),
+            FarmingCycleReportQueryRepository.SearchCondition(memberId, setOf(farmId), setOf(cropId), null, 11),
         )
     }
 
@@ -211,13 +208,7 @@ class FarmingCycleReportQueryServiceTest {
     fun `list without filters stays member scoped without ownership lookups`() {
         `when`(
             queryRepository.searchCompleted(
-                FarmingCycleReportQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    farmIds = emptySet(),
-                    cropIds = emptySet(),
-                    cursor = null,
-                    size = 21,
-                ),
+                FarmingCycleReportQueryRepository.SearchCondition(memberId, emptySet(), emptySet(), null, 21),
             ),
         ).thenReturn(FarmingCycleReportQueryRepository.SearchResult(emptyList()))
 
@@ -226,13 +217,7 @@ class FarmingCycleReportQueryServiceTest {
         assertThat(result.items).isEmpty()
         verifyNoInteractions(farmRepository, memberCropRepository)
         verify(queryRepository).searchCompleted(
-            FarmingCycleReportQueryRepository.SearchCondition(
-                memberId = memberId,
-                farmIds = emptySet(),
-                cropIds = emptySet(),
-                cursor = null,
-                size = 21,
-            ),
+            FarmingCycleReportQueryRepository.SearchCondition(memberId, emptySet(), emptySet(), null, 21),
         )
     }
 
@@ -240,13 +225,7 @@ class FarmingCycleReportQueryServiceTest {
     fun `list with crop only does not require a farm ownership lookup`() {
         `when`(
             queryRepository.searchCompleted(
-                FarmingCycleReportQueryRepository.SearchCondition(
-                    memberId = memberId,
-                    farmIds = emptySet(),
-                    cropIds = setOf(cropId),
-                    cursor = null,
-                    size = 21,
-                ),
+                FarmingCycleReportQueryRepository.SearchCondition(memberId, emptySet(), setOf(cropId), null, 21),
             ),
         ).thenReturn(FarmingCycleReportQueryRepository.SearchResult(emptyList()))
 
@@ -279,13 +258,7 @@ class FarmingCycleReportQueryServiceTest {
             `when`(memberCropRepository.existsByMemberIdAndFarmIdInAndCropId(memberId, farmIds, selectedCropId))
                 .thenReturn(true)
         }
-        val expected = FarmingCycleReportQueryRepository.SearchCondition(
-            memberId = memberId,
-            farmIds = farmIds,
-            cropIds = cropIds,
-            cursor = null,
-            size = 21,
-        )
+        val expected = FarmingCycleReportQueryRepository.SearchCondition(memberId, farmIds, cropIds, null, 21)
         `when`(queryRepository.searchCompleted(expected))
             .thenReturn(FarmingCycleReportQueryRepository.SearchResult(emptyList()))
 
@@ -327,13 +300,13 @@ class FarmingCycleReportQueryServiceTest {
         report(
             id = id,
             projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.ACTIVE,
-                startsAt = day(40),
-                endsAt = null,
-                startBasis = FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST,
-                finalHarvestRecord = null,
-                statisticsSchemaVersion = 1,
-                statistics = typedStatistics,
+                FarmingCycleReportStatus.ACTIVE,
+                day(40),
+                null,
+                FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST,
+                null,
+                1,
+                typedStatistics,
             ),
         )
 
@@ -345,13 +318,13 @@ class FarmingCycleReportQueryServiceTest {
         report(
             id = id,
             projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = endedAt.minusDays(10),
-                endsAt = endedAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = finalHarvestRecord(finalRecordId, endedAt),
-                statisticsSchemaVersion = 1,
-                statistics = typedStatistics,
+                FarmingCycleReportStatus.COMPLETED,
+                endedAt.minusDays(10),
+                endedAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                finalHarvestRecord(finalRecordId, endedAt),
+                1,
+                typedStatistics,
             ),
         )
 
@@ -365,7 +338,19 @@ class FarmingCycleReportQueryServiceTest {
     }
 
     private fun finalHarvestRecord(id: UUID, workedAt: LocalDateTime): FarmingRecord =
-        FarmingRecord(id, member, farm, crop, WorkType.HARVEST, workedAt, "맑음", 20, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
+        FarmingRecord(
+            id,
+            member,
+            farm,
+            crop,
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            20,
+            "최종 수확",
+            com.chamchamcham.domain.farming.EntryMode.MANUAL,
+            false,
+        )
 
     private fun day(day: Long): LocalDateTime = baseTime.plusDays(day)
 

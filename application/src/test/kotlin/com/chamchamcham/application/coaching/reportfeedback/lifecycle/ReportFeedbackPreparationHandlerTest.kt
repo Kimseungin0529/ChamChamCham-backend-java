@@ -77,17 +77,17 @@ class ReportFeedbackPreparationHandlerTest {
         val crop = Crop(UUID.randomUUID(), 422, "황기", CropUsePartCategory.ROOT_BARK)
         val finalHarvest = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.HARVEST, endsAt, "맑음", 24, "최종 수확", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
         report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = startsAt,
-                endsAt = endsAt,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = finalHarvest,
-                statisticsSchemaVersion = 1,
-                statistics = CycleReportStatistics.empty(),
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                FarmingCycleReportStatus.COMPLETED,
+                startsAt,
+                endsAt,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                finalHarvest,
+                1,
+                CycleReportStatistics.empty(),
             ),
         ).also { setId(it, reportId) }
         handler = ReportFeedbackPreparationHandler(

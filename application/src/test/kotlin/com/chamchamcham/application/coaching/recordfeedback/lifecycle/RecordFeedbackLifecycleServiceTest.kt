@@ -31,7 +31,19 @@ class RecordFeedbackLifecycleServiceTest {
     private val member = Member(UUID.randomUUID(), "member@example.com", null)
     private val farm = Farm(UUID.randomUUID(), member, "약초밭", "강원도 평창군")
     private val crop = Crop(UUID.randomUUID(), 1, "황기", CropUsePartCategory.ROOT_BARK)
-    private val record = FarmingRecord(UUID.randomUUID(), member, farm, crop, WorkType.WATERING, LocalDateTime.of(2026, 7, 11, 9, 0), "맑음", 25, "관수 기록", com.chamchamcham.domain.farming.EntryMode.MANUAL, false)
+    private val record = FarmingRecord(
+        UUID.randomUUID(),
+        member,
+        farm,
+        crop,
+        WorkType.WATERING,
+        LocalDateTime.of(2026, 7, 11, 9, 0),
+        "맑음",
+        25,
+        "관수 기록",
+        com.chamchamcham.domain.farming.EntryMode.MANUAL,
+        false,
+    )
 
     private val service by lazy { RecordFeedbackLifecycleService(feedbackRepository, eventPublisher) }
 

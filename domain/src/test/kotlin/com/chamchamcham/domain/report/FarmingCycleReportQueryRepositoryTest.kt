@@ -202,32 +202,22 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
         )
         val latest = persistCompleted(
             endedAt = day(40),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 2, lastWorkedOn = day(38).toLocalDate()),
-                harvest = HarvestStatistics(recordCount = 1, lastWorkedOn = day(40).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(2, null, day(38).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics(1, null, day(40).toLocalDate(), 0, null, 0, null, emptyList(), null, null, null, Coverage(0, 0), null, null, emptyList(), null, null, emptyList()), CommonOnlyStatistics.empty()),
         )
         val sameEndOtherScope = persistCompleted(
             farm = otherFarm,
             crop = otherCrop,
             endedAt = day(40),
-            statistics = CycleReportStatistics(
-                planting = PlantingStatistics(recordCount = 3, lastWorkedOn = day(15).toLocalDate()),
-                etc = CommonOnlyStatistics(recordCount = 0, lastWorkedOn = day(16).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics(3, null, day(15).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), WateringStatistics.empty(), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics(0, null, day(16).toLocalDate(), 0, null, 0, null, emptyList(), null)),
         )
         persistCompleted(
             owner = otherMember,
             endedAt = day(50),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 9, lastWorkedOn = day(50).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(9, null, day(50).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         val active = persistActive(
             startsAt = day(10),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 4, lastWorkedOn = day(20).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(4, null, day(20).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         persistSuperseded(endedAt = day(60))
         entityManager.flush()
@@ -293,15 +283,11 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     fun `work items without a last worked date are ordered last`() {
         val recentWithoutWorkedOn = persistCompleted(
             endedAt = day(70),
-            statistics = CycleReportStatistics(
-                etc = CommonOnlyStatistics(recordCount = 1, lastWorkedOn = null),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics.empty(), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics(1, null, null, 0, null, 0, null, emptyList(), null)),
         )
         val olderWithWorkedOn = persistCompleted(
             endedAt = day(30),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1, lastWorkedOn = day(20).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, day(20).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         entityManager.flush()
         entityManager.clear()
@@ -318,15 +304,11 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     fun `work items on the same date keep active status first`() {
         val tiedActive = persistActive(
             startsAt = day(5),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1, lastWorkedOn = day(25).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, day(25).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         val tiedCompleted = persistCompleted(
             endedAt = day(30),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1, lastWorkedOn = day(25).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, day(25).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         entityManager.flush()
         entityManager.clear()
@@ -343,16 +325,11 @@ class FarmingCycleReportQueryRepositoryTest @Autowired constructor(
     fun `work item cursor crosses active work types and completed reports without overlap`() {
         val active = persistActive(
             startsAt = day(40),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 2, lastWorkedOn = day(41).toLocalDate()),
-                harvest = HarvestStatistics(recordCount = 1, lastWorkedOn = day(42).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(2, null, day(41).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics(1, null, day(42).toLocalDate(), 0, null, 0, null, emptyList(), null, null, null, Coverage(0, 0), null, null, emptyList(), null, null, emptyList()), CommonOnlyStatistics.empty()),
         )
         val completed = persistCompleted(
             endedAt = day(30),
-            statistics = CycleReportStatistics(
-                watering = WateringStatistics(recordCount = 1, lastWorkedOn = day(20).toLocalDate()),
-            ),
+            statistics = CycleReportStatistics(PlantingStatistics.empty(), WateringStatistics(1, null, day(20).toLocalDate(), 0, null, 0, null, emptyList(), null, emptyList(), emptyList()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty()),
         )
         entityManager.flush()
         entityManager.clear()

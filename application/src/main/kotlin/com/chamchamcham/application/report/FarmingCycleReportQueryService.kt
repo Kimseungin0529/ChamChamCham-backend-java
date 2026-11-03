@@ -28,13 +28,7 @@ class FarmingCycleReportQueryService(
         validateListScope(condition.memberId, condition.farmIds, condition.cropIds)
         val cursor = decodeCursor(condition.cursor)
         val result = queryRepository.searchCompleted(
-            FarmingCycleReportQueryRepository.SearchCondition(
-                memberId = condition.memberId,
-                farmIds = condition.farmIds,
-                cropIds = condition.cropIds,
-                cursor = cursor,
-                size = condition.size + 1,
-            ),
+            FarmingCycleReportQueryRepository.SearchCondition(condition.memberId, condition.farmIds, condition.cropIds, cursor, condition.size + 1),
         )
         val visibleRows = result.rows.take(condition.size)
         val nextCursor = if (result.rows.size > condition.size) {
@@ -85,10 +79,7 @@ class FarmingCycleReportQueryService(
             cursor,
             FarmingCycleReportCursorPayload::class.java,
         )
-        return FarmingCycleReportQueryRepository.Cursor(
-            endsAt = payload.endsAt,
-            finalHarvestRecordId = payload.finalHarvestRecordId,
-        )
+        return FarmingCycleReportQueryRepository.Cursor(payload.endsAt, payload.finalHarvestRecordId)
     }
 
     private fun encodeCursor(report: FarmingCycleReport): String =

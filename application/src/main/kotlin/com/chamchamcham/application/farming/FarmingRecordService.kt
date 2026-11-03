@@ -78,7 +78,19 @@ class FarmingRecordService(
         val media = validateMedia(command.memberId, command.mediaIds)
 
         val record = farmingRecordRepository.save(
-            FarmingRecord(null, member, farm, crop, command.workType, command.workedAt, command.weatherCondition, command.weatherTemperature, command.memo, command.entryMode, false)
+            FarmingRecord(
+                null,
+                member,
+                farm,
+                crop,
+                command.workType,
+                command.workedAt,
+                command.weatherCondition,
+                command.weatherTemperature,
+                command.memo,
+                command.entryMode,
+                false,
+            )
         )
 
         saveDetail(record, command)
@@ -121,7 +133,18 @@ class FarmingRecordService(
         size: Int
     ): FarmingRecordQueryRepository.SearchCondition {
         val trimmedKeyword = condition.keyword?.trim()?.takeIf(String::isNotEmpty)
-        return FarmingRecordQueryRepository.SearchCondition(condition.memberId, condition.cropIds, condition.workTypes, condition.startDate?.atStartOfDay(), condition.endDate?.plusDays(1)?.atStartOfDay(), trimmedKeyword, matchedWorkTypes(trimmedKeyword), matchedParts(trimmedKeyword), cursor, size)
+        return FarmingRecordQueryRepository.SearchCondition(
+            condition.memberId,
+            condition.cropIds,
+            condition.workTypes,
+            condition.startDate?.atStartOfDay(),
+            condition.endDate?.plusDays(1)?.atStartOfDay(),
+            trimmedKeyword,
+            matchedWorkTypes(trimmedKeyword),
+            matchedParts(trimmedKeyword),
+            cursor,
+            size,
+        )
     }
 
     private fun matchedWorkTypes(keyword: String?): List<WorkType> =
@@ -197,7 +220,16 @@ class FarmingRecordService(
             WorkType.PLANTING -> {
                 val detail = payload.planting ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 plantingRecordRepository.save(
-                    PlantingRecord(null, record, detail.plantingMethod, detail.seedAmount, detail.seedAmountUnit, detail.seedlingCount, detail.seedlingUnit, detail.propagationMethod)
+                    PlantingRecord(
+                        null,
+                        record,
+                        detail.plantingMethod,
+                        detail.seedAmount,
+                        detail.seedAmountUnit,
+                        detail.seedlingCount,
+                        detail.seedlingUnit,
+                        detail.propagationMethod,
+                    )
                 )
             }
 
@@ -217,7 +249,16 @@ class FarmingRecordService(
             WorkType.PEST_CONTROL -> {
                 val detail = payload.pestControl ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 pestControlRecordRepository.save(
-                    PestControlRecord(null, record, findPesticide(detail.pesticideId), detail.pesticideAmount, detail.pesticideAmountUnit, detail.totalSprayAmount, detail.totalSprayAmountUnit, detail.pestId?.let(::findPest))
+                    PestControlRecord(
+                        null,
+                        record,
+                        findPesticide(detail.pesticideId),
+                        detail.pesticideAmount,
+                        detail.pesticideAmountUnit,
+                        detail.totalSprayAmount,
+                        detail.totalSprayAmountUnit,
+                        detail.pestId?.let(::findPest),
+                    )
                 )
             }
 
@@ -230,7 +271,15 @@ class FarmingRecordService(
             WorkType.HARVEST -> {
                 val detail = payload.harvest ?: throw BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)
                 harvestRecordRepository.save(
-                    HarvestRecord(null, record, detail.harvestAmount.takeUnless { detail.amountUnknown }, detail.medicinalPart, detail.harvestSource, detail.growthPeriod, detail.isLastHarvest)
+                    HarvestRecord(
+                        null,
+                        record,
+                        detail.harvestAmount.takeUnless { detail.amountUnknown },
+                        detail.medicinalPart,
+                        detail.harvestSource,
+                        detail.growthPeriod,
+                        detail.isLastHarvest,
+                    )
                 )
             }
 

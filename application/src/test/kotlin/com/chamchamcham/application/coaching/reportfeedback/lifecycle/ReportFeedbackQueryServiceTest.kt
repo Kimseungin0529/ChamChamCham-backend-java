@@ -1,5 +1,10 @@
 package com.chamchamcham.application.coaching.reportfeedback.lifecycle
 
+import com.chamchamcham.domain.report.WeedingStatistics
+import com.chamchamcham.domain.report.PlantingStatistics
+import com.chamchamcham.domain.report.PestControlStatistics
+import com.chamchamcham.domain.report.Coverage
+import com.chamchamcham.domain.report.CommonOnlyStatistics
 import com.chamchamcham.application.exception.ErrorCode
 import com.chamchamcham.application.exception.business.BusinessException
 import com.chamchamcham.domain.coaching.reportfeedback.ReportFeedback
@@ -281,17 +286,17 @@ class ReportFeedbackQueryServiceTest {
             FarmingCycleReportStatus.COMPLETED
         }
         val report = FarmingCycleReport.create(
-            member = member,
-            farm = farm,
-            crop = crop,
-            projection = FarmingCycleReportProjection(
-                status = sourceStatus,
-                startsAt = LocalDateTime.of(2026, 2, 1, 9, 0),
-                endsAt = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest.workedAt else null,
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                finalHarvestRecord = if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest else null,
-                statisticsSchemaVersion = 1,
-                statistics = statistics,
+            member,
+            farm,
+            crop,
+            FarmingCycleReportProjection(
+                sourceStatus,
+                LocalDateTime.of(2026, 2, 1, 9, 0),
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest.workedAt else null,
+                FarmingCycleStartBasis.FIRST_RECORD,
+                if (sourceStatus == FarmingCycleReportStatus.COMPLETED) finalHarvest else null,
+                1,
+                statistics,
             ),
         )
         ReflectionTestUtils.setField(report, "id", reportId)
@@ -302,18 +307,62 @@ class ReportFeedbackQueryServiceTest {
     }
 
     private fun statisticsFor(vararg workTypes: WorkType) = CycleReportStatistics(
-        watering = WateringStatistics(
-            recordCount = WorkType.WATERING.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 2),
+        PlantingStatistics.empty(),
+        WateringStatistics(
+            WorkType.WATERING.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 2),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            emptyList(),
+            emptyList(),
         ),
-        fertilizing = FertilizingStatistics(
-            recordCount = WorkType.FERTILIZING.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 1),
+        FertilizingStatistics(
+            WorkType.FERTILIZING.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 1),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            null,
+            null,
+            Coverage(0, 0),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
         ),
-        harvest = HarvestStatistics(
-            recordCount = WorkType.HARVEST.countIn(workTypes),
-            lastWorkedOn = LocalDate.of(2026, 6, 3),
+        PestControlStatistics.empty(),
+        WeedingStatistics.empty(),
+        CommonOnlyStatistics.empty(),
+        HarvestStatistics(
+            WorkType.HARVEST.countIn(workTypes),
+            null,
+            LocalDate.of(2026, 6, 3),
+            0,
+            null,
+            0,
+            null,
+            emptyList(),
+            null,
+            null,
+            null,
+            Coverage(0, 0),
+            null,
+            null,
+            emptyList(),
+            null,
+            null,
+            emptyList(),
         ),
+        CommonOnlyStatistics.empty(),
     )
 
     private fun WorkType.countIn(workTypes: Array<out WorkType>): Int =
