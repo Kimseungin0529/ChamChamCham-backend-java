@@ -124,8 +124,8 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(pesticideQueryRepository.findByCropNames(listOf("황기"), 200)).thenReturn(
             listOf(
-                PesticideQueryRepository.VoiceCatalogRow(itemName = "코니도", brandName = "바이엘", pestName = "진딧물"),
-                PesticideQueryRepository.VoiceCatalogRow(itemName = "코니도", brandName = "바이엘", pestName = "총채벌레"),
+                PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "진딧물"),
+                PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "총채벌레"),
             )
         )
 
@@ -140,7 +140,7 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
+                PesticideQueryRepository.SearchCondition(null, null, 51)
             )
         ).thenReturn(listOf(Pesticide("다이센엠-45", "농협케미컬")))
 
@@ -154,7 +154,7 @@ class VoiceSessionServiceTest {
         stubCreateCollaborators()
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 51)
+                PesticideQueryRepository.SearchCondition(null, null, 51)
             )
         ).thenReturn((1..51).map { Pesticide("농약$it", "제조사") })
 

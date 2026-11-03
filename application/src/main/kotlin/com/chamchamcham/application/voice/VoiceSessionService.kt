@@ -160,7 +160,7 @@ class VoiceSessionService(
         }
 
         val smallCatalog = pesticideQueryRepository.search(
-            PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = MAX_PESTICIDE_OPTIONS + 1)
+            PesticideQueryRepository.SearchCondition(null, null, MAX_PESTICIDE_OPTIONS + 1)
         )
         if (smallCatalog.isEmpty() || smallCatalog.size > MAX_PESTICIDE_OPTIONS) return emptyList()
         return smallCatalog.map { VoicePesticideOption(name = "${it.itemName}(${it.brandName})", pests = emptyList()) }

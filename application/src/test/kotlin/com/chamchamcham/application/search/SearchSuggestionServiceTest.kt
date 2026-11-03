@@ -151,7 +151,7 @@ class SearchSuggestionServiceTest {
             .thenReturn(crops.map { Crop(0, it, CropUsePartCategory.ROOT_BARK) })
         `when`(
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = keyword, cursor = null, size = 9)
+                PesticideQueryRepository.SearchCondition(keyword, null, 9)
             )
         ).thenReturn(pesticides.map { Pesticide(it, it) })
         `when`(policyProgramRepository.findTitleSuggestions(keyword, PageRequest.of(0, 9)))

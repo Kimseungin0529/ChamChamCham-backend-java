@@ -41,7 +41,7 @@ class PesticideCatalogServiceTest {
     fun `search returns no next cursor when results fit within the page`() {
         val pesticide = Pesticide(UUID.randomUUID(), "만코제브 수화제", "가가방")
         `when`(
-            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 21))
+            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(null, null, 21))
         ).thenReturn(listOf(pesticide))
 
         val result = service.search(keyword = null, cursor = null, size = 20)
@@ -57,7 +57,7 @@ class PesticideCatalogServiceTest {
             Pesticide(UUID.randomUUID(), "품목$it", "상표$it")
         }
         `when`(
-            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(keyword = null, cursor = null, size = 3))
+            pesticideQueryRepository.search(PesticideQueryRepository.SearchCondition(null, null, 3))
         ).thenReturn(pesticides)
 
         val result = service.search(keyword = null, cursor = null, size = 2)

@@ -24,7 +24,7 @@ class SearchSuggestionService(
             cropRepository.findTop9ByNameContainingIgnoreCaseOrderByNameAsc(trimmed)
                 .map { it.name },
             pesticideQueryRepository.search(
-                PesticideQueryRepository.SearchCondition(keyword = trimmed, cursor = null, size = MAX_RELATED)
+                PesticideQueryRepository.SearchCondition(trimmed, null, MAX_RELATED)
             ).map { it.brandName },
             policyProgramRepository.findTitleSuggestions(trimmed, PageRequest.of(0, MAX_RELATED))
                 .map { it.title },
