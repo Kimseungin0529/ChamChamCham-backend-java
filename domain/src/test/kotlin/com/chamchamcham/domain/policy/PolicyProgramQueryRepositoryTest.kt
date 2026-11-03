@@ -160,45 +160,40 @@ class PolicyProgramQueryRepositoryTest @Autowired constructor(
         recommendable: Boolean = true,
         createdAt: LocalDateTime = LocalDateTime.of(2026, 7, 7, 9, 0)
     ): PolicyProgram {
-        val program = PolicyProgram(
-            title = title,
-            body = "정책 상세",
-            region = "전국",
-            targetManagementType = null
-        ).apply {
+        val program = PolicyProgram(title, "정책 상세", "전국", null).apply {
             applyListFields(
-                source = PolicySource.NONGUP_EZ,
-                externalId = "external-$title",
-                sourceYear = "2026",
-                title = title,
-                summary = summary,
-                region = "전국",
-                sourceUrl = "https://policy.example.com/$title",
-                agencyName = agencyName
+                PolicySource.NONGUP_EZ,
+                "external-$title",
+                "2026",
+                title,
+                summary,
+                "전국",
+                "https://policy.example.com/$title",
+                agencyName
             )
             if (detailSynced) {
                 applyDetailFields(
-                    body = "정책 상세",
-                    purpose = null,
-                    eligibilityOriginal = null,
-                    eligibilitySummary = "자격 확인",
-                    benefitOriginal = null,
-                    benefitSummary = "지원 확인",
-                    applyStartsOn = null,
-                    applyEndsOn = null,
-                    applicationPeriodLabel = "접수기관문의",
-                    applicationPeriodNotice = null,
-                    applicationMethod = null,
-                    requiredDocuments = null,
-                    selectionCriteria = null,
-                    departmentName = null,
-                    onlineApplyAvailable = false,
-                    applicationUrl = null,
-                    targetTagsJson = "[]",
-                    cropTagsJson = "[]",
-                    regionTagsJson = "[]",
-                    rawPayload = "{}",
-                    recommendable = recommendable
+                    "정책 상세",
+                    null,
+                    null,
+                    "자격 확인",
+                    null,
+                    "지원 확인",
+                    null,
+                    null,
+                    "접수기관문의",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    null,
+                    "[]",
+                    "[]",
+                    "[]",
+                    "{}",
+                    recommendable
                 )
             }
         }

@@ -258,45 +258,39 @@ class PolicyRecommendationQueryRepositoryTest @Autowired constructor(
         createdAt: LocalDateTime = LocalDateTime.of(2026, 7, 7, 9, 20)
     ): PolicyRecommendation {
         val program = persist(
-            PolicyProgram(
-                title = title,
-                body = "정책 상세",
-                region = "전국",
-                targetManagementType = null,
-                applyEndsOn = applyEndsOn
-            ).apply {
+            PolicyProgram(title, "정책 상세", "전국", null).apply { this.applyEndsOn = applyEndsOn }.apply {
                 applyListFields(
-                    source = PolicySource.NONGUP_EZ,
-                    externalId = "external-$title",
-                    sourceYear = sourceYear,
-                    title = title,
-                    summary = summary,
-                    region = "전국",
-                    sourceUrl = null,
-                    agencyName = "농림축산식품부"
+                    PolicySource.NONGUP_EZ,
+                    "external-$title",
+                    sourceYear,
+                    title,
+                    summary,
+                    "전국",
+                    null,
+                    "농림축산식품부"
                 )
                 applyDetailFields(
-                    body = "정책 상세",
-                    purpose = null,
-                    eligibilityOriginal = null,
-                    eligibilitySummary = "자격 확인",
-                    benefitOriginal = null,
-                    benefitSummary = benefitSummary,
-                    applyStartsOn = applyStartsOn,
-                    applyEndsOn = applyEndsOn,
-                    applicationPeriodLabel = "접수기관문의",
-                    applicationPeriodNotice = null,
-                    applicationMethod = null,
-                    requiredDocuments = null,
-                    selectionCriteria = null,
-                    departmentName = null,
-                    onlineApplyAvailable = false,
-                    applicationUrl = null,
-                    targetTagsJson = "[]",
-                    cropTagsJson = "[]",
-                    regionTagsJson = "[]",
-                    rawPayload = "{}",
-                    recommendable = true
+                    "정책 상세",
+                    null,
+                    null,
+                    "자격 확인",
+                    null,
+                    benefitSummary,
+                    applyStartsOn,
+                    applyEndsOn,
+                    "접수기관문의",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    null,
+                    "[]",
+                    "[]",
+                    "[]",
+                    "{}",
+                    true
                 )
             },
             LocalDateTime.of(2026, 7, 7, 9, 10)

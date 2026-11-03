@@ -303,44 +303,39 @@ class PolicySyncServiceTest {
     private fun existingSyncedProgram(
         benefitSummary: String = PolicyBenefitCategory.GRANT.label
     ): PolicyProgram =
-        PolicyProgram(
-            title = "친환경농업 직불 지원",
-            body = "친환경농업 확산\n\n친환경 인증 농업인 지원\n\n농업경영정보를 등록하고 친환경인증을 받은 농업인\n\n인증단계별 직불금 지원",
-            region = "전국",
-            targetManagementType = null
-        ).also {
+        PolicyProgram("친환경농업 직불 지원", "친환경농업 확산\n\n친환경 인증 농업인 지원\n\n농업경영정보를 등록하고 친환경인증을 받은 농업인\n\n인증단계별 직불금 지원", "전국", null).also {
             it.applyListFields(
-                source = PolicySource.NONGUP_EZ,
-                externalId = "AB000009",
-                sourceYear = "2026",
-                title = "친환경농업 직불 지원",
-                summary = "친환경 인증 농업인에게 직불금을 지원합니다.",
-                region = "전국",
-                sourceUrl = "https://www.nongupez.go.kr/nsm/bizAply/wholeBiz/wholeBizDtls?afbzCd=AB000009&bizYr=2026",
-                agencyName = "농림축산식품부"
+                PolicySource.NONGUP_EZ,
+                "AB000009",
+                "2026",
+                "친환경농업 직불 지원",
+                "친환경 인증 농업인에게 직불금을 지원합니다.",
+                "전국",
+                "https://www.nongupez.go.kr/nsm/bizAply/wholeBiz/wholeBizDtls?afbzCd=AB000009&bizYr=2026",
+                "농림축산식품부"
             )
             it.applyDetailFields(
-                body = "친환경농업 확산\n\n친환경 인증 농업인 지원\n\n농업경영정보를 등록하고 친환경인증을 받은 농업인\n\n인증단계별 직불금 지원",
-                purpose = "친환경농업 확산",
-                eligibilityOriginal = "농업경영정보를 등록하고 친환경인증을 받은 농업인",
-                eligibilitySummary = "인증 보유 농업인",
-                benefitOriginal = "인증단계별 직불금 지원",
-                benefitSummary = benefitSummary,
-                applyStartsOn = LocalDate.of(2026, 2, 1),
-                applyEndsOn = LocalDate.of(2026, 3, 31),
-                applicationPeriodLabel = "2026.02.01~03.31",
-                applicationPeriodNotice = null,
-                applicationMethod = "방문 신청",
-                requiredDocuments = "신청서",
-                selectionCriteria = "자격 확인",
-                departmentName = "친환경농업과",
-                onlineApplyAvailable = false,
-                applicationUrl = null,
-                targetTagsJson = """["REGISTERED_FARMER"]""",
-                cropTagsJson = """["ECO_FRIENDLY"]""",
-                regionTagsJson = """["전국"]""",
-                rawPayload = """{"afbzCd":"AB000009","bizYr":"2026"}""",
-                recommendable = true
+                "친환경농업 확산\n\n친환경 인증 농업인 지원\n\n농업경영정보를 등록하고 친환경인증을 받은 농업인\n\n인증단계별 직불금 지원",
+                "친환경농업 확산",
+                "농업경영정보를 등록하고 친환경인증을 받은 농업인",
+                "인증 보유 농업인",
+                "인증단계별 직불금 지원",
+                benefitSummary,
+                LocalDate.of(2026, 2, 1),
+                LocalDate.of(2026, 3, 31),
+                "2026.02.01~03.31",
+                null,
+                "방문 신청",
+                "신청서",
+                "자격 확인",
+                "친환경농업과",
+                false,
+                null,
+                """["REGISTERED_FARMER"]""",
+                """["ECO_FRIENDLY"]""",
+                """["전국"]""",
+                """{"afbzCd":"AB000009","bizYr":"2026"}""",
+                true
             )
         }
 

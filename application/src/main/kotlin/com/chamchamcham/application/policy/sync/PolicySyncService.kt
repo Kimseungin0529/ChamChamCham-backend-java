@@ -185,52 +185,47 @@ class PolicySyncService(
         existing: PolicyProgram?
     ): Boolean {
         val isNew = existing == null
-        val program = existing ?: PolicyProgram(
-            title = item.title,
-            body = item.summary ?: item.title,
-            region = DEFAULT_REGION,
-            targetManagementType = null
-        )
+        val program = existing ?: PolicyProgram(item.title, item.summary ?: item.title, DEFAULT_REGION, null)
 
         var changed = isNew
         changed = program.applyListFields(
-            source = PolicySource.NONGUP_EZ,
-            externalId = item.externalId,
-            sourceYear = item.sourceYear,
-            title = item.title,
-            summary = item.summary,
-            region = DEFAULT_REGION,
-            sourceUrl = detailUrl(item.externalId, item.sourceYear),
-            agencyName = item.agencyName
+            PolicySource.NONGUP_EZ,
+            item.externalId,
+            item.sourceYear,
+            item.title,
+            item.summary,
+            DEFAULT_REGION,
+            detailUrl(item.externalId, item.sourceYear),
+            item.agencyName
         ) || changed
 
         if (detailFields == null) {
             if (isNew || !program.detailSynced) {
-                changed = program.markDetailSyncFailed(rawPayload = item.rawJson) || changed
+                changed = program.markDetailSyncFailed(item.rawJson) || changed
             }
         } else {
             changed = program.applyDetailFields(
-                body = detailFields.body,
-                purpose = detailFields.purpose,
-                eligibilityOriginal = detailFields.eligibilityOriginal,
-                eligibilitySummary = detailFields.eligibilitySummary,
-                benefitOriginal = detailFields.benefitOriginal,
-                benefitSummary = detailFields.benefitSummary,
-                applyStartsOn = detailFields.applyStartsOn,
-                applyEndsOn = detailFields.applyEndsOn,
-                applicationPeriodLabel = detailFields.applicationPeriodLabel,
-                applicationPeriodNotice = detailFields.applicationPeriodNotice,
-                applicationMethod = detailFields.applicationMethod,
-                requiredDocuments = detailFields.requiredDocuments,
-                selectionCriteria = detailFields.selectionCriteria,
-                departmentName = detailFields.departmentName,
-                onlineApplyAvailable = detailFields.onlineApplyAvailable,
-                applicationUrl = detailFields.applicationUrl,
-                targetTagsJson = detailFields.targetTagsJson,
-                cropTagsJson = detailFields.cropTagsJson,
-                regionTagsJson = detailFields.regionTagsJson,
-                rawPayload = detailFields.rawPayload,
-                recommendable = true
+                detailFields.body,
+                detailFields.purpose,
+                detailFields.eligibilityOriginal,
+                detailFields.eligibilitySummary,
+                detailFields.benefitOriginal,
+                detailFields.benefitSummary,
+                detailFields.applyStartsOn,
+                detailFields.applyEndsOn,
+                detailFields.applicationPeriodLabel,
+                detailFields.applicationPeriodNotice,
+                detailFields.applicationMethod,
+                detailFields.requiredDocuments,
+                detailFields.selectionCriteria,
+                detailFields.departmentName,
+                detailFields.onlineApplyAvailable,
+                detailFields.applicationUrl,
+                detailFields.targetTagsJson,
+                detailFields.cropTagsJson,
+                detailFields.regionTagsJson,
+                detailFields.rawPayload,
+                true
             ) || changed
         }
 
@@ -251,27 +246,27 @@ class PolicySyncService(
             }
             .forEach { program ->
                 val changed = program.applyDetailFields(
-                    body = program.body,
-                    purpose = program.purpose,
-                    eligibilityOriginal = program.eligibilityOriginal,
-                    eligibilitySummary = program.eligibilitySummary,
-                    benefitOriginal = program.benefitOriginal,
-                    benefitSummary = program.benefitSummary,
-                    applyStartsOn = program.applyStartsOn,
-                    applyEndsOn = program.applyEndsOn,
-                    applicationPeriodLabel = program.applicationPeriodLabel,
-                    applicationPeriodNotice = program.applicationPeriodNotice,
-                    applicationMethod = program.applicationMethod,
-                    requiredDocuments = program.requiredDocuments,
-                    selectionCriteria = program.selectionCriteria,
-                    departmentName = program.departmentName,
-                    onlineApplyAvailable = program.onlineApplyAvailable,
-                    applicationUrl = program.applicationUrl,
-                    targetTagsJson = program.targetTagsJson,
-                    cropTagsJson = program.cropTagsJson,
-                    regionTagsJson = program.regionTagsJson,
-                    rawPayload = program.rawPayload,
-                    recommendable = false
+                    program.body,
+                    program.purpose,
+                    program.eligibilityOriginal,
+                    program.eligibilitySummary,
+                    program.benefitOriginal,
+                    program.benefitSummary,
+                    program.applyStartsOn,
+                    program.applyEndsOn,
+                    program.applicationPeriodLabel,
+                    program.applicationPeriodNotice,
+                    program.applicationMethod,
+                    program.requiredDocuments,
+                    program.selectionCriteria,
+                    program.departmentName,
+                    program.onlineApplyAvailable,
+                    program.applicationUrl,
+                    program.targetTagsJson,
+                    program.cropTagsJson,
+                    program.regionTagsJson,
+                    program.rawPayload,
+                    false
                 )
                 if (changed) {
                     policyProgramRepository.save(program)

@@ -67,21 +67,16 @@ class PolicyProgramRepositoryTest @Autowired constructor(
         externalId: String,
         agencyName: String = "농림축산식품부"
     ): PolicyProgram {
-        val program = PolicyProgram(
-            title = title,
-            body = "정책 상세",
-            region = "전국",
-            targetManagementType = null
-        )
+        val program = PolicyProgram(title, "정책 상세", "전국", null)
         program.applyListFields(
-            source = PolicySource.NONGUP_EZ,
-            externalId = externalId,
-            sourceYear = "2026",
-            title = title,
-            summary = "$title 요약",
-            region = "전국",
-            sourceUrl = null,
-            agencyName = agencyName
+            PolicySource.NONGUP_EZ,
+            externalId,
+            "2026",
+            title,
+            "$title 요약",
+            "전국",
+            null,
+            agencyName
         )
         return persist(program, LocalDateTime.of(2026, 7, 7, 9, 0))
     }

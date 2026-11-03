@@ -261,13 +261,7 @@ class SearchServiceTest {
     )
 
     private fun policyProgram(title: String, createdAt: LocalDateTime): PolicyProgram {
-        val program = PolicyProgram(
-            id = UUID.randomUUID(),
-            title = title,
-            body = "정책 상세",
-            region = "전국",
-            targetManagementType = null,
-        )
+        val program = PolicyProgram(UUID.randomUUID(), title, "정책 상세", "전국", null)
         BaseTimeEntity::class.java.getDeclaredField("createdAt").apply {
             isAccessible = true
             set(program, createdAt)
