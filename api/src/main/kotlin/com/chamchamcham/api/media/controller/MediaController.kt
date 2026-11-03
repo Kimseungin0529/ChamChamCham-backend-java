@@ -28,11 +28,11 @@ class MediaController(
     ): ResponseEntity<ApiResponse<MediaResponses.UploadedImageResponse>> {
         val result = mediaUploadService.upload(
             MediaCommand.UploadImage(
-                memberId = parseMemberId(memberId),
-                usageType = requireNotNull(request.usageType),
-                base64Image = request.base64Image,
-                originalFilename = request.originalFilename,
-                contentType = request.contentType
+                parseMemberId(memberId),
+                requireNotNull(request.usageType),
+                request.base64Image,
+                request.originalFilename,
+                request.contentType
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(MediaResponses.UploadedImageResponse.from(result)))

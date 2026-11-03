@@ -21,8 +21,8 @@ class CloudinaryImageUploader(
                 )
             )
             ImageUploader.UploadedImage(
-                imageUrl = uploadResult["secure_url"] as String,
-                cloudinaryPublicId = uploadResult["public_id"] as String
+                uploadResult["secure_url"] as String,
+                uploadResult["public_id"] as String
             )
         } catch (exception: Exception) {
             throw BusinessException(ErrorCode.MEDIA_UPLOAD_FAILED)

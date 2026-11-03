@@ -74,9 +74,9 @@ class MemberControllerTest(
         given(memberProfileService.getMyFarmCrops(memberId)).willReturn(
             listOf(
                 MemberProfileResult.FarmCrops(
-                    farmId = farmId,
-                    farmName = "횡성 황기밭",
-                    crops = listOf(cropSummary())
+                    farmId,
+                    "횡성 황기밭",
+                    listOf(cropSummary())
                 )
             )
         )
@@ -104,7 +104,7 @@ class MemberControllerTest(
 
     @Test
     fun `update profile succeeds without name phone birthDate or nickname`() {
-        given(memberProfileService.updateMyProfile(updateCommand().copy(name = null, phone = null, birthDate = null, nickname = null)))
+        given(memberProfileService.updateMyProfile(updateCommand(name = null, phone = null, birthDate = null, nickname = null)))
             .willReturn(myProfile())
 
         mockMvc.perform(
@@ -159,7 +159,7 @@ class MemberControllerTest(
     fun `update profile allows experience level up to one hundred when birthDate is absent`() {
         given(
             memberProfileService.updateMyProfile(
-                updateCommand().copy(birthDate = null, experienceLevel = 90)
+                updateCommand(birthDate = null, experienceLevel = 90)
             )
         ).willReturn(myProfile())
 
@@ -180,13 +180,13 @@ class MemberControllerTest(
     fun `get public profile keeps safe fields`() {
         given(memberProfileService.getPublicProfile(memberId)).willReturn(
             MemberProfileResult.PublicProfile(
-                memberId = memberId,
-                nickname = "황기농부",
-                experienceLevel = 2,
-                managementType = ManagementType.AGRICULTURAL_INDIVIDUAL.name,
-                profileImageUrl = null,
-                farms = listOf(MemberProfileResult.PublicFarm(farmId, "강원특별자치도 횡성군")),
-                crops = listOf(MemberProfileResult.CropProfile(cropId, "황기"))
+                memberId,
+                "황기농부",
+                2,
+                ManagementType.AGRICULTURAL_INDIVIDUAL.name,
+                null,
+                listOf(MemberProfileResult.PublicFarm(farmId, "강원특별자치도 횡성군")),
+                listOf(MemberProfileResult.CropProfile(cropId, "황기"))
             )
         )
 
@@ -212,61 +212,67 @@ class MemberControllerTest(
 
     private fun myProfile(): MemberProfileResult.MyProfile =
         MemberProfileResult.MyProfile(
-            memberId = memberId,
-            email = "hwanggi@example.com",
-            name = "이황기",
-            phone = "010-1000-0001",
-            birthDate = LocalDate.of(1986, 3, 12),
-            nickname = "황기농부",
-            experienceLevel = 2,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL.name,
-            profileImageUrl = null,
-            farms = listOf(
+            memberId,
+            "hwanggi@example.com",
+            "이황기",
+            "010-1000-0001",
+            LocalDate.of(1986, 3, 12),
+            "황기농부",
+            2,
+            ManagementType.AGRICULTURAL_INDIVIDUAL.name,
+            null,
+            listOf(
                 MemberProfileResult.MyFarm(
-                    farmId = farmId,
-                    name = "횡성 황기밭",
-                    roadAddress = "강원특별자치도 횡성군 둔내면 1",
-                    jibunAddress = null,
-                    displayRegion = "강원특별자치도 횡성군"
+                    farmId,
+                    "횡성 황기밭",
+                    "강원특별자치도 횡성군 둔내면 1",
+                    null,
+                    "강원특별자치도 횡성군"
                 )
             ),
-            crops = listOf(MemberProfileResult.CropProfile(cropId, "황기"))
+            listOf(MemberProfileResult.CropProfile(cropId, "황기"))
         )
 
     private fun cropSummary(): CropResult.CropSummary =
         CropResult.CropSummary(
-            id = cropId,
-            externalNo = 422,
-            name = "황기",
-            usePartCategory = CropUsePartCategory.ROOT_BARK.name,
-            usePartCategoryLabel = CropUsePartCategory.ROOT_BARK.label
+            cropId,
+            422,
+            "황기",
+            CropUsePartCategory.ROOT_BARK.name,
+            CropUsePartCategory.ROOT_BARK.label
         )
 
-    private fun updateCommand(): MemberProfileCommand.UpdateMyProfile =
+    private fun updateCommand(
+        name: String? = "이황기",
+        phone: String? = "010-1000-0001",
+        birthDate: LocalDate? = LocalDate.of(1986, 3, 12),
+        nickname: String? = "황기농부",
+        experienceLevel: Int = 2
+    ): MemberProfileCommand.UpdateMyProfile =
         MemberProfileCommand.UpdateMyProfile(
-            memberId = memberId,
-            name = "이황기",
-            phone = "010-1000-0001",
-            birthDate = LocalDate.of(1986, 3, 12),
-            nickname = "황기농부",
-            experienceLevel = 2,
-            managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-            profileMediaId = null,
-            farms = listOf(
+            memberId,
+            name,
+            phone,
+            birthDate,
+            nickname,
+            experienceLevel,
+            ManagementType.AGRICULTURAL_INDIVIDUAL,
+            null,
+            listOf(
                 MemberProfileCommand.Farm(
-                    farmId = farmId,
-                    name = "횡성 황기밭",
-                    roadAddress = "강원특별자치도 횡성군 둔내면 1",
-                    jibunAddress = null,
-                    latitude = 37.5,
-                    longitude = 128.5,
-                    pnu = null,
-                    landCategory = null,
-                    areaSqm = null,
-                    areaIsManualEntry = false,
-                    boundaryCoordinates = emptyList(),
-                    dataSource = MemberProfileCommand.FarmDataSource(null, null, null, null),
-                    cropIds = listOf(cropId)
+                    farmId,
+                    "횡성 황기밭",
+                    "강원특별자치도 횡성군 둔내면 1",
+                    null,
+                    37.5,
+                    128.5,
+                    null,
+                    null,
+                    null,
+                    false,
+                    emptyList(),
+                    MemberProfileCommand.FarmDataSource(null, null, null, null),
+                    listOf(cropId)
                 )
             )
         )

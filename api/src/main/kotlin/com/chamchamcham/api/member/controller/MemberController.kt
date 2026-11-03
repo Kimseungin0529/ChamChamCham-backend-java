@@ -55,39 +55,39 @@ class MemberController(
     ): ResponseEntity<ApiResponse<MemberResponses.MyProfileResponse>> {
         val profile = memberProfileService.updateMyProfile(
             MemberProfileCommand.UpdateMyProfile(
-                memberId = parseMemberId(memberId),
-                name = request.name,
-                phone = request.phone,
-                birthDate = request.birthDate,
-                nickname = request.nickname,
-                experienceLevel = requireNotNull(request.experienceLevel),
-                managementType = requireNotNull(request.managementType),
-                profileMediaId = request.profileMediaId,
-                farms = request.farms.map { farm ->
+                parseMemberId(memberId),
+                request.name,
+                request.phone,
+                request.birthDate,
+                request.nickname,
+                requireNotNull(request.experienceLevel),
+                requireNotNull(request.managementType),
+                request.profileMediaId,
+                request.farms.map { farm ->
                     MemberProfileCommand.Farm(
-                        farmId = farm.farmId,
-                        name = farm.name,
-                        roadAddress = farm.roadAddress,
-                        jibunAddress = farm.jibunAddress,
-                        latitude = farm.latitude,
-                        longitude = farm.longitude,
-                        pnu = farm.pnu,
-                        landCategory = farm.landCategory,
-                        areaSqm = farm.areaSqm,
-                        areaIsManualEntry = farm.areaIsManualEntry,
-                        boundaryCoordinates = farm.boundaryCoordinates.map {
+                        farm.farmId,
+                        farm.name,
+                        farm.roadAddress,
+                        farm.jibunAddress,
+                        farm.latitude,
+                        farm.longitude,
+                        farm.pnu,
+                        farm.landCategory,
+                        farm.areaSqm,
+                        farm.areaIsManualEntry,
+                        farm.boundaryCoordinates.map {
                             MemberProfileCommand.FarmBoundaryCoordinate(
-                                latitude = requireNotNull(it.latitude),
-                                longitude = requireNotNull(it.longitude)
+                                requireNotNull(it.latitude),
+                                requireNotNull(it.longitude)
                             )
                         },
-                        dataSource = MemberProfileCommand.FarmDataSource(
-                            address = farm.dataSource.address,
-                            coordinate = farm.dataSource.coordinate,
-                            parcel = farm.dataSource.parcel,
-                            landCharacteristic = farm.dataSource.landCharacteristic
+                        MemberProfileCommand.FarmDataSource(
+                            farm.dataSource.address,
+                            farm.dataSource.coordinate,
+                            farm.dataSource.parcel,
+                            farm.dataSource.landCharacteristic
                         ),
-                        cropIds = farm.cropIds
+                        farm.cropIds
                     )
                 }
             )

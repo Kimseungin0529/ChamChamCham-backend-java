@@ -46,18 +46,18 @@ class MediaControllerTest(
         `when`(
             mediaUploadService.upload(
                 MediaCommand.UploadImage(
-                    memberId = memberId,
-                    usageType = UploadedMediaUsageType.COMMUNITY_POST,
-                    base64Image = "aGVsbG8=",
-                    originalFilename = "sprout.jpg",
-                    contentType = "image/jpeg"
+                    memberId,
+                    UploadedMediaUsageType.COMMUNITY_POST,
+                    "aGVsbG8=",
+                    "sprout.jpg",
+                    "image/jpeg"
                 )
             )
         ).thenReturn(
             MediaResult.UploadedImage(
-                mediaId = mediaId,
-                imageUrl = "https://example.test/sprout.jpg",
-                status = UploadedMediaStatus.TEMP
+                mediaId,
+                "https://example.test/sprout.jpg",
+                UploadedMediaStatus.TEMP
             )
         )
 
