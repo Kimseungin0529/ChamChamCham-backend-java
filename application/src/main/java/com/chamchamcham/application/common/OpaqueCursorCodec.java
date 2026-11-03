@@ -32,7 +32,7 @@ public class OpaqueCursorCodec {
         Objects.requireNonNull(payloadType, "payloadType");
         try {
             var json = new String(Base64.getUrlDecoder().decode(cursor), StandardCharsets.UTF_8);
-            return objectMapper.readValue(json, payloadType);
+            return Objects.requireNonNull(objectMapper.readValue(json, payloadType));
         } catch (Exception exception) {
             throw new BusinessException(ErrorCode.INVALID_CURSOR);
         }

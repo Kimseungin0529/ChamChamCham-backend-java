@@ -30,5 +30,12 @@ class OpaqueCursorCodecTest {
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.INVALID_CURSOR);
     }
 
+    @Test
+    void decodeRejectsJsonNullPayload() {
+        var exception = assertThrows(BusinessException.class,
+            () -> codec.decode("bnVsbA", TestCursorPayload.class));
+        assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.INVALID_CURSOR);
+    }
+
     record TestCursorPayload(String sort, Long score, LocalDateTime createdAt, UUID id) {}
 }
