@@ -208,14 +208,15 @@ class FarmingRecordServiceTest {
         usageType: UploadedMediaUsageType = UploadedMediaUsageType.FARMING_RECORD,
         status: UploadedMediaStatus = UploadedMediaStatus.TEMP,
     ): UploadedMedia = UploadedMedia(
-        id = id,
-        owner = member,
-        mediaType = UploadedMediaType.IMAGE,
-        usageType = usageType,
-        fileUrl = "https://example.test/$id.jpg",
-        cloudinaryPublicId = "farming/$id",
-        status = status,
-    )
+        id,
+        member,
+        UploadedMediaType.IMAGE,
+        usageType,
+        "https://example.test/$id.jpg",
+        "farming/$id"
+    ).also { migratedUploadedMedia ->
+        migratedUploadedMedia.status = status
+    }
 
     private fun stubFarmingRecordSave() {
         `when`(farmingRecordRepository.save(any(FarmingRecord::class.java))).thenAnswer { invocation ->

@@ -461,13 +461,14 @@ class FarmingRecordQueryRepositoryTest @Autowired constructor(
     private fun persistMedia(record: FarmingRecord, displayOrder: Int, url: String) {
         val media = persist(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = url,
-                cloudinaryPublicId = "farming/${UUID.randomUUID()}",
-                status = UploadedMediaStatus.ATTACHED,
-            ),
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                url,
+                "farming/${UUID.randomUUID()}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             now
         )
         persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)

@@ -96,11 +96,11 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
         memberCropRepository.save(MemberCrop(member = member, farm = farm, crop = crop))
         media = uploadedMediaRepository.save(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = "https://example.com/farming-record.jpg",
-                cloudinaryPublicId = "farming-record-test",
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                "https://example.com/farming-record.jpg",
+                "farming-record-test"
             ),
         )
     }

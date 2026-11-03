@@ -166,11 +166,11 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
 
     private fun newMedia(): UploadedMedia = uploadedMediaRepository.save(
         UploadedMedia(
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.FARMING_RECORD,
-            fileUrl = "https://example.com/farming-record-${UUID.randomUUID()}.jpg",
-            cloudinaryPublicId = "farming-record-test-${UUID.randomUUID()}",
+            member,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.FARMING_RECORD,
+            "https://example.com/farming-record-${UUID.randomUUID()}.jpg",
+            "farming-record-test-${UUID.randomUUID()}"
         ),
     )
 

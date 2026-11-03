@@ -198,13 +198,14 @@ class FarmingCycleReportSourceRepositoryTest @Autowired constructor(
     private fun persistMedia(record: FarmingRecord, displayOrder: Int) {
         val media = persist(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = "https://example.test/$displayOrder.jpg",
-                cloudinaryPublicId = "farming/${UUID.randomUUID()}",
-                status = UploadedMediaStatus.ATTACHED,
-            ),
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                "https://example.test/$displayOrder.jpg",
+                "farming/${UUID.randomUUID()}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             now,
         )
         persist(FarmingRecordMedia(record = record, uploadedMedia = media, displayOrder = displayOrder), now)

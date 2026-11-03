@@ -175,13 +175,14 @@ class FarmingWorkReportSourceRepositoryTest @Autowired constructor(
     ): FarmingRecordMedia {
         val media = persist(
             UploadedMedia(
-                owner = member,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.FARMING_RECORD,
-                fileUrl = url,
-                cloudinaryPublicId = "farming/$suffix",
-                status = UploadedMediaStatus.ATTACHED,
-            ),
+                member,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.FARMING_RECORD,
+                url,
+                "farming/$suffix"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             now,
         )
         return persist(

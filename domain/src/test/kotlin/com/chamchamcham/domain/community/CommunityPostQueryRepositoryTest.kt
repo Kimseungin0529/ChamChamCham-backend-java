@@ -401,13 +401,14 @@ class CommunityPostQueryRepositoryTest @Autowired constructor(
     private fun persistThumbnail(post: CommunityPost) {
         val media = persist(
             UploadedMedia(
-                owner = otherMember,
-                mediaType = UploadedMediaType.IMAGE,
-                usageType = UploadedMediaUsageType.COMMUNITY_POST,
-                fileUrl = "https://example.test/${post.title}.jpg",
-                cloudinaryPublicId = "community/${post.title}",
-                status = UploadedMediaStatus.ATTACHED
-            ),
+                otherMember,
+                UploadedMediaType.IMAGE,
+                UploadedMediaUsageType.COMMUNITY_POST,
+                "https://example.test/${post.title}.jpg",
+                "community/${post.title}"
+            ).also { migratedUploadedMedia ->
+                migratedUploadedMedia.status = UploadedMediaStatus.ATTACHED
+            },
             LocalDateTime.of(2026, 6, 12, 9, 50)
         )
         persist(CommunityPostMedia(post = post, uploadedMedia = media, displayOrder = 0), LocalDateTime.of(2026, 6, 12, 9, 51))

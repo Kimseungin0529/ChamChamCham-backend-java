@@ -191,12 +191,12 @@ class OnboardingServiceTest {
         val member = member()
         val otherMember = Member(UUID.fromString("00000000-0000-0000-0000-000000000099"), "other@example.com", null)
         val media = UploadedMedia(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000501"),
-            owner = otherMember,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.PROFILE,
-            fileUrl = "https://example.test/profile.jpg",
-            cloudinaryPublicId = "profiles/profile"
+            UUID.fromString("00000000-0000-0000-0000-000000000501"),
+            otherMember,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.PROFILE,
+            "https://example.test/profile.jpg",
+            "profiles/profile"
         )
 
         `when`(memberRepository.findById(memberId)).thenReturn(Optional.of(member))
@@ -296,12 +296,12 @@ class OnboardingServiceTest {
 
     private fun profileMedia(member: Member): UploadedMedia {
         return UploadedMedia(
-            id = UUID.fromString("00000000-0000-0000-0000-000000000501"),
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = UploadedMediaUsageType.PROFILE,
-            fileUrl = "https://example.test/profile.jpg",
-            cloudinaryPublicId = "profiles/profile"
+            UUID.fromString("00000000-0000-0000-0000-000000000501"),
+            member,
+            UploadedMediaType.IMAGE,
+            UploadedMediaUsageType.PROFILE,
+            "https://example.test/profile.jpg",
+            "profiles/profile"
         )
     }
 }

@@ -369,14 +369,15 @@ class CommunityCommentServiceTest {
         status: UploadedMediaStatus = UploadedMediaStatus.TEMP
     ): UploadedMedia =
         UploadedMedia(
-            id = id,
-            owner = owner,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/comment.jpg",
-            cloudinaryPublicId = "community/comment",
-            status = status
-        )
+            id,
+            owner,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/comment.jpg",
+            "community/comment"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
 
     private fun capturedComment(): CommunityComment {
         val captor = ArgumentCaptor.forClass(CommunityComment::class.java)

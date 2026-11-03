@@ -715,14 +715,15 @@ class CommunityPostServiceTest {
     ): UploadedMedia {
         val index = if (id == mediaId2) "2" else "1"
         return UploadedMedia(
-            id = id,
-            owner = member,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/$index.jpg",
-            cloudinaryPublicId = "community/$index",
-            status = status
-        )
+            id,
+            member,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/$index.jpg",
+            "community/$index"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
     }
 
     private fun existingPost(author: Member, crop: Crop, id: UUID = postId): CommunityPost =

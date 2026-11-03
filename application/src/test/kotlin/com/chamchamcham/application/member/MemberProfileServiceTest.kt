@@ -380,14 +380,15 @@ class MemberProfileServiceTest {
         status: UploadedMediaStatus = UploadedMediaStatus.ATTACHED
     ): UploadedMedia =
         UploadedMedia(
-            id = id,
-            owner = owner,
-            mediaType = UploadedMediaType.IMAGE,
-            usageType = usageType,
-            fileUrl = "https://example.test/$id.jpg",
-            cloudinaryPublicId = "profile/$id",
-            status = status
-        )
+            id,
+            owner,
+            UploadedMediaType.IMAGE,
+            usageType,
+            "https://example.test/$id.jpg",
+            "profile/$id"
+        ).also { migratedUploadedMedia ->
+            migratedUploadedMedia.status = status
+        }
 
     private fun farm(
         id: UUID,
