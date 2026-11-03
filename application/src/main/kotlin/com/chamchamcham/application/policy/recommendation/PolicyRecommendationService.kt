@@ -81,13 +81,13 @@ class PolicyRecommendationService(
 
         val result = policyRecommendationQueryRepository.findPage(
             PolicyRecommendationQueryRepository.SearchCondition(
-                memberId = memberId,
-                source = source,
-                sourceYear = sourceYear,
-                benefitSummary = benefitCategory?.label,
-                sort = sort,
-                cursor = decodedCursor,
-                size = size + 1
+                memberId,
+                source,
+                sourceYear,
+                benefitCategory?.label,
+                sort,
+                decodedCursor,
+                size + 1
             )
         )
         val visible = result.rows.take(size)
@@ -181,10 +181,10 @@ class PolicyRecommendationService(
                 return@mapNotNull null
             }
             PolicyRecommendation(
-                member = member,
-                policyProgram = program,
-                score = score.score,
-                reason = score.reason
+                member,
+                program,
+                score.score,
+                score.reason
             )
         }
 
@@ -243,17 +243,17 @@ class PolicyRecommendationService(
         }
         return when (sort) {
             PolicyRecommendationSort.RECOMMENDED -> PolicyRecommendationQueryRepository.Cursor(
-                score = payload.score ?: throw BusinessException(ErrorCode.INVALID_INPUT),
-                applyStartsOn = null,
-                applyEndsOn = payload.applyEndsOn,
-                id = payload.id
+                payload.score ?: throw BusinessException(ErrorCode.INVALID_INPUT),
+                null,
+                payload.applyEndsOn,
+                payload.id
             )
 
             PolicyRecommendationSort.LATEST -> PolicyRecommendationQueryRepository.Cursor(
-                score = null,
-                applyStartsOn = payload.applyStartsOn,
-                applyEndsOn = null,
-                id = payload.id
+                null,
+                payload.applyStartsOn,
+                null,
+                payload.id
             )
         }
     }

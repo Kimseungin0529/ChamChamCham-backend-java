@@ -139,45 +139,40 @@ class SearchPolicyIntegrationTest(
         sourceUrl: String?,
         detailSynced: Boolean = true,
     ): PolicyProgram {
-        return PolicyProgram(
-            title = title,
-            body = "정책 상세",
-            region = "전국",
-            targetManagementType = null,
-        ).apply {
+        return PolicyProgram(title, "정책 상세", "전국", null).apply {
             applyListFields(
-                source = PolicySource.NONGUP_EZ,
-                externalId = externalId,
-                sourceYear = "2026",
-                title = title,
-                summary = summary,
-                region = "전국",
-                sourceUrl = sourceUrl,
-                agencyName = "농림축산식품부"
+                PolicySource.NONGUP_EZ,
+                externalId,
+                "2026",
+                title,
+                summary,
+                "전국",
+                sourceUrl,
+                "농림축산식품부"
             )
             if (detailSynced) {
                 applyDetailFields(
-                    body = "정책 상세",
-                    purpose = null,
-                    eligibilityOriginal = null,
-                    eligibilitySummary = "자격 확인",
-                    benefitOriginal = null,
-                    benefitSummary = benefitSummary,
-                    applyStartsOn = null,
-                    applyEndsOn = null,
-                    applicationPeriodLabel = "접수기관문의",
-                    applicationPeriodNotice = null,
-                    applicationMethod = null,
-                    requiredDocuments = null,
-                    selectionCriteria = null,
-                    departmentName = null,
-                    onlineApplyAvailable = false,
-                    applicationUrl = null,
-                    targetTagsJson = "[]",
-                    cropTagsJson = "[]",
-                    regionTagsJson = "[]",
-                    rawPayload = "{}",
-                    recommendable = true
+                    "정책 상세",
+                    null,
+                    null,
+                    "자격 확인",
+                    null,
+                    benefitSummary,
+                    null,
+                    null,
+                    "접수기관문의",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    false,
+                    null,
+                    "[]",
+                    "[]",
+                    "[]",
+                    "{}",
+                    true
                 )
             }
         }

@@ -73,10 +73,10 @@ class SearchService(
         val cursor = query.cursor?.let { cursorCodec.decode(it, PolicySearchCursorPayload::class.java) }
         val rows = policyProgramQueryRepository.search(
             PolicyProgramQueryRepository.SearchCondition(
-                keyword = query.keyword,
-                cursorCreatedAt = cursor?.createdAt,
-                cursorId = cursor?.id,
-                size = query.size + 1,
+                query.keyword,
+                cursor?.createdAt,
+                cursor?.id,
+                query.size + 1,
             )
         )
         val visible = rows.take(query.size)

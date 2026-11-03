@@ -385,10 +385,10 @@ class PolicyRecommendationServiceTest {
         val firstCondition = recommendationSearchCondition(size = 2)
         val cursorCondition = recommendationSearchCondition(
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = BigDecimal("96.0"),
-                applyStartsOn = null,
-                applyEndsOn = LocalDate.of(2026, 6, 30),
-                id = recommendationId
+                BigDecimal("96.0"),
+                null,
+                LocalDate.of(2026, 6, 30),
+                recommendationId
             ),
             size = 2
         )
@@ -434,10 +434,10 @@ class PolicyRecommendationServiceTest {
         val cursorCondition = recommendationSearchCondition(
             sort = PolicyRecommendationSort.LATEST,
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = null,
-                applyStartsOn = LocalDate.of(2026, 3, 1),
-                applyEndsOn = null,
-                id = recommendationId
+                null,
+                LocalDate.of(2026, 3, 1),
+                null,
+                recommendationId
             ),
             size = 2
         )
@@ -523,10 +523,10 @@ class PolicyRecommendationServiceTest {
         val expectedCondition = recommendationSearchCondition(
             sort = PolicyRecommendationSort.LATEST,
             cursor = PolicyRecommendationQueryRepository.Cursor(
-                score = null,
-                applyStartsOn = null,
-                applyEndsOn = null,
-                id = recommendationId
+                null,
+                null,
+                null,
+                recommendationId
             )
         )
         `when`(policyRecommendationQueryRepository.findPage(expectedCondition))
@@ -747,13 +747,13 @@ class PolicyRecommendationServiceTest {
         size: Int = 21
     ): PolicyRecommendationQueryRepository.SearchCondition =
         PolicyRecommendationQueryRepository.SearchCondition(
-            memberId = memberId,
-            source = PolicySource.NONGUP_EZ,
-            sourceYear = "2026",
-            benefitSummary = benefitSummary,
-            sort = sort,
-            cursor = cursor,
-            size = size
+            memberId,
+            PolicySource.NONGUP_EZ,
+            "2026",
+            benefitSummary,
+            sort,
+            cursor,
+            size
         )
 
     private fun givenLatestSyncJob() {
@@ -853,37 +853,38 @@ class PolicyRecommendationServiceTest {
         rawPayload: String = "{}"
     ): PolicyProgram =
         PolicyProgram(
-            id = id,
-            title = title,
-            body = "약용작물 재배 청년농 지원",
-            region = "충청북도",
-            targetManagementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-            applyStartsOn = applyStartsOn,
-            applyEndsOn = applyEndsOn,
-            sourceUrl = "https://example.test/policy",
-            source = PolicySource.NONGUP_EZ,
-            externalId = "AB000009",
-            sourceYear = "2026",
-            summary = "약용작물 지원",
-            agencyName = "농림축산식품부",
-            departmentName = "친환경농업과",
-            onlineApplyAvailable = true,
-            applicationUrl = "https://example.test/apply",
-            applicationPeriodLabel = "2026.03.01~06.30",
-            eligibilityOriginal = "만 40세 미만 청년농",
-            eligibilitySummary = "청년농 대상",
-            benefitOriginal = "약용작물 생산 지원",
-            benefitSummary = "생산비 지원",
-            purpose = "약용작물 재배 확대",
-            applicationMethod = "온라인 신청",
-            requiredDocuments = "신청서",
-            selectionCriteria = "자격 확인",
-            detailSynced = true,
-            recommendable = true,
-            targetTagsJson = targetTagsJson,
-            cropTagsJson = cropTagsJson,
-            regionTagsJson = regionTagsJson,
-            rawPayload = rawPayload
+            id,
+            title,
+            "약용작물 재배 청년농 지원",
+            "충청북도",
+            ManagementType.AGRICULTURAL_INDIVIDUAL,
+            applyStartsOn,
+            applyEndsOn,
+            "https://example.test/policy",
+            PolicySource.NONGUP_EZ,
+            "AB000009",
+            "2026",
+            "약용작물 지원",
+            "농림축산식품부",
+            "친환경농업과",
+            true,
+            "https://example.test/apply",
+            "2026.03.01~06.30",
+            null,
+            "만 40세 미만 청년농",
+            "청년농 대상",
+            "약용작물 생산 지원",
+            "생산비 지원",
+            "약용작물 재배 확대",
+            "온라인 신청",
+            "신청서",
+            "자격 확인",
+            true,
+            true,
+            targetTagsJson,
+            cropTagsJson,
+            regionTagsJson,
+            rawPayload
         )
 
     private fun recommendation(
@@ -893,11 +894,11 @@ class PolicyRecommendationServiceTest {
         createdAt: LocalDateTime = LocalDateTime.of(2026, 3, 15, 9, 0)
     ): PolicyRecommendation =
         PolicyRecommendation(
-            id = id,
-            member = member,
-            policyProgram = program,
-            score = score,
-            reason = "청년농 대상이고 재배 품목이 맞아요."
+            id,
+            member,
+            program,
+            score,
+            "청년농 대상이고 재배 품목이 맞아요."
         ).also { setCreatedAt(it, createdAt) }
 
     private fun setCreatedAt(entity: PolicyRecommendation, createdAt: LocalDateTime) {

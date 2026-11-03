@@ -161,11 +161,5 @@ class SearchSuggestionServiceTest {
     }
 
     private fun policyProgram(title: String, agencyName: String): PolicyProgram =
-        PolicyProgram(
-            title = title,
-            body = "정책 상세",
-            region = "전국",
-            targetManagementType = null,
-            agencyName = agencyName,
-        )
+        PolicyProgram(title, "정책 상세", "전국", null).apply { this.agencyName = agencyName }
 }
