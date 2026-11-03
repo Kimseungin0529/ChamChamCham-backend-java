@@ -301,7 +301,7 @@ class PolicySyncService(
 
     private fun findJob(jobId: UUID): PolicySyncJob =
         policySyncJobRepository.findById(jobId).orElseThrow {
-            BusinessException(ErrorCode.RESOURCE_NOT_FOUND, detail = jobId)
+            BusinessException(ErrorCode.RESOURCE_NOT_FOUND, jobId)
         }
 
     private data class DetailFields(

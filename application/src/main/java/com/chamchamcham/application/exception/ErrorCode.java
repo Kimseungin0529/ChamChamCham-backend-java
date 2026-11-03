@@ -1,12 +1,7 @@
-package com.chamchamcham.application.exception
+package com.chamchamcham.application.exception;
 
-enum class ErrorCode(
-    val code: String,
-    val messageKey: String,
-    val status: Int
-) {
-
-    INVALID_INPUT("COMMON_001", "error.invalid_input", 400),
+public enum ErrorCode {
+INVALID_INPUT("COMMON_001", "error.invalid_input", 400),
     INVALID_JSON("COMMON_002", "error.invalid_json", 400),
     INVALID_CURSOR("COMMON_003", "error.invalid_cursor", 400),
     INTERNAL_ERROR("COMMON_999", "error.internal_error", 500),
@@ -76,6 +71,19 @@ enum class ErrorCode(
     REPORT_FEEDBACK_NOT_FOUND("COACHING_003", "error.report_feedback_not_found", 404),
     REPORT_FEEDBACK_REGENERATION_NOT_ALLOWED("COACHING_004", "error.report_feedback_regeneration_not_allowed", 409),
     UNAUTHORIZED("AUTH_001", "error.unauthorized", 401),
-    FORBIDDEN("AUTH_002", "error.forbidden", 403),
+    FORBIDDEN("AUTH_002", "error.forbidden", 403);
 
+    private final String code;
+    private final String messageKey;
+    private final int status;
+
+    ErrorCode(String code, String messageKey, int status) {
+        this.code = code;
+        this.messageKey = messageKey;
+        this.status = status;
+    }
+
+    public String getCode() { return code; }
+    public String getMessageKey() { return messageKey; }
+    public int getStatus() { return status; }
 }

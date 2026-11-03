@@ -104,7 +104,7 @@ class PolicyRecommendationService(
             throw BusinessException(ErrorCode.MEMBER_NOT_FOUND)
         }
         val program = policyProgramRepository.findByIdAndDetailSyncedTrueAndRecommendableTrue(policyProgramId)
-            ?: throw BusinessException(ErrorCode.POLICY_PROGRAM_NOT_FOUND, detail = policyProgramId)
+            ?: throw BusinessException(ErrorCode.POLICY_PROGRAM_NOT_FOUND, policyProgramId)
 
         return PolicyRecommendationResult.Detail(
             id = requireNotNull(program.id),
