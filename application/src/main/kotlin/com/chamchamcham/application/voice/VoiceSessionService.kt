@@ -41,7 +41,7 @@ class VoiceSessionService(
             .map { FarmOption(farmId = requireNotNull(it.id), name = it.name) }
 
         val cropsByFarm: Map<String, List<CropOption>> = memberCropRepository.findByMemberId(command.memberId)
-            .groupBy { it.farm.id.toString() }
+            .groupBy { it.farm.id?.toString() ?: "null" }
             .mapValues { (_, memberCrops) ->
                 memberCrops.map { CropOption(cropId = requireNotNull(it.crop.id), name = it.crop.name) }
                     .distinctBy { it.cropId }
