@@ -289,12 +289,19 @@ class ReportFeedbackGenerationHandlerTest {
     @Test
     fun `malformed target snapshot fails only that row`() {
         val target = ReportFeedback(
-            id = feedbackId,
-            member = member,
-            report = report,
-            workType = WorkType.WATERING,
-            status = ReportFeedbackStatus.PENDING,
-            sourceFingerprint = sourceFingerprint,
+            feedbackId,
+            member,
+            report,
+            WorkType.WATERING,
+            ReportFeedbackStatus.PENDING,
+            null,
+            sourceFingerprint,
+            emptyList(),
+            null,
+            emptyList(),
+            null,
+            null,
+            null
         ).also { it.attachInputSnapshot(mapOf("schemaVersion" to "invalid")) }
         val sibling = pendingFeedback(WorkType.FERTILIZING, UUID.randomUUID(), context(WorkType.FERTILIZING))
         val event = generationEvent(WorkType.WATERING)
@@ -329,12 +336,19 @@ class ReportFeedbackGenerationHandlerTest {
         id: UUID = feedbackId,
         context: ReportFeedbackContext = context(workType),
     ) = ReportFeedback(
-        id = id,
-        member = member,
-        report = report,
-        workType = workType,
-        status = ReportFeedbackStatus.PENDING,
-        sourceFingerprint = sourceFingerprint,
+        id,
+        member,
+        report,
+        workType,
+        ReportFeedbackStatus.PENDING,
+        null,
+        sourceFingerprint,
+        emptyList(),
+        null,
+        emptyList(),
+        null,
+        null,
+        null
     ).also { it.attachInputSnapshot(snapshot(context)) }
 
     private fun generationEvent(

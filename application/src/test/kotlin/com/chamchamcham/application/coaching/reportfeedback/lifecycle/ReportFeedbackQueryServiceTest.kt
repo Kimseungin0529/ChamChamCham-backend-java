@@ -228,8 +228,8 @@ class ReportFeedbackQueryServiceTest {
     ).also {
         it.attachInputSnapshot(mapOf("schemaVersion" to 2))
         it.markReady(
-            summary = "관수 작업 요약",
-            items = listOf(
+            "관수 작업 요약",
+            listOf(
                 ReportFeedbackItemDraft(
                     ReportFeedbackItemSection.COMPARISON,
                     "직전보다 기록 1회 증가",
@@ -239,11 +239,11 @@ class ReportFeedbackQueryServiceTest {
                 ReportFeedbackItemDraft(ReportFeedbackItemSection.IMPROVEMENT, "통계 근거", "관수 간격도 함께 비교해 보세요."),
                 ReportFeedbackItemDraft(ReportFeedbackItemSection.NEXT_ACTION, "기록 근거", "내일 토양 수분을 다시 확인하세요."),
             ),
-            citations = listOf(mapOf("kind" to "record", "id" to "internal-only")),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "chat-model",
-            embeddingModel = "embedding-model",
+            listOf(mapOf("kind" to "record", "id" to "internal-only")),
+            "PASS",
+            emptyList(),
+            "chat-model",
+            "embedding-model",
         )
     }
 
@@ -262,12 +262,19 @@ class ReportFeedbackQueryServiceTest {
 
     private fun feedback(id: UUID, workType: WorkType): ReportFeedback =
         ReportFeedback(
-            id = id,
-            member = member,
-            report = completedReport,
-            workType = workType,
-            status = ReportFeedbackStatus.PENDING,
-            sourceFingerprint = "${workType.ordinal + 1}".repeat(64).take(64),
+            id,
+            member,
+            completedReport,
+            workType,
+            ReportFeedbackStatus.PENDING,
+            null,
+            "${workType.ordinal + 1}".repeat(64).take(64),
+            emptyList(),
+            null,
+            emptyList(),
+            null,
+            null,
+            null
         ).also {
             ReflectionTestUtils.setField(it, "createdAt", createdAt)
             ReflectionTestUtils.setField(it, "updatedAt", updatedAt)

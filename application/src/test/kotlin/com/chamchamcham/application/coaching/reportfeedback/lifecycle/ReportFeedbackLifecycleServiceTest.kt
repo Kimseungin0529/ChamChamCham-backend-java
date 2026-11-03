@@ -128,11 +128,11 @@ class ReportFeedbackLifecycleServiceTest {
 
         val feedbacks = service.reconcile(report, setOf(WorkType.HARVEST, WorkType.WATERING))
 
-        assertThat(feedbacks.map(ReportFeedback::workType))
+        assertThat(feedbacks.map(ReportFeedback::getWorkType))
             .containsExactly(WorkType.WATERING, WorkType.HARVEST)
-        assertThat(feedbacks.map(ReportFeedback::status))
+        assertThat(feedbacks.map(ReportFeedback::getStatus))
             .containsOnly(ReportFeedbackStatus.PENDING)
-        assertThat(feedbacks.map(ReportFeedback::sourceFingerprint))
+        assertThat(feedbacks.map(ReportFeedback::getSourceFingerprint))
             .containsExactly(wateringFingerprint, harvestFingerprint)
         val events = ArgumentCaptor.forClass(ReportFeedbackPreparationRequested::class.java)
         verify(eventPublisher, times(2)).publishEvent(events.capture())
@@ -391,32 +391,32 @@ class ReportFeedbackLifecycleServiceTest {
         setId(it, id)
         it.attachInputSnapshot(mapOf("sourceRevision" to 1))
         it.markReady(
-            summary = "${workType.label} 요약",
-            items = emptyList(),
-            citations = emptyList(),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "test-chat",
-            embeddingModel = "test-embedding",
+            "${workType.label} 요약",
+            emptyList(),
+            emptyList(),
+            "PASS",
+            emptyList(),
+            "test-chat",
+            "test-embedding",
         )
     }
 
     private fun legacyReadyFeedback(snapshot: Map<String, Any?>?): ReportFeedback = ReportFeedback(
-        id = wateringFeedbackId,
-        member = member,
-        report = report,
-        workType = WorkType.WATERING,
-        status = ReportFeedbackStatus.PENDING,
+        wateringFeedbackId,
+        member,
+        report,
+        WorkType.WATERING,
+        ReportFeedbackStatus.PENDING
     ).also { feedback ->
         snapshot?.let(feedback::attachInputSnapshot)
         feedback.markReady(
-            summary = "관수 작업 요약",
-            items = emptyList(),
-            citations = emptyList(),
-            auditStatus = "PASS",
-            auditWarnings = emptyList(),
-            modelName = "test-chat",
-            embeddingModel = "test-embedding",
+            "관수 작업 요약",
+            emptyList(),
+            emptyList(),
+            "PASS",
+            emptyList(),
+            "test-chat",
+            "test-embedding",
         )
     }
 

@@ -77,13 +77,13 @@ class ReportFeedbackGenerationHandler(
                 feedback.inputSnapshot != expectedSnapshot
             ) return@executeWithoutResult
             feedback.markReady(
-                summary = result.content.summary,
-                items = result.content.items().map { ReportFeedbackItemDraft(it.section, it.item.basis, it.item.text) },
-                citations = result.citations,
-                auditStatus = if (result.auditWarnings.isEmpty()) RagAuditStatus.PASS.name else RagAuditStatus.WARN.name,
-                auditWarnings = result.auditWarnings,
-                modelName = result.modelInfo.chat,
-                embeddingModel = result.modelInfo.embedding,
+                result.content.summary,
+                result.content.items().map { ReportFeedbackItemDraft(it.section, it.item.basis, it.item.text) },
+                result.citations,
+                if (result.auditWarnings.isEmpty()) RagAuditStatus.PASS.name else RagAuditStatus.WARN.name,
+                result.auditWarnings,
+                result.modelInfo.chat,
+                result.modelInfo.embedding,
             )
         }
     }

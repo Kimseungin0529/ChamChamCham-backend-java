@@ -49,10 +49,10 @@ class ReportFeedbackLifecycleService(
             val pending = orderedWorkTypes.map { workType ->
                 val context = contextAssembler.assemble(memberId, reportId, workType)
                 ReportFeedback.pending(
-                    member = report.member,
-                    report = report,
-                    workType = workType,
-                    sourceFingerprint = contextFingerprint.calculate(context),
+                    report.member,
+                    report,
+                    workType,
+                    contextFingerprint.calculate(context),
                 )
             }
             return feedbackRepository.saveAll(pending).also { saved ->
@@ -60,7 +60,7 @@ class ReportFeedbackLifecycleService(
             }
         }
 
-        val existingByWorkType = existing.associateBy(ReportFeedback::workType)
+        val existingByWorkType = existing.associateBy(ReportFeedback::getWorkType)
         val current = orderedWorkTypes.map { workType ->
             existingByWorkType[workType]?.also { feedback ->
                 val context = contextAssembler.assemble(memberId, reportId, workType)

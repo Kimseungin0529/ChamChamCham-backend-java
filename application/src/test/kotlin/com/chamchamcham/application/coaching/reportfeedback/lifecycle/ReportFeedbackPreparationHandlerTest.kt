@@ -286,12 +286,19 @@ class ReportFeedbackPreparationHandlerTest {
         id: UUID = feedbackId,
         sourceFingerprint: String = if (workType == WorkType.WATERING) sourceFingerprint() else "f".repeat(64),
     ) = ReportFeedback(
-        id = id,
-        member = member,
-        report = report,
-        workType = workType,
-        status = ReportFeedbackStatus.PENDING,
-        sourceFingerprint = sourceFingerprint,
+        id,
+        member,
+        report,
+        workType,
+        ReportFeedbackStatus.PENDING,
+        null,
+        sourceFingerprint,
+        emptyList(),
+        null,
+        emptyList(),
+        null,
+        null,
+        null
     )
 
     private fun preparationEvent(
