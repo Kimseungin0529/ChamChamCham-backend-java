@@ -38,11 +38,11 @@ class CropControllerTest(
             .thenReturn(
                 listOf(
                     CropResult.CropSummary(
-                        id = cropId,
-                        externalNo = 1001,
-                        name = "토마토",
-                        usePartCategory = "FRUIT",
-                        usePartCategoryLabel = "열매"
+                        cropId,
+                        1001,
+                        "토마토",
+                        "FRUIT",
+                        "열매"
                     )
                 )
             )
@@ -63,8 +63,8 @@ class CropControllerTest(
             .thenReturn(
                 listOf(
                     CropResult.CategorySummary(
-                        code = "FRUIT",
-                        label = "열매"
+                        "FRUIT",
+                        "열매"
                     )
                 )
             )
@@ -83,11 +83,11 @@ class CropControllerTest(
             .thenReturn(
                 listOf(
                     CropResult.CropSummary(
-                        id = cropId,
-                        externalNo = 422,
-                        name = "참당귀",
-                        usePartCategory = "ROOT_BARK",
-                        usePartCategoryLabel = "뿌리·껍질"
+                        cropId,
+                        422,
+                        "참당귀",
+                        "ROOT_BARK",
+                        "뿌리·껍질"
                     )
                 )
             )
