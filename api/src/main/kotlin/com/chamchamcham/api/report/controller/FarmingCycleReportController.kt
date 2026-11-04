@@ -35,12 +35,12 @@ class FarmingCycleReportController(
         val result = try {
             queryService.listCompleted(
                 FarmingCycleReportSearchCondition(
-                    memberId = parseMemberId(memberId),
-                    farmIds = farmId.orEmpty(),
-                    cropIds = cropId.orEmpty(),
-                    cursor = cursor,
-                    size = size,
-                ),
+            parseMemberId(memberId),
+            farmId.orEmpty(),
+            cropId.orEmpty(),
+            cursor,
+            size,
+        ),
             )
         } catch (exception: BusinessException) {
             if (exception.errorCode == ErrorCode.INVALID_CURSOR) {

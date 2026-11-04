@@ -95,10 +95,17 @@ class FarmingRecordService(
 
         saveDetail(record, command)
         attachMedia(record, media)
-        reportProjectionService.rebuild(ReportScope(command.memberId, command.farmId, command.cropId))
+        reportProjectionService.rebuild(ReportScope(
+            command.memberId,
+            command.farmId,
+            command.cropId,
+        ))
         recordFeedbackLifecycleService.enqueue(record)
 
-        return FarmingRecordResult.RecordId(id = requireNotNull(record.id), workType = record.workType)
+        return FarmingRecordResult.RecordId(
+            requireNotNull(record.id),
+            record.workType,
+        )
     }
 
     @Transactional(readOnly = true)
@@ -115,8 +122,8 @@ class FarmingRecordService(
             null
         }
         return FarmingRecordResult.Page(
-            items = visibleRows.map(::toSummary),
-            nextCursor = nextCursor
+            visibleRows.map(::toSummary),
+            nextCursor,
         )
     }
 
@@ -172,9 +179,9 @@ class FarmingRecordService(
         val media = validateUpdatedMedia(record, command.memberId, command.mediaIds)
 
         val previousScope = ReportScope(
-            memberId = command.memberId,
-            farmId = requireNotNull(record.farm.id) { "Persisted farm id is required" },
-            cropId = requireNotNull(record.crop.id) { "Persisted crop id is required" },
+            command.memberId,
+            requireNotNull(record.farm.id) { "Persisted farm id is required" },
+            requireNotNull(record.crop.id) { "Persisted crop id is required" },
         )
         val previousWorkType = record.workType
         record.update(
@@ -194,21 +201,28 @@ class FarmingRecordService(
         reportProjectionService.rebuildAll(
             listOf(
                 previousScope,
-                ReportScope(command.memberId, command.farmId, command.cropId),
+                ReportScope(
+            command.memberId,
+            command.farmId,
+            command.cropId,
+        ),
             ),
         )
         recordFeedbackLifecycleService.enqueue(record)
 
-        return FarmingRecordResult.RecordId(id = requireNotNull(record.id), workType = record.workType)
+        return FarmingRecordResult.RecordId(
+            requireNotNull(record.id),
+            record.workType,
+        )
     }
 
     fun delete(command: FarmingRecordCommand.Delete) {
         val record = findRecord(command.recordId)
         assertOwner(record, command.memberId)
         val scope = ReportScope(
-            memberId = command.memberId,
-            farmId = requireNotNull(record.farm.id) { "Persisted farm id is required" },
-            cropId = requireNotNull(record.crop.id) { "Persisted crop id is required" },
+            command.memberId,
+            requireNotNull(record.farm.id) { "Persisted farm id is required" },
+            requireNotNull(record.crop.id) { "Persisted crop id is required" },
         )
         record.softDelete()
         reportProjectionService.rebuild(scope)
@@ -306,9 +320,9 @@ class FarmingRecordService(
             .sortedBy { it.displayOrder }
             .map {
                 FarmingRecordResult.MediaItem(
-                    mediaId = requireNotNull(it.uploadedMedia.id) { "Persisted uploaded media id is required" },
-                    url = it.uploadedMedia.fileUrl,
-                )
+            requireNotNull(it.uploadedMedia.id) { "Persisted uploaded media id is required" },
+            it.uploadedMedia.fileUrl,
+        )
             }
 
         var planting: FarmingRecordResult.PlantingDetail? = null
@@ -321,104 +335,106 @@ class FarmingRecordService(
         when (record.workType) {
             WorkType.PLANTING -> planting = plantingRecordRepository.findByRecord_Id(recordId)?.let {
                 FarmingRecordResult.PlantingDetail(
-                    plantingMethod = it.plantingMethod,
-                    seedAmount = it.seedAmount,
-                    seedAmountUnit = it.seedAmountUnit,
-                    seedlingCount = it.seedlingCount,
-                    seedlingUnit = it.seedlingUnit,
-                    propagationMethod = it.propagationMethod,
-                )
+            it.plantingMethod,
+            it.seedAmount,
+            it.seedAmountUnit,
+            it.seedlingCount,
+            it.seedlingUnit,
+            it.propagationMethod,
+        )
             }
 
             WorkType.WATERING -> watering = wateringRecordRepository.findByRecord_Id(recordId)?.let {
                 FarmingRecordResult.WateringDetail(
-                    irrigationAmount = it.irrigationAmount,
-                    irrigationMethod = it.irrigationMethod,
-                )
+            it.irrigationAmount,
+            it.irrigationMethod,
+        )
             }
 
             WorkType.FERTILIZING -> fertilizing = fertilizingRecordRepository.findByRecord_Id(recordId)?.let {
                 FarmingRecordResult.FertilizingDetail(
-                    materialName = it.materialName,
-                    amount = it.amount,
-                    amountUnit = it.amountUnit,
-                    applicationMethod = it.applicationMethod,
-                )
+            it.materialName,
+            it.amount,
+            it.amountUnit,
+            it.applicationMethod,
+        )
             }
 
             WorkType.PEST_CONTROL -> pestControl = pestControlRecordRepository.findByRecord_Id(recordId)?.let {
                 FarmingRecordResult.PestControlDetail(
-                    pesticideId = requireNotNull(it.pesticide.id) { "Persisted pesticide id is required" },
-                    pesticideName = it.pesticide.itemName,
-                    pesticideAmount = it.pesticideAmount,
-                    pesticideAmountUnit = it.pesticideAmountUnit,
-                    totalSprayAmount = it.totalSprayAmount,
-                    totalSprayAmountUnit = it.totalSprayAmountUnit,
-                    pestId = it.pest?.id,
-                    pestName = it.pest?.name,
-                )
+            requireNotNull(it.pesticide.id) { "Persisted pesticide id is required" },
+            it.pesticide.itemName,
+            it.pesticideAmount,
+            it.pesticideAmountUnit,
+            it.totalSprayAmount,
+            it.totalSprayAmountUnit,
+            it.pest?.id,
+            it.pest?.name,
+        )
             }
 
             WorkType.WEEDING -> weeding = weedingRecordRepository.findByRecord_Id(recordId)?.let {
-                FarmingRecordResult.WeedingDetail(weedingMethod = it.weedingMethod)
+                FarmingRecordResult.WeedingDetail(
+            it.weedingMethod,
+        )
             }
 
             WorkType.PRUNING -> Unit
 
             WorkType.HARVEST -> harvest = harvestRecordRepository.findByRecord_Id(recordId)?.let {
                 FarmingRecordResult.HarvestDetail(
-                    harvestAmount = it.harvestAmount,
-                    medicinalPart = it.medicinalPart,
-                    harvestSource = it.harvestSource,
-                    growthPeriod = it.growthPeriod,
-                    isLastHarvest = it.isLastHarvest,
-                )
+            it.harvestAmount,
+            it.medicinalPart,
+            it.harvestSource,
+            it.growthPeriod,
+            it.isLastHarvest,
+        )
             }
 
             WorkType.ETC -> Unit
         }
 
         return FarmingRecordResult.Detail(
-            id = recordId,
-            farmId = requireNotNull(record.farm.id) { "Persisted farm id is required" },
-            farmName = record.farm.name,
-            cropId = requireNotNull(record.crop.id) { "Persisted crop id is required" },
-            cropName = record.crop.name,
-            workType = record.workType,
-            workedAt = record.workedAt,
-            weatherCondition = record.weatherCondition,
-            weatherTemperature = record.weatherTemperature,
-            memo = record.memo,
-            planting = planting,
-            watering = watering,
-            fertilizing = fertilizing,
-            pestControl = pestControl,
-            weeding = weeding,
-            harvest = harvest,
-            images = images,
-            createdAt = record.createdAt,
-            updatedAt = record.updatedAt,
+            recordId,
+            requireNotNull(record.farm.id) { "Persisted farm id is required" },
+            record.farm.name,
+            requireNotNull(record.crop.id) { "Persisted crop id is required" },
+            record.crop.name,
+            record.workType,
+            record.workedAt,
+            record.weatherCondition,
+            record.weatherTemperature,
+            record.memo,
+            planting,
+            watering,
+            fertilizing,
+            pestControl,
+            weeding,
+            harvest,
+            images,
+            record.createdAt,
+            record.updatedAt,
         )
     }
 
     private fun toSummary(row: FarmingRecordQueryRepository.Row): FarmingRecordResult.Summary {
         val record = row.record
         return FarmingRecordResult.Summary(
-            id = requireNotNull(record.id) { "Persisted farming record id is required" },
-            cropId = requireNotNull(record.crop.id) { "Persisted crop id is required" },
-            cropName = record.crop.name,
-            workType = record.workType,
-            workedAt = record.workedAt,
-            weatherCondition = record.weatherCondition,
-            weatherTemperature = record.weatherTemperature,
-            memoPreview = record.memo.take(MEMO_PREVIEW_LENGTH),
-            thumbnailUrl = row.thumbnailUrl,
-            irrigationMethod = row.irrigationMethod,
-            harvestAmount = row.harvestAmount,
-            pesticideName = row.pesticideName,
-            weedingMethod = row.weedingMethod,
-            plantingMethod = row.plantingMethod,
-            materialName = row.materialName,
+            requireNotNull(record.id) { "Persisted farming record id is required" },
+            requireNotNull(record.crop.id) { "Persisted crop id is required" },
+            record.crop.name,
+            record.workType,
+            record.workedAt,
+            record.weatherCondition,
+            record.weatherTemperature,
+            record.memo.take(MEMO_PREVIEW_LENGTH),
+            row.thumbnailUrl,
+            row.irrigationMethod,
+            row.harvestAmount,
+            row.pesticideName,
+            row.weedingMethod,
+            row.plantingMethod,
+            row.materialName,
         )
     }
 
@@ -540,9 +556,9 @@ class FarmingRecordService(
         val record = row.record
         return cursorCodec.encode(
             FarmingRecordCursorPayload(
-                workedAt = record.workedAt,
-                id = requireNotNull(record.id) { "Persisted farming record id is required" }
-            )
+            record.workedAt,
+            requireNotNull(record.id) { "Persisted farming record id is required" },
+        )
         )
     }
 

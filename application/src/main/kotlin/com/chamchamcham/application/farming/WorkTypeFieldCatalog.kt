@@ -35,130 +35,163 @@ object WorkTypeFieldCatalog {
     // 않으므로 프론트는 검증 규칙을 별도로 반영해야 한다.
     private val PLANTING_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "plantingMethod",
-            type = FieldValueType.ENUM,
-            required = true,
-            options = PlantingMethod.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "plantingMethod",
+            FieldValueType.ENUM,
+            true,
+            PlantingMethod.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "seedAmount",
-            type = FieldValueType.DECIMAL,
-            required = false,
-            options = emptyList()
+            "seedAmount",
+            FieldValueType.DECIMAL,
+            false,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "seedAmountUnit",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = SeedAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "seedAmountUnit",
+            FieldValueType.ENUM,
+            false,
+            SeedAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "seedlingCount",
-            type = FieldValueType.INT,
-            required = false,
-            options = emptyList()
+            "seedlingCount",
+            FieldValueType.INT,
+            false,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "seedlingUnit",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = SeedlingUnit.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "seedlingUnit",
+            FieldValueType.ENUM,
+            false,
+            SeedlingUnit.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "propagationMethod",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = PropagationMethod.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "propagationMethod",
+            FieldValueType.ENUM,
+            false,
+            PropagationMethod.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         )
     )
 
     private val WATERING_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "irrigationAmount",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = IrrigationAmount.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "irrigationAmount",
+            FieldValueType.ENUM,
+            false,
+            IrrigationAmount.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "irrigationMethod",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = IrrigationMethod.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "irrigationMethod",
+            FieldValueType.ENUM,
+            false,
+            IrrigationMethod.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         )
     )
 
     private val FERTILIZING_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "materialName",
-            type = FieldValueType.STRING,
-            required = true,
-            options = emptyList()
+            "materialName",
+            FieldValueType.STRING,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "amount",
-            type = FieldValueType.DECIMAL,
-            required = true,
-            options = emptyList()
+            "amount",
+            FieldValueType.DECIMAL,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "amountUnit",
-            type = FieldValueType.ENUM,
-            required = true,
-            options = FertilizerAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "amountUnit",
+            FieldValueType.ENUM,
+            true,
+            FertilizerAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "applicationMethod",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = FertilizingMethod.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "applicationMethod",
+            FieldValueType.ENUM,
+            false,
+            FertilizingMethod.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         )
     )
 
     private val PEST_CONTROL_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "pesticideId",
-            type = FieldValueType.STRING,
-            required = true,
-            options = emptyList()
+            "pesticideId",
+            FieldValueType.STRING,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "pesticideAmount",
-            type = FieldValueType.DECIMAL,
-            required = true,
-            options = emptyList()
+            "pesticideAmount",
+            FieldValueType.DECIMAL,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "pesticideAmountUnit",
-            type = FieldValueType.ENUM,
-            required = true,
-            options = PesticideAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "pesticideAmountUnit",
+            FieldValueType.ENUM,
+            true,
+            PesticideAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "totalSprayAmount",
-            type = FieldValueType.DECIMAL,
-            required = true,
-            options = emptyList()
+            "totalSprayAmount",
+            FieldValueType.DECIMAL,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "totalSprayAmountUnit",
-            type = FieldValueType.ENUM,
-            required = true,
-            options = SprayAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "totalSprayAmountUnit",
+            FieldValueType.ENUM,
+            true,
+            SprayAmountUnit.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "pestId",
-            type = FieldValueType.STRING,
-            required = false,
-            options = emptyList()
+            "pestId",
+            FieldValueType.STRING,
+            false,
+            emptyList(),
         )
     )
 
     private val WEEDING_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "weedingMethod",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = WeedingMethod.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "weedingMethod",
+            FieldValueType.ENUM,
+            false,
+            WeedingMethod.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         )
     )
 
@@ -168,28 +201,34 @@ object WorkTypeFieldCatalog {
     // growthPeriod는 항상 개월 단위이며 필수다.
     private val HARVEST_FIELDS: List<WorkTypeResult.FieldSummary> = listOf(
         WorkTypeResult.FieldSummary(
-            name = "harvestAmount",
-            type = FieldValueType.DECIMAL,
-            required = true,
-            options = emptyList()
+            "harvestAmount",
+            FieldValueType.DECIMAL,
+            true,
+            emptyList(),
         ),
         WorkTypeResult.FieldSummary(
-            name = "medicinalPart",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = CropUsePartCategory.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "medicinalPart",
+            FieldValueType.ENUM,
+            false,
+            CropUsePartCategory.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "harvestSource",
-            type = FieldValueType.ENUM,
-            required = false,
-            options = HarvestSource.entries.map { WorkTypeResult.EnumOptionSummary(it.name, it.label) }
+            "harvestSource",
+            FieldValueType.ENUM,
+            false,
+            HarvestSource.entries.map { WorkTypeResult.EnumOptionSummary(
+            it.name,
+            it.label,
+        ) },
         ),
         WorkTypeResult.FieldSummary(
-            name = "growthPeriod",
-            type = FieldValueType.INT,
-            required = true,
-            options = emptyList()
+            "growthPeriod",
+            FieldValueType.INT,
+            true,
+            emptyList(),
         )
     )
 }

@@ -38,8 +38,8 @@ class FarmingCycleReportQueryService(
         }
 
         return FarmingCycleReportResult.Page(
-            items = visibleRows.map(::toMetadata),
-            nextCursor = nextCursor,
+            visibleRows.map(::toMetadata),
+            nextCursor,
         )
     }
 
@@ -52,7 +52,7 @@ class FarmingCycleReportQueryService(
             ?: throw BusinessException(ErrorCode.REPORT_NOT_FOUND)
 
         return FarmingCycleReportResult.Detail(
-            selected = toSnapshot(selected),
+            toSnapshot(selected),
         )
     }
 
@@ -85,41 +85,41 @@ class FarmingCycleReportQueryService(
     private fun encodeCursor(report: FarmingCycleReport): String =
         cursorCodec.encode(
             FarmingCycleReportCursorPayload(
-                endsAt = requireNotNull(report.endsAt) { "Completed report endsAt is required" },
-                finalHarvestRecordId = requireNotNull(report.finalHarvestRecord?.id) {
+            requireNotNull(report.endsAt) { "Completed report endsAt is required" },
+            requireNotNull(report.finalHarvestRecord?.id) {
                     "Completed report final harvest record id is required"
                 },
-            ),
+        ),
         )
 
     private fun toMetadata(report: FarmingCycleReport): FarmingCycleReportResult.Metadata =
         FarmingCycleReportResult.Metadata(
-            id = requireNotNull(report.id) { "Persisted farming cycle report id is required" },
-            farmId = requireNotNull(report.farm.id) { "Persisted farm id is required" },
-            farmName = report.farm.name,
-            cropId = requireNotNull(report.crop.id) { "Persisted crop id is required" },
-            cropName = report.crop.name,
-            status = report.status,
-            startsAt = report.startsAt,
-            endsAt = report.endsAt,
-            startBasis = report.startBasis,
-            sourceRevision = report.sourceRevision,
+            requireNotNull(report.id) { "Persisted farming cycle report id is required" },
+            requireNotNull(report.farm.id) { "Persisted farm id is required" },
+            report.farm.name,
+            requireNotNull(report.crop.id) { "Persisted crop id is required" },
+            report.crop.name,
+            report.status,
+            report.startsAt,
+            report.endsAt,
+            report.startBasis,
+            report.sourceRevision,
         )
 
     private fun toSnapshot(report: FarmingCycleReport): FarmingCycleReportResult.Snapshot =
         FarmingCycleReportResult.Snapshot(
-            id = requireNotNull(report.id) { "Persisted farming cycle report id is required" },
-            farmId = requireNotNull(report.farm.id) { "Persisted farm id is required" },
-            farmName = report.farm.name,
-            cropId = requireNotNull(report.crop.id) { "Persisted crop id is required" },
-            cropName = report.crop.name,
-            status = report.status,
-            startsAt = report.startsAt,
-            endsAt = report.endsAt,
-            startBasis = report.startBasis,
-            finalHarvestRecordId = report.finalHarvestRecord?.id,
-            statisticsSchemaVersion = report.statisticsSchemaVersion,
-            sourceRevision = report.sourceRevision,
-            statistics = report.statistics,
+            requireNotNull(report.id) { "Persisted farming cycle report id is required" },
+            requireNotNull(report.farm.id) { "Persisted farm id is required" },
+            report.farm.name,
+            requireNotNull(report.crop.id) { "Persisted crop id is required" },
+            report.crop.name,
+            report.status,
+            report.startsAt,
+            report.endsAt,
+            report.startBasis,
+            report.finalHarvestRecord?.id,
+            report.statisticsSchemaVersion,
+            report.sourceRevision,
+            report.statistics,
         )
 }

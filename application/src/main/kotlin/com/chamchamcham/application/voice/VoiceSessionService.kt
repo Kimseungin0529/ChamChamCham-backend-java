@@ -110,7 +110,11 @@ class VoiceSessionService(
             throw BusinessException(ErrorCode.VOICE_SESSION_INVALID_STATE)
         }
 
-        val createResult = farmingRecordService.create(command.record.copy(entryMode = EntryMode.VOICE))
+        val createResult = farmingRecordService.create(command.record.let { record ->
+            com.chamchamcham.application.farming.FarmingRecordCommand.Create(
+                record.memberId, record.farmId, record.cropId, record.workType, record.workedAt, record.weatherCondition, record.weatherTemperature, record.memo, record.planting, record.watering, record.fertilizing, record.pestControl, record.weeding, record.harvest, record.mediaIds, EntryMode.VOICE,
+            )
+        })
         val record = farmingRecordRepository.findById(createResult.id)
             .orElseThrow { BusinessException(ErrorCode.FARMING_RECORD_NOT_FOUND) }
 

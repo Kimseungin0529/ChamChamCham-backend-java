@@ -146,23 +146,23 @@ fun FarmingRecordRequests.SaveRecordRequest.toCreateCommand(
     entryMode: EntryMode = this.entryMode,
 ): FarmingRecordCommand.Create =
     FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = requireNotNull(farmId),
-        cropId = requireNotNull(cropId),
-        workType = requireNotNull(workType),
-        workedAt = requireNotNull(workedAt),
-        weatherCondition = weatherCondition,
-        weatherTemperature = requireNotNull(weatherTemperature),
-        memo = memo,
-        planting = toPlantingDetail(),
-        watering = toWateringDetail(),
-        fertilizing = toFertilizingDetail(),
-        pestControl = toPestControlDetail(),
-        weeding = toWeedingDetail(),
-        harvest = toHarvestDetail(),
-        mediaIds = mediaIds,
-        entryMode = entryMode,
-    )
+            memberId,
+            requireNotNull(farmId),
+            requireNotNull(cropId),
+            requireNotNull(workType),
+            requireNotNull(workedAt),
+            weatherCondition,
+            requireNotNull(weatherTemperature),
+            memo,
+            toPlantingDetail(),
+            toWateringDetail(),
+            toFertilizingDetail(),
+            toPestControlDetail(),
+            toWeedingDetail(),
+            toHarvestDetail(),
+            mediaIds,
+            entryMode,
+        )
 
 fun FarmingRecordRequests.SaveRecordRequest.toPlantingDetail(): FarmingRecordCommand.PlantingDetail? = planting?.toCommand()
 
@@ -178,44 +178,49 @@ fun FarmingRecordRequests.SaveRecordRequest.toHarvestDetail(): FarmingRecordComm
 
 fun FarmingRecordRequests.PlantingDetailRequest.toCommand(): FarmingRecordCommand.PlantingDetail =
     FarmingRecordCommand.PlantingDetail(
-        plantingMethod = requireNotNull(plantingMethod),
-        seedAmount = seedAmount,
-        seedAmountUnit = seedAmountUnit,
-        seedlingCount = seedlingCount,
-        seedlingUnit = seedlingUnit,
-        propagationMethod = propagationMethod,
-    )
+            requireNotNull(plantingMethod),
+            seedAmount,
+            seedAmountUnit,
+            seedlingCount,
+            seedlingUnit,
+            propagationMethod,
+        )
 
 fun FarmingRecordRequests.WateringDetailRequest.toCommand(): FarmingRecordCommand.WateringDetail =
-    FarmingRecordCommand.WateringDetail(irrigationAmount = irrigationAmount, irrigationMethod = irrigationMethod)
+    FarmingRecordCommand.WateringDetail(
+            irrigationAmount,
+            irrigationMethod,
+        )
 
 fun FarmingRecordRequests.FertilizingDetailRequest.toCommand(): FarmingRecordCommand.FertilizingDetail =
     FarmingRecordCommand.FertilizingDetail(
-        materialName = materialName,
-        amount = amount,
-        amountUnit = amountUnit,
-        applicationMethod = applicationMethod,
-    )
+            materialName,
+            amount,
+            amountUnit,
+            applicationMethod,
+        )
 
 fun FarmingRecordRequests.PestControlDetailRequest.toCommand(): FarmingRecordCommand.PestControlDetail =
     FarmingRecordCommand.PestControlDetail(
-        pesticideId = requireNotNull(pesticideId),
-        pesticideAmount = pesticideAmount,
-        pesticideAmountUnit = pesticideAmountUnit,
-        totalSprayAmount = totalSprayAmount,
-        totalSprayAmountUnit = totalSprayAmountUnit,
-        pestId = pestId,
-    )
+            requireNotNull(pesticideId),
+            pesticideAmount,
+            pesticideAmountUnit,
+            totalSprayAmount,
+            totalSprayAmountUnit,
+            pestId,
+        )
 
 fun FarmingRecordRequests.WeedingDetailRequest.toCommand(): FarmingRecordCommand.WeedingDetail =
-    FarmingRecordCommand.WeedingDetail(weedingMethod = weedingMethod)
+    FarmingRecordCommand.WeedingDetail(
+            weedingMethod,
+        )
 
 fun FarmingRecordRequests.HarvestDetailRequest.toCommand(): FarmingRecordCommand.HarvestDetail =
     FarmingRecordCommand.HarvestDetail(
-        harvestAmount = harvestAmount,
-        amountUnknown = harvestAmountUnknown,
-        medicinalPart = medicinalPart,
-        harvestSource = harvestSource,
-        growthPeriod = requireNotNull(growthPeriod),
-        isLastHarvest = requireNotNull(isLastHarvest),
-    )
+            harvestAmount,
+            harvestAmountUnknown,
+            medicinalPart,
+            harvestSource,
+            requireNotNull(growthPeriod),
+            requireNotNull(isLastHarvest),
+        )

@@ -31,6 +31,13 @@ class StatisticsMathTest {
         assertThat(StatisticsMath.INSTANCE.average(List.of())).isNull();
         assertThat(StatisticsMath.INSTANCE.averageIntervalDays(List.of())).isNull();
     }
+    @Test
+    void decimalPercentagePreservesSignedDenominatorAndHalfUpRounding() {
+        assertThat(StatisticsMath.INSTANCE.percentage(new BigDecimal("1"), new BigDecimal("-32"))).isEqualByComparingTo("-3.13");
+        assertThat(StatisticsMath.INSTANCE.percentage(new BigDecimal("1"), new BigDecimal("0.00"))).isNull();
+        assertThat(StatisticsMath.INSTANCE.average(List.of(new BigDecimal("0.005")))).isEqualByComparingTo("0.01");
+    }
+
     private LocalDate date(int day) {
         return LocalDate.of(2026, 1, day);
     }

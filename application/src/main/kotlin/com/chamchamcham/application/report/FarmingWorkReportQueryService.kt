@@ -57,12 +57,12 @@ class FarmingWorkReportQueryService(
         val slicesByScope = buildSlicesByScope(visibleRows, snapshot)
 
         return FarmingWorkReportResult.Page(
-            items = visibleRows.map { row ->
+            visibleRows.map { row ->
                 row.toResult(
                     thumbnailUrl = findThumbnailUrl(row, slicesByScope[row.scopeKey()].orEmpty(), snapshot),
                 )
             },
-            nextCursor = if (result.rows.size > condition.size) {
+            if (result.rows.size > condition.size) {
                 visibleRows.lastOrNull()?.let(::encodeCursor)
             } else {
                 null
@@ -86,26 +86,26 @@ class FarmingWorkReportQueryService(
             val feedback = feedbackQueryService.get(memberId, reportId).feedbacks
                 .firstOrNull { it.workType == workType }
             FarmingWorkReportResult.FeedbackStatus(
-                status = feedback?.status ?: ReportFeedbackStatus.PENDING,
-                content = feedback?.content,
-            )
+            feedback?.status ?: ReportFeedbackStatus.PENDING,
+            feedback?.content,
+        )
         } else {
             null
         }
 
         return FarmingWorkReportResult.Detail(
-            reportId = requireNotNull(report.id) { "Persisted farming cycle report id is required" },
-            status = report.status,
-            workType = workType,
-            workTypeLabel = workType.toCoachingText(),
-            farmId = requireNotNull(report.farm.id) { "Persisted farm id is required" },
-            farmName = report.farm.name,
-            cropId = requireNotNull(report.crop.id) { "Persisted crop id is required" },
-            cropName = report.crop.name,
-            startsAt = report.startsAt,
-            endsAt = report.endsAt,
-            statistics = statistics,
-            feedback = feedbackStatus,
+            requireNotNull(report.id) { "Persisted farming cycle report id is required" },
+            report.status,
+            workType,
+            workType.toCoachingText(),
+            requireNotNull(report.farm.id) { "Persisted farm id is required" },
+            report.farm.name,
+            requireNotNull(report.crop.id) { "Persisted crop id is required" },
+            report.crop.name,
+            report.startsAt,
+            report.endsAt,
+            statistics,
+            feedbackStatus,
         )
     }
 
@@ -165,33 +165,33 @@ class FarmingWorkReportQueryService(
     private fun encodeCursor(row: FarmingCycleReportQueryRepository.WorkItem): String =
         cursorCodec.encode(
             FarmingWorkReportCursorPayload(
-                version = FarmingWorkReportCursorPayload.CURRENT_VERSION,
-                lastWorkedOn = row.lastWorkedOn,
-                status = row.status,
-                sortAt = row.sortAt,
-                reportId = row.reportId,
-                workType = row.workType,
-            ),
+            FarmingWorkReportCursorPayload.CURRENT_VERSION,
+            row.lastWorkedOn,
+            row.status,
+            row.sortAt,
+            row.reportId,
+            row.workType,
+        ),
         )
 
     private fun FarmingCycleReportQueryRepository.WorkItem.toResult(
         thumbnailUrl: String?,
     ): FarmingWorkReportResult.Item =
         FarmingWorkReportResult.Item(
-            reportId = reportId,
-            status = status,
-            farmId = farmId,
-            farmName = farmName,
-            cropId = cropId,
-            cropName = cropName,
-            startsAt = startsAt,
-            endsAt = endsAt,
-            finalHarvestRecordId = finalHarvestRecordId,
-            workType = workType,
-            workTypeLabel = workType.toCoachingText(),
-            recordCount = recordCount,
-            lastWorkedOn = lastWorkedOn,
-            thumbnailUrl = thumbnailUrl,
+            reportId,
+            status,
+            farmId,
+            farmName,
+            cropId,
+            cropName,
+            startsAt,
+            endsAt,
+            finalHarvestRecordId,
+            workType,
+            workType.toCoachingText(),
+            recordCount,
+            lastWorkedOn,
+            thumbnailUrl,
         )
 
     private fun FarmingRecord.toCycleSource(
@@ -199,21 +199,29 @@ class FarmingWorkReportQueryService(
     ): CycleReportSourceRecord {
         val recordId = requireNotNull(id) { "Persisted farming record id is required" }
         return CycleReportSourceRecord(
-            id = recordId,
-            workedAt = workedAt,
-            createdAt = createdAt,
-            workType = workType,
-            weatherCondition = weatherCondition,
-            weatherTemperature = weatherTemperature,
-            hasPhoto = snapshot.firstImageUrlByRecordId.containsKey(recordId),
-            memo = memo,
-            harvest = if (workType == WorkType.HARVEST) {
+            recordId,
+            workedAt,
+            createdAt,
+            workType,
+            weatherCondition,
+            weatherTemperature,
+            snapshot.firstImageUrlByRecordId.containsKey(recordId),
+            memo,
+            null,
+            null,
+            null,
+            null,
+            null,
+            if (workType == WorkType.HARVEST) {
                 HarvestReportSource(
-                    amountKg = null,
-                    medicinalPart = null,
-                    growthPeriodMonths = null,
-                    isLastHarvest = recordId in snapshot.finalHarvestRecordIds,
-                )
+            null,
+            null,
+            CategoryRef("CULTIVATED", "재배"),
+            null,
+            null,
+            null,
+            recordId in snapshot.finalHarvestRecordIds,
+        )
             } else {
                 null
             },
@@ -235,31 +243,77 @@ class FarmingWorkReportQueryService(
 private fun CycleReportStatistics.forWorkType(workType: WorkType): FarmingWorkReportResult.WorkStatistics =
     when (workType) {
         WorkType.PLANTING -> FarmingWorkReportResult.WorkStatistics(
-            common = planting.toCommon(),
-            planting = planting,
+            planting.toCommon(),
+            planting,
+            null,
+            null,
+            null,
+            null,
+            null,
         )
         WorkType.WATERING -> FarmingWorkReportResult.WorkStatistics(
-            common = watering.toCommon(),
-            watering = watering,
+            watering.toCommon(),
+            null,
+            watering,
+            null,
+            null,
+            null,
+            null,
         )
         WorkType.FERTILIZING -> FarmingWorkReportResult.WorkStatistics(
-            common = fertilizing.toCommon(),
-            fertilizing = fertilizing,
+            fertilizing.toCommon(),
+            null,
+            null,
+            fertilizing,
+            null,
+            null,
+            null,
         )
         WorkType.PEST_CONTROL -> FarmingWorkReportResult.WorkStatistics(
-            common = pestControl.toCommon(),
-            pestControl = pestControl,
+            pestControl.toCommon(),
+            null,
+            null,
+            null,
+            pestControl,
+            null,
+            null,
         )
         WorkType.WEEDING -> FarmingWorkReportResult.WorkStatistics(
-            common = weeding.toCommon(),
-            weeding = weeding,
+            weeding.toCommon(),
+            null,
+            null,
+            null,
+            null,
+            weeding,
+            null,
         )
-        WorkType.PRUNING -> FarmingWorkReportResult.WorkStatistics(common = pruning)
+        WorkType.PRUNING -> FarmingWorkReportResult.WorkStatistics(
+            pruning,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        )
         WorkType.HARVEST -> FarmingWorkReportResult.WorkStatistics(
-            common = harvest.toCommon(),
-            harvest = harvest,
+            harvest.toCommon(),
+            null,
+            null,
+            null,
+            null,
+            null,
+            harvest,
         )
-        WorkType.ETC -> FarmingWorkReportResult.WorkStatistics(common = etc)
+        WorkType.ETC -> FarmingWorkReportResult.WorkStatistics(
+            etc,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        )
     }
 
 private fun PlantingStatistics.toCommon() = common(

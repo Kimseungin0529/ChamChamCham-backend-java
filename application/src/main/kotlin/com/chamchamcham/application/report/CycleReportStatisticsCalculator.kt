@@ -111,7 +111,10 @@ class CycleReportStatisticsCalculator {
             StatisticsMath.average(knownAmounts),
             Coverage(knownAmounts.size, records.size),
             distribution(
-                details.map { CategoryRef(it.materialName, it.materialName) },
+                details.map { CategoryRef(
+            it.materialName,
+            it.materialName,
+        ) },
                 records.size,
             ),
             calculateMaterialCategories(details, records.size, totalAmount),
@@ -135,7 +138,10 @@ class CycleReportStatisticsCalculator {
             common.weatherDistribution,
             common.averageTemperatureC,
             distribution(
-                details.map { CategoryRef(it.pesticideId.toString(), it.pesticideName) },
+                details.map { CategoryRef(
+            it.pesticideId.toString(),
+            it.pesticideName,
+        ) },
                 records.size,
             ),
             details
@@ -146,7 +152,10 @@ class CycleReportStatisticsCalculator {
                 }
                 .sortedBy { it.unit },
             details
-                .groupBy { CategoryRef(it.pesticideId.toString(), it.pesticideName) to it.pesticideAmountUnit }
+                .groupBy { CategoryRef(
+            it.pesticideId.toString(),
+            it.pesticideName,
+        ) to it.pesticideAmountUnit }
                 .map { (key, items) ->
                     val (category, unit) = key
                     val knownAmounts = items.mapNotNull { it.pesticideAmount }
@@ -221,7 +230,10 @@ class CycleReportStatisticsCalculator {
             distribution(
                 values = details.mapNotNull { detail ->
                     detail.growthPeriodMonths?.let { months ->
-                        CategoryRef(code = months.toString(), label = "${months}개월")
+                        CategoryRef(
+            months.toString(),
+            "${months}개월",
+        )
                     }
                 },
                 denominator = records.size,
@@ -275,7 +287,10 @@ class CycleReportStatisticsCalculator {
             .toSortedMap()
             .flatMap { (materialName, materialItems) ->
                 materialItems
-                    .map { it.applicationMethod ?: CategoryRef("MISSING", "미입력") }
+                    .map { it.applicationMethod ?: CategoryRef(
+            "MISSING",
+            "미입력",
+        ) }
                     .groupingBy { it }
                     .eachCount()
                     .map { (method, count) ->
@@ -332,7 +347,10 @@ class CycleReportStatisticsCalculator {
             weatherDistribution = distribution(
                 values = records.map {
                     it.weatherCondition.trim().takeIf(String::isNotEmpty)
-                        ?.let { value -> CategoryRef(value, value) }
+                        ?.let { value -> CategoryRef(
+            value,
+            value,
+        ) }
                 },
                 denominator = records.size,
             ),
@@ -343,7 +361,10 @@ class CycleReportStatisticsCalculator {
     }
 
     private fun distribution(values: List<CategoryRef?>, denominator: Int): List<CountDistribution> =
-        values.map { it ?: CategoryRef("MISSING", "미입력") }
+        values.map { it ?: CategoryRef(
+            "MISSING",
+            "미입력",
+        ) }
             .groupingBy { it }
             .eachCount()
             .map { (item, count) ->

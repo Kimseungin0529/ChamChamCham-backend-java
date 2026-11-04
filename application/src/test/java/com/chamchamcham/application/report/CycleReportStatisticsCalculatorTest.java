@@ -133,6 +133,15 @@ class CycleReportStatisticsCalculatorTest {
         assertThat(result.getGrowthPeriodDistribution().stream().map(it -> org.assertj.core.api.Assertions.tuple(it.code(), it.label(), it.count())).toList()).containsExactly(org.assertj.core.api.Assertions.tuple("24", "24개월", 2), org.assertj.core.api.Assertions.tuple("36", "36개월", 1));
         assertThat(result.getGrowthPeriodDistribution().stream().map(it -> org.assertj.core.api.Assertions.tuple(it.code(), it.ratePct())).toList()).containsExactly(org.assertj.core.api.Assertions.tuple("24", new BigDecimal("66.67")), org.assertj.core.api.Assertions.tuple("36", new BigDecimal("33.33")));
     }
+    @Test
+    void unicodeSpaceCharactersAreTrimmedBeforeWeatherGrouping() {
+        var time = LocalDateTime.of(2026, 1, 1, 9, 0);
+        var record = new CycleReportSourceRecord(id("999"), time, time, WorkType.WATERING,
+            "\u00a0맑음\u2007\u202f", 20, false, "", null, null, null, null, null, null);
+        var distribution = calculator.calculate(List.of(record)).getWatering().getWeatherDistribution();
+        assertThat(distribution).containsExactly(new com.chamchamcham.domain.report.CountDistribution("맑음", "맑음", 1, new BigDecimal("100.00")));
+    }
+
     private void assertDirectCommonFields(Object stats, int day, boolean photoAttached) throws Exception {
         assertThat((Integer) readField(stats, "recordCount")).isEqualTo(1);
         assertThat((LocalDate) readField(stats, "firstWorkedOn")).isEqualTo(date(day));

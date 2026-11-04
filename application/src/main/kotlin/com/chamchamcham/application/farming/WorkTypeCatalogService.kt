@@ -10,10 +10,10 @@ class WorkTypeCatalogService {
     fun listWorkTypes(): List<WorkTypeResult.WorkTypeSummary> =
         WorkType.entries.map { workType ->
             WorkTypeResult.WorkTypeSummary(
-                code = workType.name,
-                label = workType.label,
-                detailRequired = workType.detailRequired,
-                fields = WorkTypeFieldCatalog.fieldsFor(workType)
-            )
+            workType.name,
+            workType.label,
+            workType.detailRequired,
+            WorkTypeFieldCatalog.fieldsFor(workType),
+        )
         }
 }

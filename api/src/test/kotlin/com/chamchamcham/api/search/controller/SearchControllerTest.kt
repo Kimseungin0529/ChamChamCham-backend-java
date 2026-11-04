@@ -183,16 +183,22 @@ class SearchControllerTest(
     }
 
     private fun recordSummary(): FarmingRecordResult.Summary = FarmingRecordResult.Summary(
-        id = recordId,
-        cropId = cropId,
-        cropName = "황기",
-        workType = WorkType.HARVEST,
-        workedAt = createdAt,
-        weatherCondition = "맑음",
-        weatherTemperature = 23,
-        memoPreview = "수확 완료",
-        thumbnailUrl = null,
-    )
+            recordId,
+            cropId,
+            "황기",
+            WorkType.HARVEST,
+            createdAt,
+            "맑음",
+            23,
+            "수확 완료",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        )
 
     private fun postSummary(): CommunityPostResult.PostSummary = CommunityPostResult.PostSummary(
         id = postId,

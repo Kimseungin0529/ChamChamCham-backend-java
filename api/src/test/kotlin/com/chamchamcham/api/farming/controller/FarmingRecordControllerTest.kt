@@ -1,5 +1,7 @@
 package com.chamchamcham.api.farming.controller
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.api.exception.GlobalExceptionHandler
 import com.chamchamcham.application.farming.FarmingRecordCommand
 import com.chamchamcham.application.farming.FarmingRecordResult
@@ -55,7 +57,10 @@ class FarmingRecordControllerTest(
     @Test
     fun `create record maps request to command and returns record id`() {
         `when`(farmingRecordService.create(createCommand()))
-            .thenReturn(FarmingRecordResult.RecordId(id = recordId, workType = WorkType.HARVEST))
+            .thenReturn(FarmingRecordResult.RecordId(
+            recordId,
+            WorkType.HARVEST,
+        ))
 
         mockMvc.perform(
             post("/api/v1/farming-records")
@@ -193,22 +198,34 @@ class FarmingRecordControllerTest(
     @Test
     fun `create record accepts harvest without medicinal part`() {
         val command = FarmingRecordCommand.Create(
-            memberId = memberId,
-            farmId = farmId,
-            cropId = cropId,
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memo = "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
-            harvest = FarmingRecordCommand.HarvestDetail(
-                harvestAmount = BigDecimal.TEN,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            ),
+            memberId,
+            farmId,
+            cropId,
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordCommand.HarvestDetail(
+            BigDecimal.TEN,
+            false,
+            null,
+            HarvestSource.CULTIVATED,
+            2,
+            true,
+        ),
+            emptyList(),
+            EntryMode.MANUAL,
         )
-        `when`(farmingRecordService.create(command)).thenReturn(FarmingRecordResult.RecordId(id = recordId, workType = WorkType.HARVEST))
+        `when`(farmingRecordService.create(command)).thenReturn(FarmingRecordResult.RecordId(
+            recordId,
+            WorkType.HARVEST,
+        ))
 
         val json = """
             {
@@ -240,24 +257,34 @@ class FarmingRecordControllerTest(
     @Test
     fun `create record accepts unknown harvest amount`() {
         val command = FarmingRecordCommand.Create(
-            memberId = memberId,
-            farmId = farmId,
-            cropId = cropId,
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memo = "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
-            harvest = FarmingRecordCommand.HarvestDetail(
-                harvestAmount = null,
-                amountUnknown = true,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            ),
+            memberId,
+            farmId,
+            cropId,
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordCommand.HarvestDetail(
+            null,
+            true,
+            CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED,
+            2,
+            true,
+        ),
+            emptyList(),
+            EntryMode.MANUAL,
         )
-        `when`(farmingRecordService.create(command)).thenReturn(FarmingRecordResult.RecordId(id = recordId, workType = WorkType.HARVEST))
+        `when`(farmingRecordService.create(command)).thenReturn(FarmingRecordResult.RecordId(
+            recordId,
+            WorkType.HARVEST,
+        ))
 
         val json = """
             {
@@ -387,15 +414,15 @@ class FarmingRecordControllerTest(
         `when`(
             farmingRecordService.search(
                 FarmingRecordSearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    workTypes = listOf(WorkType.HARVEST),
-                    startDate = LocalDate.of(2026, 6, 1),
-                    endDate = LocalDate.of(2026, 6, 30),
-                    keyword = null,
-                    cursor = "cursor-1",
-                    size = 10
-                )
+            memberId,
+            listOf(cropId),
+            listOf(WorkType.HARVEST),
+            LocalDate.of(2026, 6, 1),
+            LocalDate.of(2026, 6, 30),
+            null,
+            "cursor-1",
+            10,
+        )
             )
         ).thenReturn(pageResult())
 
@@ -418,15 +445,15 @@ class FarmingRecordControllerTest(
         `when`(
             farmingRecordService.search(
                 FarmingRecordSearchCondition(
-                    memberId = memberId,
-                    cropIds = emptyList(),
-                    workTypes = emptyList(),
-                    startDate = null,
-                    endDate = null,
-                    keyword = "수확",
-                    cursor = null,
-                    size = 20
-                )
+            memberId,
+            emptyList(),
+            emptyList(),
+            null,
+            null,
+            "수확",
+            null,
+            20,
+        )
             )
         ).thenReturn(pageResult())
 
@@ -459,7 +486,10 @@ class FarmingRecordControllerTest(
     @Test
     fun `update record maps request to command`() {
         `when`(farmingRecordService.update(updateCommand()))
-            .thenReturn(FarmingRecordResult.RecordId(id = recordId, workType = WorkType.HARVEST))
+            .thenReturn(FarmingRecordResult.RecordId(
+            recordId,
+            WorkType.HARVEST,
+        ))
 
         mockMvc.perform(
             patch("/api/v1/farming-records/{recordId}", recordId)
@@ -523,98 +553,124 @@ class FarmingRecordControllerTest(
 
     private fun createCommand(): FarmingRecordCommand.Create =
         FarmingRecordCommand.Create(
-            memberId = memberId,
-            farmId = farmId,
-            cropId = cropId,
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memo = "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
-            harvest = FarmingRecordCommand.HarvestDetail(
-                harvestAmount = BigDecimal.TEN,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            ),
-            mediaIds = listOf(mediaId),
+            memberId,
+            farmId,
+            cropId,
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordCommand.HarvestDetail(
+            BigDecimal.TEN,
+            false,
+            CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED,
+            2,
+            true,
+        ),
+            listOf(mediaId),
+            EntryMode.MANUAL,
         )
 
     private fun updateCommand(): FarmingRecordCommand.Update =
         FarmingRecordCommand.Update(
-            memberId = memberId,
-            recordId = recordId,
-            farmId = farmId,
-            cropId = cropId,
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memo = "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
-            harvest = FarmingRecordCommand.HarvestDetail(
-                harvestAmount = BigDecimal.TEN,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            ),
-            mediaIds = listOf(mediaId),
+            memberId,
+            recordId,
+            farmId,
+            cropId,
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "오늘은 날씨가 좋아 하루 종일 수확 작업을 진행했고 별다른 문제 없이 마무리했습니다",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordCommand.HarvestDetail(
+            BigDecimal.TEN,
+            false,
+            CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED,
+            2,
+            true,
+        ),
+            listOf(mediaId),
         )
 
     private fun pageResult(): FarmingRecordResult.Page =
         FarmingRecordResult.Page(
-            items = listOf(summaryResult()),
-            nextCursor = "cursor-1"
+            listOf(summaryResult()),
+            "cursor-1",
         )
 
     private fun summaryResult(): FarmingRecordResult.Summary =
         FarmingRecordResult.Summary(
-            id = recordId,
-            cropId = cropId,
-            cropName = "마늘",
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memoPreview = "수확 완료",
-            thumbnailUrl = "https://example.test/1.jpg",
-            harvestAmount = BigDecimal.TEN,
+            recordId,
+            cropId,
+            "마늘",
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "수확 완료",
+            "https://example.test/1.jpg",
+            null,
+            BigDecimal.TEN,
+            null,
+            null,
+            null,
+            null,
         )
 
     private fun detailResult(): FarmingRecordResult.Detail =
         FarmingRecordResult.Detail(
-            id = recordId,
-            farmId = farmId,
-            farmName = "약초농장",
-            cropId = cropId,
-            cropName = "마늘",
-            workType = WorkType.HARVEST,
-            workedAt = workedAt,
-            weatherCondition = "맑음",
-            weatherTemperature = 28,
-            memo = "수확 완료",
-            harvest = FarmingRecordResult.HarvestDetail(
-                harvestAmount = BigDecimal.TEN,
-                medicinalPart = CropUsePartCategory.ROOT_BARK,
-                harvestSource = HarvestSource.CULTIVATED,
-                growthPeriod = 2,
-                isLastHarvest = true,
-            ),
-            images = listOf(FarmingRecordResult.MediaItem(mediaId = mediaId, url = "https://example.test/1.jpg")),
-            createdAt = createdAt,
-            updatedAt = createdAt,
+            recordId,
+            farmId,
+            "약초농장",
+            cropId,
+            "마늘",
+            WorkType.HARVEST,
+            workedAt,
+            "맑음",
+            28,
+            "수확 완료",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordResult.HarvestDetail(
+            BigDecimal.TEN,
+            CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED,
+            2,
+            true,
+        ),
+            listOf(FarmingRecordResult.MediaItem(
+            mediaId,
+            "https://example.test/1.jpg",
+        )),
+            createdAt,
+            createdAt,
         )
 
     private fun anySearchCondition(): FarmingRecordSearchCondition =
         FarmingRecordSearchCondition(
-            memberId = memberId,
-            cropIds = emptyList(),
-            workTypes = emptyList(),
-            startDate = null,
-            endDate = null,
-            keyword = null,
-            cursor = null,
-            size = 20
+            memberId,
+            emptyList(),
+            emptyList(),
+            null,
+            null,
+            null,
+            null,
+            20,
         )
 }

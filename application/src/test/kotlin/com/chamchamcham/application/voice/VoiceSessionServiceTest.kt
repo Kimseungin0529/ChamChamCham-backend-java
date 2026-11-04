@@ -210,7 +210,10 @@ class VoiceSessionServiceTest {
         )
         `when`(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session)
         `when`(farmingRecordService.create(createCommand()))
-            .thenReturn(FarmingRecordResult.RecordId(id = recordId, workType = WorkType.WATERING))
+            .thenReturn(FarmingRecordResult.RecordId(
+            recordId,
+            WorkType.WATERING,
+        ))
         `when`(farmingRecordRepository.findById(recordId)).thenReturn(Optional.of(record))
 
         val result = service.confirm(
@@ -281,14 +284,21 @@ class VoiceSessionServiceTest {
     }
 
     private fun createCommand() = FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 6, 1, 9, 0),
-        weatherCondition = "맑음",
-        weatherTemperature = 20,
-        memo = "물 줬어요",
-        entryMode = EntryMode.VOICE,
-    )
+            memberId,
+            farmId,
+            cropId,
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 6, 1, 9, 0),
+            "맑음",
+            20,
+            "물 줬어요",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            emptyList(),
+            EntryMode.VOICE,
+        )
 }

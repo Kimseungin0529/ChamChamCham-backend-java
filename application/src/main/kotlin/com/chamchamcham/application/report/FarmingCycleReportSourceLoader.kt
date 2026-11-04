@@ -38,39 +38,39 @@ class FarmingCycleReportSourceLoader(
         return snapshot.records.map { record ->
             val recordId = requireNotNull(record.id) { "Persisted farming record id is required" }
             CycleReportSourceRecord(
-                id = recordId,
-                workedAt = record.workedAt,
-                createdAt = record.createdAt,
-                workType = record.workType,
-                weatherCondition = record.weatherCondition,
-                weatherTemperature = record.weatherTemperature,
-                hasPhoto = snapshot.mediaRecordIds.contains(recordId),
-                memo = record.memo,
-                planting = when (record.workType) {
+            recordId,
+            record.workedAt,
+            record.createdAt,
+            record.workType,
+            record.weatherCondition,
+            record.weatherTemperature,
+            snapshot.mediaRecordIds.contains(recordId),
+            record.memo,
+            when (record.workType) {
                     WorkType.PLANTING -> normalizePlanting(snapshot.plantingByRecordId.required(recordId))
                     else -> null
                 },
-                watering = when (record.workType) {
+            when (record.workType) {
                     WorkType.WATERING -> snapshot.wateringByRecordId[recordId]?.let(::normalizeWatering)
                     else -> null
                 },
-                fertilizing = when (record.workType) {
+            when (record.workType) {
                     WorkType.FERTILIZING -> normalizeFertilizing(snapshot.fertilizingByRecordId.required(recordId))
                     else -> null
                 },
-                pestControl = when (record.workType) {
+            when (record.workType) {
                     WorkType.PEST_CONTROL -> normalizePestControl(snapshot.pestControlByRecordId.required(recordId))
                     else -> null
                 },
-                weeding = when (record.workType) {
+            when (record.workType) {
                     WorkType.WEEDING -> snapshot.weedingByRecordId[recordId]?.let(::normalizeWeeding)
                     else -> null
                 },
-                harvest = when (record.workType) {
+            when (record.workType) {
                     WorkType.HARVEST -> normalizeHarvest(snapshot.harvestByRecordId.required(recordId))
                     else -> null
                 },
-            )
+        )
         }
     }
 
@@ -80,60 +80,62 @@ class FarmingCycleReportSourceLoader(
     private fun normalizePlanting(detail: PlantingRecord): PlantingReportSource {
         return if (detail.plantingMethod == PlantingMethod.SEED) {
             PlantingReportSource(
-                plantingMethod = detail.plantingMethod.toRef(),
-                propagationMethod = detail.propagationMethod?.toRef(),
-                quantity = detail.seedAmount?.scale4(),
-                quantityUnit = detail.seedAmountUnit?.name,
-            )
+            detail.plantingMethod.toRef(),
+            detail.propagationMethod?.toRef(),
+            detail.seedAmount?.scale4(),
+            detail.seedAmountUnit?.name,
+        )
         } else {
             PlantingReportSource(
-                plantingMethod = detail.plantingMethod.toRef(),
-                propagationMethod = detail.propagationMethod?.toRef(),
-                quantity = detail.seedlingCount?.toBigDecimal()?.scale4(),
-                quantityUnit = detail.seedlingCount?.let { "JU" },
-            )
+            detail.plantingMethod.toRef(),
+            detail.propagationMethod?.toRef(),
+            detail.seedlingCount?.toBigDecimal()?.scale4(),
+            detail.seedlingCount?.let { "JU" },
+        )
         }
     }
 
     private fun normalizeWatering(detail: WateringRecord): WateringReportSource =
         WateringReportSource(
-            amount = detail.irrigationAmount?.toRef(),
-            method = detail.irrigationMethod?.toRef(),
+            detail.irrigationAmount?.toRef(),
+            detail.irrigationMethod?.toRef(),
         )
 
     private fun normalizeFertilizing(detail: FertilizingRecord): FertilizingReportSource =
         FertilizingReportSource(
-            materialName = detail.materialName,
-            amount = detail.amount.scale4(),
-            amountUnit = detail.amountUnit.name,
-            amountKg = detail.amount.toKilogramsOrNull(detail.amountUnit),
-            applicationMethod = detail.applicationMethod?.toRef(),
+            detail.materialName,
+            detail.amount.scale4(),
+            detail.amountUnit.name,
+            detail.amount.toKilogramsOrNull(detail.amountUnit),
+            detail.applicationMethod?.toRef(),
         )
 
     private fun normalizePestControl(detail: PestControlRecord): PestControlReportSource =
         PestControlReportSource(
-            pesticideId = requireNotNull(detail.pesticide.id) { "Persisted pesticide id is required" },
-            pesticideName = detail.pesticide.brandName,
-            pesticideAmount = detail.pesticideAmount.scale4(),
-            pesticideAmountUnit = detail.pesticideAmountUnit.name,
-            totalSprayAmountLiters = when (detail.totalSprayAmountUnit) {
+            requireNotNull(detail.pesticide.id) { "Persisted pesticide id is required" },
+            detail.pesticide.brandName,
+            detail.pesticideAmount.scale4(),
+            detail.pesticideAmountUnit.name,
+            when (detail.totalSprayAmountUnit) {
                 SprayAmountUnit.ML -> detail.totalSprayAmount.divide(BigDecimal("1000")).scale4()
             },
-            pestName = detail.pest?.name,
+            detail.pest?.name,
         )
 
     private fun normalizeWeeding(detail: WeedingRecord): WeedingReportSource =
-        WeedingReportSource(method = detail.weedingMethod?.toRef())
+        WeedingReportSource(
+            detail.weedingMethod?.toRef(),
+        )
 
     private fun normalizeHarvest(detail: HarvestRecord): HarvestReportSource =
         HarvestReportSource(
-            amountKg = detail.harvestAmount?.scale4(),
-            medicinalPart = detail.medicinalPart?.toRef(),
-            harvestSource = detail.harvestSource.toRef(),
-            growthPeriod = detail.growthPeriod,
-            growthPeriodUnit = "MONTH",
-            growthPeriodMonths = detail.growthPeriod,
-            isLastHarvest = detail.isLastHarvest,
+            detail.harvestAmount?.scale4(),
+            detail.medicinalPart?.toRef(),
+            detail.harvestSource.toRef(),
+            detail.growthPeriod,
+            "MONTH",
+            detail.growthPeriod,
+            detail.isLastHarvest,
         )
 
     private fun BigDecimal.toKilogramsOrNull(unit: FertilizerAmountUnit): BigDecimal? =
@@ -144,12 +146,36 @@ class FarmingCycleReportSourceLoader(
 
     private fun BigDecimal.scale4(): BigDecimal = setScale(4, RoundingMode.HALF_UP)
 
-    private fun PlantingMethod.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun PropagationMethod.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun IrrigationAmount.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun IrrigationMethod.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun FertilizingMethod.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun WeedingMethod.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun CropUsePartCategory.toRef(): CategoryRef = CategoryRef(name, label)
-    private fun HarvestSource.toRef(): CategoryRef = CategoryRef(name, label)
+    private fun PlantingMethod.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun PropagationMethod.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun IrrigationAmount.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun IrrigationMethod.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun FertilizingMethod.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun WeedingMethod.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun CropUsePartCategory.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
+    private fun HarvestSource.toRef(): CategoryRef = CategoryRef(
+            name,
+            label,
+        )
 }

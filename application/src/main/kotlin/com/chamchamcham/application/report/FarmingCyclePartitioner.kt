@@ -24,14 +24,14 @@ class FarmingCyclePartitioner {
             current += record
             if (record.harvest?.isLastHarvest == true) {
                 result += CycleSlice(
-                    status = FarmingCycleReportStatus.COMPLETED,
-                    startBasis = if (hasPreviousFinalHarvest) {
+            FarmingCycleReportStatus.COMPLETED,
+            if (hasPreviousFinalHarvest) {
                         FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST
                     } else {
                         FarmingCycleStartBasis.FIRST_RECORD
                     },
-                    records = current.toList(),
-                )
+            current.toList(),
+        )
                 current.clear()
                 hasPreviousFinalHarvest = true
             }
@@ -39,14 +39,14 @@ class FarmingCyclePartitioner {
 
         if (current.isNotEmpty()) {
             result += CycleSlice(
-                status = FarmingCycleReportStatus.ACTIVE,
-                startBasis = if (hasPreviousFinalHarvest) {
+            FarmingCycleReportStatus.ACTIVE,
+            if (hasPreviousFinalHarvest) {
                     FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST
                 } else {
                     FarmingCycleStartBasis.FIRST_RECORD
                 },
-                records = current.toList(),
-            )
+            current.toList(),
+        )
         }
         return result
     }
