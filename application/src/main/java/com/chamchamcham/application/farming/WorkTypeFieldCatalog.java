@@ -1,5 +1,7 @@
 package com.chamchamcham.application.farming;
 
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 import com.chamchamcham.domain.crop.CropUsePartCategory;
 import com.chamchamcham.domain.farming.FertilizerAmountUnit;
 import com.chamchamcham.domain.farming.FertilizingMethod;
@@ -33,15 +35,51 @@ public final class WorkTypeFieldCatalog {
         };
     }
 
-    private static final List<WorkTypeResult.FieldSummary> PLANTING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("plantingMethod", FieldValueType.ENUM, true, Arrays.asList(PlantingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("seedAmount", FieldValueType.DECIMAL, false, List.of()), new WorkTypeResult.FieldSummary("seedAmountUnit", FieldValueType.ENUM, false, Arrays.asList(SeedAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("seedlingCount", FieldValueType.INT, false, List.of()), new WorkTypeResult.FieldSummary("seedlingUnit", FieldValueType.ENUM, false, Arrays.asList(SeedlingUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("propagationMethod", FieldValueType.ENUM, false, Arrays.asList(PropagationMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()));
+    private static final List<WorkTypeResult.FieldSummary> PLANTING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("plantingMethod",
+        FieldValueType.ENUM, true, Arrays.asList(PlantingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("seedAmount", FieldValueType.DECIMAL, false,
+        List.of()), new WorkTypeResult.FieldSummary("seedAmountUnit", FieldValueType.ENUM, false,
+        Arrays.asList(SeedAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("seedlingCount", FieldValueType.INT, false,
+        List.of()), new WorkTypeResult.FieldSummary("seedlingUnit", FieldValueType.ENUM, false,
+        Arrays.asList(SeedlingUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("propagationMethod", FieldValueType.ENUM, false,
+        Arrays.asList(PropagationMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))));
 
-    private static final List<WorkTypeResult.FieldSummary> WATERING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("irrigationAmount", FieldValueType.ENUM, false, Arrays.asList(IrrigationAmount.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("irrigationMethod", FieldValueType.ENUM, false, Arrays.asList(IrrigationMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()));
+    private static final List<WorkTypeResult.FieldSummary> WATERING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("irrigationAmount",
+        FieldValueType.ENUM, false, Arrays.asList(IrrigationAmount.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("irrigationMethod", FieldValueType.ENUM, false,
+        Arrays.asList(IrrigationMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))));
 
-    private static final List<WorkTypeResult.FieldSummary> FERTILIZING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("materialName", FieldValueType.STRING, true, List.of()), new WorkTypeResult.FieldSummary("amount", FieldValueType.DECIMAL, true, List.of()), new WorkTypeResult.FieldSummary("amountUnit", FieldValueType.ENUM, true, Arrays.asList(FertilizerAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("applicationMethod", FieldValueType.ENUM, false, Arrays.asList(FertilizingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()));
+    private static final List<WorkTypeResult.FieldSummary> FERTILIZING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("materialName",
+        FieldValueType.STRING, true, List.of()), new WorkTypeResult.FieldSummary("amount", FieldValueType.DECIMAL, true, List.of()),
+        new WorkTypeResult.FieldSummary("amountUnit", FieldValueType.ENUM, true,
+        Arrays.asList(FertilizerAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("applicationMethod", FieldValueType.ENUM, false,
+        Arrays.asList(FertilizingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))));
 
-    private static final List<WorkTypeResult.FieldSummary> PEST_CONTROL_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("pesticideId", FieldValueType.STRING, true, List.of()), new WorkTypeResult.FieldSummary("pesticideAmount", FieldValueType.DECIMAL, true, List.of()), new WorkTypeResult.FieldSummary("pesticideAmountUnit", FieldValueType.ENUM, true, Arrays.asList(PesticideAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("totalSprayAmount", FieldValueType.DECIMAL, true, List.of()), new WorkTypeResult.FieldSummary("totalSprayAmountUnit", FieldValueType.ENUM, true, Arrays.asList(SprayAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("pestId", FieldValueType.STRING, false, List.of()));
+    private static final List<WorkTypeResult.FieldSummary> PEST_CONTROL_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("pesticideId",
+        FieldValueType.STRING, true, List.of()), new WorkTypeResult.FieldSummary("pesticideAmount", FieldValueType.DECIMAL, true, List.of()),
+        new WorkTypeResult.FieldSummary("pesticideAmountUnit", FieldValueType.ENUM, true,
+        Arrays.asList(PesticideAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("totalSprayAmount", FieldValueType.DECIMAL,
+        true, List.of()), new WorkTypeResult.FieldSummary("totalSprayAmountUnit", FieldValueType.ENUM, true,
+        Arrays.asList(SprayAmountUnit.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("pestId", FieldValueType.STRING, false,
+        List.of()));
 
-    private static final List<WorkTypeResult.FieldSummary> WEEDING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("weedingMethod", FieldValueType.ENUM, false, Arrays.asList(WeedingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()));
+    private static final List<WorkTypeResult.FieldSummary> WEEDING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("weedingMethod",
+        FieldValueType.ENUM, false, Arrays.asList(WeedingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))));
 
-    private static final List<WorkTypeResult.FieldSummary> HARVEST_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("harvestAmount", FieldValueType.DECIMAL, true, List.of()), new WorkTypeResult.FieldSummary("medicinalPart", FieldValueType.ENUM, false, Arrays.asList(CropUsePartCategory.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("harvestSource", FieldValueType.ENUM, false, Arrays.asList(HarvestSource.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(), it.getLabel())).toList()), new WorkTypeResult.FieldSummary("growthPeriod", FieldValueType.INT, true, List.of()));
+    private static final List<WorkTypeResult.FieldSummary> HARVEST_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("harvestAmount",
+        FieldValueType.DECIMAL, true, List.of()), new WorkTypeResult.FieldSummary("medicinalPart", FieldValueType.ENUM, false,
+        Arrays.asList(CropUsePartCategory.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("harvestSource", FieldValueType.ENUM, false,
+        Arrays.asList(HarvestSource.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
+        it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("growthPeriod", FieldValueType.INT, true,
+        List.of()));
 }

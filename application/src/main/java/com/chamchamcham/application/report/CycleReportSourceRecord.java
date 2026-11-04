@@ -1,13 +1,8 @@
 package com.chamchamcham.application.report;
 
 import com.chamchamcham.domain.farming.WorkType;
-import com.chamchamcham.domain.report.FarmingCycleReportStatus;
-import com.chamchamcham.domain.report.FarmingCycleStartBasis;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -63,4 +58,48 @@ public record CycleReportSourceRecord(
     public WeedingReportSource getWeeding() { return weeding; }
     @Nullable
     public HarvestReportSource getHarvest() { return harvest; }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static CycleReportSourceRecord fromJson(
+            @com.fasterxml.jackson.annotation.JsonProperty("id") UUID id,
+            @com.fasterxml.jackson.annotation.JsonProperty("workedAt") LocalDateTime workedAt,
+            @com.fasterxml.jackson.annotation.JsonProperty("createdAt")
+            @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreatedAtInputDeserializer.class) CreatedAtInput createdAt,
+            @com.fasterxml.jackson.annotation.JsonProperty("workType") WorkType workType,
+            @com.fasterxml.jackson.annotation.JsonProperty("weatherCondition") String weatherCondition,
+            @com.fasterxml.jackson.annotation.JsonProperty("weatherTemperature") int weatherTemperature,
+            @com.fasterxml.jackson.annotation.JsonProperty("hasPhoto") boolean hasPhoto,
+            @com.fasterxml.jackson.annotation.JsonProperty("memo")
+            @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = MemoWithDefault.class) String memo,
+            @com.fasterxml.jackson.annotation.JsonProperty("planting") PlantingReportSource planting,
+            @com.fasterxml.jackson.annotation.JsonProperty("watering") WateringReportSource watering,
+            @com.fasterxml.jackson.annotation.JsonProperty("fertilizing") FertilizingReportSource fertilizing,
+            @com.fasterxml.jackson.annotation.JsonProperty("pestControl") PestControlReportSource pestControl,
+            @com.fasterxml.jackson.annotation.JsonProperty("weeding") WeedingReportSource weeding,
+            @com.fasterxml.jackson.annotation.JsonProperty("harvest") HarvestReportSource harvest) {
+        return new CycleReportSourceRecord(id, workedAt, createdAt == null ? workedAt : createdAt.value(), workType,
+            weatherCondition, weatherTemperature, hasPhoto, memo, planting, watering, fertilizing, pestControl, weeding, harvest);
+    }
+
+    public record CreatedAtInput(LocalDateTime value) {}
+
+    // createdAt의 누락은 workedAt을 사용하지만 명시적 null은 거부한다.
+    public static class CreatedAtInputDeserializer extends com.fasterxml.jackson.databind.JsonDeserializer<CreatedAtInput> {
+        @Override
+        public CreatedAtInput deserialize(com.fasterxml.jackson.core.JsonParser parser,
+            com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {
+            return new CreatedAtInput(context.readValue(parser, LocalDateTime.class));
+        }
+        @Override public CreatedAtInput getAbsentValue(com.fasterxml.jackson.databind.DeserializationContext context) { return null; }
+        @Override public CreatedAtInput getNullValue(com.fasterxml.jackson.databind.DeserializationContext context) { return new CreatedAtInput(null); }
+    }
+
+    public static class MemoWithDefault extends com.fasterxml.jackson.databind.JsonDeserializer<String> {
+        @Override
+        public String deserialize(com.fasterxml.jackson.core.JsonParser parser,
+            com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {
+            return context.readValue(parser, String.class);
+        }
+        @Override public String getAbsentValue(com.fasterxml.jackson.databind.DeserializationContext context) { return ""; }
+    }
 }

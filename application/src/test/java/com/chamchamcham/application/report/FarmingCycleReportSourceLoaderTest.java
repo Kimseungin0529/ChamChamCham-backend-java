@@ -33,9 +33,11 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 
 class FarmingCycleReportSourceLoaderTest {
@@ -49,45 +51,53 @@ class FarmingCycleReportSourceLoaderTest {
 
     @Test
     @DisplayName("loader normalizes merged fields without free text category fallback")
-    void loader_normalizes_merged_fields_without_free_text_category_fallback() throws Exception {
+    void loaderNormalizesMergedFieldsWithoutFreeTextCategoryFallback() throws Exception {
         var repository = new FakeSourceRepository(fullSnapshot());
         var loader = new FarmingCycleReportSourceLoader(repository);
         var records = loader.load(scope);
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PLANTING)).findFirst().orElseThrow().getPlanting().getQuantity()).isEqualByComparingTo("1250.0000");
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PLANTING)).findFirst().orElseThrow().getPlanting().getQuantityUnit()).isEqualTo("G");
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.WATERING)).findFirst().orElseThrow().getWatering().getAmount()).isEqualTo(new CategoryRef("NORMAL", "보통"));
-        var fertilizing = records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.FERTILIZING)).findFirst().orElseThrow().getFertilizing();
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.PLANTING)).toList()).getPlanting().getQuantity()).isEqualByComparingTo("1250.0000");
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PLANTING)).toList()).getPlanting().getQuantityUnit()).isEqualTo("G");
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.WATERING)).toList()).getWatering().getAmount()).isEqualTo(new CategoryRef("NORMAL", "보통"));
+        var fertilizing = single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.FERTILIZING)).toList()).getFertilizing();
         assertThat(fertilizing.getMaterialName()).isEqualTo("유기질비료");
         assertThat(fertilizing.getAmount()).isEqualByComparingTo("250");
         assertThat(fertilizing.getAmountUnit()).isEqualTo("ML");
         assertThat(fertilizing.getAmountKg()).isNull();
-        var pestControl = records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PEST_CONTROL)).findFirst().orElseThrow().getPestControl();
+        var pestControl = single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PEST_CONTROL)).toList()).getPestControl();
         assertThat(pestControl.getPesticideName()).isEqualTo("가가방");
         assertThat(pestControl.getPestName()).isEqualTo("진딧물");
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PEST_CONTROL)).findFirst().orElseThrow().getPestControl().getPesticideAmountUnit()).isEqualTo("ML");
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PEST_CONTROL)).findFirst().orElseThrow().getPestControl().getTotalSprayAmountLiters()).isEqualByComparingTo("10.0000");
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.WEEDING)).findFirst().orElseThrow().getWeeding().getMethod()).isEqualTo(new CategoryRef("HAND", "손으로 뽑기"));
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).findFirst().orElseThrow().getHarvest().getAmountKg()).isNull();
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).findFirst().orElseThrow().getHarvest().getGrowthPeriodMonths()).isEqualTo(24);
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).findFirst().orElseThrow().getHarvest().isLastHarvest()).isTrue();
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PRUNING)).findFirst().orElseThrow().getPlanting()).isNull();
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.ETC)).findFirst().orElseThrow().getHasPhoto()).isTrue();
-        assertThat(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PLANTING)).findFirst().orElseThrow().getCreatedAt()).isEqualTo(LocalDateTime.of(2026, 7, 1, 8, 1));
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.PEST_CONTROL)).toList()).getPestControl().getPesticideAmountUnit()).isEqualTo("ML");
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.PEST_CONTROL)).toList()).getPestControl().getTotalSprayAmountLiters()).isEqualByComparingTo("10.0000");
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.WEEDING)).toList()).getWeeding().getMethod()).isEqualTo(new CategoryRef("HAND", "손으로 뽑기"));
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).toList()).getHarvest().getAmountKg()).isNull();
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).toList()).getHarvest().getGrowthPeriodMonths()).isEqualTo(24);
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.HARVEST)).toList()).getHarvest().isLastHarvest()).isTrue();
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.PRUNING)).toList()).getPlanting()).isNull();
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(), WorkType.ETC)).toList()).getHasPhoto()).isTrue();
+        assertThat(single(records.stream().filter(it -> Objects.equals(it.getWorkType(),
+            WorkType.PLANTING)).toList()).getCreatedAt()).isEqualTo(LocalDateTime.of(2026, 7, 1, 8, 1));
     }
 
     @Test
     @DisplayName("loader preserves sub gram precision before report aggregation")
-    void loader_preserves_sub_gram_precision_before_report_aggregation() throws Exception {
+    void loaderPreservesSubGramPrecisionBeforeReportAggregation() throws Exception {
         var fertilizing = record("00000000-0000-0000-0000-000000000209", WorkType.FERTILIZING, 9);
-        var snapshot = new FarmingCycleReportSourceSnapshot(java.util.Arrays.asList(fertilizing), Map.of(), Map.of(), Map.ofEntries(Map.entry(Objects.requireNonNull(fertilizing.getId()), new FertilizingRecord(null, fertilizing, "유기질비료", new BigDecimal("0.01"), FertilizerAmountUnit.G, null))), Map.of(), Map.of(), Map.of(), Set.of());
-        var source = new FarmingCycleReportSourceLoader(new FakeSourceRepository(snapshot)).load(scope).get(0).getFertilizing();
+        var snapshot = new FarmingCycleReportSourceSnapshot(java.util.Arrays.asList(fertilizing), Map.of(), Map.of(),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(fertilizing.getId()), new FertilizingRecord(null, fertilizing, "유기질비료", new BigDecimal("0.01"),
+            FertilizerAmountUnit.G, null))), Map.of(), Map.of(), Map.of(), Set.of());
+        var source = single(new FarmingCycleReportSourceLoader(new FakeSourceRepository(snapshot)).load(scope)).getFertilizing();
         assertThat(source.getAmount()).isEqualByComparingTo("0.0100");
         assertThat(source.getAmountKg()).isEqualByComparingTo("0.00001");
     }
 
     @Test
     @DisplayName("loader fails when required detail is missing")
-    void loader_fails_when_required_detail_is_missing() throws Exception {
+    void loaderFailsWhenRequiredDetailIsMissing() throws Exception {
         var planting = record("00000000-0000-0000-0000-000000000201", WorkType.PLANTING, 1);
         var repository = new FakeSourceRepository(emptySnapshot(java.util.Arrays.asList(planting)));
         var loader = new FarmingCycleReportSourceLoader(repository);
@@ -102,13 +112,25 @@ class FarmingCycleReportSourceLoaderTest {
         var pruning = record("00000000-0000-0000-0000-000000000206", WorkType.PRUNING, 6);
         var harvest = record("00000000-0000-0000-0000-000000000207", WorkType.HARVEST, 7);
         var etc = record("00000000-0000-0000-0000-000000000208", WorkType.ETC, 8);
-        return new FarmingCycleReportSourceSnapshot(java.util.Arrays.asList(planting, watering, fertilizing, pestControl, weeding, pruning, harvest, etc), Map.ofEntries(Map.entry(Objects.requireNonNull(planting.getId()), new PlantingRecord(null, planting, PlantingMethod.SEED, new BigDecimal("1250.0000"), SeedAmountUnit.G, null, null, null))), Map.ofEntries(Map.entry(Objects.requireNonNull(watering.getId()), new WateringRecord(null, watering, IrrigationAmount.NORMAL, IrrigationMethod.DRIP))), Map.ofEntries(Map.entry(Objects.requireNonNull(fertilizing.getId()), new FertilizingRecord(null, fertilizing, "유기질비료", new BigDecimal("250.0000"), FertilizerAmountUnit.ML, FertilizingMethod.SOIL))), Map.ofEntries(Map.entry(Objects.requireNonNull(pestControl.getId()), new PestControlRecord(null, pestControl, new Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"), new BigDecimal("30.0000"), PesticideAmountUnit.ML, new BigDecimal("10000.0000"), SprayAmountUnit.ML, new Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물")))), Map.ofEntries(Map.entry(Objects.requireNonNull(weeding.getId()), new WeedingRecord(null, weeding, WeedingMethod.HAND))), Map.ofEntries(Map.entry(Objects.requireNonNull(harvest.getId()), new HarvestRecord(null, harvest, null, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 24, true))), Set.of(Objects.requireNonNull(etc.getId())));
+        return new FarmingCycleReportSourceSnapshot(java.util.Arrays.asList(planting, watering, fertilizing, pestControl, weeding, pruning, harvest, etc),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(planting.getId()), new PlantingRecord(null, planting, PlantingMethod.SEED,
+            new BigDecimal("1250.0000"), SeedAmountUnit.G, null, null, null))), Map.ofEntries(Map.entry(Objects.requireNonNull(watering.getId()),
+            new WateringRecord(null, watering, IrrigationAmount.NORMAL, IrrigationMethod.DRIP))),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(fertilizing.getId()), new FertilizingRecord(null, fertilizing, "유기질비료",
+            new BigDecimal("250.0000"), FertilizerAmountUnit.ML, FertilizingMethod.SOIL))),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(pestControl.getId()), new PestControlRecord(null, pestControl,
+            new Pesticide(uuid("00000000-0000-0000-0000-000000000301"), "만코제브 수화제", "가가방"), new BigDecimal("30.0000"), PesticideAmountUnit.ML,
+            new BigDecimal("10000.0000"), SprayAmountUnit.ML, new Pest(uuid("00000000-0000-0000-0000-000000000302"), "진딧물")))),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(weeding.getId()), new WeedingRecord(null, weeding, WeedingMethod.HAND))),
+            Map.ofEntries(Map.entry(Objects.requireNonNull(harvest.getId()), new HarvestRecord(null, harvest, null, CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED, 24, true))), Set.of(Objects.requireNonNull(etc.getId())));
     }
     private FarmingCycleReportSourceSnapshot emptySnapshot(List<FarmingRecord> records) {
         return new FarmingCycleReportSourceSnapshot(records, Map.of(), Map.of(), Map.of(), Map.of(), Map.of(), Map.of(), Set.of());
     }
     private FarmingRecord record(String id, WorkType workType, long hour) {
-        var record = new FarmingRecord(uuid(id), member, farm, crop, workType, LocalDateTime.of(2026, 7, 1, 8, 0).plusHours(hour), "맑음", 24, "memo", EntryMode.MANUAL, false);
+        var record = new FarmingRecord(uuid(id), member, farm, crop, workType, LocalDateTime.of(2026, 7, 1, 8, 0).plusHours(hour), "맑음", 24, "memo",
+            EntryMode.MANUAL, false);
         org.springframework.test.util.ReflectionTestUtils.setField(record, "createdAt", LocalDateTime.of(2026, 7, 1, 8, 0).plusMinutes(hour));
         return record;
     }
@@ -120,4 +142,9 @@ class FarmingCycleReportSourceLoaderTest {
         private FakeSourceRepository(FarmingCycleReportSourceSnapshot snapshot) { this.snapshot = snapshot; }
         @Override public FarmingCycleReportSourceSnapshot load(UUID memberId, UUID farmId, UUID cropId) { return snapshot; }
     }
+    private static <T> T single(List<T> values) {
+        assertThat(values).hasSize(1);
+        return values.getFirst();
+    }
+
 }

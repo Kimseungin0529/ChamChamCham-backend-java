@@ -1,10 +1,8 @@
 package com.chamchamcham.application.farming;
 
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 public final class WorkTypeResult {
     private WorkTypeResult() {}

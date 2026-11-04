@@ -10,8 +10,11 @@ import org.springframework.lang.Nullable;
 
 public record FarmingWorkReportSearchCondition(
     @NonNull UUID memberId,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.chamchamcham.application.farming.EmptyCollectionDefaultDeserializer.class)
     @NonNull Set<UUID> farmIds,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.chamchamcham.application.farming.EmptyCollectionDefaultDeserializer.class)
     @NonNull Set<UUID> cropIds,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.chamchamcham.application.farming.EmptyCollectionDefaultDeserializer.class)
     @NonNull List<WorkType> workTypes,
     @Nullable String cursor,
     int size

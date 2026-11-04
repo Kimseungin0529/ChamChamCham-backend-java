@@ -4,29 +4,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
 class StatisticsMathTest {
 
     @Test
     @DisplayName("percentage and average use scale two half up")
-    void percentage_and_average_use_scale_two_half_up() throws Exception {
+    void percentageAndAverageUseScaleTwoHalfUp() throws Exception {
         assertThat(StatisticsMath.percentage(1, 3)).isEqualByComparingTo("33.33");
         assertThat(StatisticsMath.average(java.util.Arrays.asList(new BigDecimal("1"), new BigDecimal("2")))).isEqualByComparingTo("1.50");
     }
 
     @Test
     @DisplayName("average interval uses distinct dates")
-    void average_interval_uses_distinct_dates() throws Exception {
+    void averageIntervalUsesDistinctDates() throws Exception {
         assertThat(StatisticsMath.averageIntervalDays(java.util.Arrays.asList(date(1), date(1), date(4), date(10)))).isEqualByComparingTo("4.50");
     }
 
     @Test
     @DisplayName("empty values return null")
-    void empty_values_return_null() throws Exception {
+    void emptyValuesReturnNull() throws Exception {
         assertThat(StatisticsMath.percentage(0, 0)).isNull();
         assertThat(StatisticsMath.average(List.of())).isNull();
         assertThat(StatisticsMath.averageIntervalDays(List.of())).isNull();

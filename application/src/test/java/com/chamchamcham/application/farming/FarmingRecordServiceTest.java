@@ -68,9 +68,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -113,7 +112,10 @@ class FarmingRecordServiceTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        service = new FarmingRecordService(memberRepository, farmRepository, cropRepository, memberCropRepository, farmingRecordRepository, farmingRecordMediaRepository, farmingRecordQueryRepository, uploadedMediaRepository, plantingRecordRepository, wateringRecordRepository, fertilizingRecordRepository, pestControlRecordRepository, weedingRecordRepository, harvestRecordRepository, pesticideRepository, pestRepository, detailValidator, cursorCodec, reportProjectionService, recordFeedbackLifecycleService);
+        service = new FarmingRecordService(memberRepository, farmRepository, cropRepository, memberCropRepository, farmingRecordRepository,
+            farmingRecordMediaRepository, farmingRecordQueryRepository, uploadedMediaRepository, plantingRecordRepository, wateringRecordRepository,
+            fertilizingRecordRepository, pestControlRecordRepository, weedingRecordRepository, harvestRecordRepository, pesticideRepository,
+            pestRepository, detailValidator, cursorCodec, reportProjectionService, recordFeedbackLifecycleService);
         lenient().when(memberCropRepository.existsByMemberIdAndFarmIdAndCropId(memberId, farmId, cropId)).thenReturn(true);
         member = new Member(memberId, "" + memberId + "@example.com", null);
         otherMember = new Member(otherMemberId, "" + otherMemberId + "@example.com", null);
@@ -122,11 +124,15 @@ class FarmingRecordServiceTest {
         media1 = uploadedMedia(mediaId1, UploadedMediaUsageType.FARMING_RECORD, UploadedMediaStatus.TEMP);
         replacementMedia = uploadedMedia(replacementMediaId, UploadedMediaUsageType.FARMING_RECORD, UploadedMediaStatus.TEMP);
     }
-    private FarmingRecordCommand.Create baseCommand(WorkType workType, FarmingRecordCommand.PlantingDetail planting, FarmingRecordCommand.HarvestDetail harvest, FarmingRecordCommand.PestControlDetail pestControl, List<UUID> mediaIds) {
-        return new FarmingRecordCommand.Create(memberId, farmId, cropId, workType, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", planting, null, null, pestControl, null, harvest, mediaIds, EntryMode.MANUAL);
+    private FarmingRecordCommand.Create baseCommand(WorkType workType, FarmingRecordCommand.PlantingDetail planting,
+        FarmingRecordCommand.HarvestDetail harvest, FarmingRecordCommand.PestControlDetail pestControl, List<UUID> mediaIds) {
+        return new FarmingRecordCommand.Create(memberId, farmId, cropId, workType, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", planting, null,
+            null, pestControl, null, harvest, mediaIds, EntryMode.MANUAL);
     }
-    private FarmingRecordCommand.Update updateCommand(WorkType workType, FarmingRecordCommand.PlantingDetail planting, FarmingRecordCommand.HarvestDetail harvest, List<UUID> mediaIds) {
-        return new FarmingRecordCommand.Update(memberId, recordId, farmId, cropId, workType, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", planting, null, null, null, null, harvest, mediaIds);
+    private FarmingRecordCommand.Update updateCommand(WorkType workType, FarmingRecordCommand.PlantingDetail planting,
+        FarmingRecordCommand.HarvestDetail harvest, List<UUID> mediaIds) {
+        return new FarmingRecordCommand.Update(memberId, recordId, farmId, cropId, workType, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo",
+            planting, null, null, null, null, harvest, mediaIds);
     }
     private FarmingRecord existingRecord(UUID id, Member owner, WorkType workType, LocalDateTime workedAt) {
         return new FarmingRecord(id, owner, farm, crop, workType, workedAt, "맑음", 20, "memo", EntryMode.MANUAL, false);
@@ -139,7 +145,8 @@ class FarmingRecordServiceTest {
     private void stubFarmingRecordSave() {
         when(farmingRecordRepository.save(any(FarmingRecord.class))).thenAnswer(invocation -> {
             FarmingRecord toSave = invocation.getArgument(0);
-            return new FarmingRecord(UUID.randomUUID(), toSave.getMember(), toSave.getFarm(), toSave.getCrop(), toSave.getWorkType(), toSave.getWorkedAt(), toSave.getWeatherCondition(), toSave.getWeatherTemperature(), toSave.getMemo(), toSave.getEntryMode(), false);
+            return new FarmingRecord(UUID.randomUUID(), toSave.getMember(), toSave.getFarm(), toSave.getCrop(), toSave.getWorkType(), toSave.getWorkedAt(),
+                toSave.getWeatherCondition(), toSave.getWeatherTemperature(), toSave.getMemo(), toSave.getEntryMode(), false);
         });
     }
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -155,12 +162,13 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create saves planting detail when workType is PLANTING")
-    void create_saves_planting_detail_when_workType_is_PLANTING() throws Exception {
+    void createSavesPlantingDetailWhenWorkTypeIsPLANTING() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
         stubFarmingRecordSave();
-        var command = baseCommand(WorkType.PLANTING, new FarmingRecordCommand.PlantingDetail(PlantingMethod.SEED, BigDecimal.TEN, SeedAmountUnit.G, null, null, null), null, null, List.of());
+        var command = baseCommand(WorkType.PLANTING, new FarmingRecordCommand.PlantingDetail(PlantingMethod.SEED, BigDecimal.TEN, SeedAmountUnit.G, null,
+            null, null), null, null, List.of());
         var result = service.create(command);
         assertEquals(WorkType.PLANTING, result.getWorkType());
         var captor = ArgumentCaptor.forClass(PlantingRecord.class);
@@ -172,7 +180,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create saves pest control detail when workType is PEST_CONTROL")
-    void create_saves_pest_control_detail_when_workType_is_PEST_CONTROL() throws Exception {
+    void createSavesPestControlDetailWhenWorkTypeIsPESTCONTROL() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -183,7 +191,8 @@ class FarmingRecordServiceTest {
         when(pesticideRepository.findById(pesticideId)).thenReturn(Optional.of(pesticide));
         when(pestRepository.findById(pestId)).thenReturn(Optional.of(pest));
         stubFarmingRecordSave();
-        var command = baseCommand(WorkType.PEST_CONTROL, null, null, new FarmingRecordCommand.PestControlDetail(pesticideId, BigDecimal.ONE, PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, pestId), List.of());
+        var command = baseCommand(WorkType.PEST_CONTROL, null, null, new FarmingRecordCommand.PestControlDetail(pesticideId, BigDecimal.ONE,
+            PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, pestId), List.of());
         service.create(command);
         var captor = ArgumentCaptor.forClass(PestControlRecord.class);
         verify(pestControlRecordRepository).save(captor.capture());
@@ -194,14 +203,15 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create throws when pesticide id does not exist")
-    void create_throws_when_pesticide_id_does_not_exist() throws Exception {
+    void createThrowsWhenPesticideIdDoesNotExist() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
         var pesticideId = UUID.randomUUID();
         when(pesticideRepository.findById(pesticideId)).thenReturn(Optional.empty());
         stubFarmingRecordSave();
-        var command = baseCommand(WorkType.PEST_CONTROL, null, null, new FarmingRecordCommand.PestControlDetail(pesticideId, BigDecimal.ONE, PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null), List.of());
+        var command = baseCommand(WorkType.PEST_CONTROL, null, null, new FarmingRecordCommand.PestControlDetail(pesticideId, BigDecimal.ONE,
+            PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null), List.of());
         var exception = assertThrows(BusinessException.class, () -> service.create(command));
         assertEquals(ErrorCode.PESTICIDE_NOT_FOUND, exception.getErrorCode());
         verify(pestControlRecordRepository, never()).save(any(PestControlRecord.class));
@@ -209,7 +219,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create persists weather fields")
-    void create_persists_weather_fields() throws Exception {
+    void createPersistsWeatherFields() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -223,7 +233,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create attaches up to five media")
-    void create_attaches_up_to_five_media() throws Exception {
+    void createAttachesUpToFiveMedia() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -236,12 +246,13 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create saves harvest detail when workType is HARVEST")
-    void create_saves_harvest_detail_when_workType_is_HARVEST() throws Exception {
+    void createSavesHarvestDetailWhenWorkTypeIsHARVEST() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
         stubFarmingRecordSave();
-        var command = baseCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(BigDecimal.TEN, false, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, false), null, List.of());
+        var command = baseCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(BigDecimal.TEN, false, CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED, 2, false), null, List.of());
         service.create(command);
         var captor = ArgumentCaptor.forClass(HarvestRecord.class);
         verify(harvestRecordRepository).save(captor.capture());
@@ -251,12 +262,13 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create stores null harvest amount when amount is unknown")
-    void create_stores_null_harvest_amount_when_amount_is_unknown() throws Exception {
+    void createStoresNullHarvestAmountWhenAmountIsUnknown() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
         stubFarmingRecordSave();
-        var command = baseCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(null, true, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, false), null, List.of());
+        var command = baseCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(null, true, CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED, 2, false), null, List.of());
         service.create(command);
         var captor = ArgumentCaptor.forClass(HarvestRecord.class);
         verify(harvestRecordRepository).save(captor.capture());
@@ -265,7 +277,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create saves no detail row when workType is PRUNING")
-    void create_saves_no_detail_row_when_workType_is_PRUNING() throws Exception {
+    void createSavesNoDetailRowWhenWorkTypeIsPRUNING() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -273,12 +285,13 @@ class FarmingRecordServiceTest {
         var command = baseCommand(WorkType.PRUNING, null, null, null, List.of());
         var result = service.create(command);
         assertEquals(WorkType.PRUNING, result.getWorkType());
-        verifyNoInteractions(plantingRecordRepository, wateringRecordRepository, fertilizingRecordRepository, pestControlRecordRepository, weedingRecordRepository, harvestRecordRepository);
+        verifyNoInteractions(plantingRecordRepository, wateringRecordRepository, fertilizingRecordRepository, pestControlRecordRepository,
+            weedingRecordRepository, harvestRecordRepository);
     }
 
     @Test
     @DisplayName("create saves no detail row when workType is ETC")
-    void create_saves_no_detail_row_when_workType_is_ETC() throws Exception {
+    void createSavesNoDetailRowWhenWorkTypeIsETC() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -286,12 +299,13 @@ class FarmingRecordServiceTest {
         var command = baseCommand(WorkType.ETC, null, null, null, List.of());
         var result = service.create(command);
         assertEquals(WorkType.ETC, result.getWorkType());
-        verifyNoInteractions(plantingRecordRepository, wateringRecordRepository, fertilizingRecordRepository, pestControlRecordRepository, weedingRecordRepository, harvestRecordRepository);
+        verifyNoInteractions(plantingRecordRepository, wateringRecordRepository, fertilizingRecordRepository, pestControlRecordRepository,
+            weedingRecordRepository, harvestRecordRepository);
     }
 
     @Test
     @DisplayName("create rejects fertilizing without required detail and saves nothing")
-    void create_rejects_fertilizing_without_required_detail_and_saves_nothing() throws Exception {
+    void createRejectsFertilizingWithoutRequiredDetailAndSavesNothing() throws Exception {
         var command = baseCommand(WorkType.FERTILIZING, null, null, null, List.of());
         org.mockito.Mockito.doThrow(new BusinessException(ErrorCode.FARMING_RECORD_DETAIL_REQUIRED)).when(detailValidator).validate(command);
         var exception = assertThrows(BusinessException.class, () -> service.create(command));
@@ -301,7 +315,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create throws when member not found")
-    void create_throws_when_member_not_found() throws Exception {
+    void createThrowsWhenMemberNotFound() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.empty());
         var command = baseCommand(WorkType.PRUNING, null, null, null, List.of());
         var exception = assertThrows(BusinessException.class, () -> service.create(command));
@@ -310,7 +324,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create throws when farm is not owned by member")
-    void create_throws_when_farm_is_not_owned_by_member() throws Exception {
+    void createThrowsWhenFarmIsNotOwnedByMember() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(null);
         var command = baseCommand(WorkType.PRUNING, null, null, null, List.of());
@@ -321,7 +335,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create throws BusinessException not IllegalArgumentException when detail is missing despite validator passing")
-    void create_throws_BusinessException_not_IllegalArgumentException_when_detail_is_missing_despite_validator_passing() throws Exception {
+    void createThrowsBusinessExceptionNotIllegalArgumentExceptionWhenDetailIsMissingDespiteValidatorPassing() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -333,12 +347,13 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update replaces detail row when workType changes")
-    void update_replaces_detail_row_when_workType_changes() throws Exception {
+    void updateReplacesDetailRowWhenWorkTypeChanges() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
-        var result = service.update(updateCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(BigDecimal.TEN, false, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, false), List.of()));
+        var result = service.update(updateCommand(WorkType.HARVEST, null, new FarmingRecordCommand.HarvestDetail(BigDecimal.TEN, false,
+            CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, false), List.of()));
         assertEquals(WorkType.HARVEST, result.getWorkType());
         assertEquals(WorkType.HARVEST, record.getWorkType());
         verify(plantingRecordRepository).deleteByRecord(record);
@@ -350,12 +365,13 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update replaces detail row when workType is unchanged")
-    void update_replaces_detail_row_when_workType_is_unchanged() throws Exception {
+    void updateReplacesDetailRowWhenWorkTypeIsUnchanged() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
-        service.update(updateCommand(WorkType.PLANTING, new FarmingRecordCommand.PlantingDetail(PlantingMethod.SEED, BigDecimal.ONE, SeedAmountUnit.G, null, null, null), null, List.of()));
+        service.update(updateCommand(WorkType.PLANTING, new FarmingRecordCommand.PlantingDetail(PlantingMethod.SEED, BigDecimal.ONE, SeedAmountUnit.G,
+            null, null, null), null, List.of()));
         verify(plantingRecordRepository).deleteByRecord(record);
         var captor = ArgumentCaptor.forClass(PlantingRecord.class);
         verify(plantingRecordRepository).save(captor.capture());
@@ -364,7 +380,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update replaces media associations")
-    void update_replaces_media_associations() throws Exception {
+    void updateReplacesMediaAssociations() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
@@ -378,7 +394,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update flushes the media delete before attaching new rows")
-    void update_flushes_the_media_delete_before_attaching_new_rows() throws Exception {
+    void updateFlushesTheMediaDeleteBeforeAttachingNewRows() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
@@ -393,30 +409,32 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update rejects duplicate media ids in the same request")
-    void update_rejects_duplicate_media_ids_in_the_same_request() throws Exception {
+    void updateRejectsDuplicateMediaIdsInTheSameRequest() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
-        var exception = assertThrows(BusinessException.class, () -> service.update(updateCommand(WorkType.PRUNING, null, null, java.util.Arrays.asList(mediaId1, mediaId1))));
+        var exception = assertThrows(BusinessException.class, () -> service.update(updateCommand(WorkType.PRUNING, null, null,
+            java.util.Arrays.asList(mediaId1, mediaId1))));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verify(farmingRecordMediaRepository, never()).deleteByRecord(record);
     }
 
     @Test
     @DisplayName("create rejects duplicate media ids in the same request")
-    void create_rejects_duplicate_media_ids_in_the_same_request() throws Exception {
+    void createRejectsDuplicateMediaIdsInTheSameRequest() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
-        var exception = assertThrows(BusinessException.class, () -> service.create(baseCommand(WorkType.PRUNING, null, null, null, java.util.Arrays.asList(mediaId1, mediaId1))));
+        var exception = assertThrows(BusinessException.class, () -> service.create(baseCommand(WorkType.PRUNING, null, null, null,
+            java.util.Arrays.asList(mediaId1, mediaId1))));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verify(farmingRecordRepository, never()).save(any(FarmingRecord.class));
     }
 
     @Test
     @DisplayName("update keeps an already-attached photo that belongs to this same record")
-    void update_keeps_an_already_attached_photo_that_belongs_to_this_same_record() throws Exception {
+    void updateKeepsAnAlreadyAttachedPhotoThatBelongsToThisSameRecord() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         var alreadyAttached = uploadedMedia(mediaId1, UploadedMediaUsageType.FARMING_RECORD, UploadedMediaStatus.ATTACHED);
         var ownRecordMedia = new FarmingRecordMedia(null, record, alreadyAttached, 0);
@@ -432,7 +450,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update rejects a photo already attached to a different record")
-    void update_rejects_a_photo_already_attached_to_a_different_record() throws Exception {
+    void updateRejectsAPhotoAlreadyAttachedToADifferentRecord() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         var otherRecord = existingRecord(secondRecordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         var attachedElsewhere = uploadedMedia(mediaId1, UploadedMediaUsageType.FARMING_RECORD, UploadedMediaStatus.ATTACHED);
@@ -448,7 +466,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update marks a dropped photo as deleted while keeping the retained one")
-    void update_marks_a_dropped_photo_as_deleted_while_keeping_the_retained_one() throws Exception {
+    void updateMarksADroppedPhotoAsDeletedWhileKeepingTheRetainedOne() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         var kept = media1;
         var dropped = replacementMedia;
@@ -467,7 +485,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update throws not found for missing or deleted record")
-    void update_throws_not_found_for_missing_or_deleted_record() throws Exception {
+    void updateThrowsNotFoundForMissingOrDeletedRecord() throws Exception {
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(null);
         var exception = assertThrows(BusinessException.class, () -> service.update(updateCommand(WorkType.PRUNING, null, null, List.of())));
         assertEquals(ErrorCode.FARMING_RECORD_NOT_FOUND, exception.getErrorCode());
@@ -475,7 +493,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update throws forbidden for record owned by another member")
-    void update_throws_forbidden_for_record_owned_by_another_member() throws Exception {
+    void updateThrowsForbiddenForRecordOwnedByAnotherMember() throws Exception {
         var record = existingRecord(recordId, otherMember, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         var exception = assertThrows(BusinessException.class, () -> service.update(updateCommand(WorkType.PRUNING, null, null, List.of())));
@@ -484,7 +502,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("create throws when crop is not registered to the farm")
-    void create_throws_when_crop_is_not_registered_to_the_farm() throws Exception {
+    void createThrowsWhenCropIsNotRegisteredToTheFarm() throws Exception {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
@@ -496,8 +514,9 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("update throws when crop is not registered to the farm")
-    void update_throws_when_crop_is_not_registered_to_the_farm() throws Exception {
-        when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0)));
+    void updateThrowsWhenCropIsNotRegisteredToTheFarm() throws Exception {
+        when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(existingRecord(recordId, member, WorkType.PRUNING,
+            LocalDateTime.of(2026, 6, 1, 9, 0)));
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(cropRepository.findById(cropId)).thenReturn(Optional.of(crop));
         when(memberCropRepository.existsByMemberIdAndFarmIdAndCropId(memberId, farmId, cropId)).thenReturn(false);
@@ -507,7 +526,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("delete sets isDeleted without removing the row")
-    void delete_sets_isDeleted_without_removing_the_row() throws Exception {
+    void deleteSetsIsDeletedWithoutRemovingTheRow() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         service.delete(new FarmingRecordCommand.Delete(memberId, recordId));
@@ -517,7 +536,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("delete throws not found for missing or deleted record")
-    void delete_throws_not_found_for_missing_or_deleted_record() throws Exception {
+    void deleteThrowsNotFoundForMissingOrDeletedRecord() throws Exception {
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(null);
         var exception = assertThrows(BusinessException.class, () -> service.delete(new FarmingRecordCommand.Delete(memberId, recordId)));
         assertEquals(ErrorCode.FARMING_RECORD_NOT_FOUND, exception.getErrorCode());
@@ -525,7 +544,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("delete throws forbidden for record owned by another member")
-    void delete_throws_forbidden_for_record_owned_by_another_member() throws Exception {
+    void deleteThrowsForbiddenForRecordOwnedByAnotherMember() throws Exception {
         var record = existingRecord(recordId, otherMember, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         var exception = assertThrows(BusinessException.class, () -> service.delete(new FarmingRecordCommand.Delete(memberId, recordId)));
@@ -535,11 +554,12 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("getDetail returns full detail with images and type specific detail")
-    void getDetail_returns_full_detail_with_images_and_type_specific_detail() throws Exception {
+    void getDetailReturnsFullDetailWithImagesAndTypeSpecificDetail() throws Exception {
         var record = existingRecord(recordId, member, WorkType.HARVEST, LocalDateTime.of(2026, 6, 1, 9, 0));
         setTimestamps(record, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
-        when(harvestRecordRepository.findByRecord_Id(recordId)).thenReturn(new HarvestRecord(null, record, BigDecimal.TEN, CropUsePartCategory.ROOT_BARK, HarvestSource.CULTIVATED, 2, true));
+        when(harvestRecordRepository.findByRecord_Id(recordId)).thenReturn(new HarvestRecord(null, record, BigDecimal.TEN, CropUsePartCategory.ROOT_BARK,
+            HarvestSource.CULTIVATED, 2, true));
         when(farmingRecordMediaRepository.findByRecord_Id(recordId)).thenReturn(java.util.Arrays.asList(new FarmingRecordMedia(null, record, media1, 0)));
         var detail = service.getDetail(memberId, recordId);
         assertEquals(recordId, detail.getId());
@@ -555,21 +575,22 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("getDetail exposes selected pesticide item name instead of brand name")
-    void getDetail_exposes_selected_pesticide_item_name_instead_of_brand_name() throws Exception {
+    void getDetailExposesSelectedPesticideItemNameInsteadOfBrandName() throws Exception {
         var record = existingRecord(recordId, member, WorkType.PEST_CONTROL, LocalDateTime.of(2026, 6, 1, 9, 0));
         setTimestamps(record, LocalDateTime.of(2026, 6, 1, 9, 0));
         var pesticideId = UUID.randomUUID();
         var pesticide = new Pesticide(pesticideId, "만코제브 수화제", "빔");
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         when(farmingRecordMediaRepository.findByRecord_Id(recordId)).thenReturn(List.of());
-        when(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(new PestControlRecord(null, record, pesticide, BigDecimal.ONE, PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null));
+        when(pestControlRecordRepository.findByRecord_Id(recordId)).thenReturn(new PestControlRecord(null, record, pesticide, BigDecimal.ONE,
+            PesticideAmountUnit.ML, BigDecimal.TEN, SprayAmountUnit.ML, null));
         var detail = service.getDetail(memberId, recordId);
         assertEquals("만코제브 수화제", detail.getPestControl().getPesticideName());
     }
 
     @Test
     @DisplayName("getDetail throws not found for missing or deleted record")
-    void getDetail_throws_not_found_for_missing_or_deleted_record() throws Exception {
+    void getDetailThrowsNotFoundForMissingOrDeletedRecord() throws Exception {
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(null);
         var exception = assertThrows(BusinessException.class, () -> service.getDetail(memberId, recordId));
         assertEquals(ErrorCode.FARMING_RECORD_NOT_FOUND, exception.getErrorCode());
@@ -577,7 +598,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("getDetail throws forbidden for record owned by another member")
-    void getDetail_throws_forbidden_for_record_owned_by_another_member() throws Exception {
+    void getDetailThrowsForbiddenForRecordOwnedByAnotherMember() throws Exception {
         var record = existingRecord(recordId, otherMember, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
         when(farmingRecordRepository.findByIdAndIsDeletedFalse(recordId)).thenReturn(record);
         var exception = assertThrows(BusinessException.class, () -> service.getDetail(memberId, recordId));
@@ -586,14 +607,19 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search maps application condition to query repository and returns next cursor")
-    void search_maps_application_condition_to_query_repository_and_returns_next_cursor() throws Exception {
+    void searchMapsApplicationConditionToQueryRepositoryAndReturnsNextCursor() throws Exception {
         var requestedSize = 1;
         var newestRecord = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 12, 10, 0));
         var overflowRecord = existingRecord(secondRecordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 12, 9, 0));
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, java.util.Arrays.asList(cropId), java.util.Arrays.asList(WorkType.PRUNING), null, null, null, List.of(), List.of(), null, requestedSize+ 1))).thenReturn(new FarmingRecordQueryRepository.SearchResult(java.util.Arrays.asList(new FarmingRecordQueryRepository.Row(newestRecord, "https://example.test/1.jpg", null, null, null, null, null, null), new FarmingRecordQueryRepository.Row(overflowRecord, null, null, null, null, null, null, null))));
-        var page = service.search(new FarmingRecordSearchCondition(memberId, java.util.Arrays.asList(cropId), java.util.Arrays.asList(WorkType.PRUNING), null, null, null, null, requestedSize));
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, java.util.Arrays.asList(cropId),
+            java.util.Arrays.asList(WorkType.PRUNING), null, null, null, List.of(), List.of(), null,
+            requestedSize+ 1))).thenReturn(new FarmingRecordQueryRepository.SearchResult(java.util.Arrays.asList(new FarmingRecordQueryRepository.Row(newestRecord,
+            "https://example.test/1.jpg", null, null, null, null, null, null), new FarmingRecordQueryRepository.Row(overflowRecord, null, null, null, null,
+            null, null, null))));
+        var page = service.search(new FarmingRecordSearchCondition(memberId, java.util.Arrays.asList(cropId), java.util.Arrays.asList(WorkType.PRUNING),
+            null, null, null, null, requestedSize));
         assertThat(page.getItems()).hasSize(1);
-        assertEquals(recordId, page.getItems().get(0).getId());
+        assertEquals(recordId, single(page.getItems()).getId());
         assertThat(page.getNextCursor()).isNotBlank();
         var nextCursor = cursorCodec.decode(page.getNextCursor(), FarmingRecordCursorPayload.class);
         assertEquals(newestRecord.getWorkedAt(), nextCursor.getWorkedAt());
@@ -602,11 +628,14 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search maps work type summary fields from query repository row")
-    void search_maps_work_type_summary_fields_from_query_repository_row() throws Exception {
+    void searchMapsWorkTypeSummaryFieldsFromQueryRepositoryRow() throws Exception {
         var record = existingRecord(recordId, member, WorkType.WATERING, LocalDateTime.of(2026, 6, 1, 9, 0));
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null, List.of(), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(java.util.Arrays.asList(new FarmingRecordQueryRepository.Row(record, null, IrrigationMethod.DRIP, BigDecimal.TEN, "친환경약제", WeedingMethod.HAND, PlantingMethod.SEEDLING, "유박비료"))));
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null,
+            List.of(), List.of(), null,
+            21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(java.util.Arrays.asList(new FarmingRecordQueryRepository.Row(record, null,
+            IrrigationMethod.DRIP, BigDecimal.TEN, "친환경약제", WeedingMethod.HAND, PlantingMethod.SEEDLING, "유박비료"))));
         var page = service.search(new FarmingRecordSearchCondition(memberId, List.of(), List.of(), null, null, null, null, 20));
-        var summary = page.getItems().get(0);
+        var summary = single(page.getItems());
         assertEquals(IrrigationMethod.DRIP, summary.getIrrigationMethod());
         assertEquals(0, BigDecimal.TEN.compareTo(summary.getHarvestAmount()));
         assertEquals("친환경약제", summary.getPesticideName());
@@ -617,15 +646,17 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search converts start and end date to datetime bounds")
-    void search_converts_start_and_end_date_to_datetime_bounds() throws Exception {
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), LocalDateTime.of(2026, 6, 1, 0, 0), LocalDateTime.of(2026, 7, 1, 0, 0), null, List.of(), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
+    void searchConvertsStartAndEndDateToDatetimeBounds() throws Exception {
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), LocalDateTime.of(2026, 6,
+            1, 0, 0), LocalDateTime.of(2026, 7, 1, 0, 0), null, List.of(), List.of(), null,
+            21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
         var page = service.search(new FarmingRecordSearchCondition(memberId, List.of(), List.of(), LocalDate.of(2026, 6, 1), LocalDate.of(2026, 6, 30), null, null, 20));
         assertThat(page.getItems()).isEmpty();
     }
 
     @Test
     @DisplayName("search rejects zero size")
-    void search_rejects_zero_size() throws Exception {
+    void searchRejectsZeroSize() throws Exception {
         var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(List.of(), List.of(), null, null, null, null, 0)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(farmingRecordQueryRepository);
@@ -633,7 +664,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search rejects negative size")
-    void search_rejects_negative_size() throws Exception {
+    void searchRejectsNegativeSize() throws Exception {
         var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(List.of(), List.of(), null, null, null, null, -1)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(farmingRecordQueryRepository);
@@ -641,7 +672,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search rejects max integer size")
-    void search_rejects_max_integer_size() throws Exception {
+    void searchRejectsMaxIntegerSize() throws Exception {
         var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(List.of(), List.of(), null, null, null, null, Integer.MAX_VALUE)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(farmingRecordQueryRepository);
@@ -649,7 +680,7 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search rejects malformed cursor")
-    void search_rejects_malformed_cursor() throws Exception {
+    void searchRejectsMalformedCursor() throws Exception {
         var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(List.of(), List.of(), null, null, null, "not-a-valid-cursor", 20)));
         assertEquals(ErrorCode.INVALID_CURSOR, exception.getErrorCode());
         verifyNoInteractions(farmingRecordQueryRepository);
@@ -657,32 +688,36 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("search resolves keyword into matched work type label")
-    void search_resolves_keyword_into_matched_work_type_label() throws Exception {
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, "수확", java.util.Arrays.asList(WorkType.HARVEST), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
+    void searchResolvesKeywordIntoMatchedWorkTypeLabel() throws Exception {
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, "수확",
+            java.util.Arrays.asList(WorkType.HARVEST), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
         var page = service.search(searchCondition(List.of(), List.of(), null, null, "수확", null, 20));
         assertThat(page.getItems()).isEmpty();
     }
 
     @Test
     @DisplayName("search resolves keyword into matched harvest part label")
-    void search_resolves_keyword_into_matched_harvest_part_label() throws Exception {
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, "잎", List.of(), java.util.Arrays.asList(CropUsePartCategory.LEAF), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
+    void searchResolvesKeywordIntoMatchedHarvestPartLabel() throws Exception {
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, "잎",
+            List.of(), java.util.Arrays.asList(CropUsePartCategory.LEAF), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
         var page = service.search(searchCondition(List.of(), List.of(), null, null, "잎", null, 20));
         assertThat(page.getItems()).isEmpty();
     }
 
     @Test
     @DisplayName("search passes blank keyword as null with no matched labels")
-    void search_passes_blank_keyword_as_null_with_no_matched_labels() throws Exception {
-        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null, List.of(), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
+    void searchPassesBlankKeywordAsNullWithNoMatchedLabels() throws Exception {
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null,
+            List.of(), List.of(), null, 21))).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
         var page = service.search(searchCondition(List.of(), List.of(), null, null, "   ", null, 20));
         assertThat(page.getItems()).isEmpty();
     }
 
     @Test
     @DisplayName("count delegates to query repository with derived matched labels and no cursor")
-    void count_delegates_to_query_repository_with_derived_matched_labels_and_no_cursor() throws Exception {
-        when(farmingRecordQueryRepository.count(new FarmingRecordQueryRepository.SearchCondition(memberId, java.util.Arrays.asList(cropId), List.of(), null, null, "수확", java.util.Arrays.asList(WorkType.HARVEST), List.of(), null, 1))).thenReturn(7L);
+    void countDelegatesToQueryRepositoryWithDerivedMatchedLabelsAndNoCursor() throws Exception {
+        when(farmingRecordQueryRepository.count(new FarmingRecordQueryRepository.SearchCondition(memberId, java.util.Arrays.asList(cropId), List.of(),
+            null, null, "수확", java.util.Arrays.asList(WorkType.HARVEST), List.of(), null, 1))).thenReturn(7L);
         var total = service.count(searchCondition(java.util.Arrays.asList(cropId), List.of(), null, null, "수확", null, 20));
         assertEquals(7L, total);
         verifyNoInteractions(farmingRecordRepository);
@@ -690,12 +725,53 @@ class FarmingRecordServiceTest {
 
     @Test
     @DisplayName("count passes blank keyword as null with no matched labels")
-    void count_passes_blank_keyword_as_null_with_no_matched_labels() throws Exception {
-        when(farmingRecordQueryRepository.count(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null, List.of(), List.of(), null, 1))).thenReturn(0L);
+    void countPassesBlankKeywordAsNullWithNoMatchedLabels() throws Exception {
+        when(farmingRecordQueryRepository.count(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(), null, null, null,
+            List.of(), List.of(), null, 1))).thenReturn(0L);
         var total = service.count(searchCondition(List.of(), List.of(), null, null, "   ", null, 20));
         assertEquals(0L, total);
     }
-    private FarmingRecordSearchCondition searchCondition(List<UUID> cropIds, List<WorkType> workTypes, LocalDate startDate, LocalDate endDate, String keyword, String cursor, int size) {
+    private FarmingRecordSearchCondition searchCondition(List<UUID> cropIds, List<WorkType> workTypes, LocalDate startDate, LocalDate endDate,
+        String keyword, String cursor, int size) {
         return new FarmingRecordSearchCondition(memberId, cropIds, workTypes, startDate, endDate, keyword, cursor, size);
     }
+
+    @Test
+    void cursorEncodingPreservesTheOriginalJacksonFailure() throws Exception {
+        var codec = org.mockito.Mockito.mock(OpaqueCursorCodec.class);
+        var failure = new com.fasterxml.jackson.core.JsonProcessingException("fixture encoding failure") {};
+        when(codec.encode(org.mockito.ArgumentMatchers.any())).thenThrow(failure);
+        org.springframework.test.util.ReflectionTestUtils.setField(service, "cursorCodec", codec);
+        var first = existingRecord(recordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 2, 9, 0));
+        var second = existingRecord(secondRecordId, member, WorkType.PRUNING, LocalDateTime.of(2026, 6, 1, 9, 0));
+        when(farmingRecordQueryRepository.search(org.mockito.ArgumentMatchers.any())).thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of(
+            new FarmingRecordQueryRepository.Row(first, null, null, null, null, null, null, null),
+            new FarmingRecordQueryRepository.Row(second, null, null, null, null, null, null, null))));
+        var thrown = assertThrows(com.fasterxml.jackson.core.JsonProcessingException.class,
+            () -> service.search(searchCondition(List.of(), List.of(), null, null, null, null, 1)));
+        org.junit.jupiter.api.Assertions.assertSame(failure, thrown);
+    }
+
+    @Test
+    void searchRejectsJsonNullCursorBeforeQueryingRecords() {
+        var cursor = java.util.Base64.getUrlEncoder().withoutPadding().encodeToString("null".getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        var thrown = assertThrows(BusinessException.class,
+            () -> service.search(searchCondition(List.of(), List.of(), null, null, null, cursor, 20)));
+        assertEquals(ErrorCode.INVALID_CURSOR, thrown.getErrorCode());
+        verifyNoInteractions(farmingRecordQueryRepository);
+    }
+
+    @Test
+    void searchTrimsUnicodeSpacesBeforeMatchingKeywordLabels() throws Exception {
+        when(farmingRecordQueryRepository.search(new FarmingRecordQueryRepository.SearchCondition(memberId, List.of(), List.of(),
+            null, null, "수확", List.of(WorkType.HARVEST), List.of(), null, 21)))
+            .thenReturn(new FarmingRecordQueryRepository.SearchResult(List.of()));
+        assertThat(service.search(searchCondition(List.of(), List.of(), null, null, "\u00a0수확\u202f", null, 20)).getItems()).isEmpty();
+    }
+
+    private static <T> T single(List<T> values) {
+        assertThat(values).hasSize(1);
+        return values.getFirst();
+    }
+
 }

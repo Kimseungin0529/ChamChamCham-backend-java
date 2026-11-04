@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -42,7 +41,9 @@ public final class FarmingRecordCommand {
         @Nullable PestControlDetail pestControl,
         @Nullable WeedingDetail weeding,
         @Nullable HarvestDetail harvest,
+        @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = EmptyCollectionDefaultDeserializer.class)
         @NonNull List<UUID> mediaIds,
+        @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = EntryModeWithDefault.class)
         @NonNull EntryMode entryMode
     ) implements FarmingRecordDetailPayload {
         public Create {
@@ -106,6 +107,7 @@ public final class FarmingRecordCommand {
         @Nullable PestControlDetail pestControl,
         @Nullable WeedingDetail weeding,
         @Nullable HarvestDetail harvest,
+        @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = EmptyCollectionDefaultDeserializer.class)
         @NonNull List<UUID> mediaIds
     ) implements FarmingRecordDetailPayload {
         public Update {
@@ -267,6 +269,7 @@ public final class FarmingRecordCommand {
         @Nullable BigDecimal harvestAmount,
         boolean amountUnknown,
         @Nullable CropUsePartCategory medicinalPart,
+        @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = HarvestSourceWithDefault.class)
         @NonNull HarvestSource harvestSource,
         int growthPeriod,
         boolean isLastHarvest
@@ -283,6 +286,26 @@ public final class FarmingRecordCommand {
         @NonNull
         public HarvestSource getHarvestSource() { return harvestSource; }
         public int getGrowthPeriod() { return growthPeriod; }
+        @com.fasterxml.jackson.annotation.JsonProperty("isLastHarvest")
         public boolean isLastHarvest() { return isLastHarvest; }
+    }
+
+    // 누락된 Kotlin 기본 인자는 적용하고 명시적인 null은 생성자 검사를 유지한다.
+    public static class EntryModeWithDefault extends com.fasterxml.jackson.databind.JsonDeserializer<EntryMode> {
+        @Override
+        public EntryMode deserialize(com.fasterxml.jackson.core.JsonParser parser,
+            com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {
+            return context.readValue(parser, EntryMode.class);
+        }
+        @Override public EntryMode getAbsentValue(com.fasterxml.jackson.databind.DeserializationContext context) { return EntryMode.MANUAL; }
+    }
+
+    public static class HarvestSourceWithDefault extends com.fasterxml.jackson.databind.JsonDeserializer<HarvestSource> {
+        @Override
+        public HarvestSource deserialize(com.fasterxml.jackson.core.JsonParser parser,
+            com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {
+            return context.readValue(parser, HarvestSource.class);
+        }
+        @Override public HarvestSource getAbsentValue(com.fasterxml.jackson.databind.DeserializationContext context) { return HarvestSource.CULTIVATED; }
     }
 }

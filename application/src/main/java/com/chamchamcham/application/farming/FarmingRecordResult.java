@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -323,6 +322,7 @@ public final class FarmingRecordResult {
         @NonNull
         public HarvestSource getHarvestSource() { return harvestSource; }
         public int getGrowthPeriod() { return growthPeriod; }
+        @com.fasterxml.jackson.annotation.JsonProperty("isLastHarvest")
         public boolean isLastHarvest() { return isLastHarvest; }
     }
 }

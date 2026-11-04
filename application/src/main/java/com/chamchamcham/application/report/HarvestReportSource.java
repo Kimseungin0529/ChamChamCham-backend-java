@@ -1,13 +1,6 @@
 package com.chamchamcham.application.report;
 
-import com.chamchamcham.domain.farming.WorkType;
-import com.chamchamcham.domain.report.FarmingCycleReportStatus;
-import com.chamchamcham.domain.report.FarmingCycleStartBasis;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
-import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -15,6 +8,7 @@ import org.springframework.lang.Nullable;
 public record HarvestReportSource(
     @Nullable BigDecimal amountKg,
     @Nullable CategoryRef medicinalPart,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = HarvestSourceWithDefault.class)
     @NonNull CategoryRef harvestSource,
     @Nullable Integer growthPeriod,
     @Nullable String growthPeriodUnit,
@@ -37,5 +31,15 @@ public record HarvestReportSource(
     public String getGrowthPeriodUnit() { return growthPeriodUnit; }
     @Nullable
     public Integer getGrowthPeriodMonths() { return growthPeriodMonths; }
+    @com.fasterxml.jackson.annotation.JsonProperty("isLastHarvest")
     public boolean isLastHarvest() { return isLastHarvest; }
+
+    public static class HarvestSourceWithDefault extends com.fasterxml.jackson.databind.JsonDeserializer<CategoryRef> {
+        @Override
+        public CategoryRef deserialize(com.fasterxml.jackson.core.JsonParser parser,
+            com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {
+            return context.readValue(parser, CategoryRef.class);
+        }
+        @Override public CategoryRef getAbsentValue(com.fasterxml.jackson.databind.DeserializationContext context) { return new CategoryRef("CULTIVATED", "재배"); }
+    }
 }

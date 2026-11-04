@@ -1,5 +1,7 @@
 package com.chamchamcham.application.farming;
 
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 import com.chamchamcham.domain.farming.WorkType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import java.util.List;
 public class WorkTypeCatalogService {
     public List<WorkTypeResult.WorkTypeSummary> listWorkTypes() {
         return Arrays.stream(WorkType.values()).map(workType -> new WorkTypeResult.WorkTypeSummary(
-            workType.name(), workType.getLabel(), workType.getDetailRequired(), WorkTypeFieldCatalog.fieldsFor(workType))).toList();
+            workType.name(), workType.getLabel(), workType.getDetailRequired(),
+                WorkTypeFieldCatalog.fieldsFor(workType))).collect(Collectors.toCollection(ArrayList::new));
     }
 }

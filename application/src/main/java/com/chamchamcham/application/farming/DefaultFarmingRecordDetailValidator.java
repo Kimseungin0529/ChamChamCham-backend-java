@@ -2,7 +2,6 @@ package com.chamchamcham.application.farming;
 
 import com.chamchamcham.application.exception.ErrorCode;
 import com.chamchamcham.application.exception.business.BusinessException;
-import com.chamchamcham.domain.farming.PlantingMethod;
 import com.chamchamcham.domain.farming.WorkType;
 import org.springframework.stereotype.Component;
 import java.util.Objects;

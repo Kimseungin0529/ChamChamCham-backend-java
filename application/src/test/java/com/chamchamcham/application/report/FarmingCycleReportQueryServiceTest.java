@@ -38,9 +38,10 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -77,7 +78,9 @@ class FarmingCycleReportQueryServiceTest {
         member = new Member(memberId, "member@example.com", null);
         farm = new Farm(farmId, member, "약초농장", "서울시 강남구");
         crop = new Crop(cropId, 422, "황기", CropUsePartCategory.ROOT_BARK);
-        typedStatistics = new CycleReportStatistics(PlantingStatistics.empty(), new WateringStatistics(1, null, null, 0, null, 0, null, List.of(), null, List.of(), List.of()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(), HarvestStatistics.empty(), CommonOnlyStatistics.empty());
+        typedStatistics = new CycleReportStatistics(PlantingStatistics.empty(), new WateringStatistics(1, null, null, 0, null, 0, null, List.of(), null,
+            List.of(), List.of()), FertilizingStatistics.empty(), PestControlStatistics.empty(), WeedingStatistics.empty(), CommonOnlyStatistics.empty(),
+            HarvestStatistics.empty(), CommonOnlyStatistics.empty());
         active = activeReport(activeReportId);
         selectedCompleted = completedReport(reportId, finalHarvestRecordId, day(30));
         previous = completedReport(previousReportId, previousFinalHarvestRecordId, day(20));
@@ -87,7 +90,7 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("detail returns only the selected completed report")
-    void detail_returns_only_the_selected_completed_report() throws Exception {
+    void detailReturnsOnlyTheSelectedCompletedReport() throws Exception {
         when(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(selectedCompleted);
         var result = service.getDetail(memberId, reportId);
         assertThat(result.getSelected().getId()).isEqualTo(reportId);
@@ -97,7 +100,7 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("active detail returns selected without completed report lookup")
-    void active_detail_returns_selected_without_completed_report_lookup() throws Exception {
+    void activeDetailReturnsSelectedWithoutCompletedReportLookup() throws Exception {
         when(reportRepository.findByIdAndMember_Id(activeReportId, memberId)).thenReturn(active);
         var result = service.getDetail(memberId, activeReportId);
         assertThat(result.getSelected().getId()).isEqualTo(activeReportId);
@@ -106,7 +109,7 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("superseded detail is not exposed")
-    void superseded_detail_is_not_exposed() throws Exception {
+    void supersededDetailIsNotExposed() throws Exception {
         when(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(superseded);
         var exception = assertThrows(BusinessException.class, () -> service.getDetail(memberId, reportId));
         assertEquals(ErrorCode.REPORT_NOT_FOUND, exception.getErrorCode());
@@ -115,7 +118,7 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("detail hides reports outside member scope")
-    void detail_hides_reports_outside_member_scope() throws Exception {
+    void detailHidesReportsOutsideMemberScope() throws Exception {
         when(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(null);
         var exception = assertThrows(BusinessException.class, () -> service.getDetail(memberId, reportId));
         assertEquals(ErrorCode.REPORT_NOT_FOUND, exception.getErrorCode());
@@ -124,10 +127,11 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("list completed uses lookahead and cursor from last visible boundary")
-    void list_completed_uses_lookahead_and_cursor_from_last_visible_boundary() throws Exception {
+    void listCompletedUsesLookaheadAndCursorFromLastVisibleBoundary() throws Exception {
         stubScope();
         var newest = completedReport(uuid("000000000305"), uuid("000000000405"), day(40));
-        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(farmId), Set.of(cropId), null, 3))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(java.util.Arrays.asList(newest, selectedCompleted, previous)));
+        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(farmId), Set.of(cropId), null,
+            3))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(java.util.Arrays.asList(newest, selectedCompleted, previous)));
         var result = service.listCompleted(searchCondition(this.farmId, this.cropId, null, 2));
         assertThat(result.getItems().stream().map(it -> it.getId()).toList()).containsExactly(newest.getId(), selectedCompleted.getId());
         assertThat(result.getItems().getFirst()).hasNoNullFieldsOrPropertiesExcept();
@@ -139,16 +143,17 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("blank cursor is treated as absent")
-    void blank_cursor_is_treated_as_absent() throws Exception {
+    void blankCursorIsTreatedAsAbsent() throws Exception {
         stubScope();
-        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(farmId), Set.of(cropId), null, 11))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
+        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(farmId), Set.of(cropId), null,
+            11))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
         service.listCompleted(searchCondition(this.farmId, this.cropId, "   ", 10));
         verify(queryRepository).searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(farmId), Set.of(cropId), null, 11));
     }
 
     @Test
     @DisplayName("invalid cursor is rejected")
-    void invalid_cursor_is_rejected() throws Exception {
+    void invalidCursorIsRejected() throws Exception {
         stubScope();
         var exception = assertThrows(BusinessException.class, () -> service.listCompleted(searchCondition(this.farmId, this.cropId, "not-a-valid-cursor", 20)));
         assertEquals(ErrorCode.INVALID_CURSOR, exception.getErrorCode());
@@ -157,7 +162,7 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("list rejects unowned farm before query lookup")
-    void list_rejects_unowned_farm_before_query_lookup() throws Exception {
+    void listRejectsUnownedFarmBeforeQueryLookup() throws Exception {
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(null);
         var exception = assertThrows(BusinessException.class, () -> service.listCompleted(searchCondition(this.farmId, this.cropId, null, 20)));
         assertEquals(ErrorCode.FARM_NOT_FOUND, exception.getErrorCode());
@@ -167,8 +172,9 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("list without filters stays member scoped without ownership lookups")
-    void list_without_filters_stays_member_scoped_without_ownership_lookups() throws Exception {
-        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(), Set.of(), null, 21))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
+    void listWithoutFiltersStaysMemberScopedWithoutOwnershipLookups() throws Exception {
+        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(), Set.of(), null,
+            21))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
         var result = service.listCompleted(searchCondition(null, null, null, 20));
         assertThat(result.getItems()).isEmpty();
         verifyNoInteractions(farmRepository, memberCropRepository);
@@ -177,15 +183,16 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("list with crop only does not require a farm ownership lookup")
-    void list_with_crop_only_does_not_require_a_farm_ownership_lookup() throws Exception {
-        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(), Set.of(cropId), null, 21))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
+    void listWithCropOnlyDoesNotRequireAFarmOwnershipLookup() throws Exception {
+        when(queryRepository.searchCompleted(new FarmingCycleReportQueryRepository.SearchCondition(memberId, Set.of(), Set.of(cropId), null,
+            21))).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
         service.listCompleted(searchCondition(null, cropId, null, 20));
         verifyNoInteractions(farmRepository, memberCropRepository);
     }
 
     @Test
     @DisplayName("list rejects crop that is not registered to member farm")
-    void list_rejects_crop_that_is_not_registered_to_member_farm() throws Exception {
+    void listRejectsCropThatIsNotRegisteredToMemberFarm() throws Exception {
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(memberCropRepository.existsByMemberIdAndFarmIdInAndCropId(memberId, Set.of(farmId), cropId)).thenReturn(false);
         var exception = assertThrows(BusinessException.class, () -> service.listCompleted(searchCondition(this.farmId, this.cropId, null, 20)));
@@ -195,13 +202,13 @@ class FarmingCycleReportQueryServiceTest {
 
     @Test
     @DisplayName("list validates and forwards multiple farm and crop filters")
-    void list_validates_and_forwards_multiple_farm_and_crop_filters() throws Exception {
+    void listValidatesAndForwardsMultipleFarmAndCropFilters() throws Exception {
         var farmIds = Set.of(farmId, secondFarmId);
         var cropIds = Set.of(cropId, secondCropId);
         when(farmRepository.findByIdAndOwnerId(farmId, memberId)).thenReturn(farm);
         when(farmRepository.findByIdAndOwnerId(secondFarmId, memberId)).thenReturn(farm);
         cropIds.forEach(selectedCropId -> {
-        when(memberCropRepository.existsByMemberIdAndFarmIdInAndCropId(memberId, farmIds, selectedCropId)).thenReturn(true);
+            when(memberCropRepository.existsByMemberIdAndFarmIdInAndCropId(memberId, farmIds, selectedCropId)).thenReturn(true);
         });
         var expected = new FarmingCycleReportQueryRepository.SearchCondition(memberId, farmIds, cropIds, null, 21);
         when(queryRepository.searchCompleted(expected)).thenReturn(new FarmingCycleReportQueryRepository.SearchResult(List.of()));
@@ -217,10 +224,12 @@ class FarmingCycleReportQueryServiceTest {
         return new FarmingCycleReportSearchCondition(memberId, (farmId == null ? Set.of() : Set.of(farmId)), (cropId == null ? Set.of() : Set.of(cropId)), cursor, size);
     }
     private FarmingCycleReport activeReport(UUID id) {
-        return report(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.ACTIVE, day(40), null, FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, null, 1, typedStatistics));
+        return report(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.ACTIVE, day(40), null,
+            FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, null, 1, typedStatistics));
     }
     private FarmingCycleReport completedReport(UUID id, UUID finalRecordId, LocalDateTime endedAt) {
-        return report(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.COMPLETED, endedAt.minusDays(10), endedAt, FarmingCycleStartBasis.FIRST_RECORD, finalHarvestRecord(finalRecordId, endedAt), 1, typedStatistics));
+        return report(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.COMPLETED, endedAt.minusDays(10), endedAt,
+            FarmingCycleStartBasis.FIRST_RECORD, finalHarvestRecord(finalRecordId, endedAt), 1, typedStatistics));
     }
     private FarmingCycleReport report(UUID id, FarmingCycleReportProjection projection) {
         var report = FarmingCycleReport.create(member, farm, crop, projection);
@@ -236,4 +245,27 @@ class FarmingCycleReportQueryServiceTest {
     private UUID uuid(String tail) {
         return UUID.fromString("00000000-0000-0000-0000-" + tail + "");
     }
+
+    @Test
+    void cursorEncodingPreservesTheOriginalJacksonFailure() throws Exception {
+        var codec = org.mockito.Mockito.mock(OpaqueCursorCodec.class);
+        var failure = new com.fasterxml.jackson.core.JsonProcessingException("fixture encoding failure") {};
+        when(codec.encode(org.mockito.ArgumentMatchers.any())).thenThrow(failure);
+        org.springframework.test.util.ReflectionTestUtils.setField(service, "cursorCodec", codec);
+        when(queryRepository.searchCompleted(org.mockito.ArgumentMatchers.any())).thenReturn(
+            new FarmingCycleReportQueryRepository.SearchResult(List.of(selectedCompleted, selectedCompleted)));
+        var thrown = assertThrows(com.fasterxml.jackson.core.JsonProcessingException.class,
+            () -> service.listCompleted(new FarmingCycleReportSearchCondition(memberId, Set.of(), Set.of(), null, 1)));
+        org.junit.jupiter.api.Assertions.assertSame(failure, thrown);
+    }
+
+    @Test
+    void completedListRejectsJsonNullCursorBeforeQueryingReports() {
+        var cursor = java.util.Base64.getUrlEncoder().withoutPadding().encodeToString("null".getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        var thrown = assertThrows(BusinessException.class,
+            () -> service.listCompleted(new FarmingCycleReportSearchCondition(memberId, Set.of(), Set.of(), cursor, 20)));
+        org.junit.jupiter.api.Assertions.assertEquals(ErrorCode.INVALID_CURSOR, thrown.getErrorCode());
+        verifyNoInteractions(queryRepository);
+    }
+
 }

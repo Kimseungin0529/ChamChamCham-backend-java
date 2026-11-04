@@ -4,14 +4,15 @@ import com.chamchamcham.domain.farming.WorkType;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 public record FarmingRecordSearchCondition(
     @NonNull UUID memberId,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.chamchamcham.application.farming.EmptyCollectionDefaultDeserializer.class)
     @NonNull List<UUID> cropIds,
+    @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.chamchamcham.application.farming.EmptyCollectionDefaultDeserializer.class)
     @NonNull List<WorkType> workTypes,
     @Nullable LocalDate startDate,
     @Nullable LocalDate endDate,

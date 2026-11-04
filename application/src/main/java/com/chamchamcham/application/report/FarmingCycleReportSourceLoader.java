@@ -1,12 +1,32 @@
 package com.chamchamcham.application.report;
 
+import java.util.stream.Collectors;
 import com.chamchamcham.domain.crop.CropUsePartCategory;
-import com.chamchamcham.domain.farming.*;
+import com.chamchamcham.domain.farming.WeedingRecord;
+import com.chamchamcham.domain.farming.FarmingCycleReportSourceRepository;
+import com.chamchamcham.domain.farming.WateringRecord;
+import com.chamchamcham.domain.farming.FertilizingRecord;
+import com.chamchamcham.domain.farming.PestControlRecord;
+import com.chamchamcham.domain.farming.PlantingRecord;
+import com.chamchamcham.domain.farming.HarvestSource;
+import com.chamchamcham.domain.farming.HarvestRecord;
+import com.chamchamcham.domain.farming.PlantingMethod;
+import com.chamchamcham.domain.farming.WorkType;
+import com.chamchamcham.domain.farming.FertilizerAmountUnit;
+import com.chamchamcham.domain.farming.IrrigationMethod;
+import com.chamchamcham.domain.farming.IrrigationAmount;
+import com.chamchamcham.domain.farming.FertilizingMethod;
+import com.chamchamcham.domain.farming.PropagationMethod;
+import com.chamchamcham.domain.farming.WeedingMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @Component
 public class FarmingCycleReportSourceLoader {
@@ -31,7 +51,7 @@ public class FarmingCycleReportSourceLoader {
                 record.getWorkType() == WorkType.WEEDING && snapshot.weedingByRecordId().get(recordId) != null
                     ? normalizeWeeding(snapshot.weedingByRecordId().get(recordId)) : null,
                 record.getWorkType() == WorkType.HARVEST ? normalizeHarvest(required(snapshot.harvestByRecordId(), recordId)) : null);
-        }).toList();
+        }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private <T> T required(Map<UUID, T> details, UUID recordId) {

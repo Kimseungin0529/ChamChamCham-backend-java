@@ -6,10 +6,20 @@ import com.chamchamcham.application.exception.business.BusinessException;
 import com.chamchamcham.domain.crop.CropRepository;
 import com.chamchamcham.domain.farm.FarmRepository;
 import com.chamchamcham.domain.farming.FarmingRecordRepository;
-import com.chamchamcham.domain.report.*;
+import com.chamchamcham.domain.report.FarmingCycleReport;
+import com.chamchamcham.domain.report.FarmingCycleReportProjection;
+import com.chamchamcham.domain.report.FarmingCycleReportRepository;
+import com.chamchamcham.domain.report.FarmingCycleReportStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,11 +71,12 @@ public class FarmingCycleReportProjectionService {
             }
             reportRepository.save(report);
             if (report.getStatus() == FarmingCycleReportStatus.COMPLETED) {
-                reportFeedbackLifecycleService.reconcile(report, slice.getRecords().stream()
-                    .map(CycleReportSourceRecord::getWorkType).collect(Collectors.toSet()));
+                var workTypes = slice.getRecords().stream().map(CycleReportSourceRecord::getWorkType)
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
+                reportFeedbackLifecycleService.reconcile(report, workTypes);
             }
         }
-        var obsolete = unmatched.values().stream().filter(FarmingCycleReport::supersede).toList();
+        var obsolete = unmatched.values().stream().filter(FarmingCycleReport::supersede).collect(Collectors.toCollection(ArrayList::new));
         if (!obsolete.isEmpty()) reportRepository.saveAll(obsolete);
     }
 
@@ -79,7 +90,7 @@ public class FarmingCycleReportProjectionService {
             .filter(r -> r.getStatus() == FarmingCycleReportStatus.COMPLETED && r.getFinalHarvestRecord() != null
                 && Objects.equals(r.getFinalHarvestRecord().getId(), slice.getFinalHarvestRecordId()))
             .findFirst().orElse(null);
-        var activeCandidates = unmatched.values().stream().filter(r -> r.getStatus() == FarmingCycleReportStatus.ACTIVE).toList();
+        var activeCandidates = unmatched.values().stream().filter(r -> r.getStatus() == FarmingCycleReportStatus.ACTIVE).collect(Collectors.toCollection(ArrayList::new));
         var active = activeCandidates.size() == 1 ? activeCandidates.getFirst() : null;
         var selected = exactCompleted != null ? exactCompleted
             : slice.getStatus() == FarmingCycleReportStatus.ACTIVE || allowActiveCompletion ? active : null;

@@ -29,9 +29,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,7 +63,8 @@ class FarmingCycleReportProjectionServiceTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        service = new FarmingCycleReportProjectionService(farmRepository, cropRepository, farmingRecordRepository, sourceLoader, partitioner, new CycleReportStatisticsCalculator(), reportRepository, reportFeedbackLifecycleService);
+        service = new FarmingCycleReportProjectionService(farmRepository, cropRepository, farmingRecordRepository, sourceLoader, partitioner,
+            new CycleReportStatisticsCalculator(), reportRepository, reportFeedbackLifecycleService);
         member = new Member(memberId, "" + memberId + "@example.com", null);
         farm = new Farm(farmId, member, "약초농장", "서울시 강남구");
         crop = new Crop(cropId, 1001, "황기", CropUsePartCategory.ROOT_BARK);
@@ -69,11 +72,12 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("rebuild locks owned farm before reading source records")
-    void rebuild_locks_owned_farm_before_reading_source_records() throws Exception {
+    void rebuildLocksOwnedFarmBeforeReadingSourceRecords() throws Exception {
         stubScope(List.of());
         var source = java.util.Arrays.asList(wateringRecord(1));
         when(sourceLoader.load(scope)).thenReturn(source);
-        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD, java.util.Arrays.asList(wateringRecord(1)))));
+        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD,
+            java.util.Arrays.asList(wateringRecord(1)))));
         service.rebuild(scope);
         var order = inOrder(farmRepository, sourceLoader);
         order.verify(farmRepository).findOwnedByIdForReportUpdate(farmId, memberId);
@@ -82,13 +86,14 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("first record creates active report")
-    void first_record_creates_active_report() throws Exception {
+    void firstRecordCreatesActiveReport() throws Exception {
         stubScope(List.of());
         var source = java.util.Arrays.asList(wateringRecord(1));
         when(sourceLoader.load(scope)).thenReturn(source);
-        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD, java.util.Arrays.asList(wateringRecord(1)))));
+        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD,
+            java.util.Arrays.asList(wateringRecord(1)))));
         service.rebuild(scope);
-        var saved = capturedSavedReports().get(0);
+        var saved = single(capturedSavedReports());
         assertThat(saved.getStatus()).isEqualTo(FarmingCycleReportStatus.ACTIVE);
         assertThat(saved.getStatistics().getWatering().getRecordCount()).isEqualTo(1);
         assertThat(saved.getStatisticsSchemaVersion()).isEqualTo(3);
@@ -97,7 +102,7 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("latest final harvest converts active report to completed")
-    void latest_isFinal_harvest_converts_active_report_to_completed() throws Exception {
+    void latestFinalHarvestConvertsActiveReportToCompleted() throws Exception {
         var active = persistedActiveReport(activeReportId, baseTime.plusDays(1));
         stubScope(java.util.Arrays.asList(active));
         when(farmingRecordRepository.getReferenceById(finalHarvestRecordId)).thenReturn(referenceRecord(finalHarvestRecordId, 10));
@@ -114,28 +119,30 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("active report does not enqueue report feedback")
-    void active_report_does_not_enqueue_report_feedback() throws Exception {
+    void activeReportDoesNotEnqueueReportFeedback() throws Exception {
         stubScope(List.of());
         var source = java.util.Arrays.asList(wateringRecord(1));
         when(sourceLoader.load(scope)).thenReturn(source);
-        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD, java.util.Arrays.asList(wateringRecord(1)))));
+        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(activeSlice(1, FarmingCycleStartBasis.FIRST_RECORD,
+            java.util.Arrays.asList(wateringRecord(1)))));
         service.rebuild(scope);
         verifyNoInteractions(reportFeedbackLifecycleService);
     }
 
     @Test
     @DisplayName("records after final preserve active report and create completed report")
-    void records_after_isFinal_preserve_active_report_and_create_completed_report() throws Exception {
+    void recordsAfterFinalPreserveActiveReportAndCreateCompletedReport() throws Exception {
         var active = persistedActiveReport(activeReportId, baseTime.plusDays(1));
         stubScope(java.util.Arrays.asList(active));
         when(farmingRecordRepository.getReferenceById(finalHarvestRecordId)).thenReturn(referenceRecord(finalHarvestRecordId, 10));
         var source = new ArrayList<>(recordsEndingWithFinalHarvest());
         source.add(wateringRecord(20));
         when(sourceLoader.load(scope)).thenReturn(source);
-        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(completedSlice(finalHarvestRecordId, 10), activeSlice(20, FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, java.util.Arrays.asList(wateringRecord(20)))));
+        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(completedSlice(finalHarvestRecordId, 10), activeSlice(20,
+            FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, java.util.Arrays.asList(wateringRecord(20)))));
         service.rebuild(scope);
         var saved = capturedSavedReports();
-        var createdCompleted = saved.stream().filter(it -> it!= active).findFirst().orElseThrow();
+        var createdCompleted = single(saved.stream().filter(it -> it!= active).toList());
         assertThat(active.getStatus()).isEqualTo(FarmingCycleReportStatus.ACTIVE);
         assertThat(active.getStartsAt()).isEqualTo(baseTime.plusDays(20));
         assertThat(createdCompleted.getStatus()).isEqualTo(FarmingCycleReportStatus.COMPLETED);
@@ -144,16 +151,17 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("historical boundary matching uses final harvest id instead of timestamp")
-    void historical_boundary_matching_uses_isFinal_harvest_id_instead_of_timestamp() throws Exception {
+    void historicalBoundaryMatchingUsesFinalHarvestIdInsteadOfTimestamp() throws Exception {
         var completed = persistedCompletedReport(completedReportId, finalHarvestRecordId, baseTime.plusDays(1), baseTime.plusDays(10), 1);
         var active = persistedActiveReport(activeReportId, baseTime.plusDays(20));
         stubScope(java.util.Arrays.asList(completed, active));
         when(farmingRecordRepository.getReferenceById(sameTimeFinalHarvestRecordId)).thenReturn(referenceRecord(sameTimeFinalHarvestRecordId, 10));
         var source = java.util.Arrays.asList(wateringRecord(1), finalHarvestRecord(sameTimeFinalHarvestRecordId, 10), wateringRecord(20));
         when(sourceLoader.load(scope)).thenReturn(source);
-        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(completedSlice(sameTimeFinalHarvestRecordId, 10), activeSlice(20, FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, java.util.Arrays.asList(wateringRecord(20)))));
+        when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(completedSlice(sameTimeFinalHarvestRecordId, 10), activeSlice(20,
+            FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST, java.util.Arrays.asList(wateringRecord(20)))));
         service.rebuild(scope);
-        var createdCompleted = capturedSavedReports().stream().filter(it -> it!= active).findFirst().orElseThrow();
+        var createdCompleted = single(capturedSavedReports().stream().filter(it -> it!= active).toList());
         assertThat(completed.getStatus()).isEqualTo(FarmingCycleReportStatus.SUPERSEDED);
         assertThat(active.getStatus()).isEqualTo(FarmingCycleReportStatus.ACTIVE);
         assertThat(createdCompleted.getFinalHarvestRecord().getId()).isEqualTo(sameTimeFinalHarvestRecordId);
@@ -161,7 +169,7 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("changed completed boundary creates new completed report and supersedes old one")
-    void changed_completed_boundary_creates_new_completed_report_and_supersedes_old_one() throws Exception {
+    void changedCompletedBoundaryCreatesNewCompletedReportAndSupersedesOldOne() throws Exception {
         var completed = persistedCompletedReport(completedReportId, finalHarvestRecordId, baseTime.plusDays(1), baseTime.plusDays(10), 1);
         stubScope(java.util.Arrays.asList(completed));
         when(farmingRecordRepository.getReferenceById(changedFinalHarvestRecordId)).thenReturn(referenceRecord(changedFinalHarvestRecordId, 11));
@@ -169,7 +177,7 @@ class FarmingCycleReportProjectionServiceTest {
         when(sourceLoader.load(scope)).thenReturn(source);
         when(partitioner.partition(source)).thenReturn(java.util.Arrays.asList(completedSlice(changedFinalHarvestRecordId, 11)));
         service.rebuild(scope);
-        var createdCompleted = capturedSavedReports().stream().filter(it -> it!= completed).findFirst().orElseThrow();
+        var createdCompleted = single(capturedSavedReports().stream().filter(it -> it!= completed).toList());
         assertThat(createdCompleted.getStatus()).isEqualTo(FarmingCycleReportStatus.COMPLETED);
         assertThat(createdCompleted.getFinalHarvestRecord().getId()).isEqualTo(changedFinalHarvestRecordId);
         assertThat(completed.getStatus()).isEqualTo(FarmingCycleReportStatus.SUPERSEDED);
@@ -177,7 +185,7 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("removed final boundary merges into active and supersedes completed report")
-    void removed_isFinal_boundary_merges_into_active_and_supersedes_completed_report() throws Exception {
+    void removedFinalBoundaryMergesIntoActiveAndSupersedesCompletedReport() throws Exception {
         var completed = persistedCompletedReport(completedReportId, finalHarvestRecordId, baseTime.plusDays(1), baseTime.plusDays(10), 1);
         var active = persistedActiveReport(activeReportId, baseTime.plusDays(20));
         stubScope(java.util.Arrays.asList(completed, active));
@@ -192,7 +200,7 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("empty source supersedes all current reports")
-    void empty_source_supersedes_all_current_reports() throws Exception {
+    void emptySourceSupersedesAllCurrentReports() throws Exception {
         var completed = persistedCompletedReport(completedReportId, finalHarvestRecordId, baseTime.plusDays(1), baseTime.plusDays(10), 1);
         var active = persistedActiveReport(activeReportId, baseTime.plusDays(1));
         stubScope(java.util.Arrays.asList(completed, active));
@@ -206,7 +214,7 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("idempotent rebuild leaves source revision unchanged")
-    void idempotent_rebuild_leaves_source_revision_unchanged() throws Exception {
+    void idempotentRebuildLeavesSourceRevisionUnchanged() throws Exception {
         var completed = persistedCompletedReport(completedReportId, finalHarvestRecordId, baseTime.plusDays(1), baseTime.plusDays(10), 3);
         var revision = completed.getSourceRevision();
         stubScope(java.util.Arrays.asList(completed));
@@ -222,15 +230,15 @@ class FarmingCycleReportProjectionServiceTest {
 
     @Test
     @DisplayName("rebuildAll deduplicates and sorts scopes before rebuilding")
-    void rebuildAll_deduplicates_and_sorts_scopes_before_rebuilding() throws Exception {
+    void rebuildAllDeduplicatesAndSortsScopesBeforeRebuilding() throws Exception {
         var scopeA = new ReportScope(uuid("000000000010"), uuid("000000000010"), uuid("000000000010"));
         var scopeB = new ReportScope(uuid("000000000010"), uuid("000000000011"), uuid("000000000010"));
         var scopeC = new ReportScope(uuid("000000000011"), uuid("000000000010"), uuid("000000000010"));
         java.util.Arrays.asList(scopeA, scopeB, scopeC).forEach(sortedScope -> {
-        when(farmRepository.findOwnedByIdForReportUpdate(sortedScope.getFarmId(), sortedScope.getMemberId())).thenReturn(farm);
-        when(cropRepository.findById(sortedScope.getCropId())).thenReturn(Optional.of(crop));
-        when(reportRepository.findAllCurrent(sortedScope.getMemberId(), sortedScope.getFarmId(), sortedScope.getCropId())).thenReturn(List.of());
-        when(sourceLoader.load(sortedScope)).thenReturn(List.of());
+            when(farmRepository.findOwnedByIdForReportUpdate(sortedScope.getFarmId(), sortedScope.getMemberId())).thenReturn(farm);
+            when(cropRepository.findById(sortedScope.getCropId())).thenReturn(Optional.of(crop));
+            when(reportRepository.findAllCurrent(sortedScope.getMemberId(), sortedScope.getFarmId(), sortedScope.getCropId())).thenReturn(List.of());
+            when(sourceLoader.load(sortedScope)).thenReturn(List.of());
         });
         when(partitioner.partition(List.of())).thenReturn(List.of());
         service.rebuildAll(java.util.Arrays.asList(scopeC, scopeB, scopeA, scopeB));
@@ -248,22 +256,28 @@ class FarmingCycleReportProjectionServiceTest {
         return new CycleSlice(FarmingCycleReportStatus.ACTIVE, startBasis, records);
     }
     private CycleSlice completedSlice(UUID finalRecordId, long day) {
-        return new CycleSlice(FarmingCycleReportStatus.COMPLETED, FarmingCycleStartBasis.FIRST_RECORD, java.util.Arrays.asList(wateringRecord(1), finalHarvestRecord(finalRecordId, day)));
+        return new CycleSlice(FarmingCycleReportStatus.COMPLETED, FarmingCycleStartBasis.FIRST_RECORD, java.util.Arrays.asList(wateringRecord(1),
+            finalHarvestRecord(finalRecordId, day)));
     }
     private List<CycleReportSourceRecord> recordsEndingWithFinalHarvest() {
         return java.util.Arrays.asList(wateringRecord(1), finalHarvestRecord(finalHarvestRecordId, 10));
     }
     private CycleReportSourceRecord wateringRecord(long day) {
-        return new CycleReportSourceRecord(uuid("0000000005%02d".formatted(day)), baseTime.plusDays(day), (baseTime.plusDays(day)), WorkType.WATERING, "맑음", 20, false, "", null, new WateringReportSource(new CategoryRef("LOW", "적음"), new CategoryRef("HOSE", "호스")), null, null, null, null);
+        return new CycleReportSourceRecord(uuid("0000000005%02d".formatted(day)), baseTime.plusDays(day), (baseTime.plusDays(day)), WorkType.WATERING,
+            "맑음", 20, false, "", null, new WateringReportSource(new CategoryRef("LOW", "적음"), new CategoryRef("HOSE", "호스")), null, null, null, null);
     }
     private CycleReportSourceRecord finalHarvestRecord(UUID id, long day) {
-        return new CycleReportSourceRecord(id, baseTime.plusDays(day), (baseTime.plusDays(day)), WorkType.HARVEST, "맑음", 20, false, "", null, null, null, null, null, new HarvestReportSource(null, new CategoryRef("ROOT_BARK", "뿌리·껍질"), new CategoryRef("CULTIVATED", "재배"), null, null, 12, true));
+        return new CycleReportSourceRecord(id, baseTime.plusDays(day), (baseTime.plusDays(day)), WorkType.HARVEST, "맑음", 20, false, "", null, null, null,
+            null, null, new HarvestReportSource(null, new CategoryRef("ROOT_BARK", "뿌리·껍질"), new CategoryRef("CULTIVATED", "재배"), null, null, 12, true));
     }
     private FarmingCycleReport persistedActiveReport(UUID id, LocalDateTime startsAt) {
-        return persistedReport(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.ACTIVE, startsAt, null, FarmingCycleStartBasis.FIRST_RECORD, null, 1, new CycleReportStatisticsCalculator().calculate(java.util.Arrays.asList(wateringRecord(1)))));
+        return persistedReport(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.ACTIVE, startsAt, null, FarmingCycleStartBasis.FIRST_RECORD,
+            null, 1, new CycleReportStatisticsCalculator().calculate(java.util.Arrays.asList(wateringRecord(1)))));
     }
     private FarmingCycleReport persistedCompletedReport(UUID id, UUID finalRecordId, LocalDateTime startsAt, LocalDateTime endsAt, int statisticsSchemaVersion) {
-        return persistedReport(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.COMPLETED, startsAt, endsAt, FarmingCycleStartBasis.FIRST_RECORD, referenceRecord(finalRecordId, 10), statisticsSchemaVersion, new CycleReportStatisticsCalculator().calculate(java.util.Arrays.asList(wateringRecord(1), finalHarvestRecord(finalRecordId, 10)))));
+        return persistedReport(id, new FarmingCycleReportProjection(FarmingCycleReportStatus.COMPLETED, startsAt, endsAt,
+            FarmingCycleStartBasis.FIRST_RECORD, referenceRecord(finalRecordId, 10), statisticsSchemaVersion,
+            new CycleReportStatisticsCalculator().calculate(java.util.Arrays.asList(wateringRecord(1), finalHarvestRecord(finalRecordId, 10)))));
     }
     private FarmingCycleReport persistedReport(UUID id, FarmingCycleReportProjection projection) {
         var report = FarmingCycleReport.create(member, farm, crop, projection);
@@ -271,7 +285,8 @@ class FarmingCycleReportProjectionServiceTest {
         return report;
     }
     private FarmingRecord referenceRecord(UUID id, long day) {
-        return new FarmingRecord(id, member, farm, crop, WorkType.HARVEST, baseTime.plusDays(day), "맑음", 20, "memo", com.chamchamcham.domain.farming.EntryMode.MANUAL, false);
+        return new FarmingRecord(id, member, farm, crop, WorkType.HARVEST, baseTime.plusDays(day), "맑음", 20, "memo",
+            com.chamchamcham.domain.farming.EntryMode.MANUAL, false);
     }
     private List<FarmingCycleReport> capturedSavedReports() {
         var captor = ArgumentCaptor.forClass(FarmingCycleReport.class);
@@ -281,4 +296,32 @@ class FarmingCycleReportProjectionServiceTest {
     private UUID uuid(String tail) {
         return UUID.fromString("00000000-0000-0000-0000-" + tail + "");
     }
+    @Test
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    void reconciliationReceivesDistinctWorkTypesInRecordEncounterOrder() {
+        stubScope(List.of());
+        var source = new ArrayList<CycleReportSourceRecord>();
+        var types = List.of(WorkType.ETC, WorkType.PLANTING, WorkType.PEST_CONTROL, WorkType.WATERING,
+            WorkType.FERTILIZING, WorkType.WEEDING, WorkType.PRUNING);
+        for (int index = 0; index < types.size(); index++) {
+            var fixture = wateringRecord(index + 1);
+            source.add(new CycleReportSourceRecord(fixture.getId(), fixture.getWorkedAt(), fixture.getCreatedAt(), types.get(index),
+                "맑음", 20, false, "", null, null, null, null, null, null));
+        }
+        source.add(finalHarvestRecord(finalHarvestRecordId, 10));
+        when(sourceLoader.load(scope)).thenReturn(source);
+        when(partitioner.partition(source)).thenReturn(List.of(new CycleSlice(FarmingCycleReportStatus.COMPLETED, FarmingCycleStartBasis.FIRST_RECORD, source)));
+        when(farmingRecordRepository.getReferenceById(finalHarvestRecordId)).thenReturn(referenceRecord(finalHarvestRecordId, 10));
+        service.rebuild(scope);
+        ArgumentCaptor<Set<WorkType>> captor = (ArgumentCaptor) ArgumentCaptor.forClass(Set.class);
+        verify(reportFeedbackLifecycleService).reconcile(org.mockito.ArgumentMatchers.any(FarmingCycleReport.class), captor.capture());
+        assertThat(captor.getValue()).containsExactly(WorkType.ETC, WorkType.PLANTING, WorkType.PEST_CONTROL, WorkType.WATERING,
+            WorkType.FERTILIZING, WorkType.WEEDING, WorkType.PRUNING, WorkType.HARVEST);
+    }
+
+    private static <T> T single(List<T> values) {
+        assertThat(values).hasSize(1);
+        return values.getFirst();
+    }
+
 }

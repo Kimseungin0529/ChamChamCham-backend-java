@@ -1,5 +1,6 @@
 package com.chamchamcham.application.report;
 
+import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public final class StatisticsMath {
     }
 
     public static BigDecimal averageIntervalDays(List<LocalDate> dates) {
-        var sorted = dates.stream().distinct().sorted().toList();
+        var sorted = dates.stream().distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
         if (sorted.size() < 2) return null;
         var intervals = new ArrayList<BigDecimal>();
         for (int i = 1; i < sorted.size(); i++) {
