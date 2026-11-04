@@ -134,4 +134,44 @@ class FarmingCyclePartitionerTest {
         assertThat(slice.getFinalHarvestRecordId()).isEqualTo(UUID.fromString("00000000-0000-0000-0000-000000000001"));
     }
 
+
+    @Test
+    void partitionSnapshotsRetainSingletonAndMultiRecordMutabilityForBothStatuses() {
+        var empty = partitioner.partition(List.of());
+        assertThat(empty).isEmpty();
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> empty.add(null));
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> empty.remove(0));
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> empty.remove((Object) null));
+        for (boolean completed : new boolean[] {false, true}) {
+            for (int size : new int[] {1, 2}) {
+                var last = completed ? harvest("02", 2, true) : record("02", 2, WorkType.WATERING, null, 2);
+                var input = size == 1 ? List.of(last) : List.of(record("01", 1, WorkType.WATERING, null, 1), last);
+                var slice = single(partitioner.partition(input));
+                assertThat(slice.getStatus()).isEqualTo(completed ? FarmingCycleReportStatus.COMPLETED : FarmingCycleReportStatus.ACTIVE);
+                var records = slice.getRecords();
+                assertThat(records).containsExactlyElementsOf(input);
+                assertThat(records.contains(null)).isFalse();
+                assertThat(records.remove((Object) null)).isFalse();
+                if (size == 1) {
+                    org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> records.set(0, null));
+                    org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> records.set(0, last));
+                    org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> records.add(null));
+                    org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> records.remove(0));
+                    org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> records.remove(last));
+                } else {
+                    var first = records.set(0, null);
+                    assertThat(first).isSameAs(input.getFirst());
+                    assertThat(records.getFirst()).isNull();
+                    records.set(0, first);
+                    assertThat(records.add(null)).isTrue();
+                    assertThat(records.remove((Object) null)).isTrue();
+                    assertThat(records.remove(0)).isSameAs(first);
+                    records.add(0, first);
+                    assertThat(records).containsExactlyElementsOf(input);
+                }
+                assertThat(slice.getFinalHarvestRecordId()).isEqualTo(completed ? last.getId() : null);
+            }
+        }
+    }
+
 }

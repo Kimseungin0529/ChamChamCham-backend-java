@@ -130,4 +130,41 @@ class WorkTypeCatalogServiceTest {
         assertThat(result.getLast()).isSameAs(first);
     }
 
+
+    @Test
+    void weedingSingletonFieldsRejectReplacementAndStructuralMutation() {
+        var fields = WorkTypeFieldCatalog.fieldsFor(WorkType.WEEDING);
+        var original = fields.getFirst();
+        try {
+            assertThat(fields).hasSize(1);
+            assertThat(fields.contains(null)).isFalse();
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.set(0, null));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.set(0, original));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.add(null));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.remove(0));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.remove(original));
+            assertThat(fields.remove((Object) null)).isFalse();
+        } finally {
+            if (fields.getFirst() != original) fields.set(0, original);
+        }
+    }
+
+    @Test
+    void wateringMultiFieldsRetainReplacementIncludingNullWithoutStructuralMutation() {
+        var fields = WorkTypeFieldCatalog.fieldsFor(WorkType.WATERING);
+        var original = fields.getFirst();
+        try {
+            assertThat(fields).extracting(it -> it.getName()).containsExactly("irrigationAmount", "irrigationMethod");
+            assertThat(fields.set(0, null)).isSameAs(original);
+            assertThat(WorkTypeFieldCatalog.fieldsFor(WorkType.WATERING).getFirst()).isNull();
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.remove((Object) null));
+            fields.set(0, original);
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.add(null));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> fields.remove(0));
+            assertThat(fields.remove((Object) null)).isFalse();
+        } finally {
+            fields.set(0, original);
+        }
+    }
+
 }

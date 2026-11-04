@@ -324,4 +324,57 @@ class FarmingCycleReportProjectionServiceTest {
         return values.getFirst();
     }
 
+
+    @Test
+    void reconciliationSingletonWorkTypesRejectStructuralMutation() {
+        var workTypes = capturedReconciliationTypes(List.of(finalHarvestRecord(finalHarvestRecordId, 10)));
+        assertThat(workTypes).containsExactly(WorkType.HARVEST);
+        assertThat(workTypes.contains(null)).isFalse();
+        assertThat(workTypes.remove(null)).isFalse();
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> workTypes.add(null));
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> workTypes.add(WorkType.WATERING));
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> workTypes.remove(WorkType.HARVEST));
+    }
+
+    @Test
+    void reconciliationMultiWorkTypesRetainEncounterOrderAndNullMutation() {
+        var workTypes = capturedReconciliationTypes(List.of(wateringRecord(1), finalHarvestRecord(finalHarvestRecordId, 10)));
+        assertThat(workTypes).containsExactly(WorkType.WATERING, WorkType.HARVEST);
+        assertThat(workTypes.add(null)).isTrue();
+        assertThat(workTypes).containsExactly(WorkType.WATERING, WorkType.HARVEST, null);
+        assertThat(workTypes.remove(null)).isTrue();
+        assertThat(workTypes.remove(WorkType.WATERING)).isTrue();
+        assertThat(workTypes.add(WorkType.WATERING)).isTrue();
+        assertThat(workTypes.add(WorkType.HARVEST)).isFalse();
+        assertThat(workTypes).containsExactly(WorkType.HARVEST, WorkType.WATERING);
+    }
+
+    @Test
+    void reconciliationRepeatedTypeAcrossMultipleRecordsRetainsMutableSet() {
+        var time = baseTime.plusDays(1);
+        var partial = new CycleReportSourceRecord(uuid("000000000402"), time, time, WorkType.HARVEST, "맑음", 20, false, "",
+            null, null, null, null, null,
+            new HarvestReportSource(null, new CategoryRef("ROOT_BARK", "뿌리·껍질"), new CategoryRef("CULTIVATED", "재배"), null, null, 12, false));
+        var workTypes = capturedReconciliationTypes(List.of(partial, finalHarvestRecord(finalHarvestRecordId, 10)));
+        assertThat(workTypes).containsExactly(WorkType.HARVEST);
+        assertThat(workTypes.add(WorkType.WATERING)).isTrue();
+        assertThat(workTypes.add(null)).isTrue();
+        assertThat(workTypes).containsExactly(WorkType.HARVEST, WorkType.WATERING, null);
+        assertThat(workTypes.remove(null)).isTrue();
+        assertThat(workTypes.remove(WorkType.HARVEST)).isTrue();
+        assertThat(workTypes).containsExactly(WorkType.WATERING);
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private Set<WorkType> capturedReconciliationTypes(List<CycleReportSourceRecord> source) {
+        stubScope(List.of());
+        when(sourceLoader.load(scope)).thenReturn(source);
+        when(partitioner.partition(source)).thenReturn(List.of(new CycleSlice(FarmingCycleReportStatus.COMPLETED, FarmingCycleStartBasis.FIRST_RECORD, source)));
+        when(farmingRecordRepository.getReferenceById(finalHarvestRecordId)).thenReturn(referenceRecord(finalHarvestRecordId, 10));
+        service.rebuild(scope);
+        ArgumentCaptor<Set<WorkType>> captor = (ArgumentCaptor) ArgumentCaptor.forClass(Set.class);
+        verify(reportFeedbackLifecycleService).reconcile(org.mockito.ArgumentMatchers.any(FarmingCycleReport.class), captor.capture());
+        return captor.getValue();
+    }
+
 }

@@ -271,4 +271,118 @@ class CycleReportStatisticsCalculatorTest {
         return values.getFirst();
     }
 
+
+    @Test
+    void emptySortedStatisticsListsRetainOriginalMutationAndNullSemantics() {
+        assertSortedStatisticsContract(0);
+    }
+
+    @Test
+    void singletonSortedStatisticsListsRetainOriginalMutationAndNullSemantics() {
+        assertSortedStatisticsContract(1);
+    }
+
+    @Test
+    void multiSortedStatisticsListsRetainReplacementButRejectStructuralMutation() {
+        assertSortedStatisticsContract(2);
+    }
+
+    @Test
+    void categoryMethodFlatMapResultsStayMutableForEmptySingletonAndMultiInputs() {
+        for (int size : new int[] {0, 1, 2}) {
+            var methods = calculator.calculate(mutabilityFixture(size)).getFertilizing().getCategoryMethods();
+            assertThat(methods).hasSize(size);
+            if (size == 1) assertThat(methods).extracting(it -> it.categoryCode() + ":" + it.methodCode()).containsExactly("B:SOIL");
+            if (size == 2) assertThat(methods).extracting(it -> it.categoryCode() + ":" + it.methodCode()).containsExactly("A:MISSING", "B:SOIL");
+            var before = new java.util.ArrayList<>(methods);
+            assertThat(methods.add(null)).isTrue();
+            assertThat(methods.remove((Object) null)).isTrue();
+            if (size > 0) {
+                var first = methods.set(0, null);
+                assertThat(methods.getFirst()).isNull();
+                methods.set(0, first);
+                assertThat(methods.remove(0)).isSameAs(first);
+                methods.add(0, first);
+            }
+            assertThat(methods).containsExactlyElementsOf(before);
+        }
+    }
+
+    private void assertSortedStatisticsContract(int size) {
+        var statistics = calculator.calculate(mutabilityFixture(size));
+        org.junit.jupiter.api.Assertions.assertAll("direct sorted results size=" + size,
+            () -> assertSortedListContract(statistics.getPruning().getWeatherDistribution(), size),
+            () -> assertSortedListContract(statistics.getPlanting().getPropagationMethods(), size),
+            () -> assertSortedListContract(statistics.getPlanting().getPlantingMethodDistribution(), size),
+            () -> assertSortedListContract(statistics.getWatering().getAmountDistribution(), size),
+            () -> assertSortedListContract(statistics.getWatering().getMethodDistribution(), size),
+            () -> assertSortedListContract(statistics.getFertilizing().getMaterialDistribution(), size),
+            () -> assertSortedListContract(statistics.getFertilizing().getMethodDistribution(), size),
+            () -> assertSortedListContract(statistics.getFertilizing().getMaterialCategories(), size),
+            () -> assertSortedListContract(statistics.getPestControl().getCategoryDistribution(), size),
+            () -> assertSortedListContract(statistics.getPestControl().getPesticideAmounts(), size),
+            () -> assertSortedListContract(statistics.getPestControl().getCategoryAmounts(), size),
+            () -> assertSortedListContract(statistics.getPestControl().getTargets(), size),
+            () -> assertSortedListContract(statistics.getWeeding().getMethodDistribution(), size),
+            () -> assertSortedListContract(statistics.getHarvest().getMedicinalParts(), size),
+            () -> assertSortedListContract(statistics.getHarvest().getGrowthPeriodDistribution(), size));
+        if (size == 2) {
+            assertThat(statistics.getPruning().getWeatherDistribution()).extracting(it -> it.code()).containsExactly("맑음", "비");
+            assertThat(statistics.getPlanting().getPropagationMethods()).extracting(it -> it.code()).containsExactly("CUTTING", "SEED");
+            assertThat(statistics.getPestControl().getPesticideAmounts()).extracting(it -> it.unit()).containsExactly("G", "ML");
+            assertThat(statistics.getPestControl().getCategoryAmounts()).extracting(it -> it.categoryCode()).containsExactly(id("901").toString(), id("902").toString());
+            assertThat(statistics.getPestControl().getTargets()).extracting(it -> it.target()).containsExactly("나방", "진딧물");
+            assertThat(statistics.getFertilizing().getMaterialCategories()).extracting(it -> it.code()).containsExactly("A", "B");
+            assertThat(statistics.getHarvest().getMedicinalParts()).extracting(it -> it.code()).containsExactly("LEAF", "ROOT_BARK");
+        }
+    }
+
+    private static <T> void assertSortedListContract(List<T> values, int size) {
+        assertThat(values).hasSize(size);
+        assertThat(values.contains(null)).isFalse();
+        if (size < 2) {
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.set(0, null));
+        } else {
+            var first = values.set(0, null);
+            assertThat(values.getFirst()).isNull();
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.remove((Object) null));
+            values.set(0, first);
+        }
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.add(null));
+        org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.remove(0));
+        if (size == 0) {
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.remove((Object) null));
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.remove(new Object()));
+        } else {
+            assertThat(values.remove((Object) null)).isFalse();
+            assertThat(values.remove(new Object())).isFalse();
+            org.junit.jupiter.api.Assertions.assertThrows(UnsupportedOperationException.class, () -> values.remove(values.getFirst()));
+        }
+        assertThat(values).hasSize(size);
+    }
+
+    private List<CycleReportSourceRecord> mutabilityFixture(int size) {
+        if (size == 0) return List.of();
+        var records = new java.util.ArrayList<CycleReportSourceRecord>();
+        records.add(seedPlanting("100", 1));
+        records.add(watering("LOW", "DRIP", 1));
+        records.add(fertilizing("B", "1000", "G", "1", "SOIL", 1));
+        records.add(pest("가가방", "1", "ML", "1", 1, id("901")));
+        records.add(weeding(1));
+        records.add(harvest("1", "ROOT_BARK", 12, false, 1, false));
+        var time = LocalDateTime.of(2026, 1, 1, 9, 0);
+        records.add(new CycleReportSourceRecord(id("801"), time, time, WorkType.PRUNING, "비", 20, false, "", null, null, null, null, null, null));
+        if (size == 2) {
+            records.add(cuttingPlanting(20, 2));
+            records.add(watering(null, null, 2));
+            records.add(fertilizing("A", "1000", "G", "1", null, 2));
+            records.add(baseRecord("52", 2, WorkType.PEST_CONTROL, false, null, null, null,
+                new PestControlReportSource(id("902"), "다른제품", BigDecimal.ONE, "G", BigDecimal.ONE, "나방"), null, null));
+            records.add(baseRecord("62", 2, WorkType.WEEDING, false, null, null, null, null, new WeedingReportSource(null), null));
+            records.add(harvest("1", "LEAF", 24, false, 2, false));
+            records.add(baseRecord("802", 2, WorkType.PRUNING, false, null, null, null, null, null, null));
+        }
+        return records;
+    }
+
 }
