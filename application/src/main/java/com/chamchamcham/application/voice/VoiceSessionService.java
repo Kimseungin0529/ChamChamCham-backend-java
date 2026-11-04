@@ -121,7 +121,8 @@ public class VoiceSessionService {
         var names = new LinkedHashSet<String>();
         for (var crops : cropsByFarm.values()) for (var crop : crops) names.add(crop.getName());
         var rows = names.isEmpty() ? List.<PesticideQueryRepository.VoiceCatalogRow>of()
-            : pesticideQueryRepository.findByCropNames(new ArrayList<>(names), MAX_PESTICIDE_CATALOG_ROWS);
+            : pesticideQueryRepository.findByCropNames(names.size() == 1
+                ? Collections.singletonList(names.iterator().next()) : new ArrayList<>(names), MAX_PESTICIDE_CATALOG_ROWS);
         if (!rows.isEmpty()) {
             var groups = new LinkedHashMap<List<String>, List<PesticideQueryRepository.VoiceCatalogRow>>();
             for (var row : rows) groups.computeIfAbsent(Arrays.asList(row.itemName(), row.brandName()), key -> new ArrayList<>()).add(row);
