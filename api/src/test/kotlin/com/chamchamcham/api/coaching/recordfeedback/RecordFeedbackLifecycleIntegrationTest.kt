@@ -161,12 +161,7 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         )
 
         generationProcessor.generate(
-            RecordFeedbackGenerationRequested(
-                feedbackId = feedbackId,
-                memberId = requireNotNull(member.id),
-                recordId = recordId,
-                sourceRevision = 1,
-            ),
+            RecordFeedbackGenerationRequested(feedbackId, requireNotNull(member.id), recordId, 1),
         )
 
         val feedbacks = recordFeedbackRepository.findAll().filter { it.record.id == recordId }
