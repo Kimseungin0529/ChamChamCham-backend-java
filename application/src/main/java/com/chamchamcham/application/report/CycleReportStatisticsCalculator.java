@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -64,7 +65,7 @@ public class CycleReportStatisticsCalculator {
         methods.sort(Comparator.comparingInt(PropagationStatistics::recordCount).reversed().thenComparing(PropagationStatistics::code));
         return new PlantingStatistics(c.recordCount(), c.firstWorkedOn(), c.lastWorkedOn(), c.workedDayCount(), c.averageIntervalDays(),
             c.photoAttachedRecordCount(), c.photoAttachmentRatePct(), c.weatherDistribution(), c.averageTemperatureC(),
-            distribution(details.stream().map(PlantingReportSource::getPlantingMethod).collect(Collectors.toCollection(ArrayList::new)), records.size()), methods);
+            distribution(details.stream().map(PlantingReportSource::getPlantingMethod).collect(Collectors.toCollection(ArrayList::new)), records.size()), sortedList(methods));
     }
 
     private WateringStatistics calculateWatering(List<CycleReportSourceRecord> records) {
@@ -121,7 +122,7 @@ public class CycleReportStatisticsCalculator {
             c.photoAttachedRecordCount(), c.photoAttachmentRatePct(), c.weatherDistribution(), c.averageTemperatureC(),
             distribution(details.stream().map(d -> new CategoryRef(d.getPesticideId().toString(),
                 d.getPesticideName())).collect(Collectors.toCollection(ArrayList::new)), records.size()),
-            amounts, categoryAmounts, sumOrNullScale4(knownSprays), new Coverage(knownSprays.size(), records.size()), targets);
+            sortedList(amounts), sortedList(categoryAmounts), sumOrNullScale4(knownSprays), new Coverage(knownSprays.size(), records.size()), sortedList(targets));
     }
 
     private WeedingStatistics calculateWeeding(List<CycleReportSourceRecord> records) {
@@ -161,7 +162,7 @@ public class CycleReportStatisticsCalculator {
     }
 
     private List<MaterialCategoryStatistics> calculateMaterialCategories(List<FertilizingReportSource> details, int recordCount, BigDecimal totalAmount) {
-        if (totalAmount == null || totalAmount.compareTo(BigDecimal.ZERO) == 0) return List.of();
+        if (totalAmount == null || totalAmount.compareTo(BigDecimal.ZERO) == 0) return sortedList(List.of());
         var result = new ArrayList<MaterialCategoryStatistics>();
         group(details.stream().filter(d -> d.getAmountKg() != null).collect(Collectors.toCollection(ArrayList::new)), FertilizingReportSource::getMaterialName)
             .forEach((name, items) -> {
@@ -171,7 +172,7 @@ public class CycleReportStatisticsCalculator {
                     Objects.requireNonNull(StatisticsMath.percentage(amount, totalAmount))));
             });
         result.sort(Comparator.comparingInt(MaterialCategoryStatistics::recordCount).reversed().thenComparing(MaterialCategoryStatistics::code));
-        return result;
+        return sortedList(result);
     }
 
     private List<CategoryMethodStatistics> calculateCategoryMethods(List<FertilizingReportSource> details) {
@@ -200,7 +201,7 @@ public class CycleReportStatisticsCalculator {
                     new Coverage(known.size(), items.size())));
             });
         result.sort(Comparator.comparingInt(HarvestPartStatistics::recordCount).reversed().thenComparing(HarvestPartStatistics::code));
-        return result;
+        return sortedList(result);
     }
 
     private CommonValues common(List<CycleReportSourceRecord> records) {
@@ -222,7 +223,15 @@ public class CycleReportStatisticsCalculator {
             .forEach((item, items) -> result.add(new CountDistribution(item.getCode(), item.getLabel(), items.size(),
                 Objects.requireNonNull(StatisticsMath.percentage(items.size(), denominator)))));
         result.sort(Comparator.comparingInt(CountDistribution::count).reversed().thenComparing(CountDistribution::code));
-        return result;
+        return sortedList(result);
+    }
+
+    // Kotlin sortedWith/By는 단일 항목은 불변, 다중 항목은 set만 가능한 배열 기반 목록을 반환한다.
+    @SuppressWarnings("unchecked")
+    private static <T> List<T> sortedList(List<T> values) {
+        if (values.isEmpty()) return Collections.unmodifiableList(Collections.emptyList());
+        if (values.size() == 1) return Collections.singletonList(values.getFirst());
+        return Arrays.asList((T[]) values.toArray());
     }
 
     private static <T, K> Map<K, List<T>> group(List<T> values, Function<T, K> key) {

@@ -6,6 +6,7 @@ import com.chamchamcham.application.exception.business.BusinessException;
 import com.chamchamcham.domain.crop.CropRepository;
 import com.chamchamcham.domain.farm.FarmRepository;
 import com.chamchamcham.domain.farming.FarmingRecordRepository;
+import com.chamchamcham.domain.farming.WorkType;
 import com.chamchamcham.domain.report.FarmingCycleReport;
 import com.chamchamcham.domain.report.FarmingCycleReportProjection;
 import com.chamchamcham.domain.report.FarmingCycleReportRepository;
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -71,8 +74,9 @@ public class FarmingCycleReportProjectionService {
             }
             reportRepository.save(report);
             if (report.getStatus() == FarmingCycleReportStatus.COMPLETED) {
-                var workTypes = slice.getRecords().stream().map(CycleReportSourceRecord::getWorkType)
+                Set<WorkType> workTypes = slice.getRecords().stream().map(CycleReportSourceRecord::getWorkType)
                     .collect(Collectors.toCollection(LinkedHashSet::new));
+                if (slice.getRecords().size() == 1) workTypes = Collections.singleton(workTypes.iterator().next());
                 reportFeedbackLifecycleService.reconcile(report, workTypes);
             }
         }

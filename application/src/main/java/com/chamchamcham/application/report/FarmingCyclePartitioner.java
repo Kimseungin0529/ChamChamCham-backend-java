@@ -5,6 +5,7 @@ import com.chamchamcham.domain.report.FarmingCycleReportStatus;
 import com.chamchamcham.domain.report.FarmingCycleStartBasis;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class FarmingCyclePartitioner {
             if (record.getHarvest() != null && record.getHarvest().isLastHarvest()) {
                 result.add(new CycleSlice(FarmingCycleReportStatus.COMPLETED,
                     hasPreviousFinalHarvest ? FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST : FarmingCycleStartBasis.FIRST_RECORD,
-                    new ArrayList<>(current)));
+                    snapshot(current)));
                 current.clear();
                 hasPreviousFinalHarvest = true;
             }
@@ -30,8 +31,12 @@ public class FarmingCyclePartitioner {
         if (!current.isEmpty()) {
             result.add(new CycleSlice(FarmingCycleReportStatus.ACTIVE,
                 hasPreviousFinalHarvest ? FarmingCycleStartBasis.AFTER_PREVIOUS_FINAL_HARVEST : FarmingCycleStartBasis.FIRST_RECORD,
-                new ArrayList<>(current)));
+                snapshot(current)));
         }
         return result;
+    }
+
+    private List<CycleReportSourceRecord> snapshot(List<CycleReportSourceRecord> records) {
+        return records.size() == 1 ? Collections.singletonList(records.getFirst()) : new ArrayList<>(records);
     }
 }

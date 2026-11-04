@@ -17,6 +17,7 @@ import com.chamchamcham.domain.farming.SprayAmountUnit;
 import com.chamchamcham.domain.farming.WeedingMethod;
 import com.chamchamcham.domain.farming.WorkType;
 import java.util.List;
+import java.util.Collections;
 import java.util.Arrays;
 
 // API의 작업 상세 요청 필드와 함께 수동으로 맞추는 카탈로그다.
@@ -71,7 +72,7 @@ public final class WorkTypeFieldCatalog {
         it.getLabel())).collect(Collectors.toCollection(ArrayList::new))), new WorkTypeResult.FieldSummary("pestId", FieldValueType.STRING, false,
         List.of()));
 
-    private static final List<WorkTypeResult.FieldSummary> WEEDING_FIELDS = java.util.Arrays.asList(new WorkTypeResult.FieldSummary("weedingMethod",
+    private static final List<WorkTypeResult.FieldSummary> WEEDING_FIELDS = Collections.singletonList(new WorkTypeResult.FieldSummary("weedingMethod",
         FieldValueType.ENUM, false, Arrays.asList(WeedingMethod.values()).stream().map(it -> new WorkTypeResult.EnumOptionSummary(it.name(),
         it.getLabel())).collect(Collectors.toCollection(ArrayList::new))));
 
