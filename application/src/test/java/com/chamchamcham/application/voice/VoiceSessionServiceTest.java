@@ -32,6 +32,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.never;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -130,6 +134,67 @@ class VoiceSessionServiceTest {
         service.create(new VoiceSessionCommand.Create(memberId));
         assertThat(capturedRequest.getInstructions()).doesNotContain("등록 농약 목록");
     }
+    @Test
+    void singleCropNamePortArgumentRejectsSetAddAndRemove() {
+        stubCreateCollaborators();
+        when(pesticideQueryRepository.findByCropNames(anyList(), eq(200))).thenAnswer(invocation -> {
+            List<String> names = invocation.getArgument(0);
+            assertThat(names).containsExactly("황기");
+            assertThrows(UnsupportedOperationException.class, () -> names.set(0, "변경"));
+            assertThrows(UnsupportedOperationException.class, () -> names.add("추가"));
+            assertThrows(UnsupportedOperationException.class, () -> names.remove(0));
+            return List.of();
+        });
+        service.create(new VoiceSessionCommand.Create(memberId));
+        verify(pesticideQueryRepository).findByCropNames(anyList(), eq(200));
+    }
+
+    @Test
+    void duplicateCropNamesPortArgumentRemainsImmutableSingleton() {
+        stubCreateCollaborators();
+        var duplicate = new Crop(UUID.fromString("00000000-0000-0000-0000-000000000202"), 423, "황기", CropUsePartCategory.ROOT_BARK);
+        when(memberCropRepository.findByMemberId(memberId)).thenReturn(List.of(
+            new MemberCrop(member, farm, crop), new MemberCrop(member, farm, duplicate)));
+        when(pesticideQueryRepository.findByCropNames(anyList(), eq(200))).thenAnswer(invocation -> {
+            List<String> names = invocation.getArgument(0);
+            assertThat(names).containsExactly("황기");
+            assertThrows(UnsupportedOperationException.class, () -> names.set(0, "변경"));
+            assertThrows(UnsupportedOperationException.class, () -> names.add("추가"));
+            assertThrows(UnsupportedOperationException.class, () -> names.remove(0));
+            return List.of();
+        });
+        service.create(new VoiceSessionCommand.Create(memberId));
+        verify(pesticideQueryRepository).findByCropNames(anyList(), eq(200));
+    }
+
+    @Test
+    void multipleCropNamesPortArgumentKeepsEncounterOrderAndAllowsSetAddAndRemove() {
+        stubCreateCollaborators();
+        var second = new Crop(UUID.fromString("00000000-0000-0000-0000-000000000202"), 423, "인삼", CropUsePartCategory.ROOT_BARK);
+        when(memberCropRepository.findByMemberId(memberId)).thenReturn(List.of(
+            new MemberCrop(member, farm, crop), new MemberCrop(member, farm, second), new MemberCrop(member, farm, crop)));
+        when(pesticideQueryRepository.findByCropNames(anyList(), eq(200))).thenAnswer(invocation -> {
+            List<String> names = invocation.getArgument(0);
+            assertThat(names).containsExactly("황기", "인삼");
+            assertThat(names.set(0, "변경")).isEqualTo("황기");
+            assertThat(names).containsExactly("변경", "인삼");
+            assertThat(names.add("추가")).isTrue();
+            assertThat(names.remove(1)).isEqualTo("인삼");
+            assertThat(names).containsExactly("변경", "추가");
+            return List.of();
+        });
+        service.create(new VoiceSessionCommand.Create(memberId));
+        verify(pesticideQueryRepository).findByCropNames(anyList(), eq(200));
+    }
+
+    @Test
+    void emptyCropNamesDoesNotCallCropFilteredPesticidePort() {
+        stubCreateCollaborators();
+        when(memberCropRepository.findByMemberId(memberId)).thenReturn(List.of());
+        service.create(new VoiceSessionCommand.Create(memberId));
+        verify(pesticideQueryRepository, never()).findByCropNames(anyList(), eq(200));
+    }
+
     private void stubCreateCollaborators() {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(farmRepository.findByOwnerId(memberId)).thenReturn(java.util.Arrays.asList(farm));

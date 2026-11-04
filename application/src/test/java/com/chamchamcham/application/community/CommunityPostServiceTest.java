@@ -532,6 +532,7 @@ class CommunityPostServiceTest {
         verify(communityPostRepository).save(captor.capture());
         return captor.getValue();
     }
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private List<CommunityPostMedia> capturedPostMedia() {
         ArgumentCaptor<Iterable<CommunityPostMedia>> captor = (ArgumentCaptor) ArgumentCaptor.forClass(Iterable.class);
         verify(communityPostMediaRepository).saveAll(captor.capture());

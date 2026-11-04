@@ -186,6 +186,7 @@ class CommunityCommentServiceTest {
         when(communityCommentRepository.findRootFirstPage(postId, PageRequest.of(0, 21))).thenReturn(java.util.Arrays.asList(deleted));
         when(communityCommentRepository.findRepliesByParentIds(java.util.Arrays.asList(rootCommentId))).thenReturn(List.of());
         var page = service.list(postId, null, 20);
+        assertEquals(1, page.getItems().size());
         assertEquals("삭제된 댓글입니다.", page.getItems().get(0).getBody());
         assertNull(page.getItems().get(0).getImageUrl());
     }
