@@ -201,22 +201,22 @@ class SearchControllerTest(
         )
 
     private fun postSummary(): CommunityPostResult.PostSummary = CommunityPostResult.PostSummary(
-        id = postId,
-        cropId = cropId,
-        cropName = "황기",
-        postType = CommunityPostType.GENERAL,
-        title = "황기 수확 후기",
-        bodyPreview = "올해 수확량이",
-        thumbnailUrl = null,
-        author = CommunityPostResult.AuthorSummary(
-            memberId = memberId,
-            nickname = "농부",
-            profileImageUrl = null,
+        postId,
+        cropId,
+        "황기",
+        CommunityPostType.GENERAL,
+        "황기 수확 후기",
+        "올해 수확량이",
+        null,
+        CommunityPostResult.AuthorSummary(
+            memberId,
+            "농부",
+            null,
         ),
-        commentCount = 2,
-        likeCount = 5,
-        likedByMe = false,
-        createdAt = createdAt,
+        2,
+        5,
+        false,
+        createdAt,
     )
 
     private fun policyItem(): SearchResult.PolicyItem = SearchResult.PolicyItem(

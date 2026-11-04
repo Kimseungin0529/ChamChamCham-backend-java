@@ -85,35 +85,36 @@ class SecurityConfigCommunityTest(
 
     private fun guestSearchCondition(): CommunityPostSearchCondition =
         CommunityPostSearchCondition(
-            memberId = null,
-            cropIds = emptyList(),
-            postType = null,
-            keyword = null,
-            likedOnly = false,
-            mineOnly = false,
-            sort = CommunityPostSort.LATEST,
-            cursor = null,
-            size = 20
+            null,
+            null,
+            emptyList(),
+            null,
+            null,
+            false,
+            false,
+            CommunityPostSort.LATEST,
+            null,
+            20,
         )
 
     private fun postDetail(): CommunityPostResult.PostDetail =
         CommunityPostResult.PostDetail(
-            id = postId,
-            cropId = cropId,
-            cropName = "황기",
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율 질문",
-            body = "싹이 거의 올라오지 않아요.",
-            imageUrls = emptyList(),
-            farmingRecordId = null,
-            author = CommunityPostResult.AuthorSummary(
-                memberId = authorMemberId,
-                nickname = "황기농부",
-                profileImageUrl = null
+            postId,
+            cropId,
+            "황기",
+            CommunityPostType.QUESTION,
+            "황기 발아율 질문",
+            "싹이 거의 올라오지 않아요.",
+            emptyList(),
+            null,
+            CommunityPostResult.AuthorSummary(
+                authorMemberId,
+                "황기농부",
+                null,
             ),
-            commentCount = 0,
-            likeCount = 0,
-            likedByMe = false,
-            createdAt = LocalDateTime.of(2026, 6, 12, 9, 0)
+            0,
+            0,
+            false,
+            LocalDateTime.of(2026, 6, 12, 9, 0),
         )
 }

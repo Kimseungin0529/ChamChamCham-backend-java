@@ -50,17 +50,19 @@ class VoiceSessionControllerTest(
 
     @Test
     fun `create session returns ephemeral secret and farm options`() {
-        `when`(voiceSessionService.create(VoiceSessionCommand.Create(memberId = memberId)))
+        `when`(voiceSessionService.create(VoiceSessionCommand.Create(
+            memberId,
+        )))
             .thenReturn(
                 VoiceSessionResult.Created(
-                    sessionId = sessionId,
-                    clientSecret = "secret",
-                    expiresAt = LocalDateTime.of(2026, 6, 1, 9, 10),
-                    model = "gpt-realtime",
-                    farms = listOf(FarmOption(farmId, "약초농장")),
-                    cropsByFarm = mapOf(farmId.toString() to emptyList()),
-                    maxRounds = 20,
-                    maxDurationSeconds = 330,
+                    sessionId,
+                    "secret",
+                    LocalDateTime.of(2026, 6, 1, 9, 10),
+                    "gpt-realtime",
+                    listOf(FarmOption(farmId, "약초농장")),
+                    mapOf(farmId.toString() to emptyList()),
+                    20,
+                    330,
                 )
             )
 
@@ -84,18 +86,50 @@ class VoiceSessionControllerTest(
         `when`(
             voiceSessionService.submitTurns(
                 VoiceSessionCommand.SubmitTurns(
-                    memberId = memberId,
-                    sessionId = sessionId,
-                    turns = listOf(VoiceSessionCommand.TurnInput(role = VoiceTurnRole.USER, content = "물 줬어요")),
-                    candidate = VoiceRecordCandidate(workType = WorkType.WATERING),
+                    memberId,
+                    sessionId,
+                    listOf(VoiceSessionCommand.TurnInput(
+                        VoiceTurnRole.USER,
+                        "물 줬어요",
+                        null,
+                    )),
+                    VoiceRecordCandidate(
+                        null,
+                        null,
+                        WorkType.WATERING,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ),
                 )
             )
         ).thenReturn(
             VoiceSessionResult.Processed(
-                sessionId = sessionId,
-                status = VoiceSessionStatus.WAITING_CONFIRMATION,
-                candidate = VoiceRecordCandidate(workType = WorkType.WATERING),
-                missingFields = listOf("farmId", "cropId"),
+                sessionId,
+                VoiceSessionStatus.WAITING_CONFIRMATION,
+                VoiceRecordCandidate(
+                    null,
+                    null,
+                    WorkType.WATERING,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                ),
+                listOf("farmId", "cropId"),
             )
         )
 
@@ -133,7 +167,11 @@ class VoiceSessionControllerTest(
     @Test
     fun `confirm forces entryMode to VOICE regardless of request body`() {
         `when`(voiceSessionService.confirm(expectedConfirmCommand()))
-            .thenReturn(VoiceSessionResult.Confirmed(sessionId = sessionId, recordId = recordId, workType = WorkType.WATERING))
+            .thenReturn(VoiceSessionResult.Confirmed(
+                sessionId,
+                recordId,
+                WorkType.WATERING,
+            ))
 
         mockMvc.perform(
             post("/api/v1/voice-sessions/$sessionId/confirm")
@@ -147,8 +185,14 @@ class VoiceSessionControllerTest(
 
     @Test
     fun `cancel returns cancelled status`() {
-        `when`(voiceSessionService.cancel(VoiceSessionCommand.Cancel(memberId = memberId, sessionId = sessionId)))
-            .thenReturn(VoiceSessionResult.Cancelled(sessionId = sessionId, status = VoiceSessionStatus.CANCELLED))
+        `when`(voiceSessionService.cancel(VoiceSessionCommand.Cancel(
+            memberId,
+            sessionId,
+        )))
+            .thenReturn(VoiceSessionResult.Cancelled(
+                sessionId,
+                VoiceSessionStatus.CANCELLED,
+            ))
 
         mockMvc.perform(post("/api/v1/voice-sessions/$sessionId/cancel").with(authenticatedMember(memberId.toString())))
             .andExpect(status().isOk)
@@ -156,9 +200,9 @@ class VoiceSessionControllerTest(
     }
 
     private fun expectedConfirmCommand() = VoiceSessionCommand.Confirm(
-        memberId = memberId,
-        sessionId = sessionId,
-        record = FarmingRecordCommand.Create(
+        memberId,
+        sessionId,
+        FarmingRecordCommand.Create(
             memberId,
             farmId,
             cropId,

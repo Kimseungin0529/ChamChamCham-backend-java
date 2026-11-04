@@ -65,16 +65,16 @@ class CommunityController(
     ): ResponseEntity<ApiResponse<CommunityResponses.PostPageResponse>> {
         val page = communityPostService.search(
             CommunityPostSearchCondition(
-                memberId = parseOptionalMemberId(memberId),
-                authorMemberId = authorMemberId,
-                cropIds = cropIds ?: emptyList(),
-                postType = postType,
-                keyword = keyword,
-                likedOnly = likedOnly,
-                mineOnly = mineOnly,
-                sort = sort,
-                cursor = cursor,
-                size = size
+                parseOptionalMemberId(memberId),
+                authorMemberId,
+                cropIds ?: emptyList(),
+                postType,
+                keyword,
+                likedOnly,
+                mineOnly,
+                sort,
+                cursor,
+                size,
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(CommunityResponses.PostPageResponse.from(page)))
@@ -87,13 +87,13 @@ class CommunityController(
     ): ResponseEntity<ApiResponse<CommunityResponses.PostIdResponse>> {
         val result = communityPostService.create(
             CommunityPostCommand.Create(
-                memberId = parseMemberId(memberId),
-                cropId = requireNotNull(request.cropId),
-                postType = requireNotNull(request.postType),
-                title = request.title,
-                body = request.body,
-                farmingRecordId = request.farmingRecordId,
-                mediaIds = request.mediaIds
+                parseMemberId(memberId),
+                requireNotNull(request.cropId),
+                requireNotNull(request.postType),
+                request.title,
+                request.body,
+                request.farmingRecordId,
+                request.mediaIds,
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(CommunityResponses.PostIdResponse.from(result)))
@@ -116,14 +116,14 @@ class CommunityController(
     ): ResponseEntity<ApiResponse<CommunityResponses.PostIdResponse>> {
         val result = communityPostService.update(
             CommunityPostCommand.Update(
-                memberId = parseMemberId(memberId),
-                postId = postId,
-                cropId = requireNotNull(request.cropId),
-                postType = requireNotNull(request.postType),
-                title = request.title,
-                body = request.body,
-                farmingRecordId = request.farmingRecordId,
-                mediaIds = request.mediaIds
+                parseMemberId(memberId),
+                postId,
+                requireNotNull(request.cropId),
+                requireNotNull(request.postType),
+                request.title,
+                request.body,
+                request.farmingRecordId,
+                request.mediaIds,
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(CommunityResponses.PostIdResponse.from(result)))
@@ -156,11 +156,11 @@ class CommunityController(
     ): ResponseEntity<ApiResponse<CommunityResponses.CommentIdResponse>> {
         val result = communityCommentService.create(
             CommunityCommentCommand.Create(
-                memberId = parseMemberId(memberId),
-                postId = postId,
-                parentCommentId = request.parentCommentId,
-                body = request.body,
-                mediaId = request.mediaId
+                parseMemberId(memberId),
+                postId,
+                request.parentCommentId,
+                request.body,
+                request.mediaId,
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(CommunityResponses.CommentIdResponse.from(result)))

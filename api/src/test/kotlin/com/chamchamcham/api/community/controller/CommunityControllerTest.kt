@@ -88,8 +88,14 @@ class CommunityControllerTest(
     fun `list post crops returns crops for the path member id not the authenticated caller`() {
         `when`(communityPostService.listPostCrops(authorMemberId)).thenReturn(
             listOf(
-                CommunityPostResult.Board(cropId = cropId, cropName = "황기"),
-                CommunityPostResult.Board(cropId = secondCropId, cropName = "인삼")
+                CommunityPostResult.Board(
+                    cropId,
+                    "황기",
+                ),
+                CommunityPostResult.Board(
+                    secondCropId,
+                    "인삼",
+                )
             )
         )
 
@@ -131,15 +137,16 @@ class CommunityControllerTest(
         `when`(
             communityPostService.search(
                 CommunityPostSearchCondition(
-                    memberId = memberId,
-                    cropIds = listOf(cropId),
-                    postType = CommunityPostType.QUESTION,
-                    keyword = "황기",
-                    likedOnly = true,
-                    mineOnly = false,
-                    sort = CommunityPostSort.POPULAR,
-                    cursor = "cursor-1",
-                    size = 10
+                    memberId,
+                    null,
+                    listOf(cropId),
+                    CommunityPostType.QUESTION,
+                    "황기",
+                    true,
+                    false,
+                    CommunityPostSort.POPULAR,
+                    "cursor-1",
+                    10,
                 )
             )
         ).thenReturn(postPageResult())
@@ -165,15 +172,16 @@ class CommunityControllerTest(
         `when`(
             communityPostService.search(
                 CommunityPostSearchCondition(
-                    memberId = memberId,
-                    cropIds = cropIds,
-                    postType = null,
-                    keyword = null,
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LATEST,
-                    cursor = null,
-                    size = 20,
+                    memberId,
+                    null,
+                    cropIds,
+                    null,
+                    null,
+                    false,
+                    false,
+                    CommunityPostSort.LATEST,
+                    null,
+                    20,
                 ),
             ),
         ).thenReturn(postPageResult())
@@ -192,16 +200,16 @@ class CommunityControllerTest(
         `when`(
             communityPostService.search(
                 CommunityPostSearchCondition(
-                    memberId = memberId,
-                    authorMemberId = authorMemberId,
-                    cropIds = emptyList(),
-                    postType = null,
-                    keyword = null,
-                    likedOnly = false,
-                    mineOnly = false,
-                    sort = CommunityPostSort.LATEST,
-                    cursor = null,
-                    size = 20
+                    memberId,
+                    authorMemberId,
+                    emptyList(),
+                    null,
+                    null,
+                    false,
+                    false,
+                    CommunityPostSort.LATEST,
+                    null,
+                    20,
                 )
             )
         ).thenReturn(postPageResult())
@@ -318,7 +326,10 @@ class CommunityControllerTest(
     @Test
     fun `toggle like returns liked state and count`() {
         `when`(communityPostService.toggleLike(CommunityPostCommand.ToggleLike(memberId, postId)))
-            .thenReturn(CommunityPostResult.LikeToggle(liked = true, likeCount = 9))
+            .thenReturn(CommunityPostResult.LikeToggle(
+                true,
+                9,
+            ))
 
         mockMvc.perform(
             post("/api/v1/community/posts/{postId}/like-toggle", postId)
@@ -356,109 +367,111 @@ class CommunityControllerTest(
 
     private fun createPostCommand(): CommunityPostCommand.Create =
         CommunityPostCommand.Create(
-            memberId = memberId,
-            cropId = cropId,
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율 질문",
-            body = "싹이 거의 올라오지 않아요.",
-            farmingRecordId = recordId,
-            mediaIds = listOf(mediaId)
+            memberId,
+            cropId,
+            CommunityPostType.QUESTION,
+            "황기 발아율 질문",
+            "싹이 거의 올라오지 않아요.",
+            recordId,
+            listOf(mediaId),
         )
 
     private fun updatePostCommand(): CommunityPostCommand.Update =
         CommunityPostCommand.Update(
-            memberId = memberId,
-            postId = postId,
-            cropId = cropId,
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율 질문",
-            body = "싹이 거의 올라오지 않아요.",
-            farmingRecordId = recordId,
-            mediaIds = listOf(mediaId)
+            memberId,
+            postId,
+            cropId,
+            CommunityPostType.QUESTION,
+            "황기 발아율 질문",
+            "싹이 거의 올라오지 않아요.",
+            recordId,
+            listOf(mediaId),
         )
 
     private fun createCommentCommand(): CommunityCommentCommand.Create =
         CommunityCommentCommand.Create(
-            memberId = memberId,
-            postId = postId,
-            parentCommentId = null,
-            body = "저도 궁금해요",
-            mediaId = mediaId
+            memberId,
+            postId,
+            null,
+            "저도 궁금해요",
+            mediaId,
         )
 
     private fun postPageResult(): CommunityPostResult.Page =
         CommunityPostResult.Page(
-            items = listOf(postSummaryResult()),
-            nextCursor = "cursor-1"
+            listOf(postSummaryResult()),
+            "cursor-1",
         )
 
     private fun postDetailResult(likedByMe: Boolean = true): CommunityPostResult.PostDetail =
         CommunityPostResult.PostDetail(
-            id = postId,
-            cropId = cropId,
-            cropName = "황기",
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율 질문",
-            body = "싹이 거의 올라오지 않아요.",
-            imageUrls = listOf("https://example.test/1.jpg"),
-            farmingRecordId = recordId,
-            author = authorResult(),
-            commentCount = 3,
-            likeCount = 8,
-            likedByMe = likedByMe,
-            createdAt = createdAt
+            postId,
+            cropId,
+            "황기",
+            CommunityPostType.QUESTION,
+            "황기 발아율 질문",
+            "싹이 거의 올라오지 않아요.",
+            listOf("https://example.test/1.jpg"),
+            recordId,
+            authorResult(),
+            3,
+            8,
+            likedByMe,
+            createdAt,
         )
 
     private fun postSummaryResult(): CommunityPostResult.PostSummary =
         CommunityPostResult.PostSummary(
-            id = postId,
-            cropId = cropId,
-            cropName = "황기",
-            postType = CommunityPostType.QUESTION,
-            title = "황기 발아율 질문",
-            bodyPreview = "싹이 거의 올라오지 않아요.",
-            thumbnailUrl = "https://example.test/1.jpg",
-            author = authorResult(),
-            commentCount = 3,
-            likeCount = 8,
-            likedByMe = true,
-            createdAt = createdAt
+            postId,
+            cropId,
+            "황기",
+            CommunityPostType.QUESTION,
+            "황기 발아율 질문",
+            "싹이 거의 올라오지 않아요.",
+            "https://example.test/1.jpg",
+            authorResult(),
+            3,
+            8,
+            true,
+            createdAt,
         )
 
     private fun commentPageResult(nextCursor: String? = "comment-cursor-1"): CommunityCommentResult.Page =
         CommunityCommentResult.Page(
-            items = listOf(deletedCommentResult()),
-            nextCursor = nextCursor
+            listOf(deletedCommentResult()),
+            nextCursor,
         )
 
     private fun deletedCommentResult(): CommunityCommentResult.Comment =
         CommunityCommentResult.Comment(
-            id = commentId,
-            parentCommentId = null,
-            author = authorResult(),
-            body = "삭제된 댓글입니다.",
-            imageUrl = null,
-            deleted = true,
-            createdAt = createdAt
+            commentId,
+            null,
+            authorResult(),
+            "삭제된 댓글입니다.",
+            null,
+            true,
+            createdAt,
+            emptyList(),
         )
 
     private fun authorResult(): CommunityPostResult.AuthorSummary =
         CommunityPostResult.AuthorSummary(
-            memberId = memberId,
-            nickname = "황기농부",
-            profileImageUrl = "https://example.test/profile.jpg"
+            memberId,
+            "황기농부",
+            "https://example.test/profile.jpg",
         )
 
     private fun anySearchCondition(memberId: UUID? = this.memberId): CommunityPostSearchCondition =
         CommunityPostSearchCondition(
-            memberId = memberId,
-            cropIds = emptyList(),
-            postType = null,
-            keyword = null,
-            likedOnly = false,
-            mineOnly = false,
-            sort = CommunityPostSort.LATEST,
-            cursor = null,
-            size = 20
+            memberId,
+            null,
+            emptyList(),
+            null,
+            null,
+            false,
+            false,
+            CommunityPostSort.LATEST,
+            null,
+            20,
         )
 }
