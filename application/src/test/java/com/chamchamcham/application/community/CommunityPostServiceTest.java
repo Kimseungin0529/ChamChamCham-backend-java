@@ -51,8 +51,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -104,7 +102,9 @@ class CommunityPostServiceTest {
         replacementMedia = uploadedMedia(member, replacementMediaId, UploadedMediaUsageType.COMMUNITY_POST, UploadedMediaStatus.TEMP);
         existingPost = existingPost(member, crop, postId);
         existingLike = new CommunityPostLike(UUID.randomUUID(), existingPost, member);
-        service = new CommunityPostService(memberRepository, cropRepository, farmingRecordRepository, uploadedMediaRepository, communityPostRepository, communityPostMediaRepository, communityCommentRepository, communityPostLikeRepository, memberCropRepository, communityPostQueryRepository, cursorCodec);
+        service = new CommunityPostService(memberRepository, cropRepository, farmingRecordRepository, uploadedMediaRepository, communityPostRepository,
+            communityPostMediaRepository, communityCommentRepository, communityPostLikeRepository, memberCropRepository, communityPostQueryRepository,
+            cursorCodec);
     }
 
     @Test
@@ -115,8 +115,8 @@ class CommunityPostServiceTest {
         when(farmingRecordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(record);
         when(uploadedMediaRepository.findAllById(java.util.Arrays.asList(mediaId1, mediaId2))).thenReturn(java.util.Arrays.asList(media1, media2));
         when(communityPostRepository.save(any(CommunityPost.class))).thenAnswer(invocation -> {
-        var post = invocation.<CommunityPost>getArgument(0);
-        return new CommunityPost(postId, post.getAuthor(), post.getCrop(), post.getFarmingRecord(), post.getPostType(), post.getTitle(), post.getBody(), false);
+            var post = invocation.<CommunityPost>getArgument(0);
+            return new CommunityPost(postId, post.getAuthor(), post.getCrop(), post.getFarmingRecord(), post.getPostType(), post.getTitle(), post.getBody(), false);
         });
         var result = service.create(createCommand(java.util.Arrays.asList(mediaId1, mediaId2), recordId));
         assertEquals(postId, result.getId());
@@ -174,8 +174,10 @@ class CommunityPostServiceTest {
         when(cropRepository.findById(secondCropId)).thenReturn(Optional.of(secondCrop));
         when(farmingRecordRepository.findByIdAndMember_Id(recordId, memberId)).thenReturn(secondRecord);
         when(communityPostMediaRepository.findByPostIdOrderByDisplayOrderAsc(postId)).thenReturn(java.util.Arrays.asList(existingPostMedia));
-        when(uploadedMediaRepository.findAllById(java.util.Arrays.asList(mediaId1, replacementMediaId))).thenReturn(java.util.Arrays.asList(existingMedia, newMedia));
-        when(communityPostMediaRepository.findByUploadedMediaIdIn(java.util.Arrays.asList(mediaId1, replacementMediaId))).thenReturn(java.util.Arrays.asList(existingPostMedia));
+        when(uploadedMediaRepository.findAllById(java.util.Arrays.asList(mediaId1, replacementMediaId))).thenReturn(java.util.Arrays.asList(existingMedia,
+            newMedia));
+        when(communityPostMediaRepository.findByUploadedMediaIdIn(java.util.Arrays.asList(mediaId1,
+            replacementMediaId))).thenReturn(java.util.Arrays.asList(existingPostMedia));
         service.update(updateCommand(java.util.Arrays.asList(mediaId1, replacementMediaId), recordId));
         assertEquals(UploadedMediaStatus.ATTACHED, existingMedia.getStatus());
         assertEquals(UploadedMediaStatus.ATTACHED, newMedia.getStatus());
@@ -267,7 +269,8 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("list boards de duplicates member crops by crop id preserving first encounter order")
     void list_boards_de_duplicates_member_crops_by_crop_id_preserving_first_encounter_order() throws Exception {
-        when(memberCropRepository.findByMemberId(memberId)).thenReturn(java.util.Arrays.asList(memberCrop(member, crop), memberCrop(member, crop), memberCrop(member, secondCrop)));
+        when(memberCropRepository.findByMemberId(memberId)).thenReturn(java.util.Arrays.asList(memberCrop(member, crop), memberCrop(member, crop),
+            memberCrop(member, secondCrop)));
         var boards = service.listBoards(memberId);
         assertThat(boards.stream().map(it -> it.getCropId()).toList()).containsExactly(cropId, secondCropId);
         assertThat(boards.stream().map(it -> it.getCropName()).toList()).containsExactly("황기", "인삼");
@@ -287,7 +290,8 @@ class CommunityPostServiceTest {
     void get_detail_returns_ordered_images_counts_and_liked_by_me() throws Exception {
         setCreatedAt(existingPost, postCreatedAt);
         when(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(existingPost);
-        when(communityPostMediaRepository.findByPostIdOrderByDisplayOrderAsc(postId)).thenReturn(java.util.Arrays.asList(new CommunityPostMedia(existingPost, media1, 0), new CommunityPostMedia(existingPost, media2, 1)));
+        when(communityPostMediaRepository.findByPostIdOrderByDisplayOrderAsc(postId)).thenReturn(java.util.Arrays.asList(new CommunityPostMedia(existingPost,
+            media1, 0), new CommunityPostMedia(existingPost, media2, 1)));
         when(communityCommentRepository.countByPostIdAndIsDeletedFalse(postId)).thenReturn(3L);
         when(communityPostLikeRepository.countByPostId(postId)).thenReturn(8L);
         when(communityPostLikeRepository.existsByPostIdAndMemberId(postId, memberId)).thenReturn(true);
@@ -319,8 +323,12 @@ class CommunityPostServiceTest {
         var overflowPost = existingPost(member, crop, secondPostId);
         setCreatedAt(overflowPost, postCreatedAt.minusMinutes(1));
         setCreatedAt(existingPost, postCreatedAt);
-        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost, "https://example.test/1.jpg", 3, 8, true, null), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, null))));
-        var page = service.search(new CommunityPostSearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, requestedSize));
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null,
+            requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost,
+            "https://example.test/1.jpg", 3, 8, true, null), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, null))));
+        var page = service.search(new CommunityPostSearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION,
+            "발아", false, false, CommunityPostSort.LATEST, null, requestedSize));
         assertThat(page.getItems()).hasSize(1);
         assertEquals(postId, page.getItems().get(0).getId());
         assertThat(page.getNextCursor()).isNotBlank();
@@ -334,7 +342,9 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("guest search delegates without viewer personalization")
     void guest_search_delegates_without_viewer_personalization() throws Exception {
-        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(null, otherMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, 21))).thenReturn(new CommunityPostQueryRepository.SearchResult(List.of()));
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(null, otherMemberId, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null,
+            21))).thenReturn(new CommunityPostQueryRepository.SearchResult(List.of()));
         var page = service.search(searchCondition(null, otherMemberId, false, false, CommunityPostSort.LATEST, null, 20));
         assertThat(page.getItems()).isEmpty();
     }
@@ -362,7 +372,10 @@ class CommunityPostServiceTest {
         var overflowPost = existingPost(member, crop, secondPostId);
         setCreatedAt(overflowPost, postCreatedAt.minusMinutes(1));
         setCreatedAt(existingPost, postCreatedAt);
-        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, null, requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost, "https://example.test/1.jpg", 3, 8, true, 8L), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, 7L))));
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, null,
+            requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost,
+            "https://example.test/1.jpg", 3, 8, true, 8L), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, 7L))));
         var page = service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LIKE, null, requestedSize));
         assertThat(page.getItems()).hasSize(1);
         var nextCursor = cursorCodec.decode(page.getNextCursor(), CommunityPostCursorPayload.class);
@@ -379,8 +392,12 @@ class CommunityPostServiceTest {
         var overflowPost = existingPost(member, crop, secondPostId);
         setCreatedAt(overflowPost, postCreatedAt.minusMinutes(1));
         setCreatedAt(existingPost, postCreatedAt);
-        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, null, requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost, "https://example.test/1.jpg", 3, 8, true, null), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, 7L))));
-        assertThrows(IllegalStateException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LIKE, null, requestedSize)));
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, null,
+            requestedSize+ 1))).thenReturn(new CommunityPostQueryRepository.SearchResult(java.util.Arrays.asList(queryRow(existingPost,
+            "https://example.test/1.jpg", 3, 8, true, null), queryRow(overflowPost, "https://example.test/2.jpg", 3, 8, true, 7L))));
+        assertThrows(IllegalStateException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LIKE, null,
+            requestedSize)));
     }
 
     @Test
@@ -388,7 +405,9 @@ class CommunityPostServiceTest {
     void search_decodes_valid_incoming_cursor_for_query_repository() throws Exception {
         var cursor = cursorCodec.encode(new CommunityPostCursorPayload(CommunityPostSort.LIKE, 8L, postCreatedAt, postId));
         var decodedCursor = new CommunityPostQueryRepository.Cursor(CommunityPostSort.LIKE, 8L, postCreatedAt, postId);
-        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, decodedCursor, 21))).thenReturn(new CommunityPostQueryRepository.SearchResult(List.of()));
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(memberId, null, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LIKE, decodedCursor,
+            21))).thenReturn(new CommunityPostQueryRepository.SearchResult(List.of()));
         var page = service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LIKE, cursor, 20));
         assertThat(page.getItems()).isEmpty();
         assertEquals(null, page.getNextCursor());
@@ -397,7 +416,8 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("search rejects zero size")
     void search_rejects_zero_size() throws Exception {
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LATEST, null, 0)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LATEST, null, 0)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -405,7 +425,8 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("search rejects negative size")
     void search_rejects_negative_size() throws Exception {
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LATEST, null, -1)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LATEST, null, -1)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -413,7 +434,8 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("search rejects max integer size")
     void search_rejects_max_integer_size() throws Exception {
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LATEST, null, Integer.MAX_VALUE)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LATEST, null, Integer.MAX_VALUE)));
         assertEquals(ErrorCode.INVALID_INPUT, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -422,7 +444,8 @@ class CommunityPostServiceTest {
     @DisplayName("search rejects cursor when embedded sort differs from request sort")
     void search_rejects_cursor_when_embedded_sort_differs_from_request_sort() throws Exception {
         var cursor = cursorCodec.encode(new CommunityPostCursorPayload(CommunityPostSort.LIKE, 8L, postCreatedAt, postId));
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LATEST, cursor, 20)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LATEST, cursor, 20)));
         assertEquals(ErrorCode.INVALID_CURSOR, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -431,7 +454,8 @@ class CommunityPostServiceTest {
     @DisplayName("search rejects count based sort cursor with null score")
     void search_rejects_count_based_sort_cursor_with_null_score() throws Exception {
         var cursor = cursorCodec.encode(new CommunityPostCursorPayload(CommunityPostSort.LIKE, null, postCreatedAt, postId));
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LIKE, cursor, 20)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LIKE, cursor, 20)));
         assertEquals(ErrorCode.INVALID_CURSOR, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -439,7 +463,8 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("search rejects malformed cursor")
     void search_rejects_malformed_cursor() throws Exception {
-        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false, CommunityPostSort.LATEST, "not-a-valid-cursor", 20)));
+        var exception = assertThrows(BusinessException.class, () -> service.search(searchCondition(this.memberId, null, false, false,
+            CommunityPostSort.LATEST, "not-a-valid-cursor", 20)));
         assertEquals(ErrorCode.INVALID_CURSOR, exception.getErrorCode());
         verifyNoInteractions(communityPostQueryRepository);
     }
@@ -447,11 +472,25 @@ class CommunityPostServiceTest {
     @Test
     @DisplayName("count delegates to query repository with condition and no cursor")
     void count_delegates_to_query_repository_with_condition_and_no_cursor() throws Exception {
-        when(communityPostQueryRepository.count(new CommunityPostQueryRepository.SearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, 1))).thenReturn(5L);
+        when(communityPostQueryRepository.count(new CommunityPostQueryRepository.SearchCondition(memberId, otherMemberId, java.util.Arrays.asList(cropId),
+            CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, 1))).thenReturn(5L);
         var total = service.count(searchCondition(this.memberId, otherMemberId, false, false, CommunityPostSort.LATEST, null, 20));
         assertEquals(5L, total);
         verifyNoInteractions(communityPostRepository);
     }
+    @Test
+    void unicodeBlankCursorAndUtf16BodyPreviewKeepOriginalBoundary() throws Exception {
+        existingPost.update(crop, record, CommunityPostType.QUESTION, "제목", "가".repeat(79) + "😀나");
+        setCreatedAt(existingPost, postCreatedAt);
+        when(communityPostQueryRepository.search(new CommunityPostQueryRepository.SearchCondition(
+            memberId, null, List.of(cropId), CommunityPostType.QUESTION, "발아", false, false, CommunityPostSort.LATEST, null, 21)))
+            .thenReturn(new CommunityPostQueryRepository.SearchResult(List.of(queryRow(existingPost, null, 3, 8, true, null))));
+        var page = service.search(searchCondition(memberId, null, false, false, CommunityPostSort.LATEST, "\u00a0\u2007\u202f", 20));
+        assertEquals("가".repeat(79) + "\ud83d", page.getItems().getFirst().getBodyPreview());
+        page.getItems().add(page.getItems().getFirst());
+        assertEquals(2, page.getItems().size());
+    }
+
     private Member member(UUID id) {
         return new Member(id, "" + id + "@example.com", null);
     }
@@ -462,7 +501,8 @@ class CommunityPostServiceTest {
         return new MemberCrop(member, farm(member), crop);
     }
     private FarmingRecord farmingRecord(Member member, Crop crop) {
-        return new FarmingRecord(recordId, member, farm(member), crop, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo", EntryMode.MANUAL, false);
+        return new FarmingRecord(recordId, member, farm(member), crop, WorkType.PLANTING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "memo",
+            EntryMode.MANUAL, false);
     }
     private UploadedMedia uploadedMedia(Member member, UUID id, UploadedMediaUsageType usageType, UploadedMediaStatus status) {
         var index = id.equals(mediaId2) ? "2" : "1";
@@ -473,8 +513,10 @@ class CommunityPostServiceTest {
     private CommunityPost existingPost(Member author, Crop crop, UUID id) {
         return new CommunityPost(id, author, crop, record, CommunityPostType.QUESTION, "황기 발아율이 낮아요", "싹이 거의 올라오지 않아요.", false);
     }
-    private CommunityPostSearchCondition searchCondition(UUID memberId, UUID authorMemberId, boolean likedOnly, boolean mineOnly, CommunityPostSort sort, String cursor, int size) {
-        return new CommunityPostSearchCondition(memberId, authorMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", likedOnly, mineOnly, sort, cursor, size);
+    private CommunityPostSearchCondition searchCondition(UUID memberId, UUID authorMemberId, boolean likedOnly, boolean mineOnly, CommunityPostSort sort,
+        String cursor, int size) {
+        return new CommunityPostSearchCondition(memberId, authorMemberId, java.util.Arrays.asList(cropId), CommunityPostType.QUESTION, "발아", likedOnly,
+            mineOnly, sort, cursor, size);
     }
     private CommunityPostCommand.Create createCommand(List<UUID> mediaIds, UUID farmingRecordId) {
         return new CommunityPostCommand.Create(memberId, cropId, CommunityPostType.QUESTION, "황기 발아율이 낮아요", "싹이 거의 올라오지 않아요.", farmingRecordId, mediaIds);

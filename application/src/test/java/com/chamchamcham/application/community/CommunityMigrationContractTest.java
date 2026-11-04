@@ -30,7 +30,8 @@ class CommunityMigrationContractTest {
         var condition = mapper.readValue("{\"likedOnly\":false,\"mineOnly\":false,\"sort\":\"LATEST\",\"size\":20}", CommunityPostSearchCondition.class);
         assertThat(condition.getCropIds()).isEmpty();
         assertThat(condition.getAuthorMemberId()).isNull();
-        assertThatThrownBy(() -> mapper.readValue("{\"cropIds\":null,\"sort\":\"LATEST\",\"size\":20}", CommunityPostSearchCondition.class)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> mapper.readValue("{\"cropIds\":null,\"sort\":\"LATEST\",\"size\":20}",
+            CommunityPostSearchCondition.class)).isInstanceOf(Exception.class);
         var commentJson = "{\"id\":\"" + id + "\",\"author\":{\"memberId\":\"" + id + "\"},\"body\":\"내용\",\"deleted\":false,\"createdAt\":\"2026-07-17T09:00:00\"";
         assertThat(mapper.readValue(commentJson + "}", CommunityCommentResult.Comment.class).getReplies()).isEmpty();
         assertThatThrownBy(() -> mapper.readValue(commentJson + ",\"replies\":null}", CommunityCommentResult.Comment.class)).isInstanceOf(Exception.class);

@@ -37,8 +37,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,7 +63,8 @@ class CommunityCommentServiceTest {
     void setUp() throws Exception {
         member = new Member(memberId, "farmer@example.com", null);
         otherMember = new Member(otherMemberId, "other@example.com", null);
-        post = new CommunityPost(postId, member, new Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기", CropUsePartCategory.ROOT_BARK), CommunityPostType.QUESTION, "황기 발아율이 낮아요", "싹이 거의 올라오지 않아요.");
+        post = new CommunityPost(postId, member, new Crop(UUID.fromString("00000000-0000-0000-0000-000000000301"), 422, "황기",
+            CropUsePartCategory.ROOT_BARK), CommunityPostType.QUESTION, "황기 발아율이 낮아요", "싹이 거의 올라오지 않아요.");
         rootComment = comment(rootCommentId, null, member, "저도 궁금해요", null, false);
         replyComment = comment(replyCommentId, rootComment, otherMember, "스크래치 작업을 해보세요", null, false);
         service = new CommunityCommentService(memberRepository, communityPostRepository, communityCommentRepository, uploadedMediaRepository, cursorCodec);
@@ -76,8 +75,8 @@ class CommunityCommentServiceTest {
     void create_root_comment_stores_comment_on_active_post() throws Exception {
         stubCreate();
         when(communityCommentRepository.save(any(CommunityComment.class))).thenAnswer(invocation -> {
-        var comment = invocation.<CommunityComment>getArgument(0);
-        return comment(rootCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), null, false);
+            var comment = invocation.<CommunityComment>getArgument(0);
+            return comment(rootCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), null, false);
         });
         var result = service.create(createCommand(null, "저도 궁금해요", null));
         assertEquals(rootCommentId, result.getId());
@@ -94,8 +93,8 @@ class CommunityCommentServiceTest {
         stubCreate();
         when(communityCommentRepository.findById(rootCommentId)).thenReturn(Optional.of(rootComment));
         when(communityCommentRepository.save(any(CommunityComment.class))).thenAnswer(invocation -> {
-        var comment = invocation.<CommunityComment>getArgument(0);
-        return comment(replyCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), null, false);
+            var comment = invocation.<CommunityComment>getArgument(0);
+            return comment(replyCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), null, false);
         });
         var result = service.create(createCommand(rootCommentId, "스크래치 작업을 해보세요", null));
         assertEquals(replyCommentId, result.getId());
@@ -145,7 +144,8 @@ class CommunityCommentServiceTest {
         setCreatedAt(overflow, LocalDateTime.of(2026, 6, 12, 9, 0));
         setCreatedAt(reply, LocalDateTime.of(2026, 6, 12, 11, 1));
         when(communityCommentRepository.findRootFirstPage(postId, PageRequest.of(0, 3))).thenReturn(java.util.Arrays.asList(newest, older, overflow));
-        when(communityCommentRepository.findRepliesByParentIds(java.util.Arrays.asList(rootCommentId, Objects.requireNonNull(older.getId())))).thenReturn(java.util.Arrays.asList(reply));
+        when(communityCommentRepository.findRepliesByParentIds(java.util.Arrays.asList(rootCommentId,
+            Objects.requireNonNull(older.getId())))).thenReturn(java.util.Arrays.asList(reply));
         var page = service.list(postId, null, 2);
         assertEquals(java.util.Arrays.asList("newest", "older"), page.getItems().stream().map(it -> it.getBody()).toList());
         assertEquals(java.util.Arrays.asList("reply"), page.getItems().getFirst().getReplies().stream().map(it -> it.getBody()).toList());
@@ -197,8 +197,8 @@ class CommunityCommentServiceTest {
         stubCreate();
         when(uploadedMediaRepository.findById(mediaId)).thenReturn(Optional.of(media));
         when(communityCommentRepository.save(any(CommunityComment.class))).thenAnswer(invocation -> {
-        var comment = invocation.<CommunityComment>getArgument(0);
-        return comment(rootCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), comment.getMedia(), false);
+            var comment = invocation.<CommunityComment>getArgument(0);
+            return comment(rootCommentId, comment.getParentComment(), comment.getAuthor(), comment.getBody(), comment.getMedia(), false);
         });
         service.create(createCommand(null, "저도 궁금해요", mediaId));
         var savedComment = capturedComment();
@@ -220,7 +220,8 @@ class CommunityCommentServiceTest {
     @DisplayName("create comment rejects media owned by another member")
     void create_comment_rejects_media_owned_by_another_member() throws Exception {
         stubCreate();
-        when(uploadedMediaRepository.findById(mediaId)).thenReturn(Optional.of(uploadedMedia(mediaId, otherMember, UploadedMediaUsageType.COMMUNITY_POST, UploadedMediaStatus.TEMP)));
+        when(uploadedMediaRepository.findById(mediaId)).thenReturn(Optional.of(uploadedMedia(mediaId, otherMember, UploadedMediaUsageType.COMMUNITY_POST,
+            UploadedMediaStatus.TEMP)));
         var exception = assertThrows(BusinessException.class, () -> service.create(createCommand(null, "저도 궁금해요", mediaId)));
         assertEquals(ErrorCode.MEDIA_NOT_OWNED, exception.getErrorCode());
         verify(communityCommentRepository, never()).save(any(CommunityComment.class));
@@ -247,6 +248,19 @@ class CommunityCommentServiceTest {
         assertEquals(ErrorCode.MEDIA_NOT_ATTACHABLE, exception.getErrorCode());
         verify(communityCommentRepository, never()).save(any(CommunityComment.class));
     }
+    @Test
+    void visibleRootsAreSnapshotBeforeReplyRepositoryCall() throws Exception {
+        setCreatedAt(rootComment, LocalDateTime.of(2026, 6, 12, 11, 0));
+        var roots = new ArrayList<>(List.of(rootComment));
+        when(communityCommentRepository.findRootFirstPage(postId, PageRequest.of(0, 21))).thenReturn(roots);
+        when(communityCommentRepository.findRepliesByParentIds(List.of(rootCommentId))).thenAnswer(invocation -> {
+            roots.clear();
+            return List.of();
+        });
+        var page = service.list(postId, null, 20);
+        assertEquals(List.of("저도 궁금해요"), page.getItems().stream().map(CommunityCommentResult.Comment::getBody).toList());
+    }
+
     private void stubCreate() {
         when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
         when(communityPostRepository.findByIdAndIsDeletedFalse(postId)).thenReturn(post);

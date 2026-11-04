@@ -73,7 +73,10 @@ class SearchServiceTest {
         val condition = postCondition(keyword = "황기", cursor = null, size = 20)
         val summary = postSummary()
         `when`(communityPostService.search(condition))
-            .thenReturn(CommunityPostResult.Page(items = listOf(summary), nextCursor = null))
+            .thenReturn(CommunityPostResult.Page(
+                listOf(summary),
+                null,
+            ))
         `when`(communityPostService.count(condition)).thenReturn(1L)
 
         val page = service.searchPosts(SearchQuery(memberId = memberId, keyword = "황기", cursor = null, size = 20))
@@ -188,7 +191,10 @@ class SearchServiceTest {
         ))
         `when`(farmingRecordService.count(recordConditionPreview)).thenReturn(12L)
         `when`(communityPostService.search(postConditionPreview))
-            .thenReturn(CommunityPostResult.Page(items = listOf(post), nextCursor = null))
+            .thenReturn(CommunityPostResult.Page(
+                listOf(post),
+                null,
+            ))
         `when`(communityPostService.count(postConditionPreview)).thenReturn(1L)
         `when`(
             policyProgramQueryRepository.search(
@@ -226,15 +232,16 @@ class SearchServiceTest {
 
     private fun postCondition(keyword: String?, cursor: String?, size: Int): CommunityPostSearchCondition =
         CommunityPostSearchCondition(
-            memberId = memberId,
-            cropIds = emptyList(),
-            postType = null,
-            keyword = keyword,
-            likedOnly = false,
-            mineOnly = false,
-            sort = CommunityPostSort.LATEST,
-            cursor = cursor,
-            size = size,
+            memberId,
+            null,
+            emptyList(),
+            null,
+            keyword,
+            false,
+            false,
+            CommunityPostSort.LATEST,
+            cursor,
+            size,
         )
 
     private fun recordSummary(): FarmingRecordResult.Summary = FarmingRecordResult.Summary(
@@ -256,22 +263,22 @@ class SearchServiceTest {
         )
 
     private fun postSummary(): CommunityPostResult.PostSummary = CommunityPostResult.PostSummary(
-        id = UUID.fromString("00000000-0000-0000-0000-000000000301"),
-        cropId = UUID.fromString("00000000-0000-0000-0000-000000000201"),
-        cropName = "황기",
-        postType = CommunityPostType.GENERAL,
-        title = "황기 수확 후기",
-        bodyPreview = "올해 수확량이",
-        thumbnailUrl = null,
-        author = CommunityPostResult.AuthorSummary(
-            memberId = memberId,
-            nickname = "농부",
-            profileImageUrl = null,
+        UUID.fromString("00000000-0000-0000-0000-000000000301"),
+        UUID.fromString("00000000-0000-0000-0000-000000000201"),
+        "황기",
+        CommunityPostType.GENERAL,
+        "황기 수확 후기",
+        "올해 수확량이",
+        null,
+        CommunityPostResult.AuthorSummary(
+            memberId,
+            "농부",
+            null,
         ),
-        commentCount = 2,
-        likeCount = 5,
-        likedByMe = false,
-        createdAt = createdAt,
+        2,
+        5,
+        false,
+        createdAt,
     )
 
     private fun policyProgram(title: String, createdAt: LocalDateTime): PolicyProgram {
