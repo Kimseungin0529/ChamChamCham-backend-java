@@ -36,7 +36,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class})
@@ -133,7 +132,7 @@ class RecordFeedbackPreparationServiceTest {
         return new RecordFeedbackPreparationRequested(feedback.getId(), member.getId(), record.getId(), feedback.getSourceRevision());
     }
     private RecordFeedbackContext context() {
-        return new RecordFeedbackContext(RecordFeedbackContextKt.RECORD_FEEDBACK_CONTEXT_SCHEMA_VERSION, new RecordFeedbackMemberContext(member.getId(), null, null), new RecordFeedbackFarmContext(farm.getId(), farm.getName(), farm.getRoadAddress(), null, null), new RecordFeedbackCropContext(crop.getId(), crop.getName(), crop.getUsePartCategory()), new RecordFeedbackRecordContext(record.getId(), SOURCE_REVISION, record.getWorkedAt(), record.getWorkType(), CommonFeedbackDetail.INSTANCE, record.getWeatherCondition(), record.getWeatherTemperature(), record.getMemo(), 0), null, List.of());
+        return new RecordFeedbackContext(RecordFeedbackContext.RECORD_FEEDBACK_CONTEXT_SCHEMA_VERSION, new RecordFeedbackMemberContext(member.getId(), null, null), new RecordFeedbackFarmContext(farm.getId(), farm.getName(), farm.getRoadAddress(), null, null), new RecordFeedbackCropContext(crop.getId(), crop.getName(), crop.getUsePartCategory()), new RecordFeedbackRecordContext(record.getId(), SOURCE_REVISION, record.getWorkedAt(), record.getWorkType(), CommonFeedbackDetail.INSTANCE, record.getWeatherCondition(), record.getWeatherTemperature(), record.getMemo(), 0), null, List.of());
     }
     private static final long SOURCE_REVISION = 3L;
     private static class NoOpTransactionManager extends AbstractPlatformTransactionManager {

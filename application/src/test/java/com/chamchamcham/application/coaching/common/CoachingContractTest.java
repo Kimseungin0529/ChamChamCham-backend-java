@@ -89,7 +89,7 @@ class CoachingContractTest {
         assertThat(restored.toString()).isEqualTo("CommonFeedbackDetail");
         var context = fixture();
         var r = context.getRecord();
-        var changed = context.copy(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), r.copy(r.getRecordId(), r.getSourceRevision(), r.getWorkedAt(), r.getWorkType(), common, r.getRecordedWeatherCondition(), r.getRecordedTemperatureC(), r.getMemo(), r.getPhotoCount()), context.getWeather(), context.getWarnings());
+        var changed = new RecordFeedbackContext(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), new RecordFeedbackRecordContext(r.getRecordId(), r.getSourceRevision(), r.getWorkedAt(), r.getWorkType(), common, r.getRecordedWeatherCondition(), r.getRecordedTemperatureC(), r.getMemo(), r.getPhotoCount()), context.getWeather(), context.getWarnings());
         assertThat(mapper.readValue(mapper.writeValueAsBytes(changed), RecordFeedbackContext.class)).isEqualTo(changed);
     }
 
@@ -162,7 +162,7 @@ class CoachingContractTest {
         var base = fixture();
         var r = base.getRecord();
         var memo = "가".repeat(119) + "😀";
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), r.copy(r.getRecordId(), r.getSourceRevision(), r.getWorkedAt(), r.getWorkType(), r.getDetail(), r.getRecordedWeatherCondition(), r.getRecordedTemperatureC(), memo, r.getPhotoCount()), base.getWeather(), base.getWarnings());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(r.getRecordId(), r.getSourceRevision(), r.getWorkedAt(), r.getWorkType(), r.getDetail(), r.getRecordedWeatherCondition(), r.getRecordedTemperatureC(), memo, r.getPhotoCount()), base.getWeather(), base.getWarnings());
         var query = new RecordFeedbackRetrievalQueryPlanner().plan(context).stream().filter(it -> it.getReason().equals("memo_text")).findFirst().orElseThrow();
         assertThat(query.getQuery()).isEqualTo("참당귀 " + "가".repeat(119) + "\ud83d");
     }
@@ -170,11 +170,11 @@ class CoachingContractTest {
     @Test
     void recordValidationCountsUtf16AndUnicodeBlankFields() {
         var context = fixture();
-        var recordRef = RecordFeedbackContextKt.recordCitationId(context);
+        var recordRef = context.recordCitationId();
         var text = "😀".repeat(7) + "요";
         var actions = List.of(new RecordFeedbackAction(RecordFeedbackActionDue.TODAY, RecordFeedbackActionCategory.GENERAL, "근거", text, List.of(recordRef)), new RecordFeedbackAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.GENERAL, "근거", text, List.of(recordRef)));
         var content = new RecordFeedbackContent(new RecordFeedbackGoodPoint("\u00a0", text, List.of(recordRef)), actions);
-        assertThat(RecordFeedbackOutputValidator.INSTANCE.validate(content, context, List.of())).containsExactly("good_point_basis_blank");
+        assertThat(RecordFeedbackOutputValidator.validate(content, context, List.of())).containsExactly("good_point_basis_blank");
     }
 
     private RecordFeedbackContext fixture() {

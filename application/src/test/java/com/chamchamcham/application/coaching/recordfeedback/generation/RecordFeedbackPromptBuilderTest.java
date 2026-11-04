@@ -17,7 +17,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.math.BigDecimal;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class RecordFeedbackPromptBuilderTest {
@@ -77,7 +76,7 @@ class RecordFeedbackPromptBuilderTest {
         for (var entry : cases) {
             var detail = entry.getKey();
             var record = base.getRecord();
-            var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), record.copy(record.getRecordId(), record.getSourceRevision(), record.getWorkedAt(), record.getWorkType(), detail, record.getRecordedWeatherCondition(), record.getRecordedTemperatureC(), record.getMemo(), record.getPhotoCount()), base.getWeather(), base.getWarnings());
+            var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(record.getRecordId(), record.getSourceRevision(), record.getWorkedAt(), record.getWorkType(), detail, record.getRecordedWeatherCondition(), record.getRecordedTemperatureC(), record.getMemo(), record.getPhotoCount()), base.getWeather(), base.getWarnings());
             var prompt = builder.build(context, List.of(), List.of());
             assertThat(prompt.getUser()).contains(entry.getValue().toArray(String[]::new));
         }
@@ -91,7 +90,7 @@ class RecordFeedbackPromptBuilderTest {
         for (var entry : cases) {
             var detail = entry.getKey();
             var record = base.getRecord();
-            var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), record.copy(record.getRecordId(), record.getSourceRevision(), record.getWorkedAt(), record.getWorkType(), detail, record.getRecordedWeatherCondition(), record.getRecordedTemperatureC(), record.getMemo(), record.getPhotoCount()), base.getWeather(), base.getWarnings());
+            var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(record.getRecordId(), record.getSourceRevision(), record.getWorkedAt(), record.getWorkType(), detail, record.getRecordedWeatherCondition(), record.getRecordedTemperatureC(), record.getMemo(), record.getPhotoCount()), base.getWeather(), base.getWarnings());
             var prompt = builder.build(context, List.of(), List.of());
             assertThat(prompt.getUser()).doesNotContain(entry.getValue().toArray(String[]::new)).doesNotContain("미상", "모름");
         }

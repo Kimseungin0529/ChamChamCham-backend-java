@@ -58,7 +58,6 @@ import java.time.ZoneOffset;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class})

@@ -7,7 +7,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.math.BigDecimal;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class RecordFeedbackRetrievalQueryPlannerTest {
@@ -41,7 +40,7 @@ class RecordFeedbackRetrievalQueryPlannerTest {
     void harvest_context_without_recorded_medicinal_part_keeps_only_generic_harvest_timing_query() throws Exception {
         var base = readFixture("today-record-feedback-harvest.json");
         var detail = ((HarvestFeedbackDetail) base.getRecord().getDetail());
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord().copy(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), detail.copy(detail.getHarvestAmount(), detail.getAmountUnknown(), null, detail.getHarvestSource(), detail.getGrowthPeriod(), detail.getGrowthPeriodUnit(), detail.isLastHarvest()), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), base.getRecord().getMemo(), base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), new HarvestFeedbackDetail(detail.getHarvestAmount(), detail.getAmountUnknown(), null, detail.getHarvestSource(), detail.getGrowthPeriod(), detail.getGrowthPeriodUnit(), detail.isLastHarvest()), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), base.getRecord().getMemo(), base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
         var queries = planner.plan(context).stream().map(it -> it.getQuery()).toList();
         assertThat(queries).contains("약용작물 수확 적기 오미자");
         assertThat(queries).noneMatch(it -> it.contains("열매/과실"));
@@ -59,7 +58,7 @@ class RecordFeedbackRetrievalQueryPlannerTest {
     @DisplayName("blank memo does not create memo query")
     void blank_memo_does_not_create_memo_query() throws Exception {
         var base = readFixture("today-record-feedback-watering.json");
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord().copy(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), base.getRecord().getDetail(), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), "  ", base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), base.getRecord().getDetail(), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), "  ", base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
         assertThat(planner.plan(context).stream().map(it -> it.getReason()).toList()).doesNotContain("memo_text");
     }
 
@@ -67,7 +66,7 @@ class RecordFeedbackRetrievalQueryPlannerTest {
     @DisplayName("long memo is truncated to 120 chars")
     void long_memo_is_truncated_to_120_chars() throws Exception {
         var base = readFixture("today-record-feedback-watering.json");
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord().copy(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), base.getRecord().getDetail(), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), "가".repeat(200), base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), new RecordFeedbackRecordContext(base.getRecord().getRecordId(), base.getRecord().getSourceRevision(), base.getRecord().getWorkedAt(), base.getRecord().getWorkType(), base.getRecord().getDetail(), base.getRecord().getRecordedWeatherCondition(), base.getRecord().getRecordedTemperatureC(), "가".repeat(200), base.getRecord().getPhotoCount()), base.getWeather(), base.getWarnings());
         var memoQuery = planner.plan(context).stream().filter(it -> Objects.equals(it.getReason(), "memo_text")).findFirst().orElseThrow();
         assertThat(memoQuery.getQuery()).isEqualTo("참당귀 "+ "가".repeat(120));
     }
@@ -78,9 +77,9 @@ class RecordFeedbackRetrievalQueryPlannerTest {
         var base = readFixture("today-record-feedback-watering.json");
         var weather = Objects.requireNonNull(base.getWeather());
         var day = weather.getForecastDays().getFirst();
-        var revisedDay = day.copy(day.getDate(), new BigDecimal("40.0"), day.getRainProbabilityPct(), day.getMaxTemperatureC(), day.getMinTemperatureC(), day.getHumidityPct(), day.getWindSpeedMs(), List.of("RAIN"));
-        var revisedWeather = weather.copy(weather.getCurrent().copy(33, weather.getCurrent().getSkyCondition(), weather.getCurrent().getObservedAt()), List.of(revisedDay), weather.getSource());
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
+        var revisedDay = new RecordFeedbackForecastDay(day.getDate(), new BigDecimal("40.0"), day.getRainProbabilityPct(), day.getMaxTemperatureC(), day.getMinTemperatureC(), day.getHumidityPct(), day.getWindSpeedMs(), List.of("RAIN"));
+        var revisedWeather = new RecordFeedbackLiveWeather(new RecordFeedbackCurrentWeather(33, weather.getCurrent().getSkyCondition(), weather.getCurrent().getObservedAt()), List.of(revisedDay), weather.getSource());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
         var reasons = planner.plan(context).stream().map(RecordFeedbackRetrievalQuery::getReason).toList();
         assertThat(reasons).contains("rain_wet_weather").doesNotContain("hot_weather");
     }
@@ -90,8 +89,8 @@ class RecordFeedbackRetrievalQueryPlannerTest {
     void ordinary_current_weather_without_forecast_risks_does_not_trigger_weather_query() {
         var base = readFixture("today-record-feedback-watering.json");
         var weather = Objects.requireNonNull(base.getWeather());
-        var revisedWeather = weather.copy(weather.getCurrent().copy(24, weather.getCurrent().getSkyCondition(), weather.getCurrent().getObservedAt()), List.of(), weather.getSource());
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
+        var revisedWeather = new RecordFeedbackLiveWeather(new RecordFeedbackCurrentWeather(24, weather.getCurrent().getSkyCondition(), weather.getCurrent().getObservedAt()), List.of(), weather.getSource());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
         var reasons = planner.plan(context).stream().map(RecordFeedbackRetrievalQuery::getReason).toList();
         assertThat(reasons).doesNotContain("hot_weather", "rain_wet_weather");
     }
@@ -102,9 +101,9 @@ class RecordFeedbackRetrievalQueryPlannerTest {
         var base = readFixture("today-record-feedback-watering.json");
         var weather = Objects.requireNonNull(base.getWeather());
         var day = weather.getForecastDays().getFirst();
-        var revisedDay = day.copy(day.getDate(), null, 20, new BigDecimal("32"), day.getMinTemperatureC(), new BigDecimal("50"), day.getWindSpeedMs(), List.of("HOT"));
-        var revisedWeather = weather.copy(weather.getCurrent(), List.of(revisedDay), weather.getSource());
-        var context = base.copy(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
+        var revisedDay = new RecordFeedbackForecastDay(day.getDate(), null, 20, new BigDecimal("32"), day.getMinTemperatureC(), new BigDecimal("50"), day.getWindSpeedMs(), List.of("HOT"));
+        var revisedWeather = new RecordFeedbackLiveWeather(weather.getCurrent(), List.of(revisedDay), weather.getSource());
+        var context = new RecordFeedbackContext(base.getSchemaVersion(), base.getMember(), base.getFarm(), base.getCrop(), base.getRecord(), revisedWeather, base.getWarnings());
         var queries = planner.plan(context).stream().map(RecordFeedbackRetrievalQuery::getQuery).toList();
         assertThat(queries).contains("참당귀 고온 예보 생육 관리");
         assertThat(queries).noneMatch(it -> it.contains("건조") || it.contains("관수 관리"));

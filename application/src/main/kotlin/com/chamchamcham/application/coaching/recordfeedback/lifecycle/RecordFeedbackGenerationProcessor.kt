@@ -31,7 +31,7 @@ class RecordFeedbackGenerationProcessor(
     fun generate(event: RecordFeedbackGenerationRequested) {
         val pendingGeneration = loadPendingGeneration(event) ?: return
         val generationResult = try {
-            generationService.generate(pendingGeneration.context)
+            generationService.generate(pendingGeneration.context, null)
         } catch (failure: RecordFeedbackGenerationFailure) {
             val diagnostics = failure.safeValidationDiagnosticCodes()
             logger.warn {

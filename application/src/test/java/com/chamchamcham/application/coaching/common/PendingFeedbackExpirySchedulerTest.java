@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class PendingFeedbackExpirySchedulerTest {

@@ -45,7 +45,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})
@@ -141,7 +140,7 @@ class RecordFeedbackGenerationProcessorTest {
         when(feedbackRepository.findByIdAndMemberIdForUpdate(event.getFeedbackId(), event.getMemberId())).thenReturn(feedback);
     }
     private RecordFeedbackContext context() {
-        return new RecordFeedbackContext(RecordFeedbackContextKt.RECORD_FEEDBACK_CONTEXT_SCHEMA_VERSION, new RecordFeedbackMemberContext(member.getId(), null, null), new RecordFeedbackFarmContext(farm.getId(), farm.getName(), farm.getRoadAddress(), null, null), new RecordFeedbackCropContext(crop.getId(), crop.getName(), crop.getUsePartCategory()), new RecordFeedbackRecordContext(record.getId(), SOURCE_REVISION, record.getWorkedAt(), record.getWorkType(), CommonFeedbackDetail.INSTANCE, record.getWeatherCondition(), record.getWeatherTemperature(), record.getMemo(), 0), null, List.of());
+        return new RecordFeedbackContext(RecordFeedbackContext.RECORD_FEEDBACK_CONTEXT_SCHEMA_VERSION, new RecordFeedbackMemberContext(member.getId(), null, null), new RecordFeedbackFarmContext(farm.getId(), farm.getName(), farm.getRoadAddress(), null, null), new RecordFeedbackCropContext(crop.getId(), crop.getName(), crop.getUsePartCategory()), new RecordFeedbackRecordContext(record.getId(), SOURCE_REVISION, record.getWorkedAt(), record.getWorkType(), CommonFeedbackDetail.INSTANCE, record.getWeatherCondition(), record.getWeatherTemperature(), record.getMemo(), 0), null, List.of());
     }
     private RecordFeedbackGenerationResult generationResult() {
         return new RecordFeedbackGenerationResult(new RecordFeedbackContent(new RecordFeedbackGoodPoint("기록된 작업", "가지 정리 시점이 적절합니다.", java.util.Arrays.asList("doc-1")), java.util.Arrays.asList(new RecordFeedbackAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.CULTIVATION, "새순 확인", "새순 상태를 확인하세요.", java.util.Arrays.asList("doc-1")), new RecordFeedbackAction(RecordFeedbackActionDue.THIS_WEEK, RecordFeedbackActionCategory.PEST_DISEASE, "병해충 확인", "이번 주 병해충 흔적을 확인하세요.", java.util.Arrays.asList("doc-1")))), java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("id", "doc-1"), new AbstractMap.SimpleEntry<>("title", "농업기술길잡이"))), java.util.Arrays.asList("날씨 근거 없음"), new RagModelInfo("embedding-test", "chat-test"));

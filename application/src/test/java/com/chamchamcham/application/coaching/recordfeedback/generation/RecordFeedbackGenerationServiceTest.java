@@ -35,7 +35,6 @@ import java.nio.charset.Charset;
 import java.util.function.Consumer;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.recordfeedback.generation.RecordFeedbackContextKt;
 import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class RecordFeedbackGenerationServiceTest {
@@ -45,13 +44,13 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("generates only from context and official document evidence")
     void generates_only_from_context_and_official_document_evidence() throws Exception {
-        var chatClient = new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var chatClient = new FakeChatClient(validResult("doc-1", context.recordCitationId()));
         var vectorStore = new FakeVectorStore(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")));
         var generationResult = service(vectorStore, chatClient).generate(context, 2);
         assertThat(generationResult.getContent().getNextActions()).hasSize(2);
-        assertThat(generationResult.getCitations().stream().map(it -> it.get("id")).toList()).contains("doc-1", RecordFeedbackContextKt.recordCitationId(context));
+        assertThat(generationResult.getCitations().stream().map(it -> it.get("id")).toList()).contains("doc-1", context.recordCitationId());
         assertThat(chatClient.requestSpec.advisorUseCount).isZero();
-        assertThat(chatClient.requestSpec.userText).contains(RecordFeedbackContextKt.recordCitationId(context));
+        assertThat(chatClient.requestSpec.userText).contains(context.recordCitationId());
         assertThat(vectorStore.requests).allSatisfy(it -> {
         assertThat(it.getFilterExpression().toString()).contains("sourceType").contains("TECH_DOCUMENT").contains("cropName").contains("참당귀").contains("GENERAL");
         });
@@ -60,7 +59,7 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("deduplicates context warnings in generation audit")
     void deduplicates_context_warnings_in_generation_audit() throws Exception {
-        var result = serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context.copy(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), context.getRecord(), context.getWeather(), java.util.Arrays.asList("weather_location_unavailable", "weather_location_unavailable")), null);
+        var result = serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(new RecordFeedbackContext(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), context.getRecord(), context.getWeather(), java.util.Arrays.asList("weather_location_unavailable", "weather_location_unavailable")), null);
         assertThat(result.getAuditWarnings()).containsExactly("weather_location_unavailable");
     }
 
@@ -68,7 +67,7 @@ class RecordFeedbackGenerationServiceTest {
     @DisplayName("rejects an unsupported context schema before retrieval")
     void rejects_an_unsupported_context_schema_before_retrieval() throws Exception {
         assertThatThrownBy(() -> {
-        serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context.copy("record-feedback-context.v1", context.getMember(), context.getFarm(), context.getCrop(), context.getRecord(), context.getWeather(), context.getWarnings()), null);
+        serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(new RecordFeedbackContext("record-feedback-context.v1", context.getMember(), context.getFarm(), context.getCrop(), context.getRecord(), context.getWeather(), context.getWarnings()), null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INVALID_CONTEXT));
     }
 
@@ -76,15 +75,15 @@ class RecordFeedbackGenerationServiceTest {
     @DisplayName("rejects a context without the farmer memo before retrieval")
     void rejects_a_context_without_the_farmer_memo_before_retrieval() throws Exception {
         assertThatThrownBy(() -> {
-        serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context.copy(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), context.getRecord().copy(context.getRecord().getRecordId(), context.getRecord().getSourceRevision(), context.getRecord().getWorkedAt(), context.getRecord().getWorkType(), context.getRecord().getDetail(), context.getRecord().getRecordedWeatherCondition(), context.getRecord().getRecordedTemperatureC(), " ", context.getRecord().getPhotoCount()), context.getWeather(), context.getWarnings()), null);
+        serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(new RecordFeedbackContext(context.getSchemaVersion(), context.getMember(), context.getFarm(), context.getCrop(), new RecordFeedbackRecordContext(context.getRecord().getRecordId(), context.getRecord().getSourceRevision(), context.getRecord().getWorkedAt(), context.getRecord().getWorkType(), context.getRecord().getDetail(), context.getRecord().getRecordedWeatherCondition(), context.getRecord().getRecordedTemperatureC(), " ", context.getRecord().getPhotoCount()), context.getWeather(), context.getWarnings()), null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INVALID_CONTEXT));
     }
 
     @Test
     @DisplayName("retries once when parsed output violates product validation")
     void retries_once_when_parsed_output_violates_product_validation() throws Exception {
-        var invalidResult = validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).copy(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).getGoodPoint(), java.util.Arrays.asList(validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "짧음", java.util.Arrays.asList("doc-1")), validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "다음 점검 때 흙 상태를 다시 살펴보세요.", java.util.Arrays.asList(RecordFeedbackContextKt.recordCitationId(context), "doc-1"))));
-        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var invalidResult = new RecordFeedbackContent(validResult("doc-1", context.recordCitationId()).getGoodPoint(), java.util.Arrays.asList(validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "짧음", java.util.Arrays.asList("doc-1")), validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "다음 점검 때 흙 상태를 다시 살펴보세요.", java.util.Arrays.asList(context.recordCitationId(), "doc-1"))));
+        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", context.recordCitationId()));
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         assertThat(chatClient.getAttempts()).isEqualTo(2);
     }
@@ -92,8 +91,8 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("includes product validation codes in the retry prompt")
     void includes_product_validation_codes_in_the_retry_prompt() throws Exception {
-        var invalidResult = validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).copy(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).getGoodPoint(), java.util.Arrays.asList(validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "짧음", java.util.Arrays.asList("doc-1")), validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "다음 점검 때 흙 상태를 다시 살펴보세요.", java.util.Arrays.asList(RecordFeedbackContextKt.recordCitationId(context), "doc-1"))));
-        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var invalidResult = new RecordFeedbackContent(validResult("doc-1", context.recordCitationId()).getGoodPoint(), java.util.Arrays.asList(validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "짧음", java.util.Arrays.asList("doc-1")), validAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.IRRIGATION, "토양 상태", "다음 점검 때 흙 상태를 다시 살펴보세요.", java.util.Arrays.asList(context.recordCitationId(), "doc-1"))));
+        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", context.recordCitationId()));
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         assertThat(chatClient.requestSpec.userTexts).hasSize(2);
         assertThat(chatClient.requestSpec.userTexts.getFirst()).doesNotContain("next_action_0_text_length");
@@ -104,8 +103,8 @@ class RecordFeedbackGenerationServiceTest {
     @DisplayName("retries an English violation with a fixed diagnostic code only")
     void retries_an_English_violation_with_a_fixed_diagnostic_code_only() throws Exception {
         var generatedText = "DRIP으로 물을 준 점은 잘했어요.";
-        var invalidResult = validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).copy(validItem("점적관수", generatedText, java.util.Arrays.asList(RecordFeedbackContextKt.recordCitationId(context))), validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).getNextActions());
-        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var invalidResult = new RecordFeedbackContent(validItem("점적관수", generatedText, java.util.Arrays.asList(context.recordCitationId())), validResult("doc-1", context.recordCitationId()).getNextActions());
+        var chatClient = new FakeChatClient(invalidResult, validResult("doc-1", context.recordCitationId()));
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         assertThat(chatClient.getAttempts()).isEqualTo(2);
         assertThat(chatClient.requestSpec.userTexts.getLast()).contains("good_point_text_english").doesNotContain(generatedText, "DRIP으로");
@@ -114,7 +113,7 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("two English violations fail as structured output invalid")
     void two_English_violations_fail_as_structured_output_invalid() throws Exception {
-        var invalidResult = validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).copy(validItem("점적관수", "DRIP으로 물을 준 점은 잘했어요.", java.util.Arrays.asList(RecordFeedbackContextKt.recordCitationId(context))), validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).getNextActions());
+        var invalidResult = new RecordFeedbackContent(validItem("점적관수", "DRIP으로 물을 준 점은 잘했어요.", java.util.Arrays.asList(context.recordCitationId())), validResult("doc-1", context.recordCitationId()).getNextActions());
         var chatClient = new FakeChatClient(invalidResult, invalidResult);
         assertThatThrownBy(() -> {
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
@@ -125,7 +124,7 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("retries once when structured output parsing fails")
     void retries_once_when_structured_output_parsing_fails() throws Exception {
-        var chatClient = new FakeChatClient(new RuntimeException("structured output parse failed"), validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var chatClient = new FakeChatClient(new RuntimeException("structured output parse failed"), validResult("doc-1", context.recordCitationId()));
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         assertThat(chatClient.getAttempts()).isEqualTo(2);
     }
@@ -133,7 +132,7 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("fails with structured output invalid after the single retry is exhausted")
     void fails_with_structured_output_invalid_after_the_single_retry_is_exhausted() throws Exception {
-        var invalidResult = validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).copy(validItem("점적관수", "짧음", java.util.Arrays.asList("doc-1")), validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)).getNextActions());
+        var invalidResult = new RecordFeedbackContent(validItem("점적관수", "짧음", java.util.Arrays.asList("doc-1")), validResult("doc-1", context.recordCitationId()).getNextActions());
         var chatClient = new FakeChatClient(invalidResult, invalidResult);
         assertThatThrownBy(() -> {
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
@@ -144,19 +143,19 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("fails with insufficient evidence when no official document is retrieved")
     void fails_with_insufficient_evidence_when_no_official_document_is_retrieved() throws Exception {
-        assertThatThrownBy(() -> serviceWithDocuments(List.of(), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context, null)).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
+        assertThatThrownBy(() -> serviceWithDocuments(List.of(), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(context, null)).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
     }
 
     @Test
     @DisplayName("context only retrieved documents are insufficient evidence")
     void context_only_retrieved_documents_are_insufficient_evidence() throws Exception {
-        assertThatThrownBy(() -> serviceWithDocuments(java.util.Arrays.asList(contextOnlyDocument("record-doc")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context, null)).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
+        assertThatThrownBy(() -> serviceWithDocuments(java.util.Arrays.asList(contextOnlyDocument("record-doc")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(context, null)).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
     }
 
     @Test
     @DisplayName("official document with blank id is insufficient evidence without llm call")
     void official_document_with_blank_id_is_insufficient_evidence_without_llm_call() throws Exception {
-        var chatClient = new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var chatClient = new FakeChatClient(validResult("doc-1", context.recordCitationId()));
         assertThatThrownBy(() -> {
         serviceWithDocuments(java.util.Arrays.asList(officialDocument(" ", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
@@ -166,7 +165,7 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("official document with blank text is insufficient evidence without llm call")
     void official_document_with_blank_text_is_insufficient_evidence_without_llm_call() throws Exception {
-        var chatClient = new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)));
+        var chatClient = new FakeChatClient(validResult("doc-1", context.recordCitationId()));
         assertThatThrownBy(() -> {
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", " ")), chatClient).generate(context, null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.INSUFFICIENT_EVIDENCE));
@@ -176,13 +175,13 @@ class RecordFeedbackGenerationServiceTest {
     @Test
     @DisplayName("returns server citation metadata after product output validation")
     void returns_server_citation_metadata_after_product_output_validation() throws Exception {
-        var generated = serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context, null);
+        var generated = serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(context, null);
         var documentCitation = generated.getCitations().stream().filter(citation -> Objects.equals(citation.get("id"), "doc-1")).findFirst().orElseThrow();
         assertThat(documentCitation.get("title")).isEqualTo("농업기술길잡이 007 약용작물");
         assertThat(documentCitation.get("page")).isEqualTo(123);
         assertThat(documentCitation.get("source")).isEqualTo("guide.pdf");
         assertThat(documentCitation.get("sourceType")).isEqualTo(RagSourceType.TECH_DOCUMENT.name());
-        var recordCitation = generated.getCitations().stream().filter(citation -> Objects.equals(citation.get("id"), RecordFeedbackContextKt.recordCitationId(context))).findFirst().orElseThrow();
+        var recordCitation = generated.getCitations().stream().filter(citation -> Objects.equals(citation.get("id"), context.recordCitationId())).findFirst().orElseThrow();
         assertThat(recordCitation.get("title")).isEqualTo("대상 영농기록");
         assertThat(recordCitation.get("sourceType")).isEqualTo(RagSourceType.FARMING_RECORD.name());
     }
@@ -191,14 +190,14 @@ class RecordFeedbackGenerationServiceTest {
     @DisplayName("maps vector store runtime failures to retrieval failed")
     void maps_vector_store_runtime_failures_to_retrieval_failed() throws Exception {
         assertThatThrownBy(() -> {
-        service(new FakeVectorStore(new IllegalStateException("vector unavailable")), new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context)))).generate(context, null);
+        service(new FakeVectorStore(new IllegalStateException("vector unavailable")), new FakeChatClient(validResult("doc-1", context.recordCitationId()))).generate(context, null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.RETRIEVAL_FAILED));
     }
 
     @Test
     @DisplayName("maps chat runtime failures to chat unavailable without structured output retry")
     void maps_chat_runtime_failures_to_chat_unavailable_without_structured_output_retry() throws Exception {
-        var chatClient = new FakeChatClient(validResult("doc-1", RecordFeedbackContextKt.recordCitationId(context))).withCallFailure(new IllegalStateException("chat unavailable"));
+        var chatClient = new FakeChatClient(validResult("doc-1", context.recordCitationId())).withCallFailure(new IllegalStateException("chat unavailable"));
         assertThatThrownBy(() -> {
         serviceWithDocuments(java.util.Arrays.asList(officialDocument("doc-1", "약용작물 관수 후 토양 수분과 배수 상태를 확인한다.")), chatClient).generate(context, null);
         }).isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(RecordFeedbackFailureCode.CHAT_UNAVAILABLE));
