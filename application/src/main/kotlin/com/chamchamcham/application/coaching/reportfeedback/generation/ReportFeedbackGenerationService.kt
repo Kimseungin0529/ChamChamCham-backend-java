@@ -37,8 +37,8 @@ class ReportFeedbackGenerationService(
             citations = citations(content, context, documents),
             auditWarnings = context.warnings.distinct(),
             modelInfo = RagModelInfo(
-                embedding = ragProperties.embedding.model,
-                chat = ragProperties.chat.model,
+                ragProperties.embedding.model,
+                ragProperties.chat.model,
             ),
         )
     }

@@ -48,7 +48,7 @@ class CoachingContractTest {
         assertThat(content.getImprovements()).isEmpty();
         assertThat(content.getNextActions()).isEmpty();
         assertThatThrownBy(() -> mapper.readValue("{\"summary\":\"요약\",\"strengths\":null}", ReportFeedbackContent.class)).isInstanceOf(Exception.class);
-        var node = (ObjectNode) mapper.valueToTree(CoachingStructuredResult.Companion.insufficientEvidence("자료 없음"));
+        var node = (ObjectNode) mapper.valueToTree(CoachingStructuredResult.insufficientEvidence("자료 없음"));
         node.remove(List.of("recordQuality", "limitations"));
         var structured = mapper.treeToValue(node, CoachingStructuredResult.class);
         assertThat(structured.getRecordQuality()).isEqualTo(new CoachingRecordQuality());
@@ -124,7 +124,7 @@ class CoachingContractTest {
     @Test
     void auditDistinctListsKeepCardinalityMutabilityAndOrder() {
         var validator = new CoachingStructuredOutputValidator();
-        var empty = validator.validate(CoachingStructuredResult.Companion.insufficientEvidence("없음"), Set.of());
+        var empty = validator.validate(CoachingStructuredResult.insufficientEvidence("없음"), Set.of());
         assertThatThrownBy(() -> empty.getWarnings().add("x")).isInstanceOf(UnsupportedOperationException.class);
         var singleton = validator.validate(new CoachingStructuredResult("요약", CoachingRiskLevel.LOW, Double.NaN, List.of(), "진단", List.of(), List.of(), List.of(), List.of(), new CoachingRecordQuality(), List.of()), Set.of());
         assertThat(singleton.getWarnings()).containsExactly("invalid_confidence");

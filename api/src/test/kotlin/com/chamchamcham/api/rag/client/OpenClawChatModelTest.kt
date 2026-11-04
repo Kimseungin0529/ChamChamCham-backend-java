@@ -201,7 +201,7 @@ class OpenClawChatModelTest {
         .withBean(RestClient.Builder::class.java, { RestClient.builder() })
         .withBean(
             RagProperties::class.java,
-            { RagProperties(chat = RagProperties.Chat(model = "rag-chat-model")) }
+            { RagProperties(RagProperties.Embedding(), RagProperties.Chat("rag-chat-model"), RagProperties.Retrieval(), RagProperties.Execution()) }
         )
         .withBean(OpenClawChatModel::class.java)
 

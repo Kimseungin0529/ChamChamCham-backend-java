@@ -81,7 +81,7 @@ class CoachingPromptLabelsTest {
         labels.addAll(Arrays.asList(WeedingMethod.values()).stream().map(it -> CoachingPromptLabelsKt.toCoachingText(it)).toList());
         labels.addAll(Arrays.asList(CropUsePartCategory.values()).stream().map(it -> CoachingPromptLabelsKt.toCoachingText(it)).toList());
         labels.addAll(Arrays.asList(HarvestSource.values()).stream().map(it -> CoachingPromptLabelsKt.toCoachingText(it)).toList());
-        assertThat(labels).allMatch(it -> !CoachingTextPolicy.INSTANCE.INSTANCE.containsEnglishLetter(it));
+        assertThat(labels).allMatch(it -> !CoachingTextPolicy.containsEnglishLetter(it));
         Arrays.asList(WorkType.values()).forEach(value -> assertThat(CoachingPromptLabelsKt.toCoachingText(value)).isNotEqualTo(value.name()));
     }
     @SafeVarargs

@@ -99,7 +99,7 @@ class ReportFeedbackPromptBuilder {
             summary, comparisons, strengths는 "~했어요."처럼 회고형 존댓말로 작성한다.
             improvements는 부족한 점을 부드럽게 설명하고 보완 방향은 "~해 보세요."처럼 제안한다.
             nextActions는 "~하세요."처럼 분명한 행동형 존댓말로 작성한다.
-        """.trimIndent() + "\n" + CoachingTextPolicy.promptInstructions
+        """.trimIndent() + "\n" + CoachingTextPolicy.getPromptInstructions()
     }
 
     private fun formatPreviousReport(context: ReportFeedbackContext): String {

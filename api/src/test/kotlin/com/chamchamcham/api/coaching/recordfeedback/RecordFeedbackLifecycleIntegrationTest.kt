@@ -353,10 +353,7 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         ),
         citations = listOf(mapOf("id" to "doc-1", "title" to "농업기술길잡이")),
         auditWarnings = emptyList(),
-        modelInfo = RagModelInfo(
-            embedding = "embedding-test",
-            chat = "chat-test",
-        ),
+        modelInfo = RagModelInfo("embedding-test", "chat-test"),
     )
 
     private fun anyContext(): RecordFeedbackContext {

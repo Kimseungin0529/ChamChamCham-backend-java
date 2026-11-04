@@ -74,7 +74,7 @@ class RecordFeedbackPromptBuilder {
             농부에게 보여줄 text에는 chunkId나 UUID를 직접 쓰지 않는다.
             응답은 RecordFeedbackContent JSON schema만 따른다.
             JSON 최상위 필드는 goodPoint와 nextActions만 둔다.
-        """.trimIndent() + "\n" + CoachingTextPolicy.promptInstructions
+        """.trimIndent() + "\n" + CoachingTextPolicy.getPromptInstructions()
     }
 
     private fun userPrompt(

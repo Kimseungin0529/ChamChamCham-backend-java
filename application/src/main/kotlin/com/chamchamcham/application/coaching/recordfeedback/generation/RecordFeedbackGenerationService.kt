@@ -264,8 +264,8 @@ class RecordFeedbackGenerationService(
 
     private fun modelInfo(): RagModelInfo {
         return RagModelInfo(
-            embedding = ragProperties.embedding.model,
-            chat = ragProperties.chat.model,
+            ragProperties.embedding.model,
+            ragProperties.chat.model,
         )
     }
 

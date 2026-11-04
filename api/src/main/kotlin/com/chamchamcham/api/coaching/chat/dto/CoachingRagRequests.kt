@@ -21,16 +21,7 @@ object CoachingRagRequests {
         val topK: Int? = null
     ) {
         fun toCommand(memberId: UUID): CoachingRagCommand {
-            return CoachingRagCommand(
-                memberId = memberId,
-                question = question,
-                farmId = farmId,
-                cropId = cropId,
-                recordId = recordId,
-                periodStart = periodStart,
-                periodEnd = periodEnd,
-                topK = topK
-            )
+            return CoachingRagCommand(memberId, question, farmId, cropId, recordId, periodStart, periodEnd, topK)
         }
     }
 }

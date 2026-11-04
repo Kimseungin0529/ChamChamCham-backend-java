@@ -41,7 +41,7 @@ class CoachingStructuredOutputValidatorTest {
     @Test
     @DisplayName("unknown risk with limitations and no citations can pass audit")
     void unknown_risk_with_limitations_and_no_citations_can_pass_audit() throws Exception {
-        var result = CoachingStructuredResult.Companion.insufficientEvidence("근거 부족");
+        var result = CoachingStructuredResult.insufficientEvidence("근거 부족");
         var audit = validator.validate(result, Set.of());
         assertThat(audit.getStatus()).isEqualTo(RagAuditStatus.PASS);
     }

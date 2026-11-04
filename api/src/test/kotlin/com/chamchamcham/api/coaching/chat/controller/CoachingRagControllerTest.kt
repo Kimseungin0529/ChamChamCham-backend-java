@@ -4,6 +4,7 @@ import com.chamchamcham.api.coaching.chat.dto.CoachingRagRequests
 import com.chamchamcham.api.coaching.chat.dto.CoachingRagResponses
 import com.chamchamcham.api.exception.GlobalExceptionHandler
 import com.chamchamcham.application.coaching.chat.CoachingRagCommand
+import com.chamchamcham.application.coaching.chat.CoachingRecordQuality
 import com.chamchamcham.application.coaching.chat.CoachingRagResult
 import com.chamchamcham.application.coaching.chat.CoachingRagService
 import com.chamchamcham.application.coaching.chat.CoachingActionDue
@@ -98,28 +99,11 @@ class CoachingRagControllerTest(
     }
 
     private fun ragResult(): CoachingRagResult {
-        return CoachingRagResult(
-            result = CoachingStructuredResult(
-                summary = "요약",
-                riskLevel = CoachingRiskLevel.LOW,
-                confidence = 0.8,
-                observations = listOf(CoachingObservation("관수", "토양 수분 확인", listOf("doc-1"))),
-                diagnosis = "진단",
-                recommendations = listOf(
+        return CoachingRagResult(CoachingStructuredResult("요약", CoachingRiskLevel.LOW, 0.8, listOf(CoachingObservation("관수", "토양 수분 확인", listOf("doc-1"))), "진단", listOf(
                     CoachingRecommendation(CoachingPriority.MEDIUM, "토양 확인", "공식문서 근거", null, listOf("doc-1"))
-                ),
-                nextActions = listOf(CoachingNextAction(CoachingActionDue.TODAY, "기록 보완", listOf("doc-1"))),
-                followUpQuestions = emptyList(),
-                citations = listOf(
-                    CoachingCitationRef("doc-1", "농업기술길잡이 007 약용작물", RagSourceType.TECH_DOCUMENT)
-                )
-            ),
-            audit = RagAuditResult(RagAuditStatus.PASS, emptyList(), emptyList()),
-            model = RagModelInfo(
-                embedding = "bge-m3",
-                chat = "openclaw/agri-rag-coach"
-            )
-        )
+                ), listOf(CoachingNextAction(CoachingActionDue.TODAY, "기록 보완", listOf("doc-1"))), emptyList(), listOf(
+                    CoachingCitationRef("doc-1", "농업기술길잡이 007 약용작물", RagSourceType.TECH_DOCUMENT, null, null, null)
+                ), CoachingRecordQuality(), emptyList()), RagAuditResult(RagAuditStatus.PASS, emptyList(), emptyList()), RagModelInfo("bge-m3", "openclaw/agri-rag-coach"))
     }
 
     private fun anyCommand(): CoachingRagCommand {

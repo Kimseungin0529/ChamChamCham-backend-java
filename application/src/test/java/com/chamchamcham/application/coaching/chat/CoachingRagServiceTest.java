@@ -66,7 +66,7 @@ class CoachingRagServiceTest {
     @DisplayName("answer returns insufficient evidence response when no documents are found")
     void answer_returns_insufficient_evidence_response_when_no_documents_are_found() throws Exception {
         var vectorStore = new FakeVectorStore(List.of());
-        var service = service(vectorStore, new FakeChatClient(CoachingStructuredResult.Companion.insufficientEvidence("unused")));
+        var service = service(vectorStore, new FakeChatClient(CoachingStructuredResult.insufficientEvidence("unused")));
         var result = service.answer(new CoachingRagCommand(memberId, "  과습 위험이 있을까?  ", null, null, null, null, null, 3));
         assertThat(result.getAnswer()).contains("현재 자료만으로는 판단할 수 없습니다");
         assertThat(result.getAudit().getStatus()).isEqualTo(RagAuditStatus.WARN);
@@ -108,14 +108,14 @@ class CoachingRagServiceTest {
     @Test
     @DisplayName("answer rejects topK above configured maximum")
     void answer_rejects_topK_above_configured_maximum() throws Exception {
-        var service = service(new FakeVectorStore(List.of()), new FakeChatClient(CoachingStructuredResult.Companion.insufficientEvidence("unused")));
+        var service = service(new FakeVectorStore(List.of()), new FakeChatClient(CoachingStructuredResult.insufficientEvidence("unused")));
         assertThatThrownBy(() -> service.answer(new CoachingRagCommand(memberId, "과습 위험?", null, null, null, null, null, 21))).isInstanceOfSatisfying(BusinessException.class, it -> assertThat(it.getErrorCode()).isEqualTo(ErrorCode.RAG_INVALID_REQUEST));
     }
 
     @Test
     @DisplayName("answer rejects reversed period")
     void answer_rejects_reversed_period() throws Exception {
-        var service = service(new FakeVectorStore(List.of()), new FakeChatClient(CoachingStructuredResult.Companion.insufficientEvidence("unused")));
+        var service = service(new FakeVectorStore(List.of()), new FakeChatClient(CoachingStructuredResult.insufficientEvidence("unused")));
         assertThatThrownBy(() -> {
         service.answer(new CoachingRagCommand(memberId, "과습 위험?", null, null, null, LocalDate.parse("2026-07-02"), LocalDate.parse("2026-07-01"), null));
         }).isInstanceOfSatisfying(BusinessException.class, it -> assertThat(it.getErrorCode()).isEqualTo(ErrorCode.RAG_INVALID_REQUEST));

@@ -42,7 +42,7 @@ class RecordFeedbackPromptBuilderTest {
         assertThat(prompt.getSystem()).contains("잘한 점 text는 \"<기록의 구체 행동>한 점은 잘했어요.\" 형식으로 작성한다.", "잘한 점에는 이유, 조언, 다음 행동을 덧붙이지 않는다.", "다음 행동 text는 농부가 바로 실행할 현장 작업만 한 문장으로 작성한다.", "모든 text는 친근한 존댓말로 끝낸다.", "다음 행동은 \"~하세요.\"처럼, 잘한 점은 \"~했어요.\"처럼 작성한다.", "현재 날씨, 예보, 기록 내용, 생육 상황, 행동의 이유와 효과를 text에 쓰지 않는다.", "전문용어와 추상 표현(관수, 배수 상태, 병해충 흔적, 생육 상태)을 쓰지 않는다.", "다음 행동에는 어디를, 무엇을, 어떻게 볼지 또는 할지를 포함한다.", "병해충 행동은 공식문서 근거에 있는 눈으로 확인할 수 있는 증상만 구체적으로 쓴다.", "basis와 evidenceRefs는 내부 검증용이다. text에 basis, 근거, citation id를 직접 쓰지 않는다.", "잘한 점 text는 15~23자를 목표로 작성한다.", "nextActions의 각 text는 15~25자를 목표로 작성한다.", "모든 text는 최대 60자까지 허용한다. 강제로 자르지 말고, 길이를 맞춰 다시 쓴다.");
         assertThat(prompt.getSystem()).doesNotContain("각 text는 15~25자를 목표로 하되");
         assertThat(prompt.getSystem()).contains("응답은 RecordFeedbackContent JSON schema만 따른다");
-        assertThat(prompt.getSystem()).contains(CoachingTextPolicy.INSTANCE.getPromptInstructions());
+        assertThat(prompt.getSystem()).contains(CoachingTextPolicy.getPromptInstructions());
         assertThat(prompt.getSystem()).contains("goodPoint", "nextActions", "basis", "text", "evidenceRefs");
         assertThat(prompt.getSystem()).doesNotContain("summary", "riskLevel", "diagnosis", "observations", "recommendations", "follow-up", "follow up");
     }
