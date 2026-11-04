@@ -41,7 +41,11 @@ class OpenAiRealtimeSessionProviderTest {
             )
 
         val result = provider.createEphemeralSession(
-            RealtimeSessionRequest(instructions = "안내", tools = listOf(mapOf("type" to "function")), expiresAfterSeconds = EXPIRES_AFTER_SECONDS)
+            RealtimeSessionRequest(
+                "안내",
+                listOf(mapOf("type" to "function")),
+                EXPIRES_AFTER_SECONDS,
+            )
         )
 
         assertThat(result.clientSecret).isEqualTo("ek_test_123")
@@ -55,7 +59,11 @@ class OpenAiRealtimeSessionProviderTest {
             .andRespond(withException(IOException("connection reset")))
 
         val exception = assertThrows(BusinessException::class.java) {
-            provider.createEphemeralSession(RealtimeSessionRequest(instructions = "안내", tools = emptyList(), expiresAfterSeconds = EXPIRES_AFTER_SECONDS))
+            provider.createEphemeralSession(RealtimeSessionRequest(
+                "안내",
+                emptyList(),
+                EXPIRES_AFTER_SECONDS,
+            ))
         }
 
         assertThat(exception.errorCode).isEqualTo(ErrorCode.VOICE_SESSION_PROVIDER_UNAVAILABLE)
@@ -67,7 +75,11 @@ class OpenAiRealtimeSessionProviderTest {
             .andRespond(withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("{}"))
 
         val exception = assertThrows(BusinessException::class.java) {
-            provider.createEphemeralSession(RealtimeSessionRequest(instructions = "안내", tools = emptyList(), expiresAfterSeconds = EXPIRES_AFTER_SECONDS))
+            provider.createEphemeralSession(RealtimeSessionRequest(
+                "안내",
+                emptyList(),
+                EXPIRES_AFTER_SECONDS,
+            ))
         }
 
         assertThat(exception.errorCode).isEqualTo(ErrorCode.VOICE_SESSION_PROVIDER_UNAVAILABLE)

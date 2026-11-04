@@ -65,25 +65,29 @@ object VoiceSessionRequests {
 
 fun VoiceSessionRequests.SubmitTurnsRequest.toCommand(memberId: UUID, sessionId: UUID): VoiceSessionCommand.SubmitTurns =
     VoiceSessionCommand.SubmitTurns(
-        memberId = memberId,
-        sessionId = sessionId,
-        turns = turns.map { VoiceSessionCommand.TurnInput(role = it.role, content = it.content, extractedFields = it.extractedFields) },
-        candidate = candidate.toCandidate(),
+        memberId,
+        sessionId,
+        turns.map { VoiceSessionCommand.TurnInput(
+            it.role,
+            it.content,
+            it.extractedFields,
+        ) },
+        candidate.toCandidate(),
     )
 
 fun VoiceSessionRequests.CandidateRequest.toCandidate(): VoiceRecordCandidate =
     VoiceRecordCandidate(
-        farmId = farmId,
-        cropId = cropId,
-        workType = workType,
-        workedAt = workedAt,
-        weatherCondition = weatherCondition,
-        weatherTemperature = weatherTemperature,
-        memo = memo,
-        planting = planting?.toCommand(),
-        watering = watering?.toCommand(),
-        fertilizing = fertilizing?.toCommand(),
-        pestControl = pestControl?.toCommand(),
-        weeding = weeding?.toCommand(),
-        harvest = harvest?.toCommand(),
+        farmId,
+        cropId,
+        workType,
+        workedAt,
+        weatherCondition,
+        weatherTemperature,
+        memo,
+        planting?.toCommand(),
+        watering?.toCommand(),
+        fertilizing?.toCommand(),
+        pestControl?.toCommand(),
+        weeding?.toCommand(),
+        harvest?.toCommand(),
     )

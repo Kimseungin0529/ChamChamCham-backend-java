@@ -31,7 +31,9 @@ class VoiceSessionController(
     fun createSession(
         @AuthenticationPrincipal memberId: String?
     ): ResponseEntity<ApiResponse<VoiceSessionResponses.CreatedResponse>> {
-        val result = voiceSessionService.create(VoiceSessionCommand.Create(memberId = parseMemberId(memberId)))
+        val result = voiceSessionService.create(VoiceSessionCommand.Create(
+            parseMemberId(memberId),
+        ))
         return ResponseEntity.ok(ApiResponse.ok(VoiceSessionResponses.CreatedResponse.from(result)))
     }
 
@@ -53,9 +55,9 @@ class VoiceSessionController(
     ): ResponseEntity<ApiResponse<VoiceSessionResponses.ConfirmedResponse>> {
         val parsedMemberId = parseMemberId(memberId)
         val command = VoiceSessionCommand.Confirm(
-            memberId = parsedMemberId,
-            sessionId = sessionId,
-            record = request.toCreateCommand(parsedMemberId, entryMode = EntryMode.VOICE),
+            parsedMemberId,
+            sessionId,
+            request.toCreateCommand(parsedMemberId, entryMode = EntryMode.VOICE),
         )
         val result = voiceSessionService.confirm(command)
         return ResponseEntity.ok(ApiResponse.ok(VoiceSessionResponses.ConfirmedResponse.from(result)))
@@ -67,7 +69,10 @@ class VoiceSessionController(
         @PathVariable sessionId: UUID
     ): ResponseEntity<ApiResponse<VoiceSessionResponses.CancelledResponse>> {
         val result = voiceSessionService.cancel(
-            VoiceSessionCommand.Cancel(memberId = parseMemberId(memberId), sessionId = sessionId)
+            VoiceSessionCommand.Cancel(
+                parseMemberId(memberId),
+                sessionId,
+            )
         )
         return ResponseEntity.ok(ApiResponse.ok(VoiceSessionResponses.CancelledResponse.from(result)))
     }

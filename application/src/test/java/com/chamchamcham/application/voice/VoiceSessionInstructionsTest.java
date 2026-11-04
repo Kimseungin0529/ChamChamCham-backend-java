@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 class VoiceSessionInstructionsTest {
@@ -14,7 +12,8 @@ class VoiceSessionInstructionsTest {
     private final UUID cropId = UUID.fromString("00000000-0000-0000-0000-000000000201");
     private final LocalDateTime now = LocalDateTime.of(2026, 7, 17, 9, 0);
     private String build(List<VoicePesticideOption> pesticides) {
-        return VoiceSessionInstructions.INSTANCE.build(java.util.Arrays.asList(new FarmOption(farmId, "약초농장")), Map.ofEntries(Map.entry(farmId.toString(), java.util.Arrays.asList(new CropOption(cropId, "황기")))), pesticides, now, 10, 300);
+        return VoiceSessionInstructions.build(java.util.Arrays.asList(new FarmOption(farmId, "약초농장")), Map.ofEntries(Map.entry(farmId.toString(),
+            java.util.Arrays.asList(new CropOption(cropId, "황기")))), pesticides, now, 10, 300);
     }
 
     @Test
@@ -82,7 +81,7 @@ class VoiceSessionInstructionsTest {
     @Test
     @DisplayName("농지가 없으면 세션 중단 안내 문구를 유지한다")
     void 농지가_없으면_세션_중단_안내_문구를_유지한다() throws Exception {
-        var instructions = VoiceSessionInstructions.INSTANCE.build(List.of(), Map.of(), List.of(), now, 10, 300);
+        var instructions = VoiceSessionInstructions.build(List.of(), Map.of(), List.of(), now, 10, 300);
         assertThat(instructions).contains("등록된 농지가 없습니다");
     }
 

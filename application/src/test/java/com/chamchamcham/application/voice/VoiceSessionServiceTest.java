@@ -37,8 +37,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.*;
-import com.chamchamcham.domain.farming.EntryMode;
-import com.chamchamcham.domain.farming.HarvestSource;
 import org.junit.jupiter.api.DisplayName;
 
 @ExtendWith(MockitoExtension.class)
@@ -66,7 +64,9 @@ class VoiceSessionServiceTest {
     @BeforeEach
     void setUp() throws Exception {
         realtimeSessionProvider = fakeProvider();
-        service = new VoiceSessionService(memberRepository, farmRepository, memberCropRepository, farmingRecordRepository, farmingRecordService, voiceRecordSessionRepository, voiceRecordTurnRepository, realtimeSessionProvider, new VoiceSessionProperties(20, 330), pesticideQueryRepository);
+        service = new VoiceSessionService(memberRepository, farmRepository, memberCropRepository, farmingRecordRepository, farmingRecordService,
+            voiceRecordSessionRepository, voiceRecordTurnRepository, realtimeSessionProvider, new VoiceSessionProperties(20, 330),
+            pesticideQueryRepository);
         member = new Member(memberId, "" + memberId + "@example.com", null);
         farm = new Farm(farmId, member, "약초농장", "서울시 강남구");
         crop = new Crop(cropId, cropId.hashCode(), "황기", CropUsePartCategory.ROOT_BARK);
@@ -79,8 +79,8 @@ class VoiceSessionServiceTest {
         when(farmRepository.findByOwnerId(memberId)).thenReturn(java.util.Arrays.asList(farm));
         when(memberCropRepository.findByMemberId(memberId)).thenReturn(java.util.Arrays.asList(new MemberCrop(member, farm, crop)));
         when(voiceRecordSessionRepository.save(any(VoiceRecordSession.class))).thenAnswer(invocation -> {
-        var toSave = invocation.<VoiceRecordSession>getArgument(0);
-        return new VoiceRecordSession(sessionId, toSave.getMember(), toSave.getStatus());
+            var toSave = invocation.<VoiceRecordSession>getArgument(0);
+            return new VoiceRecordSession(sessionId, toSave.getMember(), toSave.getStatus());
         });
         var result = service.create(new VoiceSessionCommand.Create(memberId));
         assertThat(result.getSessionId()).isEqualTo(sessionId);
@@ -103,7 +103,9 @@ class VoiceSessionServiceTest {
     @DisplayName("세션 생성 시 회원 작물에 등록된 농약 목록을 지침에 주입한다")
     void 세션_생성_시_회원_작물에_등록된_농약_목록을_지침에_주입한다() throws Exception {
         stubCreateCollaborators();
-        when(pesticideQueryRepository.findByCropNames(java.util.Arrays.asList("황기"), 200)).thenReturn(java.util.Arrays.asList(new PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "진딧물"), new PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "총채벌레")));
+        when(pesticideQueryRepository.findByCropNames(java.util.Arrays.asList("황기"),
+            200)).thenReturn(java.util.Arrays.asList(new PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "진딧물"),
+            new PesticideQueryRepository.VoiceCatalogRow("코니도", "바이엘", "총채벌레")));
         service.create(new VoiceSessionCommand.Create(memberId));
         assertThat(capturedRequest.getInstructions()).contains("코니도(바이엘)");
         assertThat(capturedRequest.getInstructions()).contains("진딧물, 총채벌레");
@@ -113,7 +115,8 @@ class VoiceSessionServiceTest {
     @DisplayName("작물 매칭 농약이 없고 전체 카탈로그가 작으면 전체 농약명을 주입한다")
     void 작물_매칭_농약이_없고_전체_카탈로그가_작으면_전체_농약명을_주입한다() throws Exception {
         stubCreateCollaborators();
-        when(pesticideQueryRepository.search(new PesticideQueryRepository.SearchCondition(null, null, 51))).thenReturn(java.util.Arrays.asList(new Pesticide("다이센엠-45", "농협케미컬")));
+        when(pesticideQueryRepository.search(new PesticideQueryRepository.SearchCondition(null, null,
+            51))).thenReturn(java.util.Arrays.asList(new Pesticide("다이센엠-45", "농협케미컬")));
         service.create(new VoiceSessionCommand.Create(memberId));
         assertThat(capturedRequest.getInstructions()).contains("다이센엠-45(농협케미컬)");
     }
@@ -122,7 +125,8 @@ class VoiceSessionServiceTest {
     @DisplayName("작물 매칭 농약이 없고 전체 카탈로그가 크면 농약 목록을 생략한다")
     void 작물_매칭_농약이_없고_전체_카탈로그가_크면_농약_목록을_생략한다() throws Exception {
         stubCreateCollaborators();
-        when(pesticideQueryRepository.search(new PesticideQueryRepository.SearchCondition(null, null, 51))).thenReturn(java.util.stream.IntStream.rangeClosed(1, 51).mapToObj(it -> new Pesticide("농약" + it, "제조사")).toList());
+        when(pesticideQueryRepository.search(new PesticideQueryRepository.SearchCondition(null, null,
+            51))).thenReturn(java.util.stream.IntStream.rangeClosed(1, 51).mapToObj(it -> new Pesticide("농약" + it, "제조사")).toList());
         service.create(new VoiceSessionCommand.Create(memberId));
         assertThat(capturedRequest.getInstructions()).doesNotContain("등록 농약 목록");
     }
@@ -131,8 +135,8 @@ class VoiceSessionServiceTest {
         when(farmRepository.findByOwnerId(memberId)).thenReturn(java.util.Arrays.asList(farm));
         when(memberCropRepository.findByMemberId(memberId)).thenReturn(java.util.Arrays.asList(new MemberCrop(member, farm, crop)));
         when(voiceRecordSessionRepository.save(any(VoiceRecordSession.class))).thenAnswer(invocation -> {
-        var toSave = invocation.<VoiceRecordSession>getArgument(0);
-        return new VoiceRecordSession(sessionId, toSave.getMember(), toSave.getStatus());
+            var toSave = invocation.<VoiceRecordSession>getArgument(0);
+            return new VoiceRecordSession(sessionId, toSave.getMember(), toSave.getStatus());
         });
     }
 
@@ -141,17 +145,21 @@ class VoiceSessionServiceTest {
     void 대화_턴_제출_시_세션은_확인대기_상태가_되고_누락필드를_계산한다() throws Exception {
         var session = new VoiceRecordSession(sessionId, member, VoiceSessionStatus.CREATED);
         when(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session);
-        var result = service.submitTurns(new VoiceSessionCommand.SubmitTurns(memberId, sessionId, java.util.Arrays.asList(new VoiceSessionCommand.TurnInput(VoiceTurnRole.USER, "어제 물 줬어요", null)), new VoiceRecordCandidate(null, null, WorkType.WATERING, null, null, null, null, null, null, null, null, null, null)));
+        var result = service.submitTurns(new VoiceSessionCommand.SubmitTurns(memberId, sessionId,
+            java.util.Arrays.asList(new VoiceSessionCommand.TurnInput(VoiceTurnRole.USER, "어제 물 줬어요", null)), new VoiceRecordCandidate(null, null,
+            WorkType.WATERING, null, null, null, null, null, null, null, null, null, null)));
         assertThat(result.getStatus()).isEqualTo(VoiceSessionStatus.WAITING_CONFIRMATION);
         assertThat(result.getMissingFields()).containsExactlyInAnyOrder("farmId", "cropId", "workedAt");
         assertThat(session.getStatus()).isEqualTo(VoiceSessionStatus.WAITING_CONFIRMATION);
+        assertThat(session.getTranscript()).isEqualTo("USER: 어제 물 줬어요");
     }
 
     @Test
     @DisplayName("확인대기 상태의 세션을 승인하면 영농일지를 생성하고 세션을 완료 처리한다")
     void 확인대기_상태의_세션을_승인하면_영농일지를_생성하고_세션을_완료_처리한다() throws Exception {
         var session = new VoiceRecordSession(sessionId, member, VoiceSessionStatus.WAITING_CONFIRMATION);
-        var record = new FarmingRecord(recordId, member, farm, crop, WorkType.WATERING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "물 줬어요", EntryMode.VOICE, false);
+        var record = new FarmingRecord(recordId, member, farm, crop, WorkType.WATERING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "물 줬어요",
+            EntryMode.VOICE, false);
         when(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session);
         when(farmingRecordService.create(createCommand())).thenReturn(new FarmingRecordResult.RecordId(recordId, WorkType.WATERING));
         when(farmingRecordRepository.findById(recordId)).thenReturn(Optional.of(record));
@@ -167,7 +175,9 @@ class VoiceSessionServiceTest {
         var session = new VoiceRecordSession(sessionId, member, VoiceSessionStatus.WAITING_CONFIRMATION);
         when(voiceRecordSessionRepository.findByIdAndMemberId(sessionId, memberId)).thenReturn(session);
         var exception = assertThrows(BusinessException.class, () -> {
-        service.submitTurns(new VoiceSessionCommand.SubmitTurns(memberId, sessionId, java.util.Arrays.asList(new VoiceSessionCommand.TurnInput(VoiceTurnRole.USER, "어제 물 줬어요", null)), new VoiceRecordCandidate(null, null, WorkType.WATERING, null, null, null, null, null, null, null, null, null, null)));
+            service.submitTurns(new VoiceSessionCommand.SubmitTurns(memberId, sessionId,
+            java.util.Arrays.asList(new VoiceSessionCommand.TurnInput(VoiceTurnRole.USER, "어제 물 줬어요", null)), new VoiceRecordCandidate(null, null,
+            WorkType.WATERING, null, null, null, null, null, null, null, null, null, null)));
         });
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.VOICE_SESSION_INVALID_STATE);
     }
@@ -198,7 +208,8 @@ class VoiceSessionServiceTest {
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.VOICE_SESSION_NOT_FOUND);
     }
     private FarmingRecordCommand.Create createCommand() {
-        return new FarmingRecordCommand.Create(memberId, farmId, cropId, WorkType.WATERING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "물 줬어요", null, null, null, null, null, null, List.of(), EntryMode.VOICE);
+        return new FarmingRecordCommand.Create(memberId, farmId, cropId, WorkType.WATERING, LocalDateTime.of(2026, 6, 1, 9, 0), "맑음", 20, "물 줬어요", null,
+            null, null, null, null, null, List.of(), EntryMode.VOICE);
     }
     private RealtimeSessionProvider fakeProvider() {
         return request -> {

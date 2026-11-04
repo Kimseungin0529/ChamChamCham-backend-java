@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FarmingRecordVoiceToolSchemaTest {
     private final UUID farmId = UUID.fromString("00000000-0000-0000-0000-000000000101");
     private final UUID cropId = UUID.fromString("00000000-0000-0000-0000-000000000201");
-    private final Map<String, Object> schema = FarmingRecordVoiceToolSchema.INSTANCE.build(
+    private final Map<String, Object> schema = FarmingRecordVoiceToolSchema.build(
         List.of(new FarmOption(farmId, "약초농장")), Map.of(farmId.toString(), List.of(new CropOption(cropId, "황기"))));
 
     @SuppressWarnings("unchecked")

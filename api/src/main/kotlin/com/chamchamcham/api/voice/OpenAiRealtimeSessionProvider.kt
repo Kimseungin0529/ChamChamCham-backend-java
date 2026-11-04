@@ -100,7 +100,11 @@ class OpenAiRealtimeSessionProvider internal constructor(
             ?.let { LocalDateTime.ofInstant(Instant.ofEpochSecond(it), ZoneId.systemDefault()) }
             ?: LocalDateTime.now().plusMinutes(DEFAULT_EXPIRY_MINUTES)
 
-        return RealtimeSessionResult(clientSecret = clientSecret, expiresAt = expiresAt, model = model)
+        return RealtimeSessionResult(
+            clientSecret,
+            expiresAt,
+            model,
+        )
     }
 
     private data class ClientSecretResponse(
