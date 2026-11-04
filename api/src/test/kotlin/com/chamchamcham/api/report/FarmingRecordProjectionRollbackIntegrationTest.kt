@@ -1,5 +1,7 @@
 package com.chamchamcham.api.report
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.ApiApplication
 import com.chamchamcham.application.farming.FarmingRecordCommand
 import com.chamchamcham.application.farming.FarmingRecordService
@@ -109,7 +111,11 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
     fun `projection failure rolls back record detail and media rows`() {
         doThrow(IllegalStateException("projection failed"))
             .`when`(projectionService)
-            .rebuild(ReportScope(memberId, farmId, cropId))
+            .rebuild(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))
 
         assertThatThrownBy {
             farmingRecordService.create(wateringCommand(withMedia = true))
@@ -122,18 +128,24 @@ class FarmingRecordProjectionRollbackIntegrationTest @Autowired constructor(
     }
 
     private fun wateringCommand(withMedia: Boolean) = FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 4, 1, 8, 30),
-        weatherCondition = "맑음",
-        weatherTemperature = 18,
-        memo = "롤백 관수",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.NORMAL,
-            irrigationMethod = IrrigationMethod.DRIP,
+            memberId,
+            farmId,
+            cropId,
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 4, 1, 8, 30),
+            "맑음",
+            18,
+            "롤백 관수",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.NORMAL,
+            IrrigationMethod.DRIP,
         ),
-        mediaIds = if (withMedia) listOf(mediaId) else emptyList(),
-    )
+            null,
+            null,
+            null,
+            null,
+            if (withMedia) listOf(mediaId) else emptyList(),
+            EntryMode.MANUAL,
+        )
 }

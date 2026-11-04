@@ -59,18 +59,18 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list binds optional filters cursor and size and returns work card shape`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            workTypes = listOf(WorkType.WATERING),
-            cursor = "cursor-1",
-            size = 2,
+            memberId,
+            setOf(farmId),
+            setOf(cropId),
+            listOf(WorkType.WATERING),
+            "cursor-1",
+            2,
         )
         `when`(service.list(condition)).thenReturn(
             FarmingWorkReportResult.Page(
-                items = listOf(workItem()),
-                nextCursor = "cursor-2",
-            ),
+            listOf(workItem()),
+            "cursor-2",
+        ),
         )
 
         mockMvc.perform(
@@ -100,14 +100,17 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list binds multiple work type filters`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            workTypes = listOf(WorkType.WATERING, WorkType.HARVEST),
-            cursor = null,
-            size = 20,
+            memberId,
+            setOf(farmId),
+            setOf(cropId),
+            listOf(WorkType.WATERING, WorkType.HARVEST),
+            null,
+            20,
         )
-        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(emptyList(), null))
+        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(
+            emptyList(),
+            null,
+        ))
 
         mockMvc.perform(
             get("/api/v1/farming-reports/work-items")
@@ -124,24 +127,24 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list returns active work card with nullable end date`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = emptyList(),
-            cursor = null,
-            size = 20,
+            memberId,
+            emptySet(),
+            emptySet(),
+            emptyList(),
+            null,
+            20,
         )
         `when`(service.list(condition)).thenReturn(
             FarmingWorkReportResult.Page(
-                items = listOf(
+            listOf(
                     workItem(
                         status = FarmingCycleReportStatus.ACTIVE,
                         endsAt = null,
                         finalHarvestRecordId = null,
                     ),
                 ),
-                nextCursor = null,
-            ),
+            null,
+        ),
         )
 
         mockMvc.perform(
@@ -157,14 +160,17 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list accepts omitted filters with default size`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = emptyList(),
-            cursor = null,
-            size = 20,
+            memberId,
+            emptySet(),
+            emptySet(),
+            emptyList(),
+            null,
+            20,
         )
-        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(emptyList(), null))
+        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(
+            emptyList(),
+            null,
+        ))
 
         mockMvc.perform(
             get("/api/v1/farming-reports/work-items")
@@ -177,14 +183,17 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list binds repeated farm and crop ids as multi filters`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId, secondFarmId),
-            cropIds = setOf(cropId, secondCropId),
-            workTypes = emptyList(),
-            cursor = null,
-            size = 20,
+            memberId,
+            setOf(farmId, secondFarmId),
+            setOf(cropId, secondCropId),
+            emptyList(),
+            null,
+            20,
         )
-        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(emptyList(), null))
+        `when`(service.list(condition)).thenReturn(FarmingWorkReportResult.Page(
+            emptyList(),
+            null,
+        ))
 
         mockMvc.perform(
             get("/api/v1/farming-reports/work-items")
@@ -227,12 +236,12 @@ class FarmingWorkReportControllerTest(
     @Test
     fun `list translates an invalid cursor from the query service to invalid input`() {
         val condition = FarmingWorkReportSearchCondition(
-            memberId = memberId,
-            farmIds = emptySet(),
-            cropIds = emptySet(),
-            workTypes = emptyList(),
-            cursor = "not-base64",
-            size = 20,
+            memberId,
+            emptySet(),
+            emptySet(),
+            emptyList(),
+            "not-base64",
+            20,
         )
         `when`(service.list(condition))
             .thenThrow(BusinessException(ErrorCode.INVALID_CURSOR))
@@ -253,9 +262,14 @@ class FarmingWorkReportControllerTest(
         `when`(service.getDetail(memberId, reportId, WorkType.WATERING)).thenReturn(
             detail(
                 statistics = FarmingWorkReportResult.WorkStatistics(
-                    common = common(recordCount = 3),
-                    watering = WateringStatistics(3, null, null, 2, null, 0, null, emptyList(), null, emptyList(), emptyList()),
-                ),
+            common(recordCount = 3),
+            null,
+            WateringStatistics(3, null, null, 2, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            null,
+            null,
+            null,
+            null,
+        ),
                 feedback = readyFeedback(),
             ),
         )
@@ -322,8 +336,19 @@ class FarmingWorkReportControllerTest(
             detail(
                 workType = WorkType.PRUNING,
                 workTypeLabel = "가지 정리",
-                statistics = FarmingWorkReportResult.WorkStatistics(common = common(recordCount = 2)),
-                feedback = FarmingWorkReportResult.FeedbackStatus(ReportFeedbackStatus.PENDING, null),
+                statistics = FarmingWorkReportResult.WorkStatistics(
+            common(recordCount = 2),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        ),
+                feedback = FarmingWorkReportResult.FeedbackStatus(
+            ReportFeedbackStatus.PENDING,
+            null,
+        ),
             ),
         )
 
@@ -350,7 +375,10 @@ class FarmingWorkReportControllerTest(
         listOf(ReportFeedbackStatus.PENDING, ReportFeedbackStatus.FAILED).forEach { feedbackStatus ->
             `when`(service.getDetail(memberId, reportId, WorkType.WATERING)).thenReturn(
                 detail(
-                    feedback = FarmingWorkReportResult.FeedbackStatus(feedbackStatus, null),
+                    feedback = FarmingWorkReportResult.FeedbackStatus(
+            feedbackStatus,
+            null,
+        ),
                 ),
             )
 
@@ -403,57 +431,62 @@ class FarmingWorkReportControllerTest(
         endsAt: LocalDateTime? = this.endsAt,
         finalHarvestRecordId: UUID? = this.finalHarvestRecordId,
     ) = FarmingWorkReportResult.Item(
-        reportId = reportId,
-        status = status,
-        farmId = farmId,
-        farmName = "약초농장",
-        cropId = cropId,
-        cropName = "황기",
-        startsAt = startsAt,
-        endsAt = endsAt,
-        finalHarvestRecordId = finalHarvestRecordId,
-        workType = WorkType.WATERING,
-        workTypeLabel = "물 주기",
-        recordCount = 3,
-        lastWorkedOn = LocalDate.of(2026, 7, 30),
-        thumbnailUrl = null,
-    )
+            reportId,
+            status,
+            farmId,
+            "약초농장",
+            cropId,
+            "황기",
+            startsAt,
+            endsAt,
+            finalHarvestRecordId,
+            WorkType.WATERING,
+            "물 주기",
+            3,
+            LocalDate.of(2026, 7, 30),
+            null,
+        )
 
     private fun detail(
         workType: WorkType = WorkType.WATERING,
         workTypeLabel: String = "물 주기",
         statistics: FarmingWorkReportResult.WorkStatistics = FarmingWorkReportResult.WorkStatistics(
-            common = common(recordCount = 3),
-            watering = WateringStatistics(3, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            common(recordCount = 3),
+            null,
+            WateringStatistics(3, null, null, 0, null, 0, null, emptyList(), null, emptyList(), emptyList()),
+            null,
+            null,
+            null,
+            null,
         ),
         status: FarmingCycleReportStatus = FarmingCycleReportStatus.COMPLETED,
         endsAt: LocalDateTime? = this.endsAt,
         feedback: FarmingWorkReportResult.FeedbackStatus?,
     ) = FarmingWorkReportResult.Detail(
-        reportId = reportId,
-        status = status,
-        workType = workType,
-        workTypeLabel = workTypeLabel,
-        farmId = farmId,
-        farmName = "약초농장",
-        cropId = cropId,
-        cropName = "황기",
-        startsAt = startsAt,
-        endsAt = endsAt,
-        statistics = statistics,
-        feedback = feedback,
-    )
+            reportId,
+            status,
+            workType,
+            workTypeLabel,
+            farmId,
+            "약초농장",
+            cropId,
+            "황기",
+            startsAt,
+            endsAt,
+            statistics,
+            feedback,
+        )
 
     private fun readyFeedback() = FarmingWorkReportResult.FeedbackStatus(
-        status = ReportFeedbackStatus.READY,
-        content = ReportFeedbackResultContent(
+            ReportFeedbackStatus.READY,
+            ReportFeedbackResultContent(
             summary = "물 주기를 잘 이어갔어요.",
             comparisons = listOf(ReportFeedbackItemResult("직전 재배보다 물 주기 기록이 한 번 늘었어요.")),
             strengths = listOf(ReportFeedbackItemResult("흙 상태를 살폈어요.")),
             improvements = emptyList(),
             nextActions = listOf(ReportFeedbackItemResult("내일 흙을 확인하세요.")),
         ),
-    )
+        )
 
     private fun common(recordCount: Int) = CommonOnlyStatistics(recordCount, null, null, recordCount, null, 0, null, emptyList(), null)
 

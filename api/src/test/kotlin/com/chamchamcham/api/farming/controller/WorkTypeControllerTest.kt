@@ -36,53 +36,59 @@ class WorkTypeControllerTest(
         `when`(workTypeCatalogService.listWorkTypes()).thenReturn(
             listOf(
                 WorkTypeResult.WorkTypeSummary(
-                    code = "PLANTING",
-                    label = "파종/정식",
-                    detailRequired = true,
-                    fields = listOf(
+            "PLANTING",
+            "파종/정식",
+            true,
+            listOf(
                         WorkTypeResult.FieldSummary(
-                            name = "propagationMethod",
-                            type = FieldValueType.ENUM,
-                            required = true,
-                            options = listOf(
-                                WorkTypeResult.EnumOptionSummary("SEED", "종자"),
-                                WorkTypeResult.EnumOptionSummary("CUTTING", "삽목")
-                            )
-                        )
-                    )
-                ),
+            "propagationMethod",
+            FieldValueType.ENUM,
+            true,
+            listOf(
+                                WorkTypeResult.EnumOptionSummary(
+            "SEED",
+            "종자",
+        ),
+                                WorkTypeResult.EnumOptionSummary(
+            "CUTTING",
+            "삽목",
+        )
+                            ),
+        )
+                    ),
+        ),
                 WorkTypeResult.WorkTypeSummary(
-                    code = "WATERING",
-                    label = "관수",
-                    detailRequired = false,
-                    fields = listOf(
+            "WATERING",
+            "관수",
+            false,
+            listOf(
                         WorkTypeResult.FieldSummary(
-                            name = "irrigationAmount",
-                            type = FieldValueType.ENUM,
-                            required = false,
-                            options = emptyList()
-                        )
-                    )
-                ),
+            "irrigationAmount",
+            FieldValueType.ENUM,
+            false,
+            emptyList(),
+        )
+                    ),
+        ),
                 WorkTypeResult.WorkTypeSummary(
-                    code = "FERTILIZING",
-                    label = "시비",
-                    detailRequired = true,
-                    fields = listOf(
+            "FERTILIZING",
+            "시비",
+            true,
+            listOf(
                         WorkTypeResult.FieldSummary(
-                            name = "materialName",
-                            type = FieldValueType.STRING,
-                            required = true,
-                            options = emptyList()
-                        )
-                    )
-                ),
+            "materialName",
+            FieldValueType.STRING,
+            true,
+            emptyList(),
+        )
+                    ),
+        ),
                 WorkTypeResult.WorkTypeSummary(
-                    code = "PRUNING",
-                    label = "가지·순 정리",
-                    detailRequired = false,
-                    fields = emptyList()
-                )
+            "PRUNING",
+            "가지·순 정리",
+            false,
+            emptyList(),
+        )
             )
         )
 

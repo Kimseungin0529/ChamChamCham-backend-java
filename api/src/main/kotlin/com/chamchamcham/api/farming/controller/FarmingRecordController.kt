@@ -59,15 +59,15 @@ class FarmingRecordController(
     ): ResponseEntity<ApiResponse<FarmingRecordResponses.RecordPageResponse>> {
         val page = farmingRecordService.search(
             FarmingRecordSearchCondition(
-                memberId = parseMemberId(memberId),
-                cropIds = cropIds ?: emptyList(),
-                workTypes = workTypes ?: emptyList(),
-                startDate = startDate,
-                endDate = endDate,
-                keyword = keyword,
-                cursor = cursor,
-                size = size
-            )
+            parseMemberId(memberId),
+            cropIds ?: emptyList(),
+            workTypes ?: emptyList(),
+            startDate,
+            endDate,
+            keyword,
+            cursor,
+            size,
+        )
         )
         return ResponseEntity.ok(ApiResponse.ok(FarmingRecordResponses.RecordPageResponse.from(page)))
     }
@@ -96,7 +96,10 @@ class FarmingRecordController(
         @AuthenticationPrincipal memberId: String?,
         @PathVariable recordId: UUID
     ): ResponseEntity<ApiResponse<Unit>> {
-        farmingRecordService.delete(FarmingRecordCommand.Delete(memberId = parseMemberId(memberId), recordId = recordId))
+        farmingRecordService.delete(FarmingRecordCommand.Delete(
+            parseMemberId(memberId),
+            recordId,
+        ))
         return ResponseEntity.ok(ApiResponse.empty(Unit))
     }
 
@@ -106,22 +109,22 @@ class FarmingRecordController(
         request: FarmingRecordRequests.SaveRecordRequest
     ): FarmingRecordCommand.Update =
         FarmingRecordCommand.Update(
-            memberId = memberId,
-            recordId = recordId,
-            farmId = requireNotNull(request.farmId),
-            cropId = requireNotNull(request.cropId),
-            workType = requireNotNull(request.workType),
-            workedAt = requireNotNull(request.workedAt),
-            weatherCondition = request.weatherCondition,
-            weatherTemperature = requireNotNull(request.weatherTemperature),
-            memo = request.memo,
-            planting = request.toPlantingDetail(),
-            watering = request.toWateringDetail(),
-            fertilizing = request.toFertilizingDetail(),
-            pestControl = request.toPestControlDetail(),
-            weeding = request.toWeedingDetail(),
-            harvest = request.toHarvestDetail(),
-            mediaIds = request.mediaIds,
+            memberId,
+            recordId,
+            requireNotNull(request.farmId),
+            requireNotNull(request.cropId),
+            requireNotNull(request.workType),
+            requireNotNull(request.workedAt),
+            request.weatherCondition,
+            requireNotNull(request.weatherTemperature),
+            request.memo,
+            request.toPlantingDetail(),
+            request.toWateringDetail(),
+            request.toFertilizingDetail(),
+            request.toPestControlDetail(),
+            request.toWeedingDetail(),
+            request.toHarvestDetail(),
+            request.mediaIds,
         )
 
     private fun parseMemberId(memberId: String?): UUID {

@@ -45,9 +45,9 @@ class ReportFeedbackContextAssembler(
         }
 
         val scope = ReportScope(
-            memberId = memberId,
-            farmId = requireNotNull(report.farm.id),
-            cropId = requireNotNull(report.crop.id),
+            memberId,
+            requireNotNull(report.farm.id),
+            requireNotNull(report.crop.id),
         )
         val targetSlice = partitioner.partition(sourceLoader.load(scope)).singleOrNull {
             it.status == FarmingCycleReportStatus.COMPLETED &&

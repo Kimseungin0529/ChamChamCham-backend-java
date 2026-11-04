@@ -1,5 +1,7 @@
 package com.chamchamcham.api.report
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.ApiApplication
 import com.chamchamcham.application.farming.FarmingRecordCommand
 import com.chamchamcham.application.farming.FarmingRecordService
@@ -125,7 +127,10 @@ class FarmingCycleReportIntegrationTest @Autowired constructor(
         assertThat(completed.statistics.harvest.totalAmountKg)
             .isEqualByComparingTo("30.0000")
 
-        farmingRecordService.delete(FarmingRecordCommand.Delete(memberId, wateringId))
+        farmingRecordService.delete(FarmingRecordCommand.Delete(
+            memberId,
+            wateringId,
+        ))
 
         val rebuilt = queryService.getDetail(
             memberId,
@@ -166,28 +171,35 @@ class FarmingCycleReportIntegrationTest @Autowired constructor(
 
     private fun loadOnlyCompletedReport() = queryService.listCompleted(
         FarmingCycleReportSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId),
-            cropIds = setOf(cropId),
-            cursor = null,
-            size = 20,
+            memberId,
+            setOf(farmId),
+            setOf(cropId),
+            null,
+            20,
         ),
     ).items.single().let { queryService.getDetail(memberId, it.id).selected }
 
     private fun wateringCommand() = FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 3, 1, 9, 0),
-        weatherCondition = "맑음",
-        weatherTemperature = 17,
-        memo = "관수",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.SUFFICIENT,
-            irrigationMethod = IrrigationMethod.SPRAYING,
+            memberId,
+            farmId,
+            cropId,
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 3, 1, 9, 0),
+            "맑음",
+            17,
+            "관수",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.SUFFICIENT,
+            IrrigationMethod.SPRAYING,
         ),
-    )
+            null,
+            null,
+            null,
+            null,
+            emptyList(),
+            EntryMode.MANUAL,
+        )
 
     private fun harvestCommand(
         isLastHarvest: Boolean,
@@ -196,21 +208,28 @@ class FarmingCycleReportIntegrationTest @Autowired constructor(
         medicinalPart: CropUsePartCategory? = CropUsePartCategory.ROOT_BARK,
         growthPeriod: Int = 4,
     ) = FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.HARVEST,
-        workedAt = LocalDateTime.of(2026, 6, 30, 9, 0),
-        weatherCondition = "흐림",
-        weatherTemperature = 25,
-        memo = "마지막 수확",
-        harvest = FarmingRecordCommand.HarvestDetail(
-            harvestAmount = amountKg?.let(::BigDecimal),
-            amountUnknown = amountUnknown,
-            medicinalPart = medicinalPart,
-            harvestSource = HarvestSource.CULTIVATED,
-            growthPeriod = growthPeriod,
-            isLastHarvest = isLastHarvest,
+            memberId,
+            farmId,
+            cropId,
+            WorkType.HARVEST,
+            LocalDateTime.of(2026, 6, 30, 9, 0),
+            "흐림",
+            25,
+            "마지막 수확",
+            null,
+            null,
+            null,
+            null,
+            null,
+            FarmingRecordCommand.HarvestDetail(
+            amountKg?.let(::BigDecimal),
+            amountUnknown,
+            medicinalPart,
+            HarvestSource.CULTIVATED,
+            growthPeriod,
+            isLastHarvest,
         ),
-    )
+            emptyList(),
+            EntryMode.MANUAL,
+        )
 }

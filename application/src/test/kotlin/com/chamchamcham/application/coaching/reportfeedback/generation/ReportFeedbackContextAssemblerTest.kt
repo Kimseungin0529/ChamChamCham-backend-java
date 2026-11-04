@@ -1,5 +1,7 @@
 package com.chamchamcham.application.coaching.reportfeedback.generation
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.domain.report.WeedingStatistics
 import com.chamchamcham.domain.report.PlantingStatistics
 import com.chamchamcham.domain.report.HarvestStatistics
@@ -96,7 +98,11 @@ class ReportFeedbackContextAssemblerTest {
             ),
         ).also { setSourceRevision(it, 3) }
         stubReports(report, previous)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         val context = assembler().assemble(memberId, reportId, WorkType.WATERING)
 
@@ -147,7 +153,11 @@ class ReportFeedbackContextAssemblerTest {
             statistics = CycleReportStatistics.empty(),
         )
         stubReports(report, previous)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         val context = assembler().assemble(memberId, reportId, WorkType.WATERING)
 
@@ -175,7 +185,11 @@ class ReportFeedbackContextAssemblerTest {
             ),
         )
         stubReports(report, null)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         val context = assembler().assemble(memberId, reportId, WorkType.WATERING)
 
@@ -253,7 +267,11 @@ class ReportFeedbackContextAssemblerTest {
             ),
         )
         stubReports(report, previous)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         val comparison = assembler().assemble(memberId, reportId, WorkType.FERTILIZING)
             .comparisons.single { it.metricKey == "fertilizing.totalAmountKg" }
@@ -298,7 +316,11 @@ class ReportFeedbackContextAssemblerTest {
             ),
         )
         stubReports(report, previous)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         val context = assembler().assemble(memberId, reportId, WorkType.WATERING)
 
@@ -322,7 +344,11 @@ class ReportFeedbackContextAssemblerTest {
             statistics = CycleReportStatistics.empty(),
         )
         `when`(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(report)
-        `when`(sourceLoader.load(ReportScope(memberId, farmId, cropId))).thenReturn(cycleRecords())
+        `when`(sourceLoader.load(ReportScope(
+            memberId,
+            farmId,
+            cropId,
+        ))).thenReturn(cycleRecords())
 
         assertThatThrownBy { assembler().assemble(memberId, reportId, WorkType.PRUNING) }
             .isInstanceOfSatisfying(ReportFeedbackGenerationFailure::class.java) {
@@ -355,42 +381,76 @@ class ReportFeedbackContextAssemblerTest {
     private fun cycleRecords(): List<CycleReportSourceRecord> = listOf(
         harvestSource(previousFinalHarvestId, startsAt, isFinal = true),
         CycleReportSourceRecord(
-            id = targetWateringId,
-            workedAt = startsAt,
-            workType = WorkType.WATERING,
-            weatherCondition = "맑음",
-            weatherTemperature = 24,
-            hasPhoto = false,
-            memo = "점적관수로 수분을 보충했어요.",
-            watering = WateringReportSource(CategoryRef("LOW", "적음"), CategoryRef("DRIP", "점적")),
+            targetWateringId,
+            startsAt,
+            startsAt,
+            WorkType.WATERING,
+            "맑음",
+            24,
+            false,
+            "점적관수로 수분을 보충했어요.",
+            null,
+            WateringReportSource(
+            CategoryRef(
+            "LOW",
+            "적음",
+        ),
+            CategoryRef(
+            "DRIP",
+            "점적",
+        ),
+        ),
+            null,
+            null,
+            null,
+            null,
         ),
         CycleReportSourceRecord(
-            id = targetFertilizingId,
-            workedAt = startsAt.plusDays(1),
-            workType = WorkType.FERTILIZING,
-            weatherCondition = "맑음",
-            weatherTemperature = 25,
-            hasPhoto = false,
-            memo = "밑거름을 줬어요.",
+            targetFertilizingId,
+            startsAt.plusDays(1),
+            startsAt.plusDays(1),
+            WorkType.FERTILIZING,
+            "맑음",
+            25,
+            false,
+            "밑거름을 줬어요.",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
         ),
         harvestSource(targetFinalHarvestId, endsAt, isFinal = true),
     )
 
     private fun harvestSource(id: UUID, workedAt: LocalDateTime, isFinal: Boolean) = CycleReportSourceRecord(
-        id = id,
-        workedAt = workedAt,
-        workType = WorkType.HARVEST,
-        weatherCondition = "맑음",
-        weatherTemperature = 24,
-        hasPhoto = false,
-        memo = "마지막 수확이에요.",
-        harvest = HarvestReportSource(
-            amountKg = BigDecimal("5.0"),
-            medicinalPart = CategoryRef("ROOT_BARK", "뿌리/근피"),
-            growthPeriodMonths = 12,
-            isLastHarvest = isFinal,
+            id,
+            workedAt,
+            workedAt,
+            WorkType.HARVEST,
+            "맑음",
+            24,
+            false,
+            "마지막 수확이에요.",
+            null,
+            null,
+            null,
+            null,
+            null,
+            HarvestReportSource(
+            BigDecimal("5.0"),
+            CategoryRef(
+            "ROOT_BARK",
+            "뿌리/근피",
         ),
-    )
+            CategoryRef("CULTIVATED", "재배"),
+            null,
+            null,
+            12,
+            isFinal,
+        ),
+        )
 
     private fun completedReport(
         id: UUID,

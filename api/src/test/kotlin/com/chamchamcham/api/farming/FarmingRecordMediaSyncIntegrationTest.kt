@@ -1,5 +1,7 @@
 package com.chamchamcham.api.farming
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.ApiApplication
 import com.chamchamcham.application.exception.ErrorCode
 import com.chamchamcham.application.exception.business.BusinessException
@@ -180,35 +182,46 @@ class FarmingRecordMediaSyncIntegrationTest @Autowired constructor(
         uploadedMediaRepository.findById(mediaId(media)).orElseThrow()
 
     private fun wateringCommand(mediaIds: List<UUID>) = FarmingRecordCommand.Create(
-        memberId = memberId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 4, 1, 8, 30),
-        weatherCondition = "맑음",
-        weatherTemperature = 18,
-        memo = "미디어 싱크 검증용 관수 기록입니다",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.NORMAL,
-            irrigationMethod = IrrigationMethod.DRIP,
+            memberId,
+            farmId,
+            cropId,
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 4, 1, 8, 30),
+            "맑음",
+            18,
+            "미디어 싱크 검증용 관수 기록입니다",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.NORMAL,
+            IrrigationMethod.DRIP,
         ),
-        mediaIds = mediaIds,
-    )
+            null,
+            null,
+            null,
+            null,
+            mediaIds,
+            EntryMode.MANUAL,
+        )
 
     private fun updateCommand(recordId: UUID, mediaIds: List<UUID>) = FarmingRecordCommand.Update(
-        memberId = memberId,
-        recordId = recordId,
-        farmId = farmId,
-        cropId = cropId,
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 4, 1, 8, 30),
-        weatherCondition = "맑음",
-        weatherTemperature = 19,
-        memo = "미디어 싱크 검증용 관수 기록 수정입니다",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.NORMAL,
-            irrigationMethod = IrrigationMethod.DRIP,
+            memberId,
+            recordId,
+            farmId,
+            cropId,
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 4, 1, 8, 30),
+            "맑음",
+            19,
+            "미디어 싱크 검증용 관수 기록 수정입니다",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.NORMAL,
+            IrrigationMethod.DRIP,
         ),
-        mediaIds = mediaIds,
-    )
+            null,
+            null,
+            null,
+            null,
+            mediaIds,
+        )
 }

@@ -55,7 +55,10 @@ class SearchServiceTest {
         val condition = recordCondition(keyword = "황기", cursor = "cursor-1", size = 10)
         val summary = recordSummary()
         `when`(farmingRecordService.search(condition))
-            .thenReturn(FarmingRecordResult.Page(items = listOf(summary), nextCursor = "cursor-2"))
+            .thenReturn(FarmingRecordResult.Page(
+            listOf(summary),
+            "cursor-2",
+        ))
         `when`(farmingRecordService.count(condition)).thenReturn(25L)
 
         val page = service.searchRecords(SearchQuery(memberId = memberId, keyword = "황기", cursor = "cursor-1", size = 10))
@@ -179,7 +182,10 @@ class SearchServiceTest {
         val post = postSummary()
         val program = policyProgram(title = "황기 재배 지원", createdAt = createdAt)
         `when`(farmingRecordService.search(recordConditionPreview))
-            .thenReturn(FarmingRecordResult.Page(items = listOf(summary), nextCursor = "more"))
+            .thenReturn(FarmingRecordResult.Page(
+            listOf(summary),
+            "more",
+        ))
         `when`(farmingRecordService.count(recordConditionPreview)).thenReturn(12L)
         `when`(communityPostService.search(postConditionPreview))
             .thenReturn(CommunityPostResult.Page(items = listOf(post), nextCursor = null))
@@ -208,12 +214,14 @@ class SearchServiceTest {
 
     private fun recordCondition(keyword: String?, cursor: String?, size: Int): FarmingRecordSearchCondition =
         FarmingRecordSearchCondition(
-            memberId = memberId,
-            startDate = null,
-            endDate = null,
-            keyword = keyword,
-            cursor = cursor,
-            size = size,
+            memberId,
+            emptyList(),
+            emptyList(),
+            null,
+            null,
+            keyword,
+            cursor,
+            size,
         )
 
     private fun postCondition(keyword: String?, cursor: String?, size: Int): CommunityPostSearchCondition =
@@ -230,16 +238,22 @@ class SearchServiceTest {
         )
 
     private fun recordSummary(): FarmingRecordResult.Summary = FarmingRecordResult.Summary(
-        id = UUID.fromString("00000000-0000-0000-0000-000000000101"),
-        cropId = UUID.fromString("00000000-0000-0000-0000-000000000201"),
-        cropName = "황기",
-        workType = WorkType.HARVEST,
-        workedAt = createdAt,
-        weatherCondition = "맑음",
-        weatherTemperature = 23,
-        memoPreview = "수확 완료",
-        thumbnailUrl = null,
-    )
+            UUID.fromString("00000000-0000-0000-0000-000000000101"),
+            UUID.fromString("00000000-0000-0000-0000-000000000201"),
+            "황기",
+            WorkType.HARVEST,
+            createdAt,
+            "맑음",
+            23,
+            "수확 완료",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        )
 
     private fun postSummary(): CommunityPostResult.PostSummary = CommunityPostResult.PostSummary(
         id = UUID.fromString("00000000-0000-0000-0000-000000000301"),

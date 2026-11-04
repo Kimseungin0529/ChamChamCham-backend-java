@@ -33,12 +33,14 @@ class SearchService(
 
     fun searchRecords(query: SearchQuery): SearchResult.RecordPage {
         val condition = FarmingRecordSearchCondition(
-            memberId = query.memberId,
-            startDate = null,
-            endDate = null,
-            keyword = query.keyword,
-            cursor = query.cursor,
-            size = query.size,
+            query.memberId,
+            emptyList(),
+            emptyList(),
+            null,
+            null,
+            query.keyword,
+            query.cursor,
+            query.size,
         )
         val page = farmingRecordService.search(condition)
         return SearchResult.RecordPage(

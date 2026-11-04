@@ -1,5 +1,7 @@
 package com.chamchamcham.api.coaching.recordfeedback
 
+import com.chamchamcham.domain.farming.EntryMode
+
 import com.chamchamcham.ApiApplication
 import com.chamchamcham.application.coaching.recordfeedback.lifecycle.RecordFeedbackGenerationProcessor
 import com.chamchamcham.application.coaching.recordfeedback.lifecycle.RecordFeedbackGenerationRequested
@@ -199,7 +201,10 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         val recordId = farmingRecordService.create(wateringCreateCommand()).id
         awaitReadyFeedback(recordId, 1)
 
-        farmingRecordService.delete(FarmingRecordCommand.Delete(memberId = requireNotNull(member.id), recordId = recordId))
+        farmingRecordService.delete(FarmingRecordCommand.Delete(
+            requireNotNull(member.id),
+            recordId,
+        ))
 
         val record = farmingRecordRepository.findById(recordId).orElseThrow()
         val feedback = recordFeedbackRepository.findByRecord_IdAndSourceRevision(recordId, 1)
@@ -279,35 +284,48 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
     }
 
     private fun wateringCreateCommand() = FarmingRecordCommand.Create(
-        memberId = requireNotNull(member.id),
-        farmId = requireNotNull(farm.id),
-        cropId = requireNotNull(crop.id),
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 7, 11, 8, 30),
-        weatherCondition = "맑음",
-        weatherTemperature = 24,
-        memo = "점적관수로 토양 수분을 보충했습니다.",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.NORMAL,
-            irrigationMethod = IrrigationMethod.DRIP,
+            requireNotNull(member.id),
+            requireNotNull(farm.id),
+            requireNotNull(crop.id),
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 7, 11, 8, 30),
+            "맑음",
+            24,
+            "점적관수로 토양 수분을 보충했습니다.",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.NORMAL,
+            IrrigationMethod.DRIP,
         ),
-    )
+            null,
+            null,
+            null,
+            null,
+            emptyList(),
+            EntryMode.MANUAL,
+        )
 
     private fun wateringUpdateCommand(recordId: UUID) = FarmingRecordCommand.Update(
-        memberId = requireNotNull(member.id),
-        recordId = recordId,
-        farmId = requireNotNull(farm.id),
-        cropId = requireNotNull(crop.id),
-        workType = WorkType.WATERING,
-        workedAt = LocalDateTime.of(2026, 7, 12, 8, 30),
-        weatherCondition = "흐림",
-        weatherTemperature = 22,
-        memo = "전날 강우를 반영해 관수량을 조절했습니다.",
-        watering = FarmingRecordCommand.WateringDetail(
-            irrigationAmount = IrrigationAmount.LOW,
-            irrigationMethod = IrrigationMethod.DRIP,
+            requireNotNull(member.id),
+            recordId,
+            requireNotNull(farm.id),
+            requireNotNull(crop.id),
+            WorkType.WATERING,
+            LocalDateTime.of(2026, 7, 12, 8, 30),
+            "흐림",
+            22,
+            "전날 강우를 반영해 관수량을 조절했습니다.",
+            null,
+            FarmingRecordCommand.WateringDetail(
+            IrrigationAmount.LOW,
+            IrrigationMethod.DRIP,
         ),
-    )
+            null,
+            null,
+            null,
+            null,
+            emptyList(),
+        )
 
     private fun generatedFeedback() = RecordFeedbackGenerationResult(
         content = RecordFeedbackContent(

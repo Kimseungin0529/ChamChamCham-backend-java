@@ -107,8 +107,8 @@ class FarmingCycleReportControllerTest(
         `when`(service.getDetail(memberId, selectedReportId))
             .thenReturn(
                 FarmingCycleReportResult.Detail(
-                    selected = selectedSnapshot(),
-                ),
+            selectedSnapshot(),
+        ),
             )
 
         mockMvc.perform(
@@ -178,7 +178,10 @@ class FarmingCycleReportControllerTest(
     @Test
     fun `list passes cursor and requested size to service`() {
         `when`(service.listCompleted(searchCondition(cursor = "cursor-1", size = 5)))
-            .thenReturn(FarmingCycleReportResult.Page(emptyList(), null))
+            .thenReturn(FarmingCycleReportResult.Page(
+            emptyList(),
+            null,
+        ))
 
         mockMvc.perform(
             get("/api/v1/farming-reports")
@@ -224,7 +227,10 @@ class FarmingCycleReportControllerTest(
         )
         conditions.forEach { condition ->
             `when`(service.listCompleted(condition))
-                .thenReturn(FarmingCycleReportResult.Page(emptyList(), null))
+                .thenReturn(FarmingCycleReportResult.Page(
+            emptyList(),
+            null,
+        ))
         }
 
         mockMvc.perform(get("/api/v1/farming-reports").with(authenticatedMember(memberId.toString())))
@@ -252,13 +258,16 @@ class FarmingCycleReportControllerTest(
     @Test
     fun `list binds repeated farm and crop ids as multi filters`() {
         val condition = FarmingCycleReportSearchCondition(
-            memberId = memberId,
-            farmIds = setOf(farmId, secondFarmId),
-            cropIds = setOf(cropId, secondCropId),
-            cursor = null,
-            size = 20,
+            memberId,
+            setOf(farmId, secondFarmId),
+            setOf(cropId, secondCropId),
+            null,
+            20,
         )
-        `when`(service.listCompleted(condition)).thenReturn(FarmingCycleReportResult.Page(emptyList(), null))
+        `when`(service.listCompleted(condition)).thenReturn(FarmingCycleReportResult.Page(
+            emptyList(),
+            null,
+        ))
 
         mockMvc.perform(
             get("/api/v1/farming-reports")
@@ -297,30 +306,30 @@ class FarmingCycleReportControllerTest(
         cursor: String? = null,
         size: Int = 20,
     ) = FarmingCycleReportSearchCondition(
-        memberId = memberId,
-        farmIds = farmId?.let(::setOf).orEmpty(),
-        cropIds = cropId?.let(::setOf).orEmpty(),
-        cursor = cursor,
-        size = size,
-    )
+            memberId,
+            farmId?.let(::setOf).orEmpty(),
+            cropId?.let(::setOf).orEmpty(),
+            cursor,
+            size,
+        )
 
     private fun completedPage() = FarmingCycleReportResult.Page(
-        items = listOf(
+            listOf(
             FarmingCycleReportResult.Metadata(
-                id = previousReportId,
-                farmId = farmId,
-                farmName = "초록농장",
-                cropId = cropId,
-                cropName = "감초",
-                status = FarmingCycleReportStatus.COMPLETED,
-                startsAt = LocalDateTime.of(2026, 1, 1, 9, 0),
-                endsAt = LocalDateTime.of(2026, 6, 30, 17, 0),
-                startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-                sourceRevision = 7L,
-            ),
+            previousReportId,
+            farmId,
+            "초록농장",
+            cropId,
+            "감초",
+            FarmingCycleReportStatus.COMPLETED,
+            LocalDateTime.of(2026, 1, 1, 9, 0),
+            LocalDateTime.of(2026, 6, 30, 17, 0),
+            FarmingCycleStartBasis.FIRST_RECORD,
+            7L,
         ),
-        nextCursor = "next-cursor",
-    )
+        ),
+            "next-cursor",
+        )
 
     private fun selectedSnapshot(
         statistics: CycleReportStatistics = representativeStatistics(),
@@ -347,20 +356,20 @@ class FarmingCycleReportControllerTest(
         endsAt: LocalDateTime?,
         statistics: CycleReportStatistics,
     ) = FarmingCycleReportResult.Snapshot(
-        id = id,
-        farmId = farmId,
-        farmName = "초록농장",
-        cropId = cropId,
-        cropName = "감초",
-        status = status,
-        startsAt = startsAt,
-        endsAt = endsAt,
-        startBasis = FarmingCycleStartBasis.FIRST_RECORD,
-        finalHarvestRecordId = finalHarvestRecordId.takeIf { status == FarmingCycleReportStatus.COMPLETED },
-        statisticsSchemaVersion = 1,
-        sourceRevision = 7L,
-        statistics = statistics,
-    )
+            id,
+            farmId,
+            "초록농장",
+            cropId,
+            "감초",
+            status,
+            startsAt,
+            endsAt,
+            FarmingCycleStartBasis.FIRST_RECORD,
+            finalHarvestRecordId.takeIf { status == FarmingCycleReportStatus.COMPLETED },
+            1,
+            7L,
+            statistics,
+        )
 
     private fun representativeStatistics() = CycleReportStatistics(
         PlantingStatistics(
