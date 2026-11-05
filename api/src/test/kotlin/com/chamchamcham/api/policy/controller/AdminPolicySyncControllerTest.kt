@@ -52,9 +52,9 @@ class AdminPolicySyncControllerTest(
         `when`(policySyncService.createAdminSyncJob(adminMemberId))
             .thenReturn(
                 PolicySyncResult.JobSummary(
-                    jobId = jobId,
-                    status = PolicySyncJobStatus.RUNNING,
-                    targetYear = "2026"
+                    jobId,
+                    PolicySyncJobStatus.RUNNING,
+                    "2026"
                 )
             )
 
@@ -79,18 +79,18 @@ class AdminPolicySyncControllerTest(
         `when`(policySyncService.getJob(jobId))
             .thenReturn(
                 PolicySyncResult.JobDetail(
-                    jobId = jobId,
-                    source = PolicySource.NONGUP_EZ,
-                    targetYear = "2026",
-                    triggerType = PolicySyncTriggerType.ADMIN,
-                    status = PolicySyncJobStatus.SUCCEEDED,
-                    totalCount = 10,
-                    syncedCount = 9,
-                    detailSuccessCount = 8,
-                    detailFailureCount = 1,
-                    errorMessage = null,
-                    startedAt = startedAt,
-                    finishedAt = finishedAt
+                    jobId,
+                    PolicySource.NONGUP_EZ,
+                    "2026",
+                    PolicySyncTriggerType.ADMIN,
+                    PolicySyncJobStatus.SUCCEEDED,
+                    10,
+                    9,
+                    8,
+                    1,
+                    null,
+                    startedAt,
+                    finishedAt
                 )
             )
 

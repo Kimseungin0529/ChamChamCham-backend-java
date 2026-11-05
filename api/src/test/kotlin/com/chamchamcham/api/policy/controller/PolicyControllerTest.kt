@@ -58,21 +58,21 @@ class PolicyControllerTest(
         )
             .thenReturn(
                 PolicyRecommendationResult.Page(
-                    items = listOf(
+                    listOf(
                         PolicyRecommendationResult.Card(
-                            recommendationId = recommendationId,
-                            policyProgramId = policyProgramId,
-                            programTitle = "청년농 정착 지원",
-                            eligibilitySummary = "만 40세 미만",
-                            benefitSummary = "월 최대 110만원",
-                            applicationPeriodLabel = "2026.01.01 - 2026.02.28",
-                            agencyName = "농림축산식품부",
-                            score = BigDecimal("87.50"),
-                            reason = "재배 작물과 지역 조건이 일치합니다",
-                            createdAt = LocalDateTime.of(2026, 1, 1, 0, 0)
+                            recommendationId,
+                            policyProgramId,
+                            "청년농 정착 지원",
+                            "만 40세 미만",
+                            "월 최대 110만원",
+                            "2026.01.01 - 2026.02.28",
+                            "농림축산식품부",
+                            BigDecimal("87.50"),
+                            "재배 작물과 지역 조건이 일치합니다",
+                            LocalDateTime.of(2026, 1, 1, 0, 0)
                         )
                     ),
-                    nextCursor = "cursor-2"
+                    "cursor-2"
                 )
             )
 
@@ -189,35 +189,35 @@ class PolicyControllerTest(
         `when`(policyRecommendationService.getProgramDetail(memberId, policyProgramId))
             .thenReturn(
                 PolicyRecommendationResult.Detail(
-                    id = policyProgramId,
-                    programTitle = "청년농 정착 지원",
-                    sourceYear = "2026",
-                    agencyName = "농림축산식품부",
-                    departmentName = "청년농육성팀",
-                    applicationPeriodLabel = "2026.01.01 - 2026.02.28",
-                    onlineApplyAvailable = true,
-                    sourceUrl = "https://www.nongupez.go.kr/detail",
-                    applicationUrl = "https://www.nongupez.go.kr/apply",
-                    purpose = "영농 초기 정착 지원",
-                    summary = "청년농을 위한 정착 지원",
-                    eligibility = "만 40세 미만 농업인",
-                    benefit = "정착지원금",
-                    applicationMethod = "온라인 신청",
-                    requiredDocuments = "사업계획서",
-                    selectionCriteria = "영농 의지",
-                    contacts = listOf(
+                    policyProgramId,
+                    "청년농 정착 지원",
+                    "2026",
+                    "농림축산식품부",
+                    "청년농육성팀",
+                    "2026.01.01 - 2026.02.28",
+                    true,
+                    "https://www.nongupez.go.kr/detail",
+                    "https://www.nongupez.go.kr/apply",
+                    "영농 초기 정착 지원",
+                    "청년농을 위한 정착 지원",
+                    "만 40세 미만 농업인",
+                    "정착지원금",
+                    "온라인 신청",
+                    "사업계획서",
+                    "영농 의지",
+                    listOf(
                         PolicyRecommendationResult.Contact(
-                            agencyName = "농림축산식품부",
-                            departmentName = "청년농육성팀",
-                            phoneNumber = "044-000-0000"
+                            "농림축산식품부",
+                            "청년농육성팀",
+                            "044-000-0000"
                         )
                     ),
-                    attachments = listOf(
+                    listOf(
                         PolicyRecommendationResult.Attachment(
-                            fileName = "guide.pdf",
-                            extension = "pdf",
-                            sizeBytes = 1024,
-                            url = "https://www.nongupez.go.kr/guide.pdf"
+                            "guide.pdf",
+                            "pdf",
+                            1024,
+                            "https://www.nongupez.go.kr/guide.pdf"
                         )
                     )
                 )
