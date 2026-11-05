@@ -76,22 +76,25 @@ class FoundationContractTest {
     }
 
     @Test void responseEnvelopeKeepsNullsMessageKeyAndValueEquality() throws Exception {
-        var empty = ApiResponse.Companion.empty(kotlin.Unit.INSTANCE);
+        var empty = ApiResponse.empty(kotlin.Unit.INSTANCE);
         assertThat(mapper.readTree(mapper.writeValueAsString(empty)))
             .isEqualTo(mapper.readTree("{\"success\":true,\"data\":null,\"error\":null}"));
-        var error = ApiResponse.Companion.fail("COMMON_001", "error.invalid_input", Map.of("field", "latitude"));
+        var error = ApiResponse.fail("COMMON_001", "error.invalid_input", Map.of("field", "latitude"));
         assertThat(mapper.readTree(mapper.writeValueAsString(error))).isEqualTo(mapper.readTree("""
             {"success":false,"data":null,"error":{"code":"COMMON_001","message":"error.invalid_input","detail":{"field":"latitude"}}}
             """));
-        assertThat(ApiResponse.Companion.ok("value")).isEqualTo(ApiResponse.Companion.ok("value"));
+        assertThat(ApiResponse.ok("value")).isEqualTo(ApiResponse.ok("value"));
     }
 
-    @Test void cloudinaryBinderKeepsSecureDefaultAndExplicitOverride() {
+    @Test void cloudinaryBinderKeepsSecureDefaultAndExplicitOverride() throws Exception {
         var properties = new java.util.HashMap<String, Object>(Map.of("cloudinary.cloud-name", "fixture", "cloudinary.api-key", "fixture", "cloudinary.api-secret", "fixture"));
         var defaults = new Binder(new MapConfigurationPropertySource(properties)).bind("cloudinary", Bindable.of(CloudinaryProperties.class)).get();
         assertThat(defaults.getSecure()).isTrue();
         properties.put("cloudinary.secure", "false");
         var override = new Binder(new MapConfigurationPropertySource(properties)).bind("cloudinary", Bindable.of(CloudinaryProperties.class)).get();
         assertThat(override.getSecure()).isFalse();
+        var json = "{\"cloudName\":\"fixture\",\"apiKey\":\"fixture\",\"apiSecret\":\"fixture\"}";
+        assertThat(mapper.readValue(json, CloudinaryProperties.class).getSecure()).isTrue();
+        assertThat(mapper.readValue(json.replace("{", "{\"secure\":null,"), CloudinaryProperties.class).getSecure()).isFalse();
     }
 }

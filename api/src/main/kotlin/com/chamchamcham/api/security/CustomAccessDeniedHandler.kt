@@ -21,9 +21,9 @@ class CustomAccessDeniedHandler : AccessDeniedHandler {
     ) {
 
         val body = ApiResponse.fail(
-            code = ErrorCode.FORBIDDEN.code,        // Forbidden 코드
-            messageKey = ErrorCode.FORBIDDEN.messageKey,
-            detail = "You do not have permission to access this resource"
+            ErrorCode.FORBIDDEN.code,        // Forbidden 코드
+            ErrorCode.FORBIDDEN.messageKey,
+            "You do not have permission to access this resource"
         )
 
         response.status = ErrorCode.FORBIDDEN.status

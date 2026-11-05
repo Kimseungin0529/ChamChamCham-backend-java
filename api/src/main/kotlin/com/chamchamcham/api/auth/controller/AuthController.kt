@@ -3,7 +3,6 @@ package com.chamchamcham.api.auth.controller
 import com.chamchamcham.api.common.ApiResponse
 import com.chamchamcham.api.auth.dto.AuthRequests
 import com.chamchamcham.api.auth.dto.AuthResponses
-import com.chamchamcham.api.farm.dto.toCommandDraft
 import com.chamchamcham.application.auth.common.AuthCommand
 import com.chamchamcham.application.auth.common.OnboardingService
 import com.chamchamcham.application.auth.local.AuthService
