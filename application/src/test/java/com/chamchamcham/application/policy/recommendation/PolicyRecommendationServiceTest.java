@@ -369,7 +369,7 @@ class PolicyRecommendationServiceTest {
     }
     @SuppressWarnings("unchecked")
     private List<PolicyRecommendation> capturedSavedRecommendations() {
-        
+
         var captor = (ArgumentCaptor<Iterable<PolicyRecommendation>>) (ArgumentCaptor<?>) ArgumentCaptor.forClass(Iterable.class);
         verify(policyRecommendationRepository).saveAll(captor.capture());
         var saved = new ArrayList<PolicyRecommendation>();
