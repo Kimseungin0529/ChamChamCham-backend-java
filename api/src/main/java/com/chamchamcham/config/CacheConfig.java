@@ -1,7 +1,7 @@
-package com.chamchamcham.config
+package com.chamchamcham.config;
 
-import org.springframework.cache.annotation.EnableCaching
-import org.springframework.context.annotation.Configuration
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 캐시 활성화. 스펙(TTL/최대 크기)은 application.yml의 `spring.cache.caffeine.spec`에 둔다.
@@ -21,4 +21,4 @@ import org.springframework.context.annotation.Configuration
  */
 @Configuration
 @EnableCaching
-class CacheConfig
+public class CacheConfig {}
