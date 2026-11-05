@@ -19,9 +19,9 @@ class CustomAuthenticationEntryPoint : AuthenticationEntryPoint {
     ) {
 
         val body = ApiResponse.fail(
-            code = ErrorCode.UNAUTHORIZED.code,
-            messageKey = ErrorCode.UNAUTHORIZED.messageKey,
-            detail = "Authorization header missing or invalid"
+            ErrorCode.UNAUTHORIZED.code,
+            ErrorCode.UNAUTHORIZED.messageKey,
+            "Authorization header missing or invalid"
         )
 
         response.status = ErrorCode.UNAUTHORIZED.status
