@@ -164,6 +164,34 @@ class PolicySyncServiceTest {
         assertEquals(PolicySyncJobStatus.FAILED, result.getStatus());
         verify(policyProgramRepository, never()).deleteAll();
     }
+    @Test
+    @DisplayName("Spring keeps the optional Clock dependency and its system default")
+    void springKeepsOptionalClockAndDefault() throws Exception {
+        when(sourceClient.detectLatestYear()).thenThrow(new IllegalStateException("condition down"));
+        when(policySyncJobRepository.save(any(PolicySyncJob.class))).thenAnswer(invocation -> {
+            PolicySyncJob job = invocation.getArgument(0);
+            return new PolicySyncJob(jobId, job.getSource(), job.getTargetYear(), job.getTriggerType(), job.getStatus(), job.getStartedAt(), job.getFinishedAt(), job.getTotalCount(), job.getSyncedCount(), job.getDetailSuccessCount(), job.getDetailFailureCount(), job.getErrorMessage(), job.getCreatedByMemberId());
+        });
+        for (boolean fixed : new boolean[]{false, true}) {
+            try (var context = new org.springframework.context.annotation.AnnotationConfigApplicationContext()) {
+                var beans = context.getBeanFactory();
+                beans.registerSingleton("sourceClient", sourceClient);
+                beans.registerSingleton("programs", policyProgramRepository);
+                beans.registerSingleton("jobs", policySyncJobRepository);
+                beans.registerSingleton("text", new PolicyCardTextGenerator());
+                beans.registerSingleton("tags", new NongupEzPolicyTagExtractor());
+                beans.registerSingleton("codec", new TextListJsonCodec());
+                beans.registerSingleton("tx", new TransactionTemplate(new TestTransactionManager()));
+                if (fixed) beans.registerSingleton("clock", Clock.fixed(java.time.Instant.parse("2001-01-01T00:00:00Z"), java.time.ZoneOffset.UTC));
+                context.registerBean(PolicySyncService.class);
+                context.refresh();
+                var result = context.getBean(PolicySyncService.class).createAdminSyncJob(adminMemberId);
+                assertEquals(fixed ? "2001" : Integer.toString(java.time.Year.now().getValue()), result.getTargetYear());
+                assertEquals(PolicySyncJobStatus.FAILED, result.getStatus());
+            }
+        }
+    }
+
     private void stubJobSaveAndFind() {
         when(policySyncJobRepository.save(any(PolicySyncJob.class))).thenAnswer(invocation -> {
         var job = ((PolicySyncJob) invocation.getArguments()[0]);

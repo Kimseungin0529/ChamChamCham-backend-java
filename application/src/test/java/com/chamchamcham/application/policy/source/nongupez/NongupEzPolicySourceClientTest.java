@@ -14,14 +14,14 @@ class NongupEzPolicySourceClientTest {
 
     @Test
     @DisplayName("detectLatestYear ignores all option and selects max numeric year")
-    void detectsLatestYear() {
+    void detectsLatestYear() throws Exception {
         var client = new NongupEzPolicySourceClient(fakeTransport(CONDITIONS_PATH, fixture("conditions.json")));
         assertThat(client.detectLatestYear()).isEqualTo("2026");
     }
 
     @Test
     @DisplayName("fetchPrograms parses list page into source list item")
-    void parsesListPage() {
+    void parsesListPage() throws Exception {
         var captured = new AtomicReference<Map<String, ?>>();
         var client = new NongupEzPolicySourceClient((path, body) -> {
             captured.set(body);
@@ -44,7 +44,7 @@ class NongupEzPolicySourceClientTest {
 
     @Test
     @DisplayName("fetchDetail parses long text contacts and attachments")
-    void parsesDetail() {
+    void parsesDetail() throws Exception {
         var client = new NongupEzPolicySourceClient(fakeTransport(DETAIL_PATH, fixture("detail-success.json")));
         var detail = client.fetchDetail("AB000009", "2026");
         assertThat(detail.getEligibility()).contains("농업경영정보");
@@ -54,7 +54,7 @@ class NongupEzPolicySourceClientTest {
 
     @Test
     @DisplayName("fetchDetail tolerates null optional fields")
-    void toleratesOptionalNulls() {
+    void toleratesOptionalNulls() throws Exception {
         var client = new NongupEzPolicySourceClient(fakeTransport(DETAIL_PATH, fixture("detail-missing-optional-fields.json")));
         var detail = client.fetchDetail("AB000010", "2026");
         assertThat(detail.getAgencyName()).isEqualTo("농업e지");

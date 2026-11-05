@@ -17,6 +17,7 @@ class PolicyRecommendationScorerTest {
         var profile = new PolicyMemberProfile(LocalDate.of(1995, 1, 1), 2, ManagementType.AGRICULTURAL_INDIVIDUAL, Set.of("참당귀"), Set.of("ROOT_BARK"), Set.of("충청북도", "제천시"));
         var scored = scorer.score(profile, Set.of("YOUNG_FARMER", "REGISTERED_FARMER"), Set.of("MEDICINAL_CROP"), Set.of("충청북도"), true, LocalDate.of(2026, 4, 1));
         assertThat(scored.getScore().doubleValue()).isGreaterThanOrEqualTo(70.0);
+        assertThat(scored.getScore()).isEqualByComparingTo("96");
         assertThat(scored.getEligible()).isTrue();
         assertThat(scored.getReason()).isEqualTo("청년농 대상이고 재배 품목이 맞아요.");
     }

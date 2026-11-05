@@ -65,9 +65,9 @@ class SecurityConfigAdminTest(
         `when`(policySyncService.createAdminSyncJob(adminMemberId))
             .thenReturn(
                 PolicySyncResult.JobSummary(
-                    jobId = jobId,
-                    status = PolicySyncJobStatus.SUCCEEDED,
-                    targetYear = "2026"
+                    jobId,
+                    PolicySyncJobStatus.SUCCEEDED,
+                    "2026"
                 )
             )
 

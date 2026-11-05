@@ -96,4 +96,42 @@ class CatalogSearchContractTest {
         assertThat(Character.isHighSurrogate(result.charAt(18))).isTrue();
         assertThat(generator.periodLabel(LocalDate.of(2026, 3, 25), LocalDate.of(2026, 6, 30), "무시")).isEqualTo("2026.03.25~06.30");
     }
+    @Test
+    void emptyResultsRejectClearAndAbsentRemoval() {
+        var codec = new TextListJsonCodec();
+        assertThatThrownBy(() -> codec.decode(null).clear()).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> codec.decode("[]").remove("없음")).isInstanceOf(UnsupportedOperationException.class);
+        var service = new SearchSuggestionService(mock(CropRepository.class), mock(PesticideQueryRepository.class), mock(PolicyProgramRepository.class));
+        assertThatThrownBy(() -> service.suggest(null).getKeywords().clear()).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> service.suggest(" ").getKeywords().remove("없음")).isInstanceOf(UnsupportedOperationException.class);
+    }
+    @Test
+    void nullStoredTagsAreIgnoredByMatchingRequirements() {
+        var scorer = new PolicyRecommendationScorer(new PolicyRegionMatcher());
+        var profile = new PolicyMemberProfile(null, null, com.chamchamcham.domain.member.ManagementType.AGRICULTURAL_INDIVIDUAL, Set.of(), Set.of(), Set.of());
+        var targets = new LinkedHashSet<>(Arrays.asList(null, "REGISTERED_FARMER"));
+        var crops = Collections.<String>singleton(null);
+        var score = scorer.score(profile, targets, crops, Set.of("전국"), false, LocalDate.of(2026, 4, 1));
+        assertThat(score.getEligible()).isTrue();
+        assertThat(score.getScore()).isEqualByComparingTo("55");
+        var generic = scorer.score(profile, Collections.singleton(null), crops, Set.of("전국"), false, LocalDate.of(2026, 4, 1));
+        assertThat(generic.getEligible()).isFalse();
+        assertThat(generic.getScore()).isEqualByComparingTo("0");
+    }
+
+    @Test
+    void catalogPageRetainsSelectedRowsWhenSourceListChangesDuringCursorEncoding() throws Exception {
+        var query = mock(PesticideQueryRepository.class);
+        var codec = mock(OpaqueCursorCodec.class);
+        var rows = new ArrayList<Pesticide>();
+        rows.add(new Pesticide(UUID.randomUUID(), "품목1", "상표1"));
+        rows.add(new Pesticide(UUID.randomUUID(), "품목2", "상표2"));
+        rows.add(new Pesticide(UUID.randomUUID(), "품목3", "상표3"));
+        when(query.search(new PesticideQueryRepository.SearchCondition(null, null, 3))).thenReturn(rows);
+        when(codec.encode(any())).thenAnswer(invocation -> { rows.clear(); return "next"; });
+        var service = new PesticideCatalogService(mock(PesticideRepository.class), query, mock(PesticideApplicationRepository.class), codec);
+        var page = service.search(null, null, 2);
+        assertThat(page.getItems()).extracting(PesticideResult.Summary::getBrandName).containsExactly("상표1", "상표2");
+        assertThat(page.getNextCursor()).isEqualTo("next");
+    }
 }

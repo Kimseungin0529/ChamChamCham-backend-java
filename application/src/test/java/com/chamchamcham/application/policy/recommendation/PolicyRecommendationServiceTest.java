@@ -367,11 +367,14 @@ class PolicyRecommendationServiceTest {
         var exception = assertThrows(BusinessException.class, () -> service.getProgramDetail(memberId, policyProgramId));
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.POLICY_PROGRAM_NOT_FOUND);
     }
+    @SuppressWarnings("unchecked")
     private List<PolicyRecommendation> capturedSavedRecommendations() {
         
         var captor = (ArgumentCaptor<Iterable<PolicyRecommendation>>) (ArgumentCaptor<?>) ArgumentCaptor.forClass(Iterable.class);
         verify(policyRecommendationRepository).saveAll(captor.capture());
-        return (List<PolicyRecommendation>) captor.getValue();
+        var saved = new ArrayList<PolicyRecommendation>();
+        captor.getValue().forEach(saved::add);
+        return saved;
     }
     private PolicyRecommendationQueryRepository.SearchCondition recommendationSearchCondition(String benefitSummary, PolicyRecommendationSort sort, PolicyRecommendationQueryRepository.Cursor cursor, int size) {
         return new PolicyRecommendationQueryRepository.SearchCondition(memberId, PolicySource.NONGUP_EZ, "2026", benefitSummary, sort, cursor, size);

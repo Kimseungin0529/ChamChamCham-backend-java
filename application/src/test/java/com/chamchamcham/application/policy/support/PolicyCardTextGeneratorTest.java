@@ -13,8 +13,8 @@ class PolicyCardTextGeneratorTest {
     @DisplayName("benefit categories expose canonical keys and labels")
     void benefit_categories_expose_canonical_keys_and_labels() throws Exception {
         assertThat(Arrays.asList(PolicyBenefitCategory.values()).stream().map(it -> new AbstractMap.SimpleEntry<>(it.name(), it.getLabel())).toList()).containsExactly(new AbstractMap.SimpleEntry<>("GRANT", "지원금"), new AbstractMap.SimpleEntry<>("FINANCE", "융자·금융"), new AbstractMap.SimpleEntry<>("FACILITY_EQUIPMENT", "시설·장비"), new AbstractMap.SimpleEntry<>("EDUCATION", "교육"), new AbstractMap.SimpleEntry<>("WELFARE", "복지"), new AbstractMap.SimpleEntry<>("CERTIFICATION", "인증"), new AbstractMap.SimpleEntry<>("MARKET", "판로"), new AbstractMap.SimpleEntry<>("STARTUP", "창업"), new AbstractMap.SimpleEntry<>("ENVIRONMENT_INFRA", "환경·인프라"), new AbstractMap.SimpleEntry<>("ETC", "기타"));
-        assertThat(PolicyBenefitCategory.Companion.fromKey("FINANCE")).isEqualTo(PolicyBenefitCategory.FINANCE);
-        assertThat(PolicyBenefitCategory.Companion.fromKey("bad")).isNull();
+        assertThat(PolicyBenefitCategory.fromKey("FINANCE")).isEqualTo(PolicyBenefitCategory.FINANCE);
+        assertThat(PolicyBenefitCategory.fromKey("bad")).isNull();
     }
 
     @Test

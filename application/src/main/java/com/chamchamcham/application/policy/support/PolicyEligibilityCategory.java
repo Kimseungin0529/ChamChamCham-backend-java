@@ -1,6 +1,6 @@
-package com.chamchamcham.application.policy.support
+package com.chamchamcham.application.policy.support;
 
-enum class PolicyEligibilityCategory(val label: String) {
+public enum PolicyEligibilityCategory {
     YOUNG_FARMER("청년 농업인"),
     RETURNING_FARMER("귀농·귀촌인"),
     FEMALE_FARMER("여성 농업인"),
@@ -14,5 +14,9 @@ enum class PolicyEligibilityCategory(val label: String) {
     AGRI_CORPORATION("농업법인·단체"),
     REGISTERED_FARMER("경영체 등록 농업인"),
     FARMER("농업인"),
-    UNKNOWN("상세 자격 확인")
+    UNKNOWN("상세 자격 확인");
+
+    private final String label;
+    PolicyEligibilityCategory(String label) { this.label = label; }
+    public String getLabel() { return label; }
 }

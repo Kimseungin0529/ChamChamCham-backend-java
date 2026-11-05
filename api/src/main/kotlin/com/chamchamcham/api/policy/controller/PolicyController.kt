@@ -37,11 +37,11 @@ class PolicyController(
         val parsedSort = PolicyRecommendationSort.fromKey(sort)
             ?: throw BusinessException(ErrorCode.INVALID_INPUT)
         val result = policyRecommendationService.listRecommendations(
-            memberId = parseMemberId(principal),
-            cursor = cursor,
-            size = size,
-            benefitCategory = parsedBenefitCategory,
-            sort = parsedSort
+            parseMemberId(principal),
+            cursor,
+            size,
+            parsedBenefitCategory,
+            parsedSort
         )
         return ResponseEntity.ok(ApiResponse.ok(PolicyRecommendationPageResponse.from(result)))
     }
