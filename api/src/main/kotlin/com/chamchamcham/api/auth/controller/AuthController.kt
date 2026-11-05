@@ -80,9 +80,9 @@ class AuthController(
     ): ResponseEntity<ApiResponse<AuthResponses.LoginResponse>> {
         val result = kakaoLoginService.login(
             AuthCommand.KakaoLogin(
-                idToken = request.idToken,
-                nonce = request.nonce,
-                kakaoAccessToken = request.kakaoAccessToken
+                request.idToken,
+                request.nonce,
+                request.kakaoAccessToken
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(AuthResponses.LoginResponse.from(result)))
@@ -94,11 +94,11 @@ class AuthController(
     ): ResponseEntity<ApiResponse<AuthResponses.LoginResponse>> {
         val result = appleLoginService.login(
             AuthCommand.AppleLogin(
-                identityToken = request.identityToken,
-                nonce = request.nonce,
-                authorizationCode = request.authorizationCode,
-                userIdentifier = request.userIdentifier,
-                name = request.name
+                request.identityToken,
+                request.nonce,
+                request.authorizationCode,
+                request.userIdentifier,
+                request.name
             )
         )
         return ResponseEntity.ok(ApiResponse.ok(AuthResponses.LoginResponse.from(result)))
@@ -119,16 +119,16 @@ class AuthController(
     ): ResponseEntity<ApiResponse<AuthResponses.OnboardingCompleteResponse>> {
         val result = onboardingService.complete(
             AuthCommand.CompleteOnboarding(
-                memberId = parseMemberId(memberId),
-                name = request.name,
-                phone = request.phone,
-                birthDate = request.birthDate,
-                nickname = request.nickname,
-                experienceLevel = requireNotNull(request.experienceLevel),
-                managementType = requireNotNull(request.managementType),
-                farm = requireNotNull(request.farm).toCommandDraft(),
-                cropIds = request.cropIds,
-                profileMediaId = request.profileMediaId
+                parseMemberId(memberId),
+                request.name,
+                request.phone,
+                request.birthDate,
+                request.nickname,
+                requireNotNull(request.experienceLevel),
+                requireNotNull(request.managementType),
+                requireNotNull(request.farm).toCommandDraft(),
+                request.cropIds,
+                request.profileMediaId
             )
         )
 

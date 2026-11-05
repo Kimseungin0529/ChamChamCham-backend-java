@@ -60,11 +60,11 @@ class NaverProfileRestClient internal constructor(
             ?: throw BusinessException(ErrorCode.INVALID_NAVER_TOKEN)
 
         return NaverProfile(
-            subject = subject,
-            email = profile.email,
-            name = profile.name,
-            phone = profile.mobile,
-            birthDate = parseBirthDate(profile.birthyear, profile.birthday)
+            subject,
+            profile.email,
+            profile.name,
+            profile.mobile,
+            parseBirthDate(profile.birthyear, profile.birthday)
         )
     }
 

@@ -214,22 +214,22 @@ class AuthControllerValidationTest(
 
     private fun loginResult(): AuthResult.Login {
         return AuthResult.Login(
-            accessToken = "access-token",
-            refreshToken = "refresh-token",
-            member = AuthResult.MemberProfile(
-                id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-                email = null,
-                name = null,
-                phone = null,
-                birthDate = null,
-                nickname = null,
-                experienceLevel = null,
-                managementType = null,
-                profileImageUrl = null
+            "access-token",
+            "refresh-token",
+            AuthResult.MemberProfile(
+                UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
             ),
-            onboarding = AuthResult.Onboarding(
-                status = AuthResult.OnboardingStatus.REQUIRED,
-                missingFields = emptyList()
+            AuthResult.Onboarding(
+                AuthResult.OnboardingStatus.REQUIRED,
+                emptyList()
             )
         )
     }
