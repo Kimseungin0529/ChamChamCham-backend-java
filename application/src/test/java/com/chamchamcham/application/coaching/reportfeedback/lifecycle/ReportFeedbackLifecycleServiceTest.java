@@ -52,7 +52,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class})
 class ReportFeedbackLifecycleServiceTest {
@@ -311,7 +310,7 @@ class ReportFeedbackLifecycleServiceTest {
         });
     }
     private ReportFeedbackContext context(WorkType workType, long sourceRevision, Object recordCount) {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), report.getStartsAt(), Objects.requireNonNull(report.getEndsAt()), sourceRevision, map(new AbstractMap.SimpleEntry<>("recordCount", recordCount))), java.util.Arrays.asList(new ReportFeedbackRecord(new UUID(0, (long) workType.ordinal()+ 1), report.getStartsAt().plusDays(1), workType, "" + workType.getLabel() + " 기록", Map.of())), null, List.of(), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), report.getStartsAt(), Objects.requireNonNull(report.getEndsAt()), sourceRevision, map(new AbstractMap.SimpleEntry<>("recordCount", recordCount))), java.util.Arrays.asList(new ReportFeedbackRecord(new UUID(0, (long) workType.ordinal()+ 1), report.getStartsAt().plusDays(1), workType, "" + workType.getLabel() + " 기록", Map.of())), null, List.of(), List.of());
     }
     private void setId(Object target, UUID id) { org.springframework.test.util.ReflectionTestUtils.setField(target, "id", id); }
     private void setStatistics(FarmingCycleReport target, CycleReportStatistics statistics) { org.springframework.test.util.ReflectionTestUtils.setField(target, "statistics", statistics); }

@@ -50,7 +50,6 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class})
 class ReportFeedbackPreparationHandlerTest {
@@ -136,7 +135,7 @@ class ReportFeedbackPreparationHandlerTest {
     @Test
     @DisplayName("preparation preserves an empty comparison list when no previous report exists")
     void preparation_preserves_an_empty_comparison_list_when_no_previous_report_exists() throws Exception {
-        var noPrevious = context().copy(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
+        var noPrevious = new ReportFeedbackContext(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
         var noPreviousFingerprint = contextFingerprint.calculate(noPrevious);
         var feedback = pendingFeedback(WorkType.WATERING, feedbackId, noPreviousFingerprint);
         var event = preparationEvent(WorkType.WATERING, this.reportId, noPreviousFingerprint);
@@ -153,7 +152,7 @@ class ReportFeedbackPreparationHandlerTest {
     void preparation_discards_an_assembled_context_whose_fingerprint_no_longer_matches_the_request() throws Exception {
         var feedback = pendingFeedback(WorkType.WATERING, feedbackId, (Objects.equals((WorkType.WATERING), WorkType.WATERING) ? sourceFingerprint() : "f".repeat(64)));
         var event = preparationEvent(WorkType.WATERING, this.reportId, sourceFingerprint());
-        var changedContext = context().copy(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), context().getPreviousReport(), context().getComparisons(), java.util.Arrays.asList("input changed"));
+        var changedContext = new ReportFeedbackContext(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), context().getPreviousReport(), context().getComparisons(), java.util.Arrays.asList("input changed"));
         when(feedbackRepository.findByIdAndMember_Id(feedbackId, memberId)).thenReturn(feedback);
         when(contextAssembler.assemble(memberId, reportId, WorkType.WATERING)).thenReturn(changedContext);
         handler.on(event);
@@ -229,7 +228,7 @@ class ReportFeedbackPreparationHandlerTest {
         return new ReportFeedbackPreparationRequested(feedbackId, memberId, reportId, workType, sourceFingerprint);
     }
     private ReportFeedbackContext context() {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), startsAt, endsAt, 7, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, startsAt.plusDays(1), WorkType.WATERING, "점적관수를 했어요.", Map.of())), new ReportFeedbackPreviousReport(previousReportId, startsAt.minusYears(1), endsAt.minusYears(1), 3, map(new AbstractMap.SimpleEntry<>("recordCount", 3))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("4"), new BigDecimal("3"), new BigDecimal("1"), new BigDecimal("33.33"), "회", new Coverage(3, 4), new Coverage(2, 3))), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), startsAt, endsAt, 7, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, startsAt.plusDays(1), WorkType.WATERING, "점적관수를 했어요.", Map.of())), new ReportFeedbackPreviousReport(previousReportId, startsAt.minusYears(1), endsAt.minusYears(1), 3, map(new AbstractMap.SimpleEntry<>("recordCount", 3))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("4"), new BigDecimal("3"), new BigDecimal("1"), new BigDecimal("33.33"), "회", new Coverage(3, 4), new Coverage(2, 3))), List.of());
     }
     private String sourceFingerprint() {
         return contextFingerprint.calculate(context());

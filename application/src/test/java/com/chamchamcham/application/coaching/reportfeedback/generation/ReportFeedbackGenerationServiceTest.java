@@ -34,7 +34,6 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class ReportFeedbackGenerationServiceTest {
     private final UUID recordId = UUID.randomUUID();
@@ -44,7 +43,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("evidence validation failure is retried with an actionable instruction")
     void evidence_validation_failure_is_retried_with_an_actionable_instruction() throws Exception {
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList("unknown"))), validContent().getImprovements(), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList("unknown"))), validContent().getImprovements(), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
         assertThat(client.requestSpec.userTexts.getLast()).contains("모든 evidenceRefs에는 허용 evidenceRefs에 나열된 값만 사용하세요.").doesNotContain("unknown_evidence");
@@ -53,7 +52,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("section shape failures are retried with an actionable instruction")
     void section_shape_failures_are_retried_with_an_actionable_instruction() throws Exception {
-        var invalid = validContent().copy(validContent().getSummary(), validContent().getComparisons(), List.of(), validContent().getImprovements(), validContent().getNextActions());
+        var invalid = new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), List.of(), validContent().getImprovements(), validContent().getNextActions());
         var client = new FakeChatClient(invalid, validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
@@ -63,7 +62,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("blank item fields retry with actionable field instructions")
     void blank_item_fields_retry_with_actionable_field_instructions() throws Exception {
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(new ReportFeedbackContentItem("", "", List.of())), validContent().getImprovements(), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(new ReportFeedbackContentItem("", "", List.of())), validContent().getImprovements(), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
         assertThat(client.requestSpec.userTexts.getLast()).contains("strengths[0].basis에 판단 근거를 작성하세요.", "strengths[0].text에 잘한 행동과 도움이 된 이유를 공백과 문장부호를 포함해 20~65자로 작성하세요.", "strengths[0].evidenceRefs에 허용 evidenceRefs의 식별자를 하나 이상 포함하세요.").doesNotContain("strength_basis_blank", "strength_text_blank", "strength_evidence_refs_blank");
@@ -77,7 +76,7 @@ class ReportFeedbackGenerationServiceTest {
         var strength = "마".repeat(10)+ "\r  " + "바".repeat(10);
         var improvement = "사".repeat(10)+ "\n\n  " + "아".repeat(10);
         var nextAction = "자".repeat(10)+ " \n " + "차".repeat(10);
-        var client = new FakeChatClient(validContent().copy(summary, java.util.Arrays.asList(comparisonItem(comparison, java.util.Arrays.asList("report:" + reportId + "", "report:" + previousReportId + ""))), java.util.Arrays.asList(item(strength, java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item(improvement, java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item(nextAction, java.util.Arrays.asList("record:" + recordId + "")))));
+        var client = new FakeChatClient(new ReportFeedbackContent(summary, java.util.Arrays.asList(comparisonItem(comparison, java.util.Arrays.asList("report:" + reportId + "", "report:" + previousReportId + ""))), java.util.Arrays.asList(item(strength, java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item(improvement, java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item(nextAction, java.util.Arrays.asList("record:" + recordId + "")))));
         var result = service(client, new FakeVectorStore()).generate(context()).getContent();
         assertThat(client.getAttempts()).isEqualTo(1);
         assertThat(result.getSummary()).isEqualTo("가".repeat(10)+ " " + "나".repeat(10));
@@ -92,7 +91,7 @@ class ReportFeedbackGenerationServiceTest {
     void length_failures_retry_with_field_length_range_and_correction_direction() throws Exception {
         var overlongSummary = "가".repeat(66);
         var overlongImprovement = "나".repeat(73);
-        var client = new FakeChatClient(validContent().copy(overlongSummary, validContent().getComparisons(), validContent().getStrengths(), java.util.Arrays.asList(item(overlongImprovement, java.util.Arrays.asList("record:" + recordId + ""))), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(overlongSummary, validContent().getComparisons(), validContent().getStrengths(), java.util.Arrays.asList(item(overlongImprovement, java.util.Arrays.asList("record:" + recordId + ""))), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
         assertThat(client.requestSpec.userTexts.getLast()).contains("summary는 현재 66자입니다.", "improvements[0].text는 현재 73자입니다.", "공백과 문장부호를 포함해 20~65자로 줄이세요.", "부족한 점, 영향, 보완 방향을 유지하면서").doesNotContain(overlongSummary, overlongImprovement, "summary_text_length", "improvement_text_length");
@@ -103,7 +102,7 @@ class ReportFeedbackGenerationServiceTest {
     void minimum_length_failures_retry_with_field_length_range_and_correction_direction() throws Exception {
         var shortSummary = "가".repeat(19);
         var shortImprovement = "나".repeat(18);
-        var client = new FakeChatClient(validContent().copy(shortSummary, validContent().getComparisons(), validContent().getStrengths(), java.util.Arrays.asList(item(shortImprovement, java.util.Arrays.asList("record:" + recordId + ""))), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(shortSummary, validContent().getComparisons(), validContent().getStrengths(), java.util.Arrays.asList(item(shortImprovement, java.util.Arrays.asList("record:" + recordId + ""))), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
         assertThat(client.requestSpec.userTexts.getLast()).contains("summary는 현재 19자입니다.", "improvements[0].text는 현재 18자입니다.", "공백과 문장부호를 포함해 20~65자로 늘리세요.", "부족한 점, 영향, 보완 방향을 유지하면서").doesNotContain(shortSummary, shortImprovement, "summary_text_length", "improvement_text_length");
@@ -113,7 +112,7 @@ class ReportFeedbackGenerationServiceTest {
     @DisplayName("English summary is accepted without retry")
     void English_summary_is_accepted_without_retry() throws Exception {
         var generatedText = "WATERING 작업 기록의 전체 흐름과 관리 방향을 확인했어요.";
-        var client = new FakeChatClient(validContent().copy(generatedText, validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
+        var client = new FakeChatClient(new ReportFeedbackContent(generatedText, validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(1);
     }
@@ -122,7 +121,7 @@ class ReportFeedbackGenerationServiceTest {
     @DisplayName("English item is accepted without retry")
     void English_item_is_accepted_without_retry() throws Exception {
         var generatedText = "다음에는 DRIP 방식으로 물을 준 뒤 흙 속 수분과 젖은 깊이를 확인하세요.";
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), java.util.Arrays.asList(item(generatedText, java.util.Arrays.asList("record:" + recordId + "")))));
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), java.util.Arrays.asList(item(generatedText, java.util.Arrays.asList("record:" + recordId + "")))));
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(1);
     }
@@ -131,7 +130,7 @@ class ReportFeedbackGenerationServiceTest {
     @DisplayName("English comparison is accepted without retry")
     void English_comparison_is_accepted_without_retry() throws Exception {
         var generatedText = "WATERING 기록이 직전보다 늘어 작업 흐름의 변화를 확인했어요.";
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), java.util.Arrays.asList(comparisonItem(generatedText, java.util.Arrays.asList("report:" + reportId + "", "report:" + previousReportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), java.util.Arrays.asList(comparisonItem(generatedText, java.util.Arrays.asList("report:" + reportId + "", "report:" + previousReportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(1);
     }
@@ -140,8 +139,8 @@ class ReportFeedbackGenerationServiceTest {
     @DisplayName("unavailable comparison is retried with an empty array instruction")
     void unavailable_comparison_is_retried_with_an_empty_array_instruction() throws Exception {
         var generatedText = "직전 재배보다 물 주기 기록이 한 번 늘었어요.";
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), java.util.Arrays.asList(comparisonItem(generatedText, java.util.Arrays.asList("report:" + reportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()), validContent().copy(validContent().getSummary(), List.of(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
-        var unavailableContext = context().copy(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), java.util.Arrays.asList(comparisonItem(generatedText, java.util.Arrays.asList("report:" + reportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()), new ReportFeedbackContent(validContent().getSummary(), List.of(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()));
+        var unavailableContext = new ReportFeedbackContext(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
         service(client, new FakeVectorStore()).generate(unavailableContext);
         assertThat(client.getAttempts()).isEqualTo(2);
         assertThat(client.requestSpec.userTexts.getLast()).contains("comparisons는 빈 배열로 반환하세요.").doesNotContain(generatedText, "comparison_not_available");
@@ -150,7 +149,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("missing comparison report reference is retried without exposing report ids")
     void missing_comparison_report_reference_is_retried_without_exposing_report_ids() throws Exception {
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), java.util.Arrays.asList(comparisonItem("직전 재배보다 물 주기 기록이 한 번 늘어 흐름이 안정됐어요.", java.util.Arrays.asList("report:" + previousReportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), java.util.Arrays.asList(comparisonItem("직전 재배보다 물 주기 기록이 한 번 늘어 흐름이 안정됐어요.", java.util.Arrays.asList("report:" + previousReportId + ""))), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.getAttempts()).isEqualTo(2);
         var retryInstruction = after(client.requestSpec.userTexts.getLast(), "직전 응답은");
@@ -161,7 +160,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("English output remains valid on the first attempt")
     void English_output_remains_valid_on_the_first_attempt() throws Exception {
-        var content = validContent().copy("WATERING 작업 기록의 전체 흐름과 관리 방향을 확인했어요.", validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions());
+        var content = new ReportFeedbackContent("WATERING 작업 기록의 전체 흐름과 관리 방향을 확인했어요.", validContent().getComparisons(), validContent().getStrengths(), validContent().getImprovements(), validContent().getNextActions());
         var client = new FakeChatClient(content, content);
         assertThat(service(client, new FakeVectorStore()).generate(context()).getContent()).isEqualTo(content);
         assertThat(client.getAttempts()).isEqualTo(1);
@@ -171,7 +170,7 @@ class ReportFeedbackGenerationServiceTest {
     @DisplayName("unknown evidence value is not echoed into retry prompt")
     void unknown_evidence_value_is_not_echoed_into_retry_prompt() throws Exception {
         var privateValue = "private-model-value";
-        var client = new FakeChatClient(validContent().copy(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList(privateValue))), validContent().getImprovements(), validContent().getNextActions()), validContent());
+        var client = new FakeChatClient(new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList(privateValue))), validContent().getImprovements(), validContent().getNextActions()), validContent());
         service(client, new FakeVectorStore()).generate(context());
         assertThat(client.requestSpec.userTexts.getLast()).contains("모든 evidenceRefs에는 허용 evidenceRefs에 나열된 값만 사용하세요.").doesNotContain(privateValue, "unknown_evidence");
     }
@@ -179,7 +178,7 @@ class ReportFeedbackGenerationServiceTest {
     @Test
     @DisplayName("two unknown evidence attempts fail only as structured output invalid")
     void two_unknown_evidence_attempts_fail_only_as_structured_output_invalid() throws Exception {
-        var invalid = validContent().copy(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList("unknown"))), validContent().getImprovements(), validContent().getNextActions());
+        var invalid = new ReportFeedbackContent(validContent().getSummary(), validContent().getComparisons(), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList("unknown"))), validContent().getImprovements(), validContent().getNextActions());
         var client = new FakeChatClient(invalid, invalid);
         assertThatThrownBy(() -> service(client, new FakeVectorStore()).generate(context())).isInstanceOfSatisfying(ReportFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(ReportFeedbackFailureCode.STRUCTURED_OUTPUT_INVALID));
         assertThat(client.getAttempts()).isEqualTo(2);
@@ -222,8 +221,8 @@ class ReportFeedbackGenerationServiceTest {
         var base = context();
         var r = base.getRecords().getFirst();
         var records = new ArrayList<>(base.getRecords());
-        records.add(r.copy(r.getId(), r.getWorkedAt(), WorkType.FERTILIZING, r.getMemo(), r.getDetails()));
-        var mixed = base.copy(base.getSchemaVersion(), base.getWorkType(), base.getReport(), records, base.getPreviousReport(), base.getComparisons(), base.getWarnings());
+        records.add(new ReportFeedbackRecord(r.getId(), r.getWorkedAt(), WorkType.FERTILIZING, r.getMemo(), r.getDetails()));
+        var mixed = new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), base.getReport(), records, base.getPreviousReport(), base.getComparisons(), base.getWarnings());
         assertThatThrownBy(() -> service(new FakeChatClient(validContent()), vectorStore).generate(mixed)).isInstanceOfSatisfying(ReportFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(ReportFeedbackFailureCode.INVALID_CONTEXT));
         assertThat(vectorStore.requests).isEmpty();
     }
@@ -239,7 +238,7 @@ class ReportFeedbackGenerationServiceTest {
         return new ReportFeedbackGenerationService(client, vectorStore, new ReportFeedbackRetrievalQueryPlanner(), new ReportFeedbackPromptBuilder(), new RagProperties(new RagProperties.Embedding("test-embedding"), new RagProperties.Chat("test-chat"), new RagProperties.Retrieval(), new RagProperties.Execution()));
     }
     private ReportFeedbackContext context() {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(reportId, "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, LocalDateTime.of(2026, 4, 1, 9, 0), WorkType.WATERING, "점적관수를 했어요.", Map.of())), new ReportFeedbackPreviousReport(previousReportId, LocalDateTime.of(2025, 3, 1, 9, 0), LocalDateTime.of(2025, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("2"), new BigDecimal("1"), new BigDecimal("1"), new BigDecimal("100"), "회", null, null)), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(reportId, "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, LocalDateTime.of(2026, 4, 1, 9, 0), WorkType.WATERING, "점적관수를 했어요.", Map.of())), new ReportFeedbackPreviousReport(previousReportId, LocalDateTime.of(2025, 3, 1, 9, 0), LocalDateTime.of(2025, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("2"), new BigDecimal("1"), new BigDecimal("1"), new BigDecimal("100"), "회", null, null)), List.of());
     }
     private ReportFeedbackContent validContent() {
         return new ReportFeedbackContent("이번 물 주기 기록의 전체 흐름과 관리 방향을 확인했어요.", java.util.Arrays.asList(comparisonItem("직전 재배보다 물 주기 기록이 한 번 늘어 흐름이 안정됐어요.", java.util.Arrays.asList("report:" + reportId + "", "report:" + previousReportId + ""))), java.util.Arrays.asList(item("흙 상태를 살핀 뒤 물을 주어 필요한 곳부터 관리한 점이 좋았어요.", java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item("물의 양이 알맞았는지 흙 속 수분까지 확인해 기록할 필요가 있어요.", java.util.Arrays.asList("record:" + recordId + ""))), java.util.Arrays.asList(item("다음에는 물을 준 뒤 흙 속까지 젖었는지 손으로 확인해 기록하세요.", java.util.Arrays.asList("record:" + recordId + ""))));

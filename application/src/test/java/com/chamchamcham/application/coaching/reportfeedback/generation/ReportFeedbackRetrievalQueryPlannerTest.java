@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class ReportFeedbackRetrievalQueryPlannerTest {
 
@@ -54,7 +53,7 @@ class ReportFeedbackRetrievalQueryPlannerTest {
         assertThat(String.join(" ", queries)).doesNotContain("NEW_METHOD");
     }
     private ReportFeedbackContext context(WorkType workType, Map<String, Object> statistics) {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(UUID.randomUUID(), "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, statistics), java.util.Arrays.asList(new ReportFeedbackRecord(UUID.randomUUID(), LocalDateTime.of(2026, 4, 1, 9, 0), workType, "메모", Map.of())), null, List.of(), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(UUID.randomUUID(), "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, statistics), java.util.Arrays.asList(new ReportFeedbackRecord(UUID.randomUUID(), LocalDateTime.of(2026, 4, 1, 9, 0), workType, "메모", Map.of())), null, List.of(), List.of());
     }
     @SafeVarargs
     private static <K> Map<K, Object> map(Map.Entry<K, ?>... entries) {

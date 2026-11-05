@@ -39,7 +39,6 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class CoachingRagServiceTest {
     private final UUID memberId = UUID.fromString("00000000-0000-0000-0000-000000000001");

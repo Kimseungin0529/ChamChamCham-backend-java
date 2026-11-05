@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class RecordFeedbackContextTest {
     private final ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();

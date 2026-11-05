@@ -45,7 +45,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})
 class RecordFeedbackGenerationProcessorTest {

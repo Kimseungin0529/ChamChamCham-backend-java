@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class ReportFeedbackContextFingerprintTest {
     private final ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
@@ -65,7 +64,7 @@ class ReportFeedbackContextFingerprintTest {
         assertThat(fingerprint.calculate(context(map(new AbstractMap.SimpleEntry<>("recordCount", 2)), java.util.Arrays.asList(record(UUID.fromString("00000000-0000-0000-0000-000000000001")))))).matches("^[0-9a-f]{64}$");
     }
     private ReportFeedbackContext context(Map<String, Object> statistics, List<ReportFeedbackRecord> records) {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(UUID.fromString("00000000-0000-0000-0000-000000000101"), "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 7, statistics), records, null, List.of(), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(UUID.fromString("00000000-0000-0000-0000-000000000101"), "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 7, statistics), records, null, List.of(), List.of());
     }
     private ReportFeedbackRecord record(UUID id) {
         return new ReportFeedbackRecord(id, LocalDateTime.of(2026, 4, 1, 9, 0), WorkType.WATERING, "점적관수", map(new AbstractMap.SimpleEntry<>("method", "DRIP"), new AbstractMap.SimpleEntry<>("amount", "LOW")));

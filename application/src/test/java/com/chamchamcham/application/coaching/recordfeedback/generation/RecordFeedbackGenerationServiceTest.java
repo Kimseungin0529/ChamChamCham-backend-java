@@ -35,7 +35,6 @@ import java.nio.charset.Charset;
 import java.util.function.Consumer;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class RecordFeedbackGenerationServiceTest {
     private final ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();

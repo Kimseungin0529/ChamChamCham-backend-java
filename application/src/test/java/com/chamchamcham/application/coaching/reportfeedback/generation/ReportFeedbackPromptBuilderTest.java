@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 class ReportFeedbackPromptBuilderTest {
     private final UUID recordId = UUID.randomUUID();
@@ -41,8 +40,8 @@ class ReportFeedbackPromptBuilderTest {
         for (var entry : List.of(Map.entry(new BigDecimal("33.33"), "33"), Map.entry(new BigDecimal("33.50"), "34"), Map.entry(new BigDecimal("0.49"), "0"))) {
             var base = context();
             var c = base.getComparisons().getFirst();
-            var comparison = c.copy(c.getMetricKey(), c.getMetricLabel(), c.getCurrentValue(), c.getPreviousValue(), c.getDifference(), entry.getKey(), c.getUnit(), c.getCurrentCoverage(), c.getPreviousCoverage());
-            var prompt = new ReportFeedbackPromptBuilder().build(base.copy(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), List.of(comparison), base.getWarnings()), List.of());
+            var comparison = new ReportFeedbackComparison(c.getMetricKey(), c.getMetricLabel(), c.getCurrentValue(), c.getPreviousValue(), c.getDifference(), entry.getKey(), c.getUnit(), c.getCurrentCoverage(), c.getPreviousCoverage());
+            var prompt = new ReportFeedbackPromptBuilder().build(new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), List.of(comparison), base.getWarnings()), List.of());
             assertThat(prompt.getUser()).contains("변화율은 " + entry.getValue() + "퍼센트예요.").doesNotContain("변화율은 " + entry.getKey().toPlainString() + "퍼센트예요.");
         }
     }
@@ -51,8 +50,8 @@ class ReportFeedbackPromptBuilderTest {
     @DisplayName("comparison keeps decrease direction while rounding the absolute percentage")
     void comparison_keeps_decrease_direction_while_rounding_the_absolute_percentage() throws Exception {
         var base = context();
-        var comparison = base.getComparisons().get(0).copy(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), new BigDecimal("-1"), new BigDecimal("-12.50"), base.getComparisons().get(0).getUnit(), base.getComparisons().get(0).getCurrentCoverage(), base.getComparisons().get(0).getPreviousCoverage());
-        var prompt = new ReportFeedbackPromptBuilder().build(base.copy(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
+        var comparison = new ReportFeedbackComparison(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), new BigDecimal("-1"), new BigDecimal("-12.50"), base.getComparisons().get(0).getUnit(), base.getComparisons().get(0).getCurrentCoverage(), base.getComparisons().get(0).getPreviousCoverage());
+        var prompt = new ReportFeedbackPromptBuilder().build(new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
         assertThat(prompt.getUser()).contains("지난 재배보다 기록 횟수가 1회 줄었어요. 변화율은 13퍼센트예요.");
     }
 
@@ -60,8 +59,8 @@ class ReportFeedbackPromptBuilderTest {
     @DisplayName("comparison omits unavailable percentage instead of explaining the calculation limit")
     void comparison_omits_unavailable_percentage_instead_of_explaining_the_calculation_limit() throws Exception {
         var base = context();
-        var comparison = base.getComparisons().get(0).copy(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), base.getComparisons().get(0).getDifference(), null, base.getComparisons().get(0).getUnit(), base.getComparisons().get(0).getCurrentCoverage(), base.getComparisons().get(0).getPreviousCoverage());
-        var prompt = new ReportFeedbackPromptBuilder().build(base.copy(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
+        var comparison = new ReportFeedbackComparison(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), base.getComparisons().get(0).getDifference(), null, base.getComparisons().get(0).getUnit(), base.getComparisons().get(0).getCurrentCoverage(), base.getComparisons().get(0).getPreviousCoverage());
+        var prompt = new ReportFeedbackPromptBuilder().build(new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
         assertThat(prompt.getUser()).contains("지난 재배보다 기록 횟수가 1회 늘었어요.").doesNotContain("변화율");
     }
 
@@ -69,8 +68,8 @@ class ReportFeedbackPromptBuilderTest {
     @DisplayName("comparison coverage calls the prior period last cultivation")
     void comparison_coverage_calls_the_prior_period_last_cultivation() throws Exception {
         var base = context();
-        var comparison = base.getComparisons().get(0).copy(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), base.getComparisons().get(0).getDifference(), base.getComparisons().get(0).getRelativeChangePct(), base.getComparisons().get(0).getUnit(), new Coverage(3, 4), new Coverage(2, 3));
-        var prompt = new ReportFeedbackPromptBuilder().build(base.copy(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
+        var comparison = new ReportFeedbackComparison(base.getComparisons().get(0).getMetricKey(), base.getComparisons().get(0).getMetricLabel(), base.getComparisons().get(0).getCurrentValue(), base.getComparisons().get(0).getPreviousValue(), base.getComparisons().get(0).getDifference(), base.getComparisons().get(0).getRelativeChangePct(), base.getComparisons().get(0).getUnit(), new Coverage(3, 4), new Coverage(2, 3));
+        var prompt = new ReportFeedbackPromptBuilder().build(new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), base.getReport(), base.getRecords(), base.getPreviousReport(), java.util.Arrays.asList(comparison), base.getWarnings()), List.of());
         assertThat(prompt.getUser()).contains("입력 범위는 이번 3/4건, 지난 재배 2/3건이에요.").doesNotContain("직전");
     }
 
@@ -80,9 +79,9 @@ class ReportFeedbackPromptBuilderTest {
         var base = context();
         Map<String, Object> statistics = map(new AbstractMap.SimpleEntry<>("recordCount", 1), new AbstractMap.SimpleEntry<>("methodDistribution", List.of(Map.of("code", "NEW_METHOD", "label", "새 방식", "count", 1, "ratePct", 100))));
         var report = base.getReport();
-        var revisedReport = report.copy(report.getId(), report.getFarmName(), report.getCropName(), report.getStartsAt(), report.getEndsAt(), report.getSourceRevision(), statistics);
-        var records = base.getRecords().stream().map(it -> it.copy(it.getId(), it.getWorkedAt(), it.getWorkType(), it.getMemo(), Map.<String, Object>of("watering", Map.of("method", Map.of("code", "NEW_METHOD", "label", "새 방식"))))).toList();
-        var context = base.copy(base.getSchemaVersion(), base.getWorkType(), revisedReport, records, base.getPreviousReport(), base.getComparisons(), base.getWarnings());
+        var revisedReport = new ReportFeedbackReport(report.getId(), report.getFarmName(), report.getCropName(), report.getStartsAt(), report.getEndsAt(), report.getSourceRevision(), statistics);
+        var records = base.getRecords().stream().map(it -> new ReportFeedbackRecord(it.getId(), it.getWorkedAt(), it.getWorkType(), it.getMemo(), Map.<String, Object>of("watering", Map.of("method", Map.of("code", "NEW_METHOD", "label", "새 방식"))))).toList();
+        var context = new ReportFeedbackContext(base.getSchemaVersion(), base.getWorkType(), revisedReport, records, base.getPreviousReport(), base.getComparisons(), base.getWarnings());
         var prompt = new ReportFeedbackPromptBuilder().build(context, List.of());
         assertThat(prompt.getUser()).doesNotContain("NEW_METHOD", "새 방식");
     }
@@ -90,7 +89,7 @@ class ReportFeedbackPromptBuilderTest {
     @Test
     @DisplayName("prompt requires an empty comparison section when the server has no comparison")
     void prompt_requires_an_empty_comparison_section_when_the_server_has_no_comparison() throws Exception {
-        var context = context().copy(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
+        var context = new ReportFeedbackContext(context().getSchemaVersion(), context().getWorkType(), context().getReport(), context().getRecords(), null, List.of(), context().getWarnings());
         var prompt = new ReportFeedbackPromptBuilder().build(context, List.of());
         assertThat(prompt.getSystem()).contains("서버가 계산한 비교값이 없으면 comparisons는 반드시 빈 배열로 응답한다.");
     }
@@ -99,7 +98,7 @@ class ReportFeedbackPromptBuilderTest {
     @DisplayName("planting statistics include seed and seedling as easy planting descriptions")
     void planting_statistics_include_seed_and_seedling_as_easy_planting_descriptions() throws Exception {
         var base = context();
-        var plantingContext = base.copy(base.getSchemaVersion(), WorkType.PLANTING, base.getReport().copy(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 2), new AbstractMap.SimpleEntry<>("propagationMethods", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "SEED"), new AbstractMap.SimpleEntry<>("recordCount", 1)), map(new AbstractMap.SimpleEntry<>("code", "SEEDLING"), new AbstractMap.SimpleEntry<>("recordCount", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
+        var plantingContext = new ReportFeedbackContext(base.getSchemaVersion(), WorkType.PLANTING, new ReportFeedbackReport(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 2), new AbstractMap.SimpleEntry<>("propagationMethods", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "SEED"), new AbstractMap.SimpleEntry<>("recordCount", 1)), map(new AbstractMap.SimpleEntry<>("code", "SEEDLING"), new AbstractMap.SimpleEntry<>("recordCount", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
         var prompt = new ReportFeedbackPromptBuilder().build(plantingContext, List.of());
         assertThat(prompt.getUser()).contains("심은 방법: 씨앗을 심음 1회").contains("심은 방법: 모종을 심음 1회").doesNotContain("SEED", "SEEDLING");
     }
@@ -108,7 +107,7 @@ class ReportFeedbackPromptBuilderTest {
     @DisplayName("fertilizer statistics keep liquid fertilizer names in the prompt")
     void fertilizer_statistics_keep_liquid_fertilizer_names_in_the_prompt() throws Exception {
         var base = context();
-        var fertilizingContext = base.copy(base.getSchemaVersion(), WorkType.FERTILIZING, base.getReport().copy(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1), new AbstractMap.SimpleEntry<>("materialDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "액상비료"), new AbstractMap.SimpleEntry<>("label", "액상비료"), new AbstractMap.SimpleEntry<>("count", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
+        var fertilizingContext = new ReportFeedbackContext(base.getSchemaVersion(), WorkType.FERTILIZING, new ReportFeedbackReport(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1), new AbstractMap.SimpleEntry<>("materialDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "액상비료"), new AbstractMap.SimpleEntry<>("label", "액상비료"), new AbstractMap.SimpleEntry<>("count", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
         var prompt = new ReportFeedbackPromptBuilder().build(fertilizingContext, List.of());
         assertThat(prompt.getUser()).contains("거름 이름: 액상비료 1회");
     }
@@ -118,7 +117,7 @@ class ReportFeedbackPromptBuilderTest {
     void pesticide_statistics_show_the_product_label_without_exposing_its_id() throws Exception {
         var pesticideId = UUID.randomUUID();
         var base = context();
-        var pestControlContext = base.copy(base.getSchemaVersion(), WorkType.PEST_CONTROL, base.getReport().copy(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1), new AbstractMap.SimpleEntry<>("categoryDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", pesticideId.toString()), new AbstractMap.SimpleEntry<>("label", "가가방"), new AbstractMap.SimpleEntry<>("count", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
+        var pestControlContext = new ReportFeedbackContext(base.getSchemaVersion(), WorkType.PEST_CONTROL, new ReportFeedbackReport(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1), new AbstractMap.SimpleEntry<>("categoryDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", pesticideId.toString()), new AbstractMap.SimpleEntry<>("label", "가가방"), new AbstractMap.SimpleEntry<>("count", 1)))))), List.of(), null, base.getComparisons(), base.getWarnings());
         var prompt = new ReportFeedbackPromptBuilder().build(pestControlContext, List.of());
         assertThat(prompt.getUser()).contains("약 이름: 가가방 1회").doesNotContain(pesticideId.toString());
     }
@@ -133,10 +132,10 @@ class ReportFeedbackPromptBuilderTest {
     }
     private ReportFeedbackContext harvestContext(HarvestSource harvestSource) {
         var base = context();
-        return base.copy(base.getSchemaVersion(), WorkType.HARVEST, base.getReport().copy(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(base.getRecords().get(0).copy(base.getRecords().get(0).getId(), base.getRecords().get(0).getWorkedAt(), WorkType.HARVEST, base.getRecords().get(0).getMemo(), map(new AbstractMap.SimpleEntry<>("harvest", map(new AbstractMap.SimpleEntry<>("harvestSource", map(new AbstractMap.SimpleEntry<>("code", harvestSource.name()), new AbstractMap.SimpleEntry<>("label", harvestSource.getLabel())))))))), null, base.getComparisons(), base.getWarnings());
+        return new ReportFeedbackContext(base.getSchemaVersion(), WorkType.HARVEST, new ReportFeedbackReport(base.getReport().getId(), base.getReport().getFarmName(), base.getReport().getCropName(), base.getReport().getStartsAt(), base.getReport().getEndsAt(), base.getReport().getSourceRevision(), map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(base.getRecords().get(0).getId(), base.getRecords().get(0).getWorkedAt(), WorkType.HARVEST, base.getRecords().get(0).getMemo(), map(new AbstractMap.SimpleEntry<>("harvest", map(new AbstractMap.SimpleEntry<>("harvestSource", map(new AbstractMap.SimpleEntry<>("code", harvestSource.name()), new AbstractMap.SimpleEntry<>("label", harvestSource.getLabel())))))))), null, base.getComparisons(), base.getWarnings());
     }
     private ReportFeedbackContext context() {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(currentReportId, "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 4), new AbstractMap.SimpleEntry<>("averageIntervalDays", 3.5), new AbstractMap.SimpleEntry<>("amountDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "LOW"), new AbstractMap.SimpleEntry<>("label", "적음"), new AbstractMap.SimpleEntry<>("count", 2), new AbstractMap.SimpleEntry<>("ratePct", 50)))), new AbstractMap.SimpleEntry<>("methodDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수"), new AbstractMap.SimpleEntry<>("count", 4), new AbstractMap.SimpleEntry<>("ratePct", 100)))))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, LocalDateTime.of(2026, 4, 1, 9, 0), WorkType.WATERING, "점적관수를 했어요.", map(new AbstractMap.SimpleEntry<>("weatherCondition", "맑음"), new AbstractMap.SimpleEntry<>("weatherTemperature", 18), new AbstractMap.SimpleEntry<>("hasPhoto", false), new AbstractMap.SimpleEntry<>("watering", map(new AbstractMap.SimpleEntry<>("amount", map(new AbstractMap.SimpleEntry<>("code", "LOW"), new AbstractMap.SimpleEntry<>("label", "적음"))), new AbstractMap.SimpleEntry<>("method", map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수")))))))), new ReportFeedbackPreviousReport(previousReportId, LocalDateTime.of(2025, 3, 1, 9, 0), LocalDateTime.of(2025, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 3), new AbstractMap.SimpleEntry<>("averageIntervalDays", 4.0), new AbstractMap.SimpleEntry<>("methodDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수"), new AbstractMap.SimpleEntry<>("count", 3), new AbstractMap.SimpleEntry<>("ratePct", 100)))))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("4"), new BigDecimal("3"), new BigDecimal("1"), new BigDecimal("33.33"), "회", null, null)), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, WorkType.WATERING, new ReportFeedbackReport(currentReportId, "약초농장", "황기", LocalDateTime.of(2026, 3, 1, 9, 0), LocalDateTime.of(2026, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 4), new AbstractMap.SimpleEntry<>("averageIntervalDays", 3.5), new AbstractMap.SimpleEntry<>("amountDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "LOW"), new AbstractMap.SimpleEntry<>("label", "적음"), new AbstractMap.SimpleEntry<>("count", 2), new AbstractMap.SimpleEntry<>("ratePct", 50)))), new AbstractMap.SimpleEntry<>("methodDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수"), new AbstractMap.SimpleEntry<>("count", 4), new AbstractMap.SimpleEntry<>("ratePct", 100)))))), java.util.Arrays.asList(new ReportFeedbackRecord(recordId, LocalDateTime.of(2026, 4, 1, 9, 0), WorkType.WATERING, "점적관수를 했어요.", map(new AbstractMap.SimpleEntry<>("weatherCondition", "맑음"), new AbstractMap.SimpleEntry<>("weatherTemperature", 18), new AbstractMap.SimpleEntry<>("hasPhoto", false), new AbstractMap.SimpleEntry<>("watering", map(new AbstractMap.SimpleEntry<>("amount", map(new AbstractMap.SimpleEntry<>("code", "LOW"), new AbstractMap.SimpleEntry<>("label", "적음"))), new AbstractMap.SimpleEntry<>("method", map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수")))))))), new ReportFeedbackPreviousReport(previousReportId, LocalDateTime.of(2025, 3, 1, 9, 0), LocalDateTime.of(2025, 7, 1, 9, 0), 1, map(new AbstractMap.SimpleEntry<>("recordCount", 3), new AbstractMap.SimpleEntry<>("averageIntervalDays", 4.0), new AbstractMap.SimpleEntry<>("methodDistribution", java.util.Arrays.asList(map(new AbstractMap.SimpleEntry<>("code", "DRIP"), new AbstractMap.SimpleEntry<>("label", "점적관수"), new AbstractMap.SimpleEntry<>("count", 3), new AbstractMap.SimpleEntry<>("ratePct", 100)))))), java.util.Arrays.asList(new ReportFeedbackComparison("recordCount", "기록 횟수", new BigDecimal("4"), new BigDecimal("3"), new BigDecimal("1"), new BigDecimal("33.33"), "회", null, null)), List.of());
     }
     @SafeVarargs
     private static <K> Map<K, Object> map(Map.Entry<K, ?>... entries) {

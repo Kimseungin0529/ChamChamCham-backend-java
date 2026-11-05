@@ -47,7 +47,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
-import com.chamchamcham.application.coaching.reportfeedback.generation.ReportFeedbackContextKt;
 
 @ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})
 class ReportFeedbackGenerationHandlerTest {
@@ -151,7 +150,7 @@ class ReportFeedbackGenerationHandlerTest {
         var event = generationEvent(WorkType.WATERING, this.reportId, this.sourceFingerprint);
         stubTarget(event, target);
         when(generationService.generate(anyContext())).thenAnswer(it -> {
-        target.attachInputSnapshot(snapshot(context(WorkType.WATERING).copy(context(WorkType.WATERING).getSchemaVersion(), context(WorkType.WATERING).getWorkType(), context(WorkType.WATERING).getReport(), context(WorkType.WATERING).getRecords(), context(WorkType.WATERING).getPreviousReport(), context(WorkType.WATERING).getComparisons(), java.util.Arrays.asList("snapshot replaced"))));
+        target.attachInputSnapshot(snapshot(new ReportFeedbackContext(context(WorkType.WATERING).getSchemaVersion(), context(WorkType.WATERING).getWorkType(), context(WorkType.WATERING).getReport(), context(WorkType.WATERING).getRecords(), context(WorkType.WATERING).getPreviousReport(), context(WorkType.WATERING).getComparisons(), java.util.Arrays.asList("snapshot replaced"))));
         return emptyItemResult();
         });
         handler.on(event);
@@ -253,7 +252,7 @@ class ReportFeedbackGenerationHandlerTest {
         when(feedbackRepository.findByIdAndMemberIdForUpdate(event.getFeedbackId(), event.getMemberId())).thenReturn(target);
     }
     private ReportFeedbackContext context(WorkType workType) {
-        return new ReportFeedbackContext(ReportFeedbackContextKt.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), startsAt, endsAt, 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(UUID.randomUUID(), startsAt.plusDays(1), workType, "" + workType.name() + " 작업을 기록했어요.", Map.of())), null, List.of(), List.of());
+        return new ReportFeedbackContext(ReportFeedbackContext.REPORT_FEEDBACK_CONTEXT_SCHEMA_VERSION, workType, new ReportFeedbackReport(reportId, report.getFarm().getName(), report.getCrop().getName(), startsAt, endsAt, 1, map(new AbstractMap.SimpleEntry<>("recordCount", 1))), java.util.Arrays.asList(new ReportFeedbackRecord(UUID.randomUUID(), startsAt.plusDays(1), workType, "" + workType.name() + " 작업을 기록했어요.", Map.of())), null, List.of(), List.of());
     }
     private ReportFeedbackGenerationResult emptyItemResult() {
         return new ReportFeedbackGenerationResult(new ReportFeedbackContent("이번 물 주기 기록의 흐름을 확인했어요.", List.of(), List.of(), List.of(), List.of()), List.of(), List.of(), new RagModelInfo("embedding-test", "chat-test"));
