@@ -1,9 +1,9 @@
-package com.chamchamcham.application.config
+package com.chamchamcham.application.config;
 
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
-import java.time.Clock
-import java.time.ZoneId
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import java.time.Clock;
+import java.time.ZoneId;
 
 /**
  * 기상청 API는 KST 기준으로만 동작한다. 컨테이너의 JVM 기본 zone은 보통 UTC라서,
@@ -12,7 +12,6 @@ import java.time.ZoneId
  * 빈을 주입받아야 하고, zone 없는 `now()` 호출은 금지한다.
  */
 @Configuration
-class ClockConfig {
-    @Bean
-    fun clock(): Clock = Clock.system(ZoneId.of("Asia/Seoul"))
+public class ClockConfig {
+    @Bean public Clock clock() { return Clock.system(ZoneId.of("Asia/Seoul")); }
 }
