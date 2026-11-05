@@ -118,6 +118,29 @@ class CoachingRagServiceTest {
         service.answer(new CoachingRagCommand(memberId, "과습 위험?", null, null, null, LocalDate.parse("2026-07-02"), LocalDate.parse("2026-07-01"), null));
         }).isInstanceOfSatisfying(BusinessException.class, it -> assertThat(it.getErrorCode()).isEqualTo(ErrorCode.RAG_INVALID_REQUEST));
     }
+    @Test
+    void answerPreservesLfInFinalUserPrompt() {
+        assertFinalUserPrompt("first\nsecond");
+    }
+
+    @Test
+    void answerNormalizesCrLfInFinalUserPrompt() {
+        assertFinalUserPrompt("first\r\nsecond");
+    }
+
+    @Test
+    void answerNormalizesCrInFinalUserPrompt() {
+        assertFinalUserPrompt("first\rsecond");
+    }
+
+    private void assertFinalUserPrompt(String question) {
+        var chatClient = new FakeChatClient(structuredResult("doc-1"));
+        var service = service(new FakeVectorStore(List.of(document("doc-1"))), chatClient);
+        service.answer(new CoachingRagCommand(memberId, question, null, null, null, null, null, null));
+        assertThat(chatClient.requestSpec.userText).isEqualTo(
+            "            질문:\n            first\nsecond\n\n            사용자 재배 context:");
+    }
+
     private CoachingRagService service(FakeVectorStore vectorStore, ChatClient chatClient) {
         return new CoachingRagService(chatClient, vectorStore, new FakeContextProvider(), new CoachingRetrievalFilterBuilder(), new CoachingStructuredOutputValidator(), new RagProperties(new RagProperties.Embedding(), new RagProperties.Chat(), new RagProperties.Retrieval(), new RagProperties.Execution()));
     }

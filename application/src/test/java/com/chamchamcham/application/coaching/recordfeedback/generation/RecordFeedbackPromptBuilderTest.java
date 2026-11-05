@@ -106,6 +106,36 @@ class RecordFeedbackPromptBuilderTest {
         assertThat(officialEvidenceSection).contains("[doc-1] 농업기술길잡이 007 약용작물 p.123");
         assertThat(officialEvidenceSection).doesNotContain("공백 ID 문서");
     }
+    @Test
+    void promptPreservesOrdinaryMemoAndEvidence() {
+        var prompt = builder.build(promptContext("첫 줄"), List.of(new RecordFeedbackRetrievalQuery("질의", "사유")), List.of(new RecordFeedbackEvidence("doc", "문서", null, "본문")));
+        assertThat(prompt.getUser()).isEqualTo("            피드백 대상 기록:\n            - 농장: 밭 (주소)\n- 영농 경력: 미상\n- 작물: 작물\n- 쓰는 부위: 잎\n- 기록 시각: 2026-11-01T09:00\n- 작업 유형: 기타 작업\n- 작업 상세: 공통 상세 없음\n- 메모: 첫 줄\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 20도\n- 현재 날씨: 없음\n- 예보: 없음\n\n            검색 쿼리:\n            - 질의\n\n            허용 citationIds:\n            - record:00000000-0000-0000-0000-000000000001 : 대상 영농기록 context\n- doc : 문서\n\n            공식문서 근거:\n            [doc] 문서\n본문");
+    }
+
+    @Test
+    void promptPreservesEvidenceTrailingLineFeed() {
+        var prompt = builder.build(promptContext("첫 줄"), List.of(new RecordFeedbackRetrievalQuery("질의", "사유")), List.of(new RecordFeedbackEvidence("doc", "문서", null, "본문\n")));
+        assertThat(prompt.getUser()).isEqualTo("            피드백 대상 기록:\n            - 농장: 밭 (주소)\n- 영농 경력: 미상\n- 작물: 작물\n- 쓰는 부위: 잎\n- 기록 시각: 2026-11-01T09:00\n- 작업 유형: 기타 작업\n- 작업 상세: 공통 상세 없음\n- 메모: 첫 줄\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 20도\n- 현재 날씨: 없음\n- 예보: 없음\n\n            검색 쿼리:\n            - 질의\n\n            허용 citationIds:\n            - record:00000000-0000-0000-0000-000000000001 : 대상 영농기록 context\n- doc : 문서\n\n            공식문서 근거:\n            [doc] 문서\n본문\n");
+    }
+
+    @Test
+    void promptPreservesSpacesOnAnInternalBlankMemoLine() {
+        var prompt = builder.build(promptContext("첫 줄\n   \n다음 줄"), List.of(new RecordFeedbackRetrievalQuery("질의", "사유")), List.of(new RecordFeedbackEvidence("doc", "문서", null, "본문")));
+        assertThat(prompt.getUser()).isEqualTo("            피드백 대상 기록:\n            - 농장: 밭 (주소)\n- 영농 경력: 미상\n- 작물: 작물\n- 쓰는 부위: 잎\n- 기록 시각: 2026-11-01T09:00\n- 작업 유형: 기타 작업\n- 작업 상세: 공통 상세 없음\n- 메모: 첫 줄\n   \n다음 줄\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 20도\n- 현재 날씨: 없음\n- 예보: 없음\n\n            검색 쿼리:\n            - 질의\n\n            허용 citationIds:\n            - record:00000000-0000-0000-0000-000000000001 : 대상 영농기록 context\n- doc : 문서\n\n            공식문서 근거:\n            [doc] 문서\n본문");
+    }
+
+    private RecordFeedbackContext promptContext(String memo) {
+        var id = UUID.fromString("00000000-0000-0000-0000-000000000001");
+        return new RecordFeedbackContext("record-feedback-context.v2",
+            new RecordFeedbackMemberContext(id, null, null),
+            new RecordFeedbackFarmContext(id, "밭", "주소", null, null),
+            new RecordFeedbackCropContext(id, "작물", CropUsePartCategory.LEAF),
+            new RecordFeedbackRecordContext(id, 1, java.time.LocalDateTime.of(2026, 11, 1, 9, 0),
+                com.chamchamcham.domain.farming.WorkType.ETC, CommonFeedbackDetail.INSTANCE,
+                "맑음", 20, memo, 0),
+            null, List.of());
+    }
+
     private RecordFeedbackContext readFixture(String name) {
         var resource = Objects.requireNonNull(getClass().getClassLoader().getResource("coaching/rag/" + name), "Missing fixture: " + name);
         try (var input = resource.openStream()) { return objectMapper.readValue(input, RecordFeedbackContext.class); }
