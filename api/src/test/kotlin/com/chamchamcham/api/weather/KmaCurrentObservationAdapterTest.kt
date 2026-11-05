@@ -24,10 +24,10 @@ import java.time.ZoneId
 class KmaCurrentObservationAdapterTest {
 
     private val location = WeatherLocation(
-        latitude = 37.5665,
-        longitude = 126.9780,
-        roadAddress = "서울 중구 세종대로 110",
-        pnu = null
+        37.5665,
+        126.9780,
+        "서울 중구 세종대로 110",
+        null
     )
 
     private lateinit var server: MockRestServiceServer
@@ -59,8 +59,8 @@ class KmaCurrentObservationAdapterTest {
         val result = adapter.fetch(location)
 
         assertThat(result.temperature).isEqualTo(24)
-        assertThat(result.humidity).isEqualTo(85)
-        assertThat(result.windSpeed).isEqualTo(1.7)
+        assertThat<Int?>(result.humidity).isEqualTo(85)
+        assertThat<Double?>(result.windSpeed).isEqualTo(1.7)
         assertThat(result.precipitationType).isNull()
     }
 

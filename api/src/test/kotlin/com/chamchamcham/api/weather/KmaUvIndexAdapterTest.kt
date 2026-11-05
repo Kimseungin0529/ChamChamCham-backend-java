@@ -32,10 +32,10 @@ class KmaUvIndexAdapterTest {
     }
 
     private fun locationWithPnu(pnu: String?) = WeatherLocation(
-        latitude = 37.5665,
-        longitude = 126.9780,
-        roadAddress = "서울시 중구 세종대로 110",
-        pnu = pnu
+        37.5665,
+        126.9780,
+        "서울시 중구 세종대로 110",
+        pnu
     )
 
     @Test

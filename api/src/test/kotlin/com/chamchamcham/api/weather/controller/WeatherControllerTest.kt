@@ -131,32 +131,32 @@ class WeatherControllerTest(
 
     private fun homeWeather(): HomeWeather =
         HomeWeather(
-            farmId = farmId,
-            temperature = 24,
-            condition = WeatherCondition.CLEAR,
-            minTemperature = 25,
-            maxTemperature = 29,
-            observedAt = LocalDateTime.of(2026, 7, 15, 21, 0),
-            partial = PartialFailure.of()
+            farmId,
+            24,
+            WeatherCondition.CLEAR,
+            25,
+            29,
+            LocalDateTime.of(2026, 7, 15, 21, 0),
+            PartialFailure.of()
         )
 
     private fun detailWeather(): DetailWeather =
         DetailWeather(
-            farmId = farmId,
-            address = "서울 중구 세종대로 110",
-            observedAt = LocalDateTime.of(2026, 7, 15, 21, 0),
-            temperature = 24,
-            feelsLikeTemperature = 26,
-            condition = WeatherCondition.CLEAR,
-            minTemperature = 25,
-            maxTemperature = 29,
-            humidity = 85,
-            windSpeed = 1.7,
-            precipitationProbability = 0,
-            uvIndex = 1,
-            forecast = listOf(
+            farmId,
+            "서울 중구 세종대로 110",
+            LocalDateTime.of(2026, 7, 15, 21, 0),
+            24,
+            26,
+            WeatherCondition.CLEAR,
+            25,
+            29,
+            85,
+            1.7,
+            0,
+            1,
+            listOf(
                 DailyForecast(LocalDate.of(2026, 7, 15), WeatherCondition.CLEAR, 25, 29)
             ),
-            partial = PartialFailure.of()
+            PartialFailure.of()
         )
 }

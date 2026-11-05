@@ -36,7 +36,7 @@ class RecordFeedbackKmaWeatherAdapter(
 
         // RecordFeedbackWeatherPort는 위경도만 넘겨준다 — 주소/PNU는 record-feedback 쪽에 없고,
         // 여기서 재사용하는 실황 조회(CurrentObservationPort)도 위경도만 쓰므로 빈 값으로 채운다.
-        val location = WeatherLocation(latitude = latitude, longitude = longitude, roadAddress = "", pnu = null)
+        val location = WeatherLocation(latitude, longitude, "", null)
         val current = currentObservationPort.fetch(location)
         val items = fetchVilageFcstItems(latitude, longitude)
 

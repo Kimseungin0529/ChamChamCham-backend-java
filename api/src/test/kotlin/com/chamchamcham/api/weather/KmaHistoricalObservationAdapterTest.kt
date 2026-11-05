@@ -22,10 +22,10 @@ class KmaHistoricalObservationAdapterTest {
     private lateinit var adapter: KmaHistoricalObservationAdapter
 
     private val seoulLocation = WeatherLocation(
-        latitude = 37.5665,
-        longitude = 126.9780,
-        roadAddress = "서울시 중구 세종대로 110",
-        pnu = null
+        37.5665,
+        126.9780,
+        "서울시 중구 세종대로 110",
+        null
     )
     private val date = LocalDate.of(2026, 7, 14)
 

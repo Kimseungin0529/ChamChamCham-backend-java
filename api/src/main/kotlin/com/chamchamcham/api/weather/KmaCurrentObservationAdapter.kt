@@ -57,12 +57,12 @@ class KmaCurrentObservationAdapter(
         val observedAt = resolveObservedAt(items)
 
         return CurrentObservation(
-            temperature = temperature,
-            precipitationType = precipitationType,
-            observedAt = observedAt,
-            humidity = humidity,
-            windSpeed = windSpeed,
-            feelsLikeTemperature = FeelsLikeTemperatureCalculator.of(
+            temperature,
+            precipitationType,
+            observedAt,
+            humidity,
+            windSpeed,
+            FeelsLikeTemperatureCalculator.of(
                 temperature = temperature,
                 humidity = humidity,
                 windSpeedMps = windSpeed,
