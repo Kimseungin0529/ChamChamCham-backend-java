@@ -69,21 +69,10 @@ class RecordFeedbackControllerTest(
         `when`(queryService.get(memberId, recordId)).thenReturn(
             result(
                 status = RecordFeedbackStatus.READY,
-                content = RecordFeedbackResultContent(
-                    goodPoint = "점적관수로 토양 수분을 확인한 점이 좋았어요.",
-                    nextActions = listOf(
-                        RecordFeedbackNextActionResult(
-                            text = "오후에 토양 표면이 마르는지 한 번 더 확인하세요.",
-                            due = RecordFeedbackActionDue.TODAY,
-                            category = RecordFeedbackActionCategory.IRRIGATION,
-                        ),
-                        RecordFeedbackNextActionResult(
-                            text = "이번 주 안에 배수로 주변의 막힌 흙을 정리하세요.",
-                            due = RecordFeedbackActionDue.THIS_WEEK,
-                            category = RecordFeedbackActionCategory.CULTIVATION,
-                        ),
-                    ),
-                ),
+                content = RecordFeedbackResultContent("점적관수로 토양 수분을 확인한 점이 좋았어요.", listOf(
+                        RecordFeedbackNextActionResult("오후에 토양 표면이 마르는지 한 번 더 확인하세요.", RecordFeedbackActionDue.TODAY, RecordFeedbackActionCategory.IRRIGATION),
+                        RecordFeedbackNextActionResult("이번 주 안에 배수로 주변의 막힌 흙을 정리하세요.", RecordFeedbackActionDue.THIS_WEEK, RecordFeedbackActionCategory.CULTIVATION),
+                    )),
             ),
         )
 
@@ -180,15 +169,5 @@ class RecordFeedbackControllerTest(
         inputPrepared: Boolean = false,
         failureCode: String? = null,
         content: RecordFeedbackResultContent? = null,
-    ) = RecordFeedbackDetailResult(
-        feedbackId = feedbackId,
-        recordId = recordId,
-        status = status,
-        sourceRevision = 3,
-        inputPrepared = inputPrepared,
-        failureCode = failureCode,
-        content = content,
-        createdAt = LocalDateTime.of(2026, 7, 11, 10, 0),
-        updatedAt = LocalDateTime.of(2026, 7, 11, 10, 1),
-    )
+    ) = RecordFeedbackDetailResult(feedbackId, recordId, status, 3, inputPrepared, failureCode, content, LocalDateTime.of(2026, 7, 11, 10, 0), LocalDateTime.of(2026, 7, 11, 10, 1))
 }

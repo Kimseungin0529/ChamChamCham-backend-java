@@ -161,12 +161,7 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
         )
 
         generationProcessor.generate(
-            RecordFeedbackGenerationRequested(
-                feedbackId = feedbackId,
-                memberId = requireNotNull(member.id),
-                recordId = recordId,
-                sourceRevision = 1,
-            ),
+            RecordFeedbackGenerationRequested(feedbackId, requireNotNull(member.id), recordId, 1),
         )
 
         val feedbacks = recordFeedbackRepository.findAll().filter { it.record.id == recordId }
@@ -327,57 +322,14 @@ class RecordFeedbackLifecycleIntegrationTest @Autowired constructor(
             emptyList(),
         )
 
-    private fun generatedFeedback() = RecordFeedbackGenerationResult(
-        content = RecordFeedbackContent(
-            goodPoint = RecordFeedbackGoodPoint(
-                basis = "자동 생성 테스트 근거입니다.",
-                text = "관수 기록이 구체적입니다.",
-                evidenceRefs = listOf("doc-1"),
-            ),
-            nextActions = listOf(
-                RecordFeedbackAction(
-                    due = RecordFeedbackActionDue.NEXT_CHECK,
-                    category = RecordFeedbackActionCategory.CULTIVATION,
-                    basis = "다음 점검이 필요합니다.",
-                    text = "토양 수분을 다시 확인하세요.",
-                    evidenceRefs = listOf("doc-1"),
-                ),
-                RecordFeedbackAction(
-                    due = RecordFeedbackActionDue.THIS_WEEK,
-                    category = RecordFeedbackActionCategory.IRRIGATION,
-                    basis = "주간 관수량 추적이 필요합니다.",
-                    text = "관수량 변화를 주간 기록에 남기세요.",
-                    evidenceRefs = listOf("doc-1"),
-                ),
-            ),
-        ),
-        citations = listOf(mapOf("id" to "doc-1", "title" to "농업기술길잡이")),
-        auditWarnings = emptyList(),
-        modelInfo = RagModelInfo(
-            embedding = "embedding-test",
-            chat = "chat-test",
-        ),
-    )
+    private fun generatedFeedback() = RecordFeedbackGenerationResult(RecordFeedbackContent(RecordFeedbackGoodPoint("자동 생성 테스트 근거입니다.", "관수 기록이 구체적입니다.", listOf("doc-1")), listOf(
+                RecordFeedbackAction(RecordFeedbackActionDue.NEXT_CHECK, RecordFeedbackActionCategory.CULTIVATION, "다음 점검이 필요합니다.", "토양 수분을 다시 확인하세요.", listOf("doc-1")),
+                RecordFeedbackAction(RecordFeedbackActionDue.THIS_WEEK, RecordFeedbackActionCategory.IRRIGATION, "주간 관수량 추적이 필요합니다.", "관수량 변화를 주간 기록에 남기세요.", listOf("doc-1")),
+            )), listOf(mapOf("id" to "doc-1", "title" to "농업기술길잡이")), emptyList(), RagModelInfo("embedding-test", "chat-test"))
 
     private fun anyContext(): RecordFeedbackContext {
         return org.mockito.Mockito.any(RecordFeedbackContext::class.java) ?: fallbackContext()
     }
 
-    private fun fallbackContext() = RecordFeedbackContext(
-        member = RecordFeedbackMemberContext(requireNotNull(member.id), null, null),
-        farm = RecordFeedbackFarmContext(requireNotNull(farm.id), farm.name, farm.roadAddress, null, null),
-        crop = RecordFeedbackCropContext(requireNotNull(crop.id), crop.name, crop.usePartCategory),
-        record = RecordFeedbackRecordContext(
-            recordId = UUID.randomUUID(),
-            sourceRevision = 1,
-            workedAt = LocalDateTime.of(2026, 7, 11, 8, 30),
-            workType = WorkType.WATERING,
-            detail = CommonFeedbackDetail,
-            recordedWeatherCondition = "맑음",
-            recordedTemperatureC = 24,
-            memo = "점적관수로 토양 수분을 보충했습니다.",
-            photoCount = 0,
-        ),
-        weather = null,
-    )
+    private fun fallbackContext() = RecordFeedbackContext(RecordFeedbackContext.RECORD_FEEDBACK_CONTEXT_SCHEMA_VERSION, RecordFeedbackMemberContext(requireNotNull(member.id), null, null), RecordFeedbackFarmContext(requireNotNull(farm.id), farm.name, farm.roadAddress, null, null), RecordFeedbackCropContext(requireNotNull(crop.id), crop.name, crop.usePartCategory), RecordFeedbackRecordContext(UUID.randomUUID(), 1, LocalDateTime.of(2026, 7, 11, 8, 30), WorkType.WATERING, CommonFeedbackDetail.INSTANCE, "맑음", 24, "점적관수로 토양 수분을 보충했습니다.", 0), null, emptyList())
 }

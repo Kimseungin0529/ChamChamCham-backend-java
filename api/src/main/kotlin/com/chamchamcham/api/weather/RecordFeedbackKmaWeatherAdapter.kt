@@ -45,15 +45,7 @@ class RecordFeedbackKmaWeatherAdapter(
         // 보완한다 — FarmWeatherService.resolveCondition과 같은 우선순위.
         val currentSky = current.precipitationType ?: nearestSky(items) ?: WeatherCondition.UNKNOWN
 
-        return RecordFeedbackLiveWeather(
-            current = RecordFeedbackCurrentWeather(
-                temperatureC = current.temperature,
-                skyCondition = currentSky.text,
-                observedAt = current.observedAt
-            ),
-            forecastDays = aggregateForecastDays(items, today, limitDays),
-            source = KMA_SHORT_TERM_SOURCE
-        )
+        return RecordFeedbackLiveWeather(RecordFeedbackCurrentWeather(current.temperature, currentSky.text, current.observedAt), aggregateForecastDays(items, today, limitDays), KMA_SHORT_TERM_SOURCE)
     }
 
     private fun fetchVilageFcstItems(latitude: Double, longitude: Double): List<VilageFcstItemDto> {
@@ -126,23 +118,14 @@ class RecordFeedbackKmaWeatherAdapter(
             .filter { it.category == "PTY" }
             .any { it.fcstValue?.toIntOrNull()?.let { value -> value != 0 } == true }
 
-        return RecordFeedbackForecastDay(
-            date = date,
-            rainfallMm = rainfallMm,
-            rainProbabilityPct = rainProbabilityPct,
-            maxTemperatureC = maxTemperatureC,
-            minTemperatureC = minTemperatureC,
-            humidityPct = humidityPct,
-            windSpeedMs = windSpeedMs,
-            riskFlags = buildRiskFlags(
+        return RecordFeedbackForecastDay(date, rainfallMm, rainProbabilityPct, maxTemperatureC, minTemperatureC, humidityPct, windSpeedMs, buildRiskFlags(
                 hasPrecipitationType = hasPrecipitationType,
                 rainProbabilityPct = rainProbabilityPct,
                 rainfallMm = rainfallMm,
                 maxTemperatureC = maxTemperatureC,
                 humidityPct = humidityPct,
                 windSpeedMs = windSpeedMs
-            )
-        )
+            ))
     }
 
     private fun buildRiskFlags(

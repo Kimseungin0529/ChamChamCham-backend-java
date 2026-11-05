@@ -479,13 +479,7 @@ class FarmingWorkReportControllerTest(
 
     private fun readyFeedback() = FarmingWorkReportResult.FeedbackStatus(
             ReportFeedbackStatus.READY,
-            ReportFeedbackResultContent(
-            summary = "물 주기를 잘 이어갔어요.",
-            comparisons = listOf(ReportFeedbackItemResult("직전 재배보다 물 주기 기록이 한 번 늘었어요.")),
-            strengths = listOf(ReportFeedbackItemResult("흙 상태를 살폈어요.")),
-            improvements = emptyList(),
-            nextActions = listOf(ReportFeedbackItemResult("내일 흙을 확인하세요.")),
-        ),
+            ReportFeedbackResultContent("물 주기를 잘 이어갔어요.", listOf(ReportFeedbackItemResult("흙 상태를 살폈어요.")), emptyList(), listOf(ReportFeedbackItemResult("내일 흙을 확인하세요.")), listOf(ReportFeedbackItemResult("직전 재배보다 물 주기 기록이 한 번 늘었어요."))),
         )
 
     private fun common(recordCount: Int) = CommonOnlyStatistics(recordCount, null, null, recordCount, null, 0, null, emptyList(), null)
