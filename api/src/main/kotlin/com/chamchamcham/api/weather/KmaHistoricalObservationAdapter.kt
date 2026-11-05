@@ -52,10 +52,10 @@ class KmaHistoricalObservationAdapter(
         )
 
         return DailyWeather(
-            date = date,
-            condition = condition,
-            minTemperature = minTemperature,
-            maxTemperature = maxTemperature
+            date,
+            condition,
+            minTemperature,
+            maxTemperature
         )
     }
 

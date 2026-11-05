@@ -68,10 +68,10 @@ class KmaMidTermForecastAdapter(
         if (minTemperature == null && maxTemperature == null && wf == null) return null
 
         return DailyForecast(
-            date = date,
-            condition = MidTermWfConditionMapper.of(wf),
-            minTemperature = minTemperature,
-            maxTemperature = maxTemperature
+            date,
+            MidTermWfConditionMapper.of(wf),
+            minTemperature,
+            maxTemperature
         )
     }
 

@@ -22,10 +22,10 @@ import java.time.ZoneId
 class KmaShortTermForecastAdapterTest {
 
     private val location = WeatherLocation(
-        latitude = 37.5665,
-        longitude = 126.9780,
-        roadAddress = "서울 중구 세종대로 110",
-        pnu = null
+        37.5665,
+        126.9780,
+        "서울 중구 세종대로 110",
+        null
     )
 
     private lateinit var server: MockRestServiceServer
@@ -59,8 +59,8 @@ class KmaShortTermForecastAdapterTest {
 
         assertThat(result).isNotNull
         val today = result!!.dailyForecasts.single { it.date == LocalDate.of(2026, 7, 15) }
-        assertThat(today.minTemperature).isNull()
-        assertThat(today.maxTemperature).isNull()
+        assertThat<Int?>(today.minTemperature).isNull()
+        assertThat<Int?>(today.maxTemperature).isNull()
     }
 
     @Test
@@ -82,8 +82,8 @@ class KmaShortTermForecastAdapterTest {
 
         assertThat(result).isNotNull
         assertThat(result!!.date).isEqualTo(LocalDate.of(2026, 7, 15))
-        assertThat(result.minTemperature).isEqualTo(25)
-        assertThat(result.maxTemperature).isEqualTo(29)
+        assertThat<Int?>(result.minTemperature).isEqualTo(25)
+        assertThat<Int?>(result.maxTemperature).isEqualTo(29)
     }
 
     @Test

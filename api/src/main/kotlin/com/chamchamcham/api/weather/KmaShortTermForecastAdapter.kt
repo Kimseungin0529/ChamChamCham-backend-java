@@ -52,9 +52,9 @@ class KmaShortTermForecastAdapter(
             .map { (fcstDate, dayItems) -> buildDailyForecast(fcstDate, dayItems) }
 
         return ShortTermForecast(
-            currentSky = currentSky,
-            precipitationProbability = precipitationProbability,
-            dailyForecasts = dailyForecasts
+            currentSky,
+            precipitationProbability,
+            dailyForecasts
         )
     }
 
@@ -108,10 +108,10 @@ class KmaShortTermForecastAdapter(
         val minTemperature = valueOfCategory(items, "TMN")?.toDoubleOrNull()?.roundToInt()
         val maxTemperature = valueOfCategory(items, "TMX")?.toDoubleOrNull()?.roundToInt()
         return DailyForecast(
-            date = date,
-            condition = noonCondition(items),
-            minTemperature = minTemperature,
-            maxTemperature = maxTemperature
+            date,
+            noonCondition(items),
+            minTemperature,
+            maxTemperature
         )
     }
 

@@ -176,7 +176,7 @@ class FarmWeatherServiceTest {
     }
 
     @Test
-    void getDaily_정확히_1년전은_포함하고_검증실패는_농지를_조회하지_않는다() {
+    void getDaily_정확히_1년전은_조회범위에_포함된다() {
         given(farmRepository.findByIdAndOwnerId(farmId, memberId)).willReturn(farm);
         LocalDate date = LocalDate.of(2025, 7, 15);
         DailyWeather historical = new DailyWeather(date, WeatherCondition.SNOW, -5, 0);
@@ -245,6 +245,26 @@ class FarmWeatherServiceTest {
         assertNotEquals(new WeatherLocation(0.0, 0.0, "", null), new WeatherLocation(-0.0, 0.0, "", null));
         assertFalse(new DailyForecast(today, WeatherCondition.CLEAR, 1, null).getHasTemperatureRange());
         assertTrue(new DailyForecast(today, WeatherCondition.CLEAR, 1, 2).getHasTemperatureRange());
+    }
+
+    @Test
+    void 폴백_예보와_부분실패_팩토리는_순서와_가변성을_보존한다() {
+        ShortTermForecast fallback = WeatherFallback.shortTermForecast(today);
+        assertThat(fallback.getDailyForecasts()).extracting(DailyForecast::getDate)
+            .containsExactly(today, today.plusDays(1), today.plusDays(2), today.plusDays(3), today.plusDays(4));
+        assertEquals(WeatherCondition.CLOUDY, fallback.getCurrentSky());
+        fallback.getDailyForecasts().add(dailyForecast(today.plusDays(5)));
+        fallback.getDailyForecasts().remove(0);
+        assertEquals(5, fallback.getDailyForecasts().size());
+        PartialFailure partial = PartialFailure.of(Map.entry("uvIndex", true), Map.entry("forecast", false), Map.entry("uvIndex", true));
+        assertThat(partial.getMissing()).containsExactly("uvIndex", "uvIndex");
+        partial.getMissing().clear();
+        assertFalse(partial.getDegraded());
+        PartialFailure empty = PartialFailure.of();
+        empty.getMissing().add("current");
+        assertTrue(empty.getDegraded());
+        assertThrows(NullPointerException.class, () -> new WeatherLocation(0, 0, null, null));
+        assertThrows(NullPointerException.class, () -> new CurrentObservation(0, null, null, null, null, null));
     }
 
     private void assertFallback(DailyWeather result) {

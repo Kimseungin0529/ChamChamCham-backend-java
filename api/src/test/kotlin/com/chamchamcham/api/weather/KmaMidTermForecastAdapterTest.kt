@@ -25,10 +25,10 @@ class KmaMidTermForecastAdapterTest {
 
     private val zone = ZoneId.of("Asia/Seoul")
     private val seoulLocation = WeatherLocation(
-        latitude = 37.5665,
-        longitude = 126.9780,
-        roadAddress = "서울시 중구 세종대로 110",
-        pnu = null
+        37.5665,
+        126.9780,
+        "서울시 중구 세종대로 110",
+        null
     )
 
     private fun adapterAt(now: LocalDateTime): KmaMidTermForecastAdapter {
@@ -53,7 +53,7 @@ class KmaMidTermForecastAdapterTest {
 
         assertThat(result).isNotNull
         assertThat(result!!.minTemperature).isEqualTo(24)
-        assertThat(result.maxTemperature).isEqualTo(30)
+        assertThat<Int?>(result.maxTemperature).isEqualTo(30)
         assertThat(result.condition).isEqualTo(WeatherCondition.RAIN)
         server.verify()
     }
@@ -72,7 +72,7 @@ class KmaMidTermForecastAdapterTest {
 
         assertThat(result).isNotNull
         assertThat(result!!.minTemperature).isEqualTo(24)
-        assertThat(result.maxTemperature).isEqualTo(30)
+        assertThat<Int?>(result.maxTemperature).isEqualTo(30)
         assertThat(result.condition).isEqualTo(WeatherCondition.CLOUDY)
         server.verify()
     }
