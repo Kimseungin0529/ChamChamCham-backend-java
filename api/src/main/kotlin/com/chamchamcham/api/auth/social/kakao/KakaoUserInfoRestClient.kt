@@ -56,11 +56,11 @@ class KakaoUserInfoRestClient internal constructor(
             ?: throw BusinessException(ErrorCode.INVALID_KAKAO_TOKEN)
 
         return KakaoUserInfo(
-            subject = subject,
-            email = response.email.takeIf { response.emailVerified == true },
-            name = response.name,
-            phone = response.phoneNumber.takeIf { response.phoneNumberVerified == true },
-            birthDate = parseBirthDate(response.birthdate)
+            subject,
+            response.email.takeIf { response.emailVerified == true },
+            response.name,
+            response.phoneNumber.takeIf { response.phoneNumberVerified == true },
+            parseBirthDate(response.birthdate)
         )
     }
 

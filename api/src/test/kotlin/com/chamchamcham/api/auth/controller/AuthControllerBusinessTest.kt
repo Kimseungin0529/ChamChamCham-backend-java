@@ -173,10 +173,10 @@ class AuthControllerBusinessTest(
         `when`(
             appleLoginService.login(
                 AuthCommand.AppleLogin(
-                    identityToken = "identity-token",
-                    nonce = "nonce",
-                    authorizationCode = "authorization-code",
-                    userIdentifier = "apple-user-id"
+                    "identity-token",
+                    "nonce",
+                    "authorization-code",
+                    "apple-user-id"
                 )
             )
         ).thenReturn(loginResult())
@@ -244,16 +244,16 @@ class AuthControllerBusinessTest(
         `when`(
             onboardingService.complete(
                 AuthCommand.CompleteOnboarding(
-                    memberId = memberId,
-                    name = "홍길동",
-                    phone = "010-1234-5678",
-                    birthDate = LocalDate.parse("1990-01-01"),
-                    nickname = "길동",
-                    experienceLevel = 3,
-                    managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-                    farm = farmCommand(),
-                    cropIds = listOf(cropId),
-                    profileMediaId = UUID.fromString("00000000-0000-0000-0000-000000000501")
+                    memberId,
+                    "홍길동",
+                    "010-1234-5678",
+                    LocalDate.parse("1990-01-01"),
+                    "길동",
+                    3,
+                    ManagementType.AGRICULTURAL_INDIVIDUAL,
+                    farmCommand(),
+                    listOf(cropId),
+                    UUID.fromString("00000000-0000-0000-0000-000000000501")
                 )
             )
         ).thenReturn(onboardingCompleteResult())
@@ -294,22 +294,22 @@ class AuthControllerBusinessTest(
         `when`(
             onboardingService.complete(
                 AuthCommand.CompleteOnboarding(
-                    memberId = memberId,
-                    name = "홍길동",
-                    phone = "010-1234-5678",
-                    birthDate = LocalDate.parse("1990-01-01"),
-                    nickname = null,
-                    experienceLevel = 3,
-                    managementType = ManagementType.AGRICULTURAL_INDIVIDUAL,
-                    farm = farmCommand(),
-                    cropIds = listOf(cropId),
-                    profileMediaId = UUID.fromString("00000000-0000-0000-0000-000000000501")
+                    memberId,
+                    "홍길동",
+                    "010-1234-5678",
+                    LocalDate.parse("1990-01-01"),
+                    null,
+                    3,
+                    ManagementType.AGRICULTURAL_INDIVIDUAL,
+                    farmCommand(),
+                    listOf(cropId),
+                    UUID.fromString("00000000-0000-0000-0000-000000000501")
                 )
             )
         ).thenReturn(
-            onboardingCompleteResult().copy(
-                member = completedMemberProfile().copy(nickname = "홍길동")
-            )
+            onboardingCompleteResult().let { result ->
+                AuthResult.OnboardingComplete(completedMemberProfile("홍길동"), result.farm, result.crops, result.onboarding)
+            }
         )
 
         mockMvc.perform(
@@ -337,12 +337,12 @@ class AuthControllerBusinessTest(
 
     private fun loginResult(): AuthResult.Login {
         return AuthResult.Login(
-            accessToken = "access-token",
-            refreshToken = "refresh-token",
-            member = memberProfile(),
-            onboarding = AuthResult.Onboarding(
-                status = AuthResult.OnboardingStatus.REQUIRED,
-                missingFields = listOf(
+            "access-token",
+            "refresh-token",
+            memberProfile(),
+            AuthResult.Onboarding(
+                AuthResult.OnboardingStatus.REQUIRED,
+                listOf(
                     AuthResult.OnboardingField.NAME,
                     AuthResult.OnboardingField.PHONE,
                     AuthResult.OnboardingField.BIRTH_DATE,
@@ -356,44 +356,44 @@ class AuthControllerBusinessTest(
 
     private fun memberProfile(): AuthResult.MemberProfile {
         return AuthResult.MemberProfile(
-            id = memberId,
-            email = "social@example.com",
-            name = null,
-            phone = null,
-            birthDate = null,
-            nickname = null,
-            experienceLevel = null,
-            managementType = null,
-            profileImageUrl = null
+            memberId,
+            "social@example.com",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
         )
     }
 
     private fun onboardingCompleteResult(): AuthResult.OnboardingComplete {
         return AuthResult.OnboardingComplete(
-            member = completedMemberProfile(),
-            farm = AuthResult.FarmSummary(
-                id = farmId,
-                name = "길동농장",
-                roadAddress = "서울시 강남구 테헤란로 1",
-                jibunAddress = "서울시 강남구 역삼동 1",
-                latitude = 35.8465,
-                longitude = 127.1292,
-                pnu = "4511310200101230004",
-                landCategory = "전",
-                areaSqm = BigDecimal("1200.5"),
-                areaIsManualEntry = false,
-                boundaryCoordinates = listOf(
-                    AuthResult.FarmBoundaryCoordinateSummary(latitude = 35.8461, longitude = 127.1289),
-                    AuthResult.FarmBoundaryCoordinateSummary(latitude = 35.8463, longitude = 127.1295)
+            completedMemberProfile(),
+            AuthResult.FarmSummary(
+                farmId,
+                "길동농장",
+                "서울시 강남구 테헤란로 1",
+                "서울시 강남구 역삼동 1",
+                35.8465,
+                127.1292,
+                "4511310200101230004",
+                "전",
+                BigDecimal("1200.5"),
+                false,
+                listOf(
+                    AuthResult.FarmBoundaryCoordinateSummary(35.8461, 127.1289),
+                    AuthResult.FarmBoundaryCoordinateSummary(35.8463, 127.1295)
                 ),
-                dataSource = AuthResult.FarmDataSourceSummary(
-                    address = "JUSO",
-                    coordinate = "V_WORLD_ADDRESS",
-                    parcel = "V_WORLD_CADASTRAL",
-                    landCharacteristic = "V_WORLD_LAND_CHARACTERISTIC"
+                AuthResult.FarmDataSourceSummary(
+                    "JUSO",
+                    "V_WORLD_ADDRESS",
+                    "V_WORLD_CADASTRAL",
+                    "V_WORLD_LAND_CHARACTERISTIC"
                 )
             ),
-            crops = listOf(
+            listOf(
                 CropResult.CropSummary(
                     cropId,
                     1001,
@@ -402,24 +402,24 @@ class AuthControllerBusinessTest(
                     "열매"
                 )
             ),
-            onboarding = AuthResult.Onboarding(
-                status = AuthResult.OnboardingStatus.COMPLETE,
-                missingFields = emptyList()
+            AuthResult.Onboarding(
+                AuthResult.OnboardingStatus.COMPLETE,
+                emptyList()
             )
         )
     }
 
-    private fun completedMemberProfile(): AuthResult.MemberProfile {
+    private fun completedMemberProfile(nickname: String? = "길동"): AuthResult.MemberProfile {
         return AuthResult.MemberProfile(
-            id = memberId,
-            email = "member@example.com",
-            name = "홍길동",
-            phone = "010-1234-5678",
-            birthDate = LocalDate.parse("1990-01-01"),
-            nickname = "길동",
-            experienceLevel = 3,
-            managementType = "AGRICULTURAL_INDIVIDUAL",
-            profileImageUrl = "https://example.test/profile.jpg"
+            memberId,
+            "member@example.com",
+            "홍길동",
+            "010-1234-5678",
+            LocalDate.parse("1990-01-01"),
+            nickname,
+            3,
+            "AGRICULTURAL_INDIVIDUAL",
+            "https://example.test/profile.jpg"
         )
     }
 
