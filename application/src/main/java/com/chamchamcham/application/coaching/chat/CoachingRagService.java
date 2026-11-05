@@ -46,7 +46,7 @@ public class CoachingRagService {
     }
     private String userPrompt(String question, CoachingContext context) {
         String text = "            질문:\n            " + question + "\n\n            " + context.getText();
-        var lines = Arrays.asList(text.split("\n", -1));
+        var lines = Arrays.asList(text.split("\r\n|\n|\r", -1));
         int indent = lines.stream().filter(it -> !trim(it).isEmpty()).mapToInt(it -> it.length() - trimStart(it).length()).min().orElse(0);
         return String.join("\n", lines.stream().map(it -> it.substring(Math.min(indent, it.length()))).toList());
     }
