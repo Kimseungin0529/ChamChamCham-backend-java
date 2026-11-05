@@ -92,6 +92,7 @@ class SearchServiceTest {
         when(policyProgramQueryRepository.search(new PolicyProgramQueryRepository.SearchCondition(null, null, null, 21))).thenReturn(java.util.Arrays.asList(program));
         when(policyProgramQueryRepository.count(null)).thenReturn(1L);
         var page = service.searchPolicies(new SearchQuery(memberId, null, null, 20));
+        assertThat(page.getItems()).hasSize(1);
         assertThat(page.getItems().get(0).getTitle()).isEqualTo("정책");
         assertThat(page.getNextCursor()).isNull();
     }
@@ -141,6 +142,7 @@ class SearchServiceTest {
         var all = service.searchAll(memberId, "황기");
         assertThat(all.getRecords().getItems()).containsExactly(summary);
         assertThat(all.getRecords().getTotalCount()).isEqualTo(12);
+        assertThat(all.getPolicies().getItems()).hasSize(1);
         assertThat(all.getPolicies().getItems().get(0).getTitle()).isEqualTo("황기 재배 지원");
         assertThat(all.getPolicies().getTotalCount()).isEqualTo(1);
         assertThat(all.getPosts().getItems()).containsExactly(post);
