@@ -1,6 +1,6 @@
 package com.chamchamcham.application.coaching.reportfeedback.generation;
 
-import com.chamchamcham.application.coaching.common.CoachingPromptLabelsKt;
+import com.chamchamcham.application.coaching.common.CoachingPromptLabels;
 import com.chamchamcham.application.coaching.common.CoachingTextPolicy;
 import com.chamchamcham.domain.crop.CropUsePartCategory;
 import com.chamchamcham.domain.farming.*;
@@ -19,7 +19,7 @@ public class ReportFeedbackPromptBuilder {
         evidence.forEach(it -> allowed.add("- " + it.getId() + " : " + it.getTitle()));
         var text = new StringBuilder(); text.append("허용 evidenceRefs:\n").append(String.join("\n", allowed)).append("\n\n");
         text.append("대상 리포트: ").append(context.getReport().getFarmName()).append(" / ").append(context.getReport().getCropName()).append('\n');
-        text.append("대상 작업: ").append(CoachingPromptLabelsKt.toCoachingText(context.getWorkType())).append('\n');
+        text.append("대상 작업: ").append(CoachingPromptLabels.toCoachingText(context.getWorkType())).append('\n');
         text.append("기간: ").append(context.getReport().getStartsAt()).append('~').append(context.getReport().getEndsAt()).append("\n현재 작업 통계:\n");
         formatStatistics(context.getWorkType(), context.getReport().getStatistics(), "").forEach(it -> text.append("- ").append(it).append('\n'));
         text.append(formatPreviousReport(context)).append("\n서버가 계산한 지난 재배의 동일 작업 비교:\n");
@@ -46,7 +46,7 @@ public class ReportFeedbackPromptBuilder {
     }
     private String subjectParticle(String text) { if (text.isEmpty()) return "가"; char last = text.charAt(text.length() - 1); return last < '\uAC00' || last > '\uD7A3' || (last - '\uAC00') % 28 == 0 ? "가" : "이"; }
     private String formatRecord(ReportFeedbackRecord record) {
-        var text = new StringBuilder("- record:" + record.getId() + " " + record.getWorkedAt() + " " + CoachingPromptLabelsKt.toCoachingText(record.getWorkType()) + " / 메모: " + record.getMemo());
+        var text = new StringBuilder("- record:" + record.getId() + " " + record.getWorkedAt() + " " + CoachingPromptLabels.toCoachingText(record.getWorkType()) + " / 메모: " + record.getMemo());
         formatRecordDetails(record.getWorkType(), record.getDetails()).forEach(it -> text.append("\n  - ").append(it));
         return text.toString();
     }
@@ -133,14 +133,14 @@ public class ReportFeedbackPromptBuilder {
     private List<Map<String, Object>> listOfMaps(Map<String, Object> map, String key) { var result = new ArrayList<Map<String, Object>>(); if (map.get(key) instanceof List<?> list) for (var item : list) { var row = asStringMap(item); if (row != null) result.add(row); } return result; }
     private Map<String, Object> asStringMap(Object value) { if (!(value instanceof Map<?, ?> map)) return null; var result = new LinkedHashMap<String, Object>(); map.forEach((key, item) -> { if (key instanceof String string) result.put(string, item); }); return result; }
     private <E extends Enum<E>> E find(E[] values, String code) { for (E value : values) if (value.name().equals(code)) return value; return null; }
-    private String propagationText(String code) { var value = find(PropagationMethod.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String plantingMethodText(String code) { var value = find(PlantingMethod.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String irrigationAmountText(String code) { var value = find(IrrigationAmount.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String irrigationMethodText(String code) { var value = find(IrrigationMethod.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String fertilizingMethodText(String code) { var value = find(FertilizingMethod.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String weedingMethodText(String code) { var value = find(WeedingMethod.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String cropPartText(String code) { var value = find(CropUsePartCategory.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
-    private String harvestSourceText(String code) { var value = find(HarvestSource.values(), code); return value == null ? null : CoachingPromptLabelsKt.toCoachingText(value); }
+    private String propagationText(String code) { var value = find(PropagationMethod.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String plantingMethodText(String code) { var value = find(PlantingMethod.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String irrigationAmountText(String code) { var value = find(IrrigationAmount.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String irrigationMethodText(String code) { var value = find(IrrigationMethod.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String fertilizingMethodText(String code) { var value = find(FertilizingMethod.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String weedingMethodText(String code) { var value = find(WeedingMethod.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String cropPartText(String code) { var value = find(CropUsePartCategory.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
+    private String harvestSourceText(String code) { var value = find(HarvestSource.values(), code); return value == null ? null : CoachingPromptLabels.toCoachingText(value); }
     private String growthPeriodUnitText(String code) { if (code == null) return null; return switch (code) { case "YEAR" -> "년"; case "MONTH" -> "개월"; default -> null; }; }
     private String unitText(String code) { if (code == null) return null; return switch (code) { case "KG" -> "킬로그램"; case "G" -> "그램"; case "ML" -> "밀리리터"; case "L" -> "리터"; case "JU" -> "포기"; default -> null; }; }
     private static boolean blank(String text) { return text.chars().allMatch(c -> Character.isWhitespace(c) || Character.isSpaceChar(c)); }

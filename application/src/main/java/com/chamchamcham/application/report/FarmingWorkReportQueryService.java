@@ -1,7 +1,7 @@
 package com.chamchamcham.application.report;
 
 import com.chamchamcham.application.common.OpaqueCursorCodec;
-import com.chamchamcham.application.coaching.common.CoachingPromptLabelsKt;
+import com.chamchamcham.application.coaching.common.CoachingPromptLabels;
 import com.chamchamcham.application.coaching.reportfeedback.lifecycle.ReportFeedbackQueryService;
 import com.chamchamcham.application.exception.ErrorCode;
 import com.chamchamcham.application.exception.business.BusinessException;
@@ -87,7 +87,7 @@ public class FarmingWorkReportQueryService {
                 feedback == null ? null : feedback.getContent());
         }
         return new FarmingWorkReportResult.Detail(required(report.getId(), "Persisted farming cycle report id is required"),
-            report.getStatus(), workType, CoachingPromptLabelsKt.toCoachingText(workType),
+            report.getStatus(), workType, CoachingPromptLabels.toCoachingText(workType),
             required(report.getFarm().getId(), "Persisted farm id is required"), report.getFarm().getName(),
             required(report.getCrop().getId(), "Persisted crop id is required"), report.getCrop().getName(),
             report.getStartsAt(), report.getEndsAt(), statistics, feedbackStatus);
@@ -130,7 +130,7 @@ public class FarmingWorkReportQueryService {
 
     private FarmingWorkReportResult.Item toResult(FarmingCycleReportQueryRepository.WorkItem row, String thumbnailUrl) {
         return new FarmingWorkReportResult.Item(row.reportId(), row.status(), row.farmId(), row.farmName(), row.cropId(), row.cropName(),
-            row.startsAt(), row.endsAt(), row.finalHarvestRecordId(), row.workType(), CoachingPromptLabelsKt.toCoachingText(row.workType()),
+            row.startsAt(), row.endsAt(), row.finalHarvestRecordId(), row.workType(), CoachingPromptLabels.toCoachingText(row.workType()),
             row.recordCount(), row.lastWorkedOn(), thumbnailUrl);
     }
 

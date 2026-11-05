@@ -49,23 +49,15 @@ class ReportFeedbackControllerTest(
     @Test
     fun `report feedback returns an ordered work type collection with ready content only`() {
         `when`(queryService.get(memberId, reportId)).thenReturn(
-            ReportFeedbackListResult(
-                reportId = reportId,
-                feedbacks = listOf(
+            ReportFeedbackListResult(reportId, listOf(
                     feedback(
                         feedbackId = wateringFeedbackId,
                         workType = WorkType.WATERING,
                         status = ReportFeedbackStatus.READY,
                         inputPrepared = true,
-                        content = ReportFeedbackResultContent(
-                            summary = "물 주기 작업을 살펴봤어요.",
-                            comparisons = listOf(
+                        content = ReportFeedbackResultContent("물 주기 작업을 살펴봤어요.", listOf(ReportFeedbackItemResult("흙이 마른 정도를 꾸준히 확인했어요.")), listOf(ReportFeedbackItemResult("물을 준 간격도 함께 비교해 보세요.")), listOf(ReportFeedbackItemResult("내일 흙이 마른 정도를 다시 확인하세요.")), listOf(
                                 ReportFeedbackItemResult("직전 재배보다 물 주기 기록이 한 번 늘었어요."),
-                            ),
-                            strengths = listOf(ReportFeedbackItemResult("흙이 마른 정도를 꾸준히 확인했어요.")),
-                            improvements = listOf(ReportFeedbackItemResult("물을 준 간격도 함께 비교해 보세요.")),
-                            nextActions = listOf(ReportFeedbackItemResult("내일 흙이 마른 정도를 다시 확인하세요.")),
-                        ),
+                            )),
                     ),
                     feedback(
                         feedbackId = fertilizingFeedbackId,
@@ -79,8 +71,7 @@ class ReportFeedbackControllerTest(
                         inputPrepared = true,
                         failureCode = "STRUCTURED_OUTPUT_INVALID",
                     ),
-                ),
-            ),
+                )),
         )
 
         mockMvc.perform(
@@ -129,7 +120,7 @@ class ReportFeedbackControllerTest(
     @Test
     fun `completed report without generated feedback returns an empty collection`() {
         `when`(queryService.get(memberId, reportId)).thenReturn(
-            ReportFeedbackListResult(reportId = reportId, feedbacks = emptyList()),
+            ReportFeedbackListResult(reportId, emptyList()),
         )
 
         mockMvc.perform(
@@ -211,16 +202,7 @@ class ReportFeedbackControllerTest(
         inputPrepared: Boolean = false,
         failureCode: String? = null,
         content: ReportFeedbackResultContent? = null,
-    ) = ReportFeedbackDetailResult(
-        feedbackId = feedbackId,
-        workType = workType,
-        status = status,
-        inputPrepared = inputPrepared,
-        failureCode = failureCode,
-        content = content,
-        createdAt = LocalDateTime.of(2026, 7, 14, 10, 0),
-        updatedAt = LocalDateTime.of(2026, 7, 14, 10, 1),
-    )
+    ) = ReportFeedbackDetailResult(feedbackId, workType, status, inputPrepared, failureCode, content, LocalDateTime.of(2026, 7, 14, 10, 0), LocalDateTime.of(2026, 7, 14, 10, 1))
 
     private fun authenticatedMember(memberId: String): RequestPostProcessor = RequestPostProcessor { request ->
         SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(

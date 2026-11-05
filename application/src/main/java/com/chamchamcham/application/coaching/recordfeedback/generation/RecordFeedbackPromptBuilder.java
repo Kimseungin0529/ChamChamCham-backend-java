@@ -1,6 +1,6 @@
 package com.chamchamcham.application.coaching.recordfeedback.generation;
 
-import com.chamchamcham.application.coaching.common.CoachingPromptLabelsKt;
+import com.chamchamcham.application.coaching.common.CoachingPromptLabels;
 import com.chamchamcham.application.coaching.common.CoachingTextPolicy;
 import org.springframework.stereotype.Component;
 import java.util.*;
@@ -17,9 +17,9 @@ public class RecordFeedbackPromptBuilder {
         return trim("- 농장: " + context.getFarm().getName() + " (" + context.getFarm().getRoadAddress() + ")\n" +
             "- 영농 경력: " + (context.getMember().getExperienceLevel() == null ? "미상" : context.getMember().getExperienceLevel() + "년") + "\n" +
             "- 작물: " + context.getCrop().getName() + "\n" +
-            "- 쓰는 부위: " + CoachingPromptLabelsKt.toCoachingText(context.getCrop().getUsePartCategory()) + "\n" +
+            "- 쓰는 부위: " + CoachingPromptLabels.toCoachingText(context.getCrop().getUsePartCategory()) + "\n" +
             "- 기록 시각: " + r.getWorkedAt() + "\n" +
-            "- 작업 유형: " + CoachingPromptLabelsKt.toCoachingText(r.getWorkType()) + "\n" +
+            "- 작업 유형: " + CoachingPromptLabels.toCoachingText(r.getWorkType()) + "\n" +
             "- 작업 상세: " + formatDetail(r.getDetail()) + "\n" +
             "- 메모: " + r.getMemo() + "\n" +
             "- 사진 수: " + r.getPhotoCount() + "장\n" +
@@ -37,31 +37,31 @@ public class RecordFeedbackPromptBuilder {
         var parts = new ArrayList<String>();
         switch (detail) {
             case PlantingFeedbackDetail d -> {
-                parts.add("심기: " + CoachingPromptLabelsKt.toCoachingText(d.getPlantingMethod()));
-                if (d.getSeedAmount() != null) parts.add("씨앗 양: " + d.getSeedAmount() + (d.getSeedAmountUnit() == null ? "" : CoachingPromptLabelsKt.toCoachingText(d.getSeedAmountUnit())));
-                if (d.getSeedlingCount() != null) parts.add("모종 수: " + d.getSeedlingCount() + (d.getSeedlingUnit() == null ? "" : CoachingPromptLabelsKt.toCoachingText(d.getSeedlingUnit())));
-                if (d.getPropagationMethod() != null) parts.add("모종 만든 방법: " + CoachingPromptLabelsKt.toCoachingText(d.getPropagationMethod()));
+                parts.add("심기: " + CoachingPromptLabels.toCoachingText(d.getPlantingMethod()));
+                if (d.getSeedAmount() != null) parts.add("씨앗 양: " + d.getSeedAmount() + (d.getSeedAmountUnit() == null ? "" : CoachingPromptLabels.toCoachingText(d.getSeedAmountUnit())));
+                if (d.getSeedlingCount() != null) parts.add("모종 수: " + d.getSeedlingCount() + (d.getSeedlingUnit() == null ? "" : CoachingPromptLabels.toCoachingText(d.getSeedlingUnit())));
+                if (d.getPropagationMethod() != null) parts.add("모종 만든 방법: " + CoachingPromptLabels.toCoachingText(d.getPropagationMethod()));
             }
             case WateringFeedbackDetail d -> {
-                if (d.getIrrigationAmount() != null) parts.add("물 준 양: " + CoachingPromptLabelsKt.toCoachingText(d.getIrrigationAmount()));
-                if (d.getIrrigationMethod() != null) parts.add("물을 준 방법: " + CoachingPromptLabelsKt.toCoachingText(d.getIrrigationMethod()));
+                if (d.getIrrigationAmount() != null) parts.add("물 준 양: " + CoachingPromptLabels.toCoachingText(d.getIrrigationAmount()));
+                if (d.getIrrigationMethod() != null) parts.add("물을 준 방법: " + CoachingPromptLabels.toCoachingText(d.getIrrigationMethod()));
             }
             case FertilizingFeedbackDetail d -> {
-                parts.add("거름 이름: " + d.getMaterialName()); parts.add("거름 양: " + d.getAmount() + CoachingPromptLabelsKt.toCoachingText(d.getAmountUnit()));
-                if (d.getApplicationMethod() != null) parts.add("거름을 준 방법: " + CoachingPromptLabelsKt.toCoachingText(d.getApplicationMethod()));
+                parts.add("거름 이름: " + d.getMaterialName()); parts.add("거름 양: " + d.getAmount() + CoachingPromptLabels.toCoachingText(d.getAmountUnit()));
+                if (d.getApplicationMethod() != null) parts.add("거름을 준 방법: " + CoachingPromptLabels.toCoachingText(d.getApplicationMethod()));
             }
             case PestControlFeedbackDetail d -> {
-                parts.add("약 이름: " + d.getPesticideName()); parts.add("약 사용량: " + d.getPesticideAmount() + CoachingPromptLabelsKt.toCoachingText(d.getPesticideAmountUnit()));
-                String unit = CoachingPromptLabelsKt.toSprayAmountCoachingText(d.getTotalSprayAmountUnit());
+                parts.add("약 이름: " + d.getPesticideName()); parts.add("약 사용량: " + d.getPesticideAmount() + CoachingPromptLabels.toCoachingText(d.getPesticideAmountUnit()));
+                String unit = CoachingPromptLabels.toSprayAmountCoachingText(d.getTotalSprayAmountUnit());
                 if (unit != null) parts.add("약을 섞은 물의 양: " + d.getTotalSprayAmount() + unit);
                 if (d.getPestName() != null) parts.add("관리 대상: " + d.getPestName());
             }
-            case WeedingFeedbackDetail d -> { if (d.getWeedingMethod() != null) parts.add("풀을 정리한 방법: " + CoachingPromptLabelsKt.toCoachingText(d.getWeedingMethod())); }
+            case WeedingFeedbackDetail d -> { if (d.getWeedingMethod() != null) parts.add("풀을 정리한 방법: " + CoachingPromptLabels.toCoachingText(d.getWeedingMethod())); }
             case HarvestFeedbackDetail d -> {
                 if (d.getHarvestAmount() != null) parts.add("수확량: " + d.getHarvestAmount() + "킬로그램");
-                if (d.getMedicinalPart() != null) parts.add("수확한 부위: " + CoachingPromptLabelsKt.toCoachingText(d.getMedicinalPart()));
-                parts.add("기른 곳: " + CoachingPromptLabelsKt.toCoachingText(d.getHarvestSource()));
-                if (d.getGrowthPeriod() != null && d.getGrowthPeriodUnit() != null) { String unit = CoachingPromptLabelsKt.toGrowthPeriodCoachingText(d.getGrowthPeriodUnit()); if (unit != null) parts.add("기른 기간: " + d.getGrowthPeriod() + unit); }
+                if (d.getMedicinalPart() != null) parts.add("수확한 부위: " + CoachingPromptLabels.toCoachingText(d.getMedicinalPart()));
+                parts.add("기른 곳: " + CoachingPromptLabels.toCoachingText(d.getHarvestSource()));
+                if (d.getGrowthPeriod() != null && d.getGrowthPeriodUnit() != null) { String unit = CoachingPromptLabels.toGrowthPeriodCoachingText(d.getGrowthPeriodUnit()); if (unit != null) parts.add("기른 기간: " + d.getGrowthPeriod() + unit); }
                 parts.add("마지막 수확: " + (d.isLastHarvest() ? "네" : "아니요"));
             }
             case CommonFeedbackDetail ignored -> { return "공통 상세 없음"; }
