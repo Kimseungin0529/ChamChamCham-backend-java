@@ -59,7 +59,7 @@ class SearchController(
         @RequestParam(defaultValue = "20") size: Int,
     ): ResponseEntity<ApiResponse<SearchResponses.SearchRecordPageResponse>> {
         val result = searchService.searchRecords(
-            SearchQuery(memberId = parseMemberId(memberId), keyword = keyword, cursor = cursor, size = size)
+            SearchQuery(parseMemberId(memberId), keyword, cursor, size)
         )
         return ResponseEntity.ok(ApiResponse.ok(SearchResponses.SearchRecordPageResponse.from(result)))
     }
@@ -81,7 +81,7 @@ class SearchController(
         @RequestParam(defaultValue = "20") size: Int,
     ): ResponseEntity<ApiResponse<SearchResponses.SearchPolicyPageResponse>> {
         val result = searchService.searchPolicies(
-            SearchQuery(memberId = parseMemberId(memberId), keyword = keyword, cursor = cursor, size = size)
+            SearchQuery(parseMemberId(memberId), keyword, cursor, size)
         )
         return ResponseEntity.ok(ApiResponse.ok(SearchResponses.SearchPolicyPageResponse.from(result)))
     }
@@ -103,7 +103,7 @@ class SearchController(
         @RequestParam(defaultValue = "20") size: Int,
     ): ResponseEntity<ApiResponse<SearchResponses.SearchPostPageResponse>> {
         val result = searchService.searchPosts(
-            SearchQuery(memberId = parseMemberId(memberId), keyword = keyword, cursor = cursor, size = size)
+            SearchQuery(parseMemberId(memberId), keyword, cursor, size)
         )
         return ResponseEntity.ok(ApiResponse.ok(SearchResponses.SearchPostPageResponse.from(result)))
     }

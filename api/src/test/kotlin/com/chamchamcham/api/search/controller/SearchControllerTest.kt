@@ -53,9 +53,9 @@ class SearchControllerTest(
     fun `search all returns record policy and post sections`() {
         `when`(searchService.searchAll(memberId, "황기")).thenReturn(
             SearchResult.All(
-                records = SearchResult.RecordPage(items = listOf(recordSummary()), nextCursor = null, totalCount = 12),
-                policies = SearchResult.PolicyPage(items = listOf(policyItem()), nextCursor = null, totalCount = 7),
-                posts = SearchResult.PostPage(items = listOf(postSummary()), nextCursor = null, totalCount = 5),
+                SearchResult.RecordPage(listOf(recordSummary()), null, 12),
+                SearchResult.PolicyPage(listOf(policyItem()), null, 7),
+                SearchResult.PostPage(listOf(postSummary()), null, 5),
             )
         )
 
@@ -81,10 +81,10 @@ class SearchControllerTest(
     fun `search records returns cursor page with default size 20`() {
         `when`(
             searchService.searchRecords(
-                SearchQuery(memberId = memberId, keyword = "황기", cursor = null, size = 20)
+                SearchQuery(memberId, "황기", null, 20)
             )
         ).thenReturn(
-            SearchResult.RecordPage(items = listOf(recordSummary()), nextCursor = "cursor-2", totalCount = 25)
+            SearchResult.RecordPage(listOf(recordSummary()), "cursor-2", 25)
         )
 
         mockMvc.perform(
@@ -103,10 +103,10 @@ class SearchControllerTest(
     fun `search policies returns policy fields and forwards cursor and size`() {
         `when`(
             searchService.searchPolicies(
-                SearchQuery(memberId = memberId, keyword = "청년", cursor = "cursor-1", size = 10)
+                SearchQuery(memberId, "청년", "cursor-1", 10)
             )
         ).thenReturn(
-            SearchResult.PolicyPage(items = listOf(policyItem()), nextCursor = null, totalCount = 1)
+            SearchResult.PolicyPage(listOf(policyItem()), null, 1)
         )
 
         mockMvc.perform(
@@ -131,10 +131,10 @@ class SearchControllerTest(
     fun `search posts returns post summaries`() {
         `when`(
             searchService.searchPosts(
-                SearchQuery(memberId = memberId, keyword = "황기", cursor = null, size = 20)
+                SearchQuery(memberId, "황기", null, 20)
             )
         ).thenReturn(
-            SearchResult.PostPage(items = listOf(postSummary()), nextCursor = "cursor-2", totalCount = 5)
+            SearchResult.PostPage(listOf(postSummary()), "cursor-2", 5)
         )
 
         mockMvc.perform(
@@ -163,7 +163,7 @@ class SearchControllerTest(
     @Test
     fun `suggestions returns keywords from suggestion service`() {
         `when`(searchSuggestionService.suggest("황기"))
-            .thenReturn(SearchSuggestionResult.Suggestions(keywords = listOf("황기", "황기환", "황기차")))
+            .thenReturn(SearchSuggestionResult.Suggestions(listOf("황기", "황기환", "황기차")))
 
         mockMvc.perform(
             get("/api/v1/search/suggestions")
@@ -220,16 +220,16 @@ class SearchControllerTest(
     )
 
     private fun policyItem(): SearchResult.PolicyItem = SearchResult.PolicyItem(
-        id = policyId,
-        title = "청년 농업인 지원사업",
-        agencyName = "농림축산식품부",
-        eligibilitySummary = "만 40세 미만",
-        benefitSummary = "월 100만원 지원",
-        applicationPeriodLabel = "2026-06-01 ~ 2026-06-30",
-        applyStartsOn = LocalDate.of(2026, 6, 1),
-        applyEndsOn = LocalDate.of(2026, 6, 30),
-        sourceUrl = "https://policy.example.com/1",
-        createdAt = createdAt,
+        policyId,
+        "청년 농업인 지원사업",
+        "농림축산식품부",
+        "만 40세 미만",
+        "월 100만원 지원",
+        "2026-06-01 ~ 2026-06-30",
+        LocalDate.of(2026, 6, 1),
+        LocalDate.of(2026, 6, 30),
+        "https://policy.example.com/1",
+        createdAt,
     )
 
     private fun authenticatedMember(memberId: String): RequestPostProcessor {
