@@ -1,14 +1,10 @@
 package com.chamchamcham.api.weather;
 
 import com.chamchamcham.application.weather.*;
-import com.chamchamcham.application.exception.ErrorCode;
-import com.chamchamcham.application.exception.business.BusinessException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.springframework.http.*;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -28,8 +24,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("tmFc가 오늘 06시면 n=4로 taMin4와 wf4Pm을 읽는다")
     void test01() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 19) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 19);
         server.expect(requestTo(taUri("11B10101", "202607150600")))
             .andRespond(withJson(itemsBody(Map.of("taMin4", "24", "taMax4", "30"))));
         server.expect(requestTo(landUri("11B00000", "202607150600")))
@@ -45,8 +41,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("tmFc가 어제 18시면 n=5로 taMin5와 wf5Pm을 읽는다")
     void test02() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 0, 5)) ;
-        var date = LocalDate.of(2026, 7, 19) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 0, 5));
+        var date = LocalDate.of(2026, 7, 19);
         server.expect(requestTo(taUri("11B10101", "202607141800")))
             .andRespond(withJson(itemsBody(Map.of("taMin5", "24", "taMax5", "30"))));
         server.expect(requestTo(landUri("11B00000", "202607141800")))
@@ -62,8 +58,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("date가 tmFc+3일이면 n=3이라 필드가 없어 null을 반환한다")
     void test03() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 18) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 18);
         server.expect(requestTo(taUri("11B10101", "202607150600")))
             .andRespond(withJson(itemsBody(Map.of())));
         server.expect(requestTo(landUri("11B00000", "202607150600")))
@@ -76,8 +72,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("n이 3에서 10 범위 밖이면 호출 없이 null을 반환한다")
     void test04() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 15) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 15);
         var result = adapter.fetch(seoulLocation, date);
         assertThat(result).isNull();
         server.verify();
@@ -86,8 +82,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("wf{n}Pm이 없고 wf{n}Am만 있으면 Am을 사용한다")
     void test05() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 19) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 19);
         server.expect(requestTo(taUri("11B10101", "202607150600")))
             .andRespond(withJson(itemsBody(Map.of("taMin4", "20", "taMax4", "26"))));
         server.expect(requestTo(landUri("11B00000", "202607150600")))
@@ -101,8 +97,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("온도와 wf 둘 다 없으면 null을 반환한다")
     void test06() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 19) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 19);
         server.expect(requestTo(taUri("11B10101", "202607150600")))
             .andRespond(withJson(itemsBody(Map.of())));
         server.expect(requestTo(landUri("11B00000", "202607150600")))
@@ -115,8 +111,8 @@ class KmaMidTermForecastAdapterTest {
     @Test
     @DisplayName("getMidTa는 지점코드를, getMidLandFcst는 규칙으로 계산한 광역 구역코드를 사용한다")
     void test07() {
-        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0)) ;
-        var date = LocalDate.of(2026, 7, 19) ;
+        var adapter = adapterAt(LocalDateTime.of(2026, 7, 15, 10, 0));
+        var date = LocalDate.of(2026, 7, 19);
         server.expect(requestTo(taUri("11B10101", "202607150600")))
             .andRespond(withJson(itemsBody(Map.of("taMin4", "24", "taMax4", "30"))));
         server.expect(requestTo(landUri("11B00000", "202607150600")))
@@ -130,12 +126,6 @@ class KmaMidTermForecastAdapterTest {
     }
     private org.springframework.test.web.client.ResponseCreator withJson(String body) {
         return withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(body);
-    }
-    private String emptyBodyOf(String code) {
-        return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
-    }
-    private String bodyOf(String... items) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":["+String.join(",",items)+"]}}}}";
     }
     private String itemsBody(Map<String,String> fields) { return itemsBody(fields,true); }
     private String itemsBody(Map<String,String> fields,boolean hasItem) {

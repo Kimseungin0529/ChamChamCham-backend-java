@@ -1,14 +1,10 @@
 package com.chamchamcham.api.weather;
 
 import com.chamchamcham.application.weather.*;
-import com.chamchamcham.application.exception.ErrorCode;
-import com.chamchamcham.application.exception.business.BusinessException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.springframework.http.*;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -84,12 +80,6 @@ class KmaHistoricalObservationAdapterTest {
     }
     private org.springframework.test.web.client.ResponseCreator withJson(String body) {
         return withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(body);
-    }
-    private String emptyBodyOf(String code) {
-        return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
-    }
-    private String bodyOf(String... items) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":["+String.join(",",items)+"]}}}}";
     }
     private String itemsBody(Map<String,String> fields) { return itemsBody(fields,true); }
     private String itemsBody(Map<String,String> fields,boolean hasItem) {

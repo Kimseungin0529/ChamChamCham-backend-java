@@ -1,14 +1,9 @@
 package com.chamchamcham.api.weather;
 
 import com.chamchamcham.application.weather.*;
-import com.chamchamcham.application.exception.ErrorCode;
-import com.chamchamcham.application.exception.business.BusinessException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.*;
 import java.util.*;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.springframework.http.*;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -167,10 +162,17 @@ class KmaShortTermForecastAdapterTest {
         return withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(body);
     }
     private String emptyBodyOf(String code) {
-        return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
+        return """
+            {"response":{"header":{"resultCode":"%s","resultMsg":"NODATA_ERROR"},
+             "body":{"dataType":"JSON","items":{"item":[]},"pageNo":1,"numOfRows":1000,"totalCount":0}}}
+            """.formatted(code).strip();
     }
     private String bodyOf(String... items) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":["+String.join(",",items)+"]}}}}";
+        return """
+            {"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_SERVICE"},
+             "body":{"dataType":"JSON","items":{"item":[%s]},
+             "pageNo":1,"numOfRows":1000,"totalCount":%d}}}
+            """.formatted(String.join(",", items), items.length).strip();
     }
     private KmaProperties properties() {
         return new KmaProperties(SERVICE_KEY,2000,2000,new KmaProperties.BaseUrl("https://weather.example.test/VilageFcstInfoService_2.0","https://weather.example.test/MidFcstInfoService","https://weather.example.test/AsosDalyInfoService","https://weather.example.test/LivingWthrIdxServiceV5"));

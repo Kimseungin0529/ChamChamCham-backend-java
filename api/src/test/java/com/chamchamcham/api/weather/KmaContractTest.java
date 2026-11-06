@@ -43,6 +43,10 @@ class KmaContractTest {
         assertThat(result.get(0).value()).isNull();
         assertThat(result.get(1).value()).isNull();
     }
+    @Test void jsonNullEnvelopeIsProviderFailure() {
+        assertThatThrownBy(() -> read("null", "test-service-key"))
+            .isInstanceOfSatisfying(BusinessException.class,e -> assertThat(e.getErrorCode()).isEqualTo(ErrorCode.WEATHER_PROVIDER_UNAVAILABLE));
+    }
     private List<Item> read(String body,String key) {
         RestClient.Builder builder=RestClient.builder();
         MockRestServiceServer server=MockRestServiceServer.bindTo(builder).build();

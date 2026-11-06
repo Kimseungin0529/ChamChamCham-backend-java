@@ -36,7 +36,7 @@ class RecordFeedbackKmaWeatherAdapterTest {
             .andRespond(withJson(THREE_DAYS_BODY));
         var result = adapter.fetch(37.5665, 126.9780, 7);
         assertThat(result.getCurrent().getTemperatureC()).isEqualTo(14);
-        assertThat(result.getCurrent().getSkyCondition()).isEqualTo("맑음") ;
+        assertThat(result.getCurrent().getSkyCondition()).isEqualTo("맑음");
         assertThat(result.getCurrent().getObservedAt()).isEqualTo(LocalDateTime.of(2026, 7, 11, 9, 0));
         assertThat(result.getSource()).isEqualTo("KMA_SHORT_TERM");
         assertThat(result.getForecastDays().stream().map(day -> day.getDate().toString()).toList())
@@ -61,7 +61,7 @@ class RecordFeedbackKmaWeatherAdapterTest {
         server.expect(requestTo(ncstUri("20260711", "0900")))
             .andRespond(withJson(ncstBodyOf("14.2", "1")));
         server.expect(requestTo(vilageFcstUri("20260711", "0800")))
-            .andRespond(withJson(THREE_DAYS_BODY)) ;
+            .andRespond(withJson(THREE_DAYS_BODY));
         var result = adapter.fetch(37.5665, 126.9780, 1);
         assertThat(result.getCurrent().getSkyCondition()).isEqualTo("비");
     }
@@ -117,17 +117,23 @@ class RecordFeedbackKmaWeatherAdapterTest {
     private String vilageFcstUri(String date,String time) {
         return BASE_URL+"/getVilageFcst?serviceKey="+SERVICE_KEY+"&dataType=JSON&pageNo=1&numOfRows=2000&base_date="+date+"&base_time="+time+"&nx=60&ny=127";
     }
-    private String ncstBodyOf(String temperature,String pty) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":[{\"baseDate\":\"20260711\",\"baseTime\":\"0900\",\"category\":\"T1H\",\"obsrValue\":\""+temperature+"\"},{\"baseDate\":\"20260711\",\"baseTime\":\"0900\",\"category\":\"PTY\",\"obsrValue\":\""+pty+"\"}]}}}}";
+    private String ncstBodyOf(String temperature, String pty) {
+        return """
+            {"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_SERVICE"},
+             "body":{"dataType":"JSON","items":{"item":[
+               {"baseDate":"20260711","baseTime":"0900","category":"T1H","obsrValue":"%s"},
+               {"baseDate":"20260711","baseTime":"0900","category":"PTY","obsrValue":"%s"}
+             ]},"pageNo":1,"numOfRows":100,"totalCount":2}}}
+            """.formatted(temperature, pty).strip();
     }
     private org.springframework.test.web.client.ResponseCreator withJson(String body) {
         return withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(body);
     }
     private String emptyBodyOf(String code) {
-        return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
-    }
-    private String bodyOf(String... items) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":["+String.join(",",items)+"]}}}}";
+        return """
+            {"response":{"header":{"resultCode":"%s","resultMsg":"NODATA_ERROR"},
+             "body":{"dataType":"JSON","items":{"item":[]},"pageNo":1,"numOfRows":1000,"totalCount":0}}}
+            """.formatted(code).strip();
     }
     private KmaProperties properties() {
         return new KmaProperties(SERVICE_KEY,2000,2000,new KmaProperties.BaseUrl("https://weather.example.test/VilageFcstInfoService_2.0","https://weather.example.test/MidFcstInfoService","https://weather.example.test/AsosDalyInfoService","https://weather.example.test/LivingWthrIdxServiceV5"));

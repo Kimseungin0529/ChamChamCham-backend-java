@@ -48,7 +48,7 @@ class NearestMidFcstStationResolverTest {
     @Test
     @DisplayName("기본 인자는 전체 중기예보 지점 목록을 사용한다")
     void test04() {
-        var result = NearestMidFcstStationResolver.INSTANCE.resolve(37.5665, 126.9780, MidFcstStations.INSTANCE.getALL());
+        var result = NearestMidFcstStationResolver.INSTANCE.resolve(37.5665, 126.9780);
         assertThat(result.getTaRegId()).isEqualTo("11B10101");
     }
 

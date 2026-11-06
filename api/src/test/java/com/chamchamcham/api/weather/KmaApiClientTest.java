@@ -6,9 +6,7 @@ import com.chamchamcham.application.exception.business.BusinessException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.*;
 import java.util.*;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.springframework.http.*;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -103,19 +101,18 @@ class KmaApiClientTest {
         client=new KmaApiClient(builder.build(),SERVICE_KEY);
     }
     private String requestUri(String operation) { return BASE_URL+"/"+operation+"?serviceKey="+SERVICE_KEY+"&dataType=JSON&pageNo=1&numOfRows=10&nx=60&ny=127"; }
-    private String bodyOf(String code,String msg) { return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\""+msg+"\"},\"body\":{\"items\":{\"item\":[]}}}}"; }
+    private String bodyOf(String code, String msg) {
+        return """
+            {"response":{"header":{"resultCode":"%s","resultMsg":"%s"},
+             "body":{"dataType":"JSON","items":{"item":[]},"pageNo":1,"numOfRows":10,"totalCount":0}}}
+            """.formatted(code, msg).strip();
+    }
     private record TestItem(@JsonProperty("category") String category,@JsonProperty("obsrValue") String obsrValue) {
         public String getCategory() { return category; }
         public String getObsrValue() { return obsrValue; }
     }
     private org.springframework.test.web.client.ResponseCreator withJson(String body) {
         return withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(body);
-    }
-    private String emptyBodyOf(String code) {
-        return "{\"response\":{\"header\":{\"resultCode\":\""+code+"\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
-    }
-    private String unusedBodyOf(String... items) {
-        return "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL_SERVICE\"},\"body\":{\"items\":{\"item\":["+String.join(",",items)+"]}}}}";
     }
     private static final String SUCCESS_BODY = """
             {"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_SERVICE"},

@@ -47,7 +47,7 @@ class NearestAsosStationResolverTest {
     @Test
     @DisplayName("기본 인자는 전체 ASOS 지점 목록을 사용한다")
     void test04() {
-        var result = NearestAsosStationResolver.INSTANCE.resolve(37.5665, 126.9780, AsosStations.INSTANCE.getALL());
+        var result = NearestAsosStationResolver.INSTANCE.resolve(37.5665, 126.9780);
         assertThat(result.getId()).isEqualTo("108");
     }
 

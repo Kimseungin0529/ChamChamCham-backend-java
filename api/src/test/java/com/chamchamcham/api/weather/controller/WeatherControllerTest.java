@@ -76,6 +76,25 @@ class WeatherControllerTest {
         mockMvc.perform(get("/api/v1/weather/home"))
             .andExpect(status().isUnauthorized()).andExpect(jsonPath("$.error.code",equalTo("AUTH_001")));
     }
+    @Test @DisplayName("상세 응답의 nullable 기상 값은 null이며 partial은 boolean과 배열로 직렬화된다")
+    void nullableDetailJson() throws Exception {
+        given(farmWeatherService.getDetail(memberId,farmId)).willReturn(new DetailWeather(farmId,"서울 중구 세종대로 110",
+            LocalDateTime.of(2026,7,15,21,0),24,null,WeatherCondition.UNKNOWN,null,null,null,null,null,null,List.of(),PartialFailure.of()));
+        var response = mockMvc.perform(get("/api/v1/weather/detail").param("farmId",farmId.toString()).with(authenticatedMember(memberId.toString())))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.data.observedAt",equalTo("2026-07-15T21:00:00")))
+            .andExpect(jsonPath("$.data.current.temperature",equalTo(24)))
+            .andExpect(jsonPath("$.data.current.condition.code",equalTo("UNKNOWN")))
+            .andExpect(jsonPath("$.data.current.condition.text",equalTo("정보없음")))
+            .andExpect(jsonPath("$.data.forecast",equalTo(List.of())))
+            .andExpect(jsonPath("$.data.partial.degraded",equalTo(false)))
+            .andExpect(jsonPath("$.data.partial.missing",equalTo(List.of())));
+        for (String field : List.of("feelsLikeTemperature","minTemperature","maxTemperature","humidity","windSpeed","precipitationProbability","uvIndex")) {
+            response.andExpect(jsonPath("$.data.current."+field).hasJsonPath())
+                .andExpect(jsonPath("$.data.current."+field).value(org.hamcrest.Matchers.nullValue()));
+        }
+    }
+
     private RequestPostProcessor authenticatedMember(String id) {
         return request -> {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(id,null,List.of(new SimpleGrantedAuthority("ROLE_USER"))));
