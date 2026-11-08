@@ -1,6 +1,6 @@
 package com.chamchamcham.api.search.controller;
 
-import com.chamchamcham.api.testsupport.TestJwtFixturesKt;
+import com.chamchamcham.api.testsupport.TestJwtFixtures;
 import com.chamchamcham.domain.member.Member;
 import com.chamchamcham.domain.member.MemberRepository;
 import com.chamchamcham.domain.policy.PolicyProgram;
@@ -37,7 +37,7 @@ class SearchPolicyIntegrationTest {
     @BeforeEach
     void setUp() {
         var member = memberRepository.save(new Member("policy-search-member@example.com", null));
-        accessToken = TestJwtFixturesKt.signedTestToken(
+        accessToken = TestJwtFixtures.signedTestToken(
             member.getId() == null ? "null" : member.getId().toString(), "access", "ROLE_USER");
         var programA = policyProgramRepository.save(buildProgram(
             "청년 농업인 지원사업", "청년 농업인 정착 지원", "월 100만원 지원",
