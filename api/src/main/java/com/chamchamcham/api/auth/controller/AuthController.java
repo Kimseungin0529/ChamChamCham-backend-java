@@ -102,8 +102,8 @@ public class AuthController {
         @Valid @RequestBody AuthRequests.CompleteOnboardingRequest request) {
         var result = onboardingService.complete(new AuthCommand.CompleteOnboarding(parseMemberId(memberId),
             request.name(), request.phone(), request.birthDate(), request.nickname(),
-            Objects.requireNonNull(request.experienceLevel()), Objects.requireNonNull(request.managementType()),
-            Objects.requireNonNull(request.farm()).toCommandDraft(), request.cropIds(), request.profileMediaId()));
+            requireNotNull(request.experienceLevel()), requireNotNull(request.managementType()),
+            requireNotNull(request.farm()).toCommandDraft(), request.cropIds(), request.profileMediaId()));
         return ResponseEntity.ok(ApiResponse.ok(AuthResponses.OnboardingCompleteResponse.from(result)));
     }
 
@@ -125,6 +125,11 @@ public class AuthController {
         authService.logout(memberId);
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, clearRefreshTokenCookie().toString())
             .body(ApiResponse.empty(Unit.INSTANCE));
+    }
+
+    private static <T> T requireNotNull(T value) {
+        if (value == null) throw new IllegalArgumentException("Required value was null.");
+        return value;
     }
 
     private ResponseCookie refreshTokenCookie(String refreshToken) {

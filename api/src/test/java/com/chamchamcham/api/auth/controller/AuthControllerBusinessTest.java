@@ -531,4 +531,22 @@ class AuthControllerBusinessTest {
         assertThat(mapped.getMissingFields()).isSameAs(missing).containsExactly(AuthResult.OnboardingField.NAME);
     }
 
+
+    @Test
+    @DisplayName("direct onboarding null arguments preserve requireNotNull failure semantics")
+    void directOnboardingNullArgumentsPreserveFailureSemantics() {
+        var controller = new AuthController(authService, kakaoLoginService, appleLoginService,
+            naverLoginService, onboardingService, tokenProvider, true);
+        for (var request : java.util.List.of(
+            new com.chamchamcham.api.auth.dto.AuthRequests.CompleteOnboardingRequest(null, null, null, null,
+                null, null, null, java.util.List.of(), null),
+            new com.chamchamcham.api.auth.dto.AuthRequests.CompleteOnboardingRequest(null, null, null, null,
+                3, null, null, java.util.List.of(), null),
+            new com.chamchamcham.api.auth.dto.AuthRequests.CompleteOnboardingRequest(null, null, null, null,
+                3, ManagementType.AGRICULTURAL_INDIVIDUAL, null, java.util.List.of(), null))) {
+            org.assertj.core.api.Assertions.assertThatThrownBy(() -> controller.completeOnboarding(memberId.toString(), request))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("Required value was null.");
+        }
+        org.mockito.Mockito.verifyNoInteractions(onboardingService);
+    }
 }
