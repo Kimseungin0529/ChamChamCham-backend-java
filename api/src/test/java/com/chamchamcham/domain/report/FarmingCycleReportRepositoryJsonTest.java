@@ -24,7 +24,6 @@ import java.util.UUID;
 import java.util.*;
 import org.junit.jupiter.api.DisplayName;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.module.kotlin.KotlinModule;
 
 @DataJpaTest(
     properties = {
@@ -66,7 +65,7 @@ class FarmingCycleReportRepositoryJsonTest {
     @Test
     @DisplayName("statistics JSON saved before distribution fields remains readable")
     void statistics_JSON_saved_before_distribution_fields_remains_readable() throws Exception {
-        var statistics = JsonMapper.builder().addModule(new KotlinModule.Builder().build()).build().readValue("""
+        var statistics = JsonMapper.builder().build().readValue("""
 {"planting":{"recordCount":1},"harvest":{"recordCount":1}}""", CycleReportStatistics.class);
         assertThat(statistics.getPlanting().getRecordCount()).isEqualTo(1);
         assertThat(statistics.getPlanting().getPlantingMethodDistribution()).isEmpty();
@@ -77,7 +76,7 @@ class FarmingCycleReportRepositoryJsonTest {
     @Test
     @DisplayName("statistics JSON rejects explicit null for non nullable default fields")
     void statistics_JSON_rejects_explicit_null_for_non_nullable_default_fields() throws Exception {
-        var mapper = JsonMapper.builder().addModule(new KotlinModule.Builder().build()).build();
+        var mapper = JsonMapper.builder().build();
         for (var json : java.util.Arrays.asList("""
 {"planting":null}""", """
 {"planting":{"weatherDistribution":null}}""", """
@@ -91,7 +90,7 @@ class FarmingCycleReportRepositoryJsonTest {
     @Test
     @DisplayName("statistics JSON preserves empty arrays and nullable fields")
     void statistics_JSON_preserves_empty_arrays_and_nullable_fields() throws Exception {
-        var statistics = JsonMapper.builder().addModule(new KotlinModule.Builder().build()).build().readValue("""
+        var statistics = JsonMapper.builder().build().readValue("""
 {"planting":{"weatherDistribution":[],"firstWorkedOn":null},"harvest":{"totalAmountKg":null}}""", CycleReportStatistics.class);
         assertThat(statistics.getPlanting().getWeatherDistribution()).isEmpty();
         assertThat(statistics.getPlanting().getFirstWorkedOn()).isNull();

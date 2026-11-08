@@ -264,7 +264,6 @@ class FarmingRecordDetailValidatorTest {
 
     private com.fasterxml.jackson.databind.ObjectMapper contractMapper() {
         return new com.fasterxml.jackson.databind.ObjectMapper()
-            .registerModule(new com.fasterxml.jackson.module.kotlin.KotlinModule.Builder().build())
             .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
     }
 }

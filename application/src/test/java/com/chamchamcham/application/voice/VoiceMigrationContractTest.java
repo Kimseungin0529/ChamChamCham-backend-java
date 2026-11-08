@@ -1,7 +1,6 @@
 package com.chamchamcham.application.voice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -15,7 +14,7 @@ class VoiceMigrationContractTest {
     private final UUID otherFarm = UUID.fromString("00000000-0000-0000-0000-000000000102");
     private final UUID crop = UUID.fromString("00000000-0000-0000-0000-000000000201");
     private final LocalDateTime now = LocalDateTime.of(2026, 7, 17, 9, 0, 0, 123000000);
-    private ObjectMapper mapper() { return new ObjectMapper().registerModule(new KotlinModule.Builder().build()).registerModule(new JavaTimeModule()); }
+    private ObjectMapper mapper() { return new ObjectMapper().registerModule(new JavaTimeModule()); }
     private String hash(String text) throws Exception { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(text.getBytes(StandardCharsets.UTF_8))); }
     @Test
     void originalPromptAndSchemaFingerprints() throws Exception {

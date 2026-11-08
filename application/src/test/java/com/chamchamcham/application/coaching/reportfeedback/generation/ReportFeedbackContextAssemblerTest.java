@@ -142,7 +142,7 @@ class ReportFeedbackContextAssemblerTest {
         assertThatThrownBy(() -> assembler().assemble(memberId, reportId, WorkType.PRUNING)).isInstanceOfSatisfying(ReportFeedbackGenerationFailure.class, it -> assertThat(it.getCode()).isEqualTo(ReportFeedbackFailureCode.INVALID_CONTEXT));
     }
     private ReportFeedbackContextAssembler assembler() {
-        return new ReportFeedbackContextAssembler(reportRepository, reportQueryRepository, sourceLoader, new FarmingCyclePartitioner(), com.fasterxml.jackson.module.kotlin.ExtensionsKt.jacksonObjectMapper(), new ReportFeedbackComparisonCalculator());
+        return new ReportFeedbackContextAssembler(reportRepository, reportQueryRepository, sourceLoader, new FarmingCyclePartitioner(), new com.fasterxml.jackson.databind.ObjectMapper(), new ReportFeedbackComparisonCalculator());
     }
     private void stubReports(FarmingCycleReport report, FarmingCycleReport previous) {
         when(reportRepository.findByIdAndMember_Id(reportId, memberId)).thenReturn(report);

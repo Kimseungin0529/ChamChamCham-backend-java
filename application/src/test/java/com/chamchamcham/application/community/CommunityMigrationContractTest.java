@@ -3,7 +3,6 @@ package com.chamchamcham.application.community;
 import com.chamchamcham.application.common.OpaqueCursorCodec;
 import com.chamchamcham.domain.community.CommunityPostSort;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -13,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 class CommunityMigrationContractTest {
     private final UUID id = UUID.fromString("00000000-0000-0000-0000-000000000101");
     private final LocalDateTime now = LocalDateTime.of(2026, 7, 17, 9, 0);
-    private ObjectMapper mapper() { return new ObjectMapper().registerModule(new KotlinModule.Builder().build()).registerModule(new JavaTimeModule()); }
+    private ObjectMapper mapper() { return new ObjectMapper().registerModule(new JavaTimeModule()); }
     @Test
     void cursorLiteralJsonAndNullableScore() throws Exception {
         var codec = new OpaqueCursorCodec();

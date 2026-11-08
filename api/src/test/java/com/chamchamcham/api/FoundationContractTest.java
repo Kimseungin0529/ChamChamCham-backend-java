@@ -8,7 +8,6 @@ import com.chamchamcham.config.CloudinaryProperties;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -18,7 +17,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.*;
 
 class FoundationContractTest {
-    private final ObjectMapper mapper = new ObjectMapper().registerModule(new KotlinModule.Builder().build())
+    private final ObjectMapper mapper = new ObjectMapper()
         .registerModule(new JavaTimeModule());
     private final jakarta.validation.Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     private final String farm = """

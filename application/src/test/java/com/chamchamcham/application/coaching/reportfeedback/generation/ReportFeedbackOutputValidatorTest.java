@@ -169,7 +169,7 @@ class ReportFeedbackOutputValidatorTest {
     @Test
     @DisplayName("deserializes omitted item sections as empty lists")
     void deserializes_omitted_item_sections_as_empty_lists() throws Exception {
-        var content = com.fasterxml.jackson.module.kotlin.ExtensionsKt.jacksonObjectMapper().readValue("{\"summary\":\"이번 물 주기 기록을 확인했어요.\"}", ReportFeedbackContent.class);
+        var content = new com.fasterxml.jackson.databind.ObjectMapper().readValue("{\"summary\":\"이번 물 주기 기록을 확인했어요.\"}", ReportFeedbackContent.class);
         assertThat(content.getComparisons()).isEmpty();
         assertThat(content.getStrengths()).isEmpty();
         assertThat(content.getImprovements()).isEmpty();
