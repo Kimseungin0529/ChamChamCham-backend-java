@@ -62,7 +62,6 @@ class FarmingCyclePartitionerTest {
     @Test
     void reportSourceJsonRetainsOmittedDefaultsAndRejectsExplicitNulls() throws Exception {
         var mapper = new com.fasterxml.jackson.databind.ObjectMapper()
-            .registerModule(new com.fasterxml.jackson.module.kotlin.KotlinModule.Builder().build())
             .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
         var json = "{\"id\":\"00000000-0000-0000-0000-000000000001\",\"workedAt\":\"2026-01-01T09:00:00\",\"workType\":\"WATERING\",\"weatherCondition\":\"맑음\",\"weatherTemperature\":20,\"hasPhoto\":false}";
         var source = mapper.readValue(json, CycleReportSourceRecord.class);
@@ -85,7 +84,6 @@ class FarmingCyclePartitionerTest {
     @Test
     void searchConditionJsonRetainsMissingCollectionDefaults() throws Exception {
         var mapper = new com.fasterxml.jackson.databind.ObjectMapper()
-            .registerModule(new com.fasterxml.jackson.module.kotlin.KotlinModule.Builder().build())
             .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
         var json = "{\"memberId\":\"00000000-0000-0000-0000-000000000001\",\"cursor\":null,\"size\":20}";
         var farming = mapper.readValue(json, com.chamchamcham.application.farming.FarmingRecordSearchCondition.class);
@@ -127,8 +125,7 @@ class FarmingCyclePartitionerTest {
 
     @Test
     void cycleSliceJsonRetainsTheOriginalDerivedFieldPopulation() throws Exception {
-        var mapper = new com.fasterxml.jackson.databind.ObjectMapper()
-            .registerModule(new com.fasterxml.jackson.module.kotlin.KotlinModule.Builder().build());
+        var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
         var slice = mapper.readValue("{\"status\":\"ACTIVE\",\"startBasis\":\"FIRST_RECORD\",\"records\":[],\"finalHarvestRecordId\":\"00000000-0000-0000-0000-000000000001\"}", CycleSlice.class);
         assertThat(slice.getRecords()).isEmpty();
         assertThat(slice.getFinalHarvestRecordId()).isEqualTo(UUID.fromString("00000000-0000-0000-0000-000000000001"));
