@@ -37,6 +37,7 @@ public class KmaHistoricalObservationAdapter implements HistoricalObservationPor
         List<AsosDailyItemDto> items = kmaApiClient.getItems(properties.getBaseUrl().getAsos(), "getWthrDataList", params, AsosDailyItemDto.class);
         if (items.isEmpty()) return null;
         AsosDailyItemDto item = items.get(0);
+        if (item == null) return null;
         // 최저·최고 중 하나라도 없으면 반쪽짜리 기록을 남기지 않는다.
         Integer min = KmaValueParser.rounded(item.minTa());
         if (min == null) return null;

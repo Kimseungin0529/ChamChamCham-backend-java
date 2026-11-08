@@ -75,6 +75,19 @@ class KmaHistoricalObservationAdapterTest {
         adapter.fetch(seoulLocation, date);
         server.verify();
     }
+
+    @Test
+    @DisplayName("첫 ASOS item이 null이면 데이터 없음으로 반환한다")
+    void nullFirstItemReturnsNoData() {
+        server.expect(requestTo(requestUri()))
+            .andRespond(withJson("""
+                {"response":{"header":{"resultCode":"00"},"body":{"items":{"item":[null]}}}}
+                """));
+
+        assertThat(adapter.fetch(seoulLocation, date)).isNull();
+        server.verify();
+    }
+
     private KmaProperties properties() {
         return new KmaProperties(SERVICE_KEY,2000,2000,new KmaProperties.BaseUrl("https://weather.example.test/VilageFcstInfoService_2.0","https://weather.example.test/MidFcstInfoService","https://weather.example.test/AsosDalyInfoService","https://weather.example.test/LivingWthrIdxServiceV5"));
     }
