@@ -1,0 +1,128 @@
+[
+  {
+    "id": "planting-seed",
+    "workType": "PLANTING",
+    "detailKey": "planting",
+    "detail": {
+      "plantingMethod": "SEED",
+      "seedAmount": 12.5,
+      "seedAmountUnit": "G"
+    },
+    "promptContains": [
+      "심기: 씨앗을 심음",
+      "씨앗 양: 12.5000그램"
+    ]
+  },
+  {
+    "id": "planting-seedling",
+    "workType": "PLANTING",
+    "detailKey": "planting",
+    "detail": {
+      "plantingMethod": "SEEDLING",
+      "seedlingCount": 12,
+      "seedlingUnit": "JU",
+      "propagationMethod": "PURCHASED"
+    },
+    "promptContains": [
+      "모종 수: 12포기",
+      "모종 만든 방법: 구입한 모종을 심음"
+    ]
+  },
+  {
+    "id": "watering",
+    "workType": "WATERING",
+    "detailKey": "watering",
+    "detail": {
+      "irrigationAmount": "NORMAL",
+      "irrigationMethod": "DRIP"
+    },
+    "promptContains": [
+      "물 준 양: 보통 양",
+      "물을 준 방법: 호스로 조금씩 물을 줌"
+    ]
+  },
+  {
+    "id": "fertilizing",
+    "workType": "FERTILIZING",
+    "detailKey": "fertilizing",
+    "detail": {
+      "materialName": "검증용 가상비료",
+      "amount": 10,
+      "amountUnit": "G",
+      "applicationMethod": "SOIL"
+    },
+    "promptContains": [
+      "거름 이름: 검증용 가상비료",
+      "거름 양: 10.0000그램"
+    ]
+  },
+  {
+    "id": "pest-control",
+    "workType": "PEST_CONTROL",
+    "detailKey": "pestControl",
+    "detail": {
+      "pesticideId": "$PESTICIDE_ID",
+      "pesticideAmount": 10,
+      "pesticideAmountUnit": "ML",
+      "totalSprayAmount": 1000,
+      "totalSprayAmountUnit": "ML",
+      "pestId": "$PEST_ID"
+    },
+    "promptContains": [
+      "약 이름: 검증용 가상제품",
+      "약 사용량: 10.0000밀리리터",
+      "약을 섞은 물의 양: 1000.0000밀리리터",
+      "관리 대상: 검증용 가상병해충"
+    ]
+  },
+  {
+    "id": "weeding",
+    "workType": "WEEDING",
+    "detailKey": "weeding",
+    "detail": {
+      "weedingMethod": "HAND"
+    },
+    "promptContains": [
+      "풀을 정리한 방법: 손으로 풀을 뽑음"
+    ]
+  },
+  {
+    "id": "pruning",
+    "workType": "PRUNING",
+    "detailKey": null,
+    "detail": null,
+    "promptContains": [
+      "작업 유형: 가지 정리",
+      "공통 상세 없음"
+    ]
+  },
+  {
+    "id": "harvest",
+    "workType": "HARVEST",
+    "detailKey": "harvest",
+    "detail": {
+      "harvestAmount": 12.5,
+      "harvestAmountUnknown": false,
+      "medicinalPart": "ROOT_BARK",
+      "harvestSource": "CULTIVATED",
+      "growthPeriod": 6,
+      "isLastHarvest": false
+    },
+    "promptContains": [
+      "수확량: 12.5000킬로그램",
+      "수확한 부위: 뿌리와 껍질",
+      "기른 기간: 6개월",
+      "마지막 수확: 아니요"
+    ]
+  },
+  {
+    "id": "etc",
+    "workType": "ETC",
+    "detailKey": null,
+    "detail": null,
+    "promptContains": [
+      "작업 유형: 기타 작업",
+      "공통 상세 없음"
+    ]
+  }
+]
