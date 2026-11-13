@@ -1,0 +1,52 @@
+﻿case_id,area,status,evidence_or_limit
+SPR-01,총살포량,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+SPR-02,총살포량,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+SPR-03,총살포량,차이 관찰·미수정,최종 살포액 의미와 기존 물의 양 표현 차이를 그대로 보존
+PLA-01,심기,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PLA-02,심기,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PLA-03,심기,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PLA-04,심기,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PLA-05,심기,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+WAT-01,관수,검증,생략·빈 객체·관수량만 입력·전체 입력; 모든 가능한 null 조합 전수 아님
+FER-01,시비,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+FER-02,시비,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PES-01,병해충,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PES-02,병해충,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PES-03,병해충,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+PES-04,병해충,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+WEE-01,제초,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+COM-01,가지정리·기타,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+HAR-01,수확,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+HAR-02,수확,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+HAR-03,수확,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+HAR-04,수확,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+HAR-05,수확,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+API-01,입력 경계,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+API-02,입력 경계,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+API-03,저장 경계,검증,자재명256/수량초과500 및 소수5자리 반올림 관찰; 모든 DB 한도 조합 전수 아님
+API-04,입력 조합,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+UPD-01,수정,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+UPD-02,수정,이름 차이 확인,요청harvestAmountUnknown/응답amountUnknown 확인; 실제 클라이언트 재전송은 미검증
+WTH-01,날씨,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+WTH-02,날씨,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+WTH-03,날씨,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+RET-01,검색,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+RET-02,검색,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+RET-03,검색,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+RET-04,검색,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+LIF-01,생성 수명주기,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+GEN-01,답변 품질,범위외·미실행,날씨 분기·실검색·비동기 수명주기·실제 모델은 후속 플랜
+CAT-01,작물목록,부분확인,"534개 seed 파일 집계는 이전 조사; 이번 DB는 합성 작물 사용, 534작물 DB·품질검증 아님"
+ENUM-01,PLANTING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-02,PLANTING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-03,PLANTING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-04,PLANTING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-05,WATERING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-06,WATERING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-07,FERTILIZING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-08,FERTILIZING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-09,PEST_CONTROL,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-10,PEST_CONTROL,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-11,WEEDING,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-12,HARVEST,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
+ENUM-13,HARVEST,검증,record-local-results.csv 및 PostgreSQL JUnit 결과 참조
