@@ -42,6 +42,21 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
+// 명시적으로 요청할 때만 test 소스의 로컬 실습 실행기를 사용한다. bootJar에는 포함되지 않는다.
+tasks.register<JavaExec>("ragApiLabRun") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.RagApiLabApplication")
+    maxHeapSize = "768m"
+}
+
+tasks.register<JavaExec>("ragApiLabIngest") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.RagApiLabIngest")
+    maxHeapSize = "512m"
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))

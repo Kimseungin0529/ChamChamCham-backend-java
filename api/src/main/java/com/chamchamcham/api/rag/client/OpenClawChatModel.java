@@ -15,6 +15,7 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -24,6 +25,7 @@ import org.springframework.web.client.RestClientException;
 
 @Component
 @Primary
+@Profile("!rag-api-lab")
 public class OpenClawChatModel implements ChatModel {
     private final RestClient restClient;
     private final OpenClawProperties properties;
