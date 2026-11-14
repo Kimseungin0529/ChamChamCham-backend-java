@@ -56,6 +56,7 @@ public class RecordFeedbackGenerationService {
         try { var content = response.entity(RecordFeedbackContent.class); if (content == null) throw new StructuredOutputFailure("empty structured output", null); return content; }
         catch (StructuredOutputFailure failure) { throw failure; }
         catch (BusinessException failure) { throw new ChatRuntimeFailure(failure); }
+        catch (org.springframework.web.client.RestClientException failure) { throw new ChatRuntimeFailure(failure); }
         catch (RuntimeException failure) { throw new StructuredOutputFailure("structured output parse failed", failure); }
     }
     private List<String> requireValidContext(RecordFeedbackContext context) {
