@@ -57,6 +57,7 @@ public class RecordFeedbackGenerationService {
         catch (StructuredOutputFailure failure) { throw failure; }
         catch (BusinessException failure) { throw new ChatRuntimeFailure(failure); }
         catch (org.springframework.web.client.RestClientException failure) { throw new ChatRuntimeFailure(failure); }
+        catch (org.springframework.ai.retry.NonTransientAiException | org.springframework.ai.retry.TransientAiException failure) { throw new ChatRuntimeFailure(failure); }
         catch (RuntimeException failure) { throw new StructuredOutputFailure("structured output parse failed", failure); }
     }
     private List<String> requireValidContext(RecordFeedbackContext context) {

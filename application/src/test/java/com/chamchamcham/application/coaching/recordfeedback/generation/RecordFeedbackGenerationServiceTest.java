@@ -225,6 +225,17 @@ class RecordFeedbackGenerationServiceTest {
                 failure -> assertThat(failure.getCode()).isEqualTo(RecordFeedbackFailureCode.CHAT_UNAVAILABLE));
         assertThat(chatClient.getAttempts()).isEqualTo(1);
     }
+    @Test
+    void entity_time_provider_http_errors_are_not_retried_as_malformed_json() {
+        for (var failure : List.of(new org.springframework.ai.retry.NonTransientAiException("HTTP 404"),
+                new org.springframework.ai.retry.TransientAiException("HTTP 503"))) {
+            var chatClient = new FakeChatClient(failure);
+            assertThatThrownBy(() -> serviceWithDocuments(List.of(officialDocument("doc-1", "토양을 살펴본다.")), chatClient).generate(context, null))
+                .isInstanceOfSatisfying(RecordFeedbackGenerationFailure.class,
+                    error -> assertThat(error.getCode()).isEqualTo(RecordFeedbackFailureCode.CHAT_UNAVAILABLE));
+            assertThat(chatClient.getAttempts()).isEqualTo(1);
+        }
+    }
     private RecordFeedbackGenerationService service(FakeVectorStore vectorStore, ChatClient chatClient) {
         return new RecordFeedbackGenerationService(chatClient, vectorStore, new RecordFeedbackRetrievalQueryPlanner(), new RecordFeedbackPromptBuilder(), new RagProperties(new RagProperties.Embedding("test-embedding"), new RagProperties.Chat("test-chat"), new RagProperties.Retrieval(), new RagProperties.Execution()));
     }

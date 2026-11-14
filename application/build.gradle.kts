@@ -20,6 +20,7 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     implementation("org.springframework.ai:spring-ai-model")
     implementation("org.springframework.ai:spring-ai-client-chat")
+    implementation("org.springframework.ai:spring-ai-retry")
     implementation("org.springframework.ai:spring-ai-vector-store")
     implementation("org.springframework.ai:spring-ai-rag")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
