@@ -1,0 +1,66 @@
+{
+  "purpose": "baseline의 모델 서버 오류7건을 같은 기록·revision·feedback ID로 재생성. 독립 평가/정확도 아님.",
+  "executed": 7,
+  "ready": 7,
+  "oldSchemaPattern": "^[^A-Za-z\\n]{14,58}요[.!?…。]?$",
+  "finalSchemaPattern": "^[가-힣0-9 .,!?~℃㎝%·:()（）/-]{14,58}요[.!?…。]?$",
+  "contentIndependentlyReevaluated": false,
+  "results": [
+    {
+      "caseId": "eval-1-pest_control-2",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-1-pruning-1",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-2-planting-1",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-2-pruning-1",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-2-weeding-1",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-3-fertilizing-1",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    },
+    {
+      "caseId": "eval-3-weeding-2",
+      "beforeStatus": "FAILED",
+      "beforeRecordedFailureCode": "STRUCTURED_OUTPUT_INVALID",
+      "afterStatus": "READY",
+      "feedbackIdPreserved": true,
+      "revisionPreserved": true
+    }
+  ]
+}

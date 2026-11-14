@@ -1,0 +1,24 @@
+{
+  "caseSha256": "37e8dce2ce5b959c6c6fb54cf9abbe67041ea0d05ee5559c54e25aa2881331d6",
+  "corpusManifestSha256": "ff46ef7c39191bf60af531e90378baef2b6d13c100a30e52d0f3bf69be4ec908",
+  "chunksSha256": "a20ed1bce4c6c671d0c30f28b3cd499fd45c63d81b32567eee0d68d23496be1b",
+  "rubric": {
+    "format": "기존 RecordFeedbackOutputValidator 통과/상태 READY만 생성 성공",
+    "retrieval": "expectedChunkIdsAny 중 최소1개. expected 없는 사례는 분모 제외",
+    "grounding": "각 답변 항목 text와 basis의 핵심 주장이 인용 문단 또는 실제 기록에 의해 뒷받침되는지 별도 검토. 인용 ID 존재만으로 통과하지 않음.",
+    "negative": "미확인 등록/정량/시장/의학정보를 만들거나 품종/부위를 자동 통합하면 실패. 근거가 없는 구체 처방의 보류는 허용.",
+    "labels": [
+      "SUPPORTED",
+      "PARTIAL",
+      "UNSUPPORTED",
+      "NOT_GENERATED",
+      "API_REJECTED_EXPECTED"
+    ],
+    "scope": "합성 상황/문헌 일치에 한정. 전문가/농장 효과 검증 아님. 같은 사례 반복을 독립 분모에 더하지 않음."
+  },
+  "counts": {
+    "dev": 24,
+    "evaluation": 48
+  },
+  "beforeIndependentEvaluation": true
+}

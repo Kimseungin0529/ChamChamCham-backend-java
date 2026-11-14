@@ -1,0 +1,687 @@
+{
+  "authorization": [
+    {
+      "method": "GET",
+      "expectedHttp": 401,
+      "actualHttp": 401,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "AUTH_001",
+          "message": "error.unauthorized",
+          "detail": "Authorization header missing or invalid"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "expectedHttp": 401,
+      "actualHttp": 401,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "AUTH_001",
+          "message": "error.unauthorized",
+          "detail": "Authorization header missing or invalid"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "expectedHttp": 403,
+      "actualHttp": 403,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "FARMING_004",
+          "message": "error.farming_record_forbidden",
+          "detail": null
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "expectedHttp": 404,
+      "actualHttp": 404,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "FARMING_001",
+          "message": "error.farming_record_not_found",
+          "detail": null
+        }
+      }
+    },
+    {
+      "method": "PATCH",
+      "expectedHttp": 403,
+      "actualHttp": 403,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "FARMING_004",
+          "message": "error.farming_record_forbidden",
+          "detail": null
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "expectedHttp": 404,
+      "actualHttp": 404,
+      "error": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "FARMING_001",
+          "message": "error.farming_record_not_found",
+          "detail": null
+        }
+      }
+    }
+  ],
+  "readyRegenerationDenied": {
+    "method": "POST",
+    "expectedHttp": 409,
+    "actualHttp": 409,
+    "error": {
+      "success": false,
+      "data": null,
+      "error": {
+        "code": "COACHING_002",
+        "message": "error.record_feedback_regeneration_not_allowed",
+        "detail": null
+      }
+    }
+  },
+  "update": {
+    "sameRecordResumed": true,
+    "firstFailureCode": "CHAT_UNAVAILABLE",
+    "history": [
+      "1:STALE",
+      "2:STALE",
+      "3:READY"
+    ],
+    "preservationChecks": {
+      "farmId": true,
+      "cropId": true,
+      "workType": true,
+      "workedAt": true,
+      "weatherCondition": true,
+      "weatherTemperature": true,
+      "memo": true,
+      "snapshotMemo": true,
+      "snapshotCrop": true,
+      "snapshotWork": true,
+      "optionalDetailNotInvented": true
+    }
+  },
+  "cpuFailureRegenerated": {
+    "feedbackIdPreserved": true,
+    "afterStatus": "READY"
+  },
+  "restart-verification": {
+    "allTablesEqual": true,
+    "fixtureIdsEqual": true,
+    "modelIdsEqual": true,
+    "tables": {
+      "community_comment": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_like": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "crop": {
+        "rows": 3,
+        "contentHash": "999e2df608ce202a8da5b3be022ef56e"
+      },
+      "external_identity": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farm": {
+        "rows": 1,
+        "contentHash": "baad22101bd60c41dfea92082554074d"
+      },
+      "farm_boundary_coordinate": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_cycle_report": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_record": {
+        "rows": 96,
+        "contentHash": "25e7215d22d8fc46fcd49432a3a03b49"
+      },
+      "farming_record_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "fertilizing_record": {
+        "rows": 14,
+        "contentHash": "380db1a3d9958c9e33fc420044e1ab35"
+      },
+      "harvest_record": {
+        "rows": 7,
+        "contentHash": "734ebef8886c390845b4b9ffe3c8be4f"
+      },
+      "lab_identity": {
+        "rows": 1,
+        "contentHash": "0f6d6c88c65856f7e33a446af9cfbf95"
+      },
+      "legal_document": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member": {
+        "rows": 2,
+        "contentHash": "6246534da385de6c203992b2bef075b9"
+      },
+      "member_consent": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member_crop": {
+        "rows": 3,
+        "contentHash": "c6cf9afc9d319ace2213a678c05f04d5"
+      },
+      "notification_preference": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "pest": {
+        "rows": 1,
+        "contentHash": "86666006d309928c5e2e996c6d1cd08f"
+      },
+      "pest_control_record": {
+        "rows": 12,
+        "contentHash": "20664045b8657101a7b435d306a10e57"
+      },
+      "pesticide": {
+        "rows": 1,
+        "contentHash": "aba6a8d0b49e2c75c5f94f976cd87029"
+      },
+      "pesticide_application": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "planting_record": {
+        "rows": 16,
+        "contentHash": "f334470ffe451ade1539966371c6a472"
+      },
+      "policy_program": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_recommendation": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_sync_job": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "record_feedback": {
+        "rows": 98,
+        "contentHash": "c24f3fef95c41fe8518882aa61823526"
+      },
+      "record_feedback_next_action": {
+        "rows": 177,
+        "contentHash": "47ba5bba1a28f4409c38aac58c07cc79"
+      },
+      "report_feedback": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "report_feedback_item": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "uploaded_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "vector_store": {
+        "rows": 26,
+        "contentHash": "0253db9e6b1795f527579c2b4f0f09be"
+      },
+      "voice_record_session": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "voice_record_turn": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "watering_record": {
+        "rows": 14,
+        "contentHash": "462370085377db2aac04192c564ea04e"
+      },
+      "weeding_record": {
+        "rows": 9,
+        "contentHash": "fa075c22cc1ba832d1ece0c8035c30aa"
+      }
+    },
+    "modelIds": {
+      "qwen2.5:7b-instruct-q4_K_M": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+      "qwen3:4b-instruct": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+      "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+    }
+  },
+  "recreation-verification": {
+    "allTablesEqual": true,
+    "fixtureIdsEqual": true,
+    "modelIdsEqual": true,
+    "tables": {
+      "community_comment": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_like": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "crop": {
+        "rows": 3,
+        "contentHash": "999e2df608ce202a8da5b3be022ef56e"
+      },
+      "external_identity": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farm": {
+        "rows": 1,
+        "contentHash": "baad22101bd60c41dfea92082554074d"
+      },
+      "farm_boundary_coordinate": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_cycle_report": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_record": {
+        "rows": 96,
+        "contentHash": "25e7215d22d8fc46fcd49432a3a03b49"
+      },
+      "farming_record_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "fertilizing_record": {
+        "rows": 14,
+        "contentHash": "380db1a3d9958c9e33fc420044e1ab35"
+      },
+      "harvest_record": {
+        "rows": 7,
+        "contentHash": "734ebef8886c390845b4b9ffe3c8be4f"
+      },
+      "lab_identity": {
+        "rows": 1,
+        "contentHash": "0f6d6c88c65856f7e33a446af9cfbf95"
+      },
+      "legal_document": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member": {
+        "rows": 2,
+        "contentHash": "6246534da385de6c203992b2bef075b9"
+      },
+      "member_consent": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member_crop": {
+        "rows": 3,
+        "contentHash": "c6cf9afc9d319ace2213a678c05f04d5"
+      },
+      "notification_preference": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "pest": {
+        "rows": 1,
+        "contentHash": "86666006d309928c5e2e996c6d1cd08f"
+      },
+      "pest_control_record": {
+        "rows": 12,
+        "contentHash": "20664045b8657101a7b435d306a10e57"
+      },
+      "pesticide": {
+        "rows": 1,
+        "contentHash": "aba6a8d0b49e2c75c5f94f976cd87029"
+      },
+      "pesticide_application": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "planting_record": {
+        "rows": 16,
+        "contentHash": "f334470ffe451ade1539966371c6a472"
+      },
+      "policy_program": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_recommendation": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_sync_job": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "record_feedback": {
+        "rows": 98,
+        "contentHash": "c24f3fef95c41fe8518882aa61823526"
+      },
+      "record_feedback_next_action": {
+        "rows": 177,
+        "contentHash": "47ba5bba1a28f4409c38aac58c07cc79"
+      },
+      "report_feedback": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "report_feedback_item": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "uploaded_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "vector_store": {
+        "rows": 26,
+        "contentHash": "0253db9e6b1795f527579c2b4f0f09be"
+      },
+      "voice_record_session": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "voice_record_turn": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "watering_record": {
+        "rows": 14,
+        "contentHash": "462370085377db2aac04192c564ea04e"
+      },
+      "weeding_record": {
+        "rows": 9,
+        "contentHash": "fa075c22cc1ba832d1ece0c8035c30aa"
+      }
+    },
+    "modelIds": {
+      "qwen2.5:7b-instruct-q4_K_M": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+      "qwen3:4b-instruct": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+      "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+    }
+  },
+  "restore-verification": {
+    "backup": ".local/rag-api/backups/20261115-083031-57b924b6.dump",
+    "backupSha256": "94ba9b34a60e0a06a7cf464bdaf8cee0b57995fd9f2057ea7afb319565f71911",
+    "allTablesEqual": true,
+    "tables": {
+      "community_comment": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_like": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "community_post_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "crop": {
+        "rows": 3,
+        "contentHash": "999e2df608ce202a8da5b3be022ef56e"
+      },
+      "external_identity": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farm": {
+        "rows": 1,
+        "contentHash": "baad22101bd60c41dfea92082554074d"
+      },
+      "farm_boundary_coordinate": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_cycle_report": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "farming_record": {
+        "rows": 96,
+        "contentHash": "25e7215d22d8fc46fcd49432a3a03b49"
+      },
+      "farming_record_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "fertilizing_record": {
+        "rows": 14,
+        "contentHash": "380db1a3d9958c9e33fc420044e1ab35"
+      },
+      "harvest_record": {
+        "rows": 7,
+        "contentHash": "734ebef8886c390845b4b9ffe3c8be4f"
+      },
+      "lab_identity": {
+        "rows": 1,
+        "contentHash": "0f6d6c88c65856f7e33a446af9cfbf95"
+      },
+      "legal_document": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member": {
+        "rows": 2,
+        "contentHash": "6246534da385de6c203992b2bef075b9"
+      },
+      "member_consent": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "member_crop": {
+        "rows": 3,
+        "contentHash": "c6cf9afc9d319ace2213a678c05f04d5"
+      },
+      "notification_preference": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "pest": {
+        "rows": 1,
+        "contentHash": "86666006d309928c5e2e996c6d1cd08f"
+      },
+      "pest_control_record": {
+        "rows": 12,
+        "contentHash": "20664045b8657101a7b435d306a10e57"
+      },
+      "pesticide": {
+        "rows": 1,
+        "contentHash": "aba6a8d0b49e2c75c5f94f976cd87029"
+      },
+      "pesticide_application": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "planting_record": {
+        "rows": 16,
+        "contentHash": "f334470ffe451ade1539966371c6a472"
+      },
+      "policy_program": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_recommendation": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "policy_sync_job": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "record_feedback": {
+        "rows": 98,
+        "contentHash": "c24f3fef95c41fe8518882aa61823526"
+      },
+      "record_feedback_next_action": {
+        "rows": 177,
+        "contentHash": "47ba5bba1a28f4409c38aac58c07cc79"
+      },
+      "report_feedback": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "report_feedback_item": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "uploaded_media": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "vector_store": {
+        "rows": 26,
+        "contentHash": "0253db9e6b1795f527579c2b4f0f09be"
+      },
+      "voice_record_session": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "voice_record_turn": {
+        "rows": 0,
+        "contentHash": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "watering_record": {
+        "rows": 14,
+        "contentHash": "462370085377db2aac04192c564ea04e"
+      },
+      "weeding_record": {
+        "rows": 9,
+        "contentHash": "fa075c22cc1ba832d1ece0c8035c30aa"
+      }
+    },
+    "temporaryDatabase": "ccc_rag_api_restore_0e7bb2203f92",
+    "originalUnchanged": true
+  },
+  "reingest-preservation": {
+    "allTablesEqual": true,
+    "ingest": {
+      "corpusChunks": 26,
+      "added": 0,
+      "stored": 26,
+      "dimensions": [
+        1024
+      ]
+    }
+  },
+  "existing-environment-protection": {
+    "containersUnchanged": [
+      "/ccc-rag-lab-ollama-1",
+      "/ccc-rag-lab-postgres-1",
+      "/ccc-postgres",
+      "/weather-verify",
+      "/ccc-redis",
+      "/gods-move-pg",
+      "/condescending_feistel",
+      "/angry_raman",
+      "/pensive_meitner",
+      "/wonderful_jepsen"
+    ],
+    "comparison": "ID/생성·시작·종료시각/상태/마운트",
+    "limits": "기존 볼륨 내용 전체를 해시한 검사는 아님. 기존 PG 볼륨을 이번 실행에 연결하지 않음."
+  },
+  "negative-identity-guard": {
+    "wrongTokenRejected": true,
+    "databaseWrites": 0,
+    "secretsPrinted": false
+  },
+  "detail-removal": {
+    "recordId": "bbfb3665-a03f-41ec-a25e-d2cd0e8cad0e",
+    "wateringRowsRemaining": 0,
+    "pendingFeedback": 0
+  },
+  "final-ready": {
+    "api": "http://127.0.0.1:18080",
+    "recordId": "bbfb3665-a03f-41ec-a25e-d2cd0e8cad0e",
+    "feedbackStatus": "READY",
+    "sourceRevision": 3,
+    "allTablesEqual": true,
+    "modelIds": {
+      "qwen2.5:7b-instruct-q4_K_M": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+      "qwen3:4b-instruct": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+      "bge-m3:latest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+    }
+  },
+  "final-tests": {
+    "api": {
+      "tests": 454,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 16
+    },
+    "application": {
+      "tests": 768,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "domain": {
+      "tests": 193,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "total": {
+      "tests": 1416,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 16
+    },
+    "passed": 1400
+  }
+}

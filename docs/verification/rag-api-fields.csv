@@ -1,0 +1,26 @@
+﻿workType,field,validation_and_presence,values,coaching_impact
+PLANTING,plantingMethod,필수,SEED / SEEDLING,분기 선택; 프롬프트
+PLANTING,seedAmount,SEED에서 필수 >=0.01; SEEDLING에서 금지,decimal,프롬프트
+PLANTING,seedAmountUnit,SEED에서 선택; SEEDLING에서 금지; 기본값 없음,G,프롬프트; 누락 시 단위 미표시
+PLANTING,seedlingCount,SEEDLING에서 필수 >=1; SEED에서 금지,integer,프롬프트
+PLANTING,seedlingUnit,SEEDLING에서 선택; SEED에서 금지; 기본값 없음,JU,프롬프트; 누락 시 단위 미표시
+PLANTING,propagationMethod,SEEDLING에서 선택; SEED에서 금지,CUTTING / GRAFTING / LAYERING / DIVISION / TISSUE_CULTURE / PURCHASED,프롬프트
+WATERING,irrigationAmount,선택; 상세 객체도 선택,LOW / NORMAL / SUFFICIENT,프롬프트
+WATERING,irrigationMethod,선택; 상세 객체도 선택,DRIP / SPRAYING / ETC,프롬프트
+FERTILIZING,materialName,필수; 공백 불가,string; API 길이 상한 없음; DB255,프롬프트; 자유문자열
+FERTILIZING,amount,필수 >=0.01,decimal; DB precision18 scale4,프롬프트
+FERTILIZING,amountUnit,필수,G / ML,프롬프트
+FERTILIZING,applicationMethod,선택,SOIL / FOLIAR,프롬프트
+PEST_CONTROL,pesticideId,필수; 해당 ID 존재 확인,UUID,제품 상표명만 AI로 전달; 검색어에 직접 포함 안 됨
+PEST_CONTROL,pesticideAmount,필수 >=0.01,decimal,프롬프트
+PEST_CONTROL,pesticideAmountUnit,필수,ML / G,프롬프트
+PEST_CONTROL,totalSprayAmount,필수 >=0.01,decimal,사용자 확인 기준: 농약과 물을 혼합한 최종 살포액 전체량. 현재 AI의 물의 양 표현은 사용자 지시에 따라 유지하며 의미 차이를 관찰한다. 약제 적정량·농도 검증과는 별개.
+PEST_CONTROL,totalSprayAmountUnit,필수,ML,프롬프트; 현재 API는 ML만 허용
+PEST_CONTROL,pestId,선택; 입력 시 ID 존재 확인,UUID,병해충 이름 기반 검색어 추가; 프롬프트
+WEEDING,weedingMethod,선택; 상세 객체도 선택,HAND / MACHINE / MULCHING / HERBICIDE,프롬프트; HERBICIDE여도 제품 필드 추가 없음
+HARVEST,harvestAmount,unknown=false일 때 필수 >=0.01; true일 때 null,decimal; AI는 kg로 표기,프롬프트; 모름과 실제0 구분
+HARVEST,harvestAmountUnknown,생략 false; true일 때 amount=null,boolean,저장 null; AI context amountUnknown은 있으나 본문은 수량 생략
+HARVEST,medicinalPart,선택; 작물 부위와 일치 검증 없음,WHOLE_HERB / ROOT_BARK / RHIZOME / LEAF / FLOWER / FRUIT / SEED / STEM_BRANCH / UNKNOWN,수확 전용 검색어 + 프롬프트
+HARVEST,harvestSource,생략 CULTIVATED; 명시 null 거부,CULTIVATED / FORAGED,프롬프트; 필수 성장기간 규칙은 동일
+HARVEST,growthPeriod,필수 >=1,integer; AI 조립 시 MONTH 고정,프롬프트; 구 문서 YEAR와 혼동 금지
+HARVEST,isLastHarvest,필수; false도 정상,boolean,프롬프트; 후속 주기보고서 영향은 별도
