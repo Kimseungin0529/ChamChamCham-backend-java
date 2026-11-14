@@ -1,0 +1,40 @@
+name: ccc-rag-lab
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:1d533553fefe4f12e5d80c7b80622ba0c382abb5758856f52983d8789179f0fb
+    pull_policy: never
+    environment:
+      POSTGRES_DB: ccc_rag_lab
+      POSTGRES_USER: ccc_rag_lab
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?실습 도구로 초기화하세요}
+    ports:
+      - "127.0.0.1:15432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ccc_rag_lab -d ccc_rag_lab"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+  ollama:
+    image: ollama/ollama@sha256:910d0d8107b538fb0894e63163eb195de0cc7aefcbc666dc62d3b18f71124592
+    pull_policy: never
+    environment:
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_MAX_LOADED_MODELS: "1"
+      OLLAMA_NO_CLOUD: "1"
+    ports:
+      - "127.0.0.1:11435:11434"
+    volumes:
+      - model:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 2s
+      timeout: 5s
+      retries: 60
+volumes:
+  postgres:
+    name: ccc-rag-lab-postgres
+  model:
+    external: true
+    name: ccc-rag-bge-m3-cache
