@@ -62,3 +62,12 @@ java {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
+
+// DB/API를 시작하지 않는 정책 비교 입력 내보내기. 제품 PromptBuilder를 그대로 사용한다.
+tasks.register<JavaExec>("coachingPolicyExport") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingPolicyExport")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "256m"
+}
