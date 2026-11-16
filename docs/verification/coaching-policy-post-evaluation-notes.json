@@ -1,0 +1,11 @@
+{
+  "timing": "고정된 최종 실행의 응답 검토 중 발견. 사전 기준을 수정하지 않고 별도 기록.",
+  "caseId": "held-3-fertilizing-2",
+  "issue": "합성 입력 작성 시 메모18G와 상세amount12.34G를 동기화하지 못함",
+  "inputChanged": false,
+  "rerun": false,
+  "classification": "양쪽 UNCERTAIN; 모델의 단위/수치 창작 오류로 세지 않음",
+  "reviewHistory": ".local/rag-api/policy/runs/policy-held-v1/review-revisions.json",
+  "nextUse": "이 사례를 이후 수정해 재사용하면 조정용으로 취급하며 새 독립 평가로 세지 않는다.",
+  "ownership": "Codex가 합성 사례를 작성하며 발생시킨 자료 오류. 제품 API/DB 오류로 주장하지 않음."
+}
