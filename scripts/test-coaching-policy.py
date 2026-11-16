@@ -13,7 +13,7 @@ if path.exists(): spec.loader.exec_module(m)
 
 ITEM = {'basis': '기록에서 직접 확인', 'text': '흙이 마른 부분부터 살펴보세요.', 'evidenceRefs': ['record:r']}
 ACTION = {**ITEM, 'category': 'IRRIGATION', 'due': 'NEXT_CHECK'}
-CASE = {'id': 'example', 'allowedCitationIds': ['record:r', 'doc:1'],
+CASE = {'id': 'example', 'documentCitationIds': ['doc:1'], 'allowedCitationIds': ['record:r', 'doc:1'],
         'prompt': {'system': '기존 정책', 'user': '기록과 근거'}, 'expectation': {'mode': 'ANSWER'}}
 class PolicyTest(unittest.TestCase):
     def test_policy_can_abstain_without_inventing_praise_or_actions(self):
@@ -110,5 +110,22 @@ class EvaluationIdentityTest(unittest.TestCase):
             m.bind_run(folder,{'split':'dev','candidateSha256':'same'})
             with self.assertRaises(RuntimeError):
                 m.require_development(folder,'same',{},[{'id':'expected'}])
+
+class EmptyEvidenceTest(unittest.TestCase):
+    def test_existing_policy_preserves_product_no_document_gate_without_calling_model(self):
+        case=copy.deepcopy(CASE);case['documentCitationIds']=[]
+        with tempfile.TemporaryDirectory() as d:
+            def forbidden(body): self.fail('product guard must prevent model generation')
+            row=m.execute(case,'baseline',Path(d),{'model':'local'},forbidden)
+            self.assertEqual('INSUFFICIENT_EVIDENCE',row['status'])
+            self.assertFalse(row['modelCalled'])
+
+class ReuseCountingTest(unittest.TestCase):
+    def test_reused_response_is_not_counted_as_a_new_model_call(self):
+        row={'caseId':'a','variant':'baseline','status':'VALID','terminal':True,'seconds':3,
+             'reusedFrom':{'run':'prior','newModelCall':False}}
+        summary=m.summarize([row],{})['baseline']
+        self.assertEqual(0,summary['modelCalls'])
+        self.assertEqual(1,summary['reusedResponses'])
 
 if __name__ == '__main__': unittest.main()

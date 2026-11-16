@@ -134,8 +134,13 @@ def execute(case, variant, folder, config, transport=None, candidate='', retry_i
         if archive.exists(): raise RuntimeError('중단 기록이 이미 있습니다. 덮어쓰지 않습니다')
         path.rename(archive)
     body = make_request(case, variant, config, candidate)
-    row = {'caseId':case['id'],'variant':variant,'attempt':attempt,'terminal':False,'requestSha256':digest(body),'request':body}
+    row = {'caseId':case['id'],'variant':variant,'attempt':attempt,'terminal':False,'requestSha256':digest(body),'request':body,'modelCalled':False}
     write(path, row)
+    if variant == 'baseline' and case.get('documentCitationIds') == []:
+        row.update(status='INSUFFICIENT_EVIDENCE',terminal=True,seconds=0,guard='existing-product-empty-document-gate')
+        write(path,row)
+        return row
+    row['modelCalled'] = True
     started = time.monotonic()
     try:
         raw = (transport or (lambda b: http('/api/chat', b)))(body)
@@ -177,9 +182,9 @@ def summarize(rows, reviews):
             review = reviews.get(row['caseId'] + '-' + variant)
             if review:
                 check_review(row, review); graded.append(review)
-        times = [r['seconds'] for r in chosen]
+        times = [r['seconds'] for r in chosen if r.get('modelCalled',True)]
         result[variant] = {'executed':len(chosen),'formatValid':len(valid),'modelError':sum(r['status']=='MODEL_ERROR' for r in chosen),
-                           'formatInvalid':sum(r['status']=='FORMAT_INVALID' for r in chosen),'protocolError':sum(r['status']=='PROTOCOL_ERROR' for r in chosen),
+                           'modelCalls':sum(r.get('modelCalled',True) and not r.get('reusedFrom') for r in chosen),'reusedResponses':sum(bool(r.get('reusedFrom')) for r in chosen),'insufficientEvidence':sum(r['status']=='INSUFFICIENT_EVIDENCE' for r in chosen),'formatInvalid':sum(r['status']=='FORMAT_INVALID' for r in chosen),'protocolError':sum(r['status']=='PROTOCOL_ERROR' for r in chosen),
                            'reviewed':len(graded),'semanticPending':len(valid)-len(graded),
                            'supported':sum(r['label']=='SUPPORTED' for r in graded),
                            'partial':sum(r['label']=='PARTIAL' for r in graded),'unsupported':sum(r['label']=='UNSUPPORTED' for r in graded),
