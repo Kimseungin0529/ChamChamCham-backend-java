@@ -68,6 +68,12 @@ class CoachingEvidenceSelectorTest {
     @Test void unknownGrowthStageIsConditional() throws Exception {
         assertThat(decide(context("천궁", "WATERING", "물을 줌", null), rule(false, "growthStage", "뿌리생장기"), Map.of()).status()).isEqualTo(Status.CONDITIONAL);
     }
+    @Test void explicitlyUnknownHarvestPartNeedsConfirmationInsteadOfConflict() throws Exception {
+        var c = context("참당귀", "HARVEST", "수확 부위 미상", "UNKNOWN");
+        var result = decide(c, rule(false, "harvestPart", "ROOT_BARK"), Map.of());
+        assertThat(result.status()).isEqualTo(Status.CONDITIONAL);
+        assertThat(result.reasons()).contains("MISSING:harvestPart");
+    }
     @Test void missingRuleIsConditional() throws Exception {
         assertThat(select(context("천궁", "WATERING", "합성", null), Map.of(), List.of(doc), Map.of()).getFirst().reasons()).contains("UNREVIEWED_SCOPE");
     }

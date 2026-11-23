@@ -33,7 +33,8 @@ public final class CoachingEvidenceSelector {
         var values = new HashMap<String, String>();
         values.put("cropName", context.crop().name());
         values.put("workType", context.record().workType().name());
-        if (context.record().detail() instanceof HarvestFeedbackDetail detail && detail.medicinalPart() != null)
+        if (context.record().detail() instanceof HarvestFeedbackDetail detail && detail.medicinalPart() != null
+                && detail.medicinalPart() != com.chamchamcham.domain.crop.CropUsePartCategory.UNKNOWN)
             values.put("harvestPart", detail.medicinalPart().name());
         if (context.record().detail() instanceof PlantingFeedbackDetail detail) {
             if (detail.plantingMethod() == PlantingMethod.SEED) values.put("propagation", "SEED");

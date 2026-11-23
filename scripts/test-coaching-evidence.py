@@ -6,6 +6,9 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import sys
+
+sys.dont_write_bytecode = True
 
 MODULE = Path(__file__).with_name("coaching-evidence.py")
 
