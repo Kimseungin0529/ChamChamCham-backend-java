@@ -71,3 +71,18 @@ tasks.register<JavaExec>("coachingPolicyExport") {
     workingDir = rootProject.projectDir
     maxHeapSize = "256m"
 }
+
+// 보존 자료의 조건 선별만 비교한다. DB/API/모델은 시작하지 않는다.
+tasks.register<JavaExec>("coachingEvidenceEvaluate") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingEvidenceEvaluation")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "256m"
+    doFirst {
+        val run = providers.gradleProperty("evidenceRun").orNull
+            ?: throw GradleException("-PevidenceRun=<new-run-name>을 지정하세요")
+        require(Regex("[a-z0-9][a-z0-9-]{0,63}").matches(run)) { "잘못된 evidenceRun" }
+        args(run)
+    }
+}

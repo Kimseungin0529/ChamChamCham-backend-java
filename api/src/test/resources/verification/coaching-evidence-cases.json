@@ -1,0 +1,4599 @@
+{
+  "schemaVersion": 1,
+  "notice": "조건 선별의 합성 통제 실험. 수동 사실 주석이며 자연어 추출/검색/답변 성능 평가가 아님. 기존 개발24 재사용, 신규48은 실행 전 기대값 고정.",
+  "cases": [
+    {
+      "id": "development-policy-dev-1-planting-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-planting-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "포기를 나눠 산간 밭에 심고 흙을 덮었습니다. 일천궁인지 확인하고 마른 부분이 없는지 점검하려고 합니다.",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "DIVISION"
+          },
+          "recordId": "5988f535-3972-4b8e-8615-f4b5977f452f",
+          "workType": "PLANTING",
+          "workedAt": "2026-11-15T07:09:23",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:09:24.382788",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-watering-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-watering-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "일천궁 밭이 더워져 흙을 살펴보고 호스로 조금씩 물을 주었습니다. 뿌리 주변 흙이 다시 마르는지 확인하려고 합니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "b46ffdaa-6bc9-4ee3-8eb6-7d56f8b0c58b",
+          "workType": "WATERING",
+          "workedAt": "2026-11-15T07:09:57",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:09:58.44866",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-fertilizing-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-fertilizing-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "합성 비료를 흙에 조금 주었습니다. 성분과 재배 면적은 모르며 입력한 그램만으로 적정한 양이라고 판단하면 안 됩니다.",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "e25baf3a-4f8e-4a65-b8e9-da291edd58a6",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-11-15T07:10:29",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:10:30.302384",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-pest_control-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-pest_control-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "합성 농약 제품을 사용했다는 가상 기록입니다. 천궁에 등록된 제품인지와 실제 병해충은 확인되지 않았습니다.",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "d1df6337-2a19-463a-93e5-ec0049b7fe2d",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-11-15T07:11:36",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:11:36.812916",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-weeding-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-weeding-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "일천궁 밭 고랑의 풀을 손으로 뽑았습니다. 더운 날 흙이 마르지 않도록 주변 상태를 보고 피복 여부를 확인하려고 합니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "b8eefcd5-7838-4a23-8712-0ba6fb4b19cd",
+          "workType": "WEEDING",
+          "workedAt": "2026-11-15T07:12:44",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:12:45.194923",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-pruning-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-pruning-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁 잎이 누래 가지 정리로 기록했지만 어떤 부분을 잘랐는지는 불명확합니다. 구기자의 적심 길이를 적용하면 안 됩니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "d4048ab0-8477-4b61-b4ef-5ddb4a7e9b39",
+          "workType": "PRUNING",
+          "workedAt": "2026-11-15T07:13:18",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:13:19.124363",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-harvest-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-harvest-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁의 잎과 줄기가 누래져 뿌리줄기를 수확했습니다. 수량을 재지 못했으므로 모름 값이 영으로 바뀌면 안 됩니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": true,
+            "harvestAmount": null,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "RHIZOME",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "fd022f65-fcb2-41a1-a2ae-1927e264e80c",
+          "workType": "HARVEST",
+          "workedAt": "2026-11-15T07:14:22",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:14:23.517377",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778",
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-1-etc-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-1-etc-0",
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "일천궁 밭의 여름 고온을 대비해 물길을 살펴보고 막힌 곳을 치웠습니다. 전용 상세 없이 메모만 남긴 합성 기록입니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "0e8d8287-7619-471e-974d-3b684e35354a",
+          "workType": "ETC",
+          "workedAt": "2026-11-15T07:14:56",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:14:57.294922",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-planting-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-planting-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 씨앗을 뿌렸으며 오래 저장한 종자인지는 모릅니다. 싹이 고르게 나지 않아 종자 상태와 물 관리부터 확인하려고 합니다.",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": 5.25,
+            "seedlingUnit": null,
+            "seedlingCount": null,
+            "plantingMethod": "SEED",
+            "seedAmountUnit": "G",
+            "propagationMethod": null
+          },
+          "recordId": "d8bda4bf-0fdd-4200-a8b6-30b25190e6b8",
+          "workType": "PLANTING",
+          "workedAt": "2026-11-15T07:15:28",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:15:29.110858",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-watering-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-watering-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 밭에 물을 주고 흙을 확인했습니다. 흑색 비닐을 덮은 밭이 더워져서 여름 고온 피해를 줄일 방법을 살펴보려 합니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "1fb13c27-b560-4bff-8320-10d86c4d0006",
+          "workType": "WATERING",
+          "workedAt": "2026-11-15T07:16:06",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:16:07.01689",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-fertilizing-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-fertilizing-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 밭에 합성 비료를 사용했으나 면적과 성분은 입력하지 않았습니다. 기록된 양만으로 적정한 시비량을 정할 수 없습니다.",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "2a23c4ee-c274-4bfd-ad1c-7dfd4844638c",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-11-15T07:16:40",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:16:40.921167",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-pest_control-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-pest_control-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "합성 농약을 참당귀에 사용한 가상 기록입니다. 제품의 등록 작물과 병해충 및 횟수는 확보되지 않아 적합성을 단정할 수 없습니다.",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "26139dbf-6ca8-48ba-86ee-6327f71b4b74",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-11-15T07:17:18",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:17:18.853151",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-weeding-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-weeding-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 밭 풀을 정리하고 흑색 비닐을 덮었습니다. 여름 고온기라 땅이 너무 더워지는지 확인하려고 합니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "bcc157fc-fe5a-4d08-ac35-7c6e775d72c8",
+          "workType": "WEEDING",
+          "workedAt": "2026-11-15T07:17:54",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:17:54.790892",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-pruning-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-pruning-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 줄기를 정리했지만 잎 생산인지 뿌리 생산인지 목적을 남기지 않았습니다. 구기자 적심 지침을 적용하면 안 됩니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "da6518b0-07e6-4889-8d71-689e6372200f",
+          "workType": "PRUNING",
+          "workedAt": "2026-11-15T07:18:28",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:18:28.767235",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-harvest-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-harvest-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 뿌리를 가을에 수확했습니다. 잎 생산의 이식 후 팔십 일 기준과 뿌리 수확 시기를 혼동하지 않으려 합니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "ROOT_BARK",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "8ab3282b-9a23-4b92-ac5d-8bc7c233bba6",
+          "workType": "HARVEST",
+          "workedAt": "2026-11-15T07:19:01",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:19:02.665074",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-2-etc-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-2-etc-0",
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀를 같은 땅에 계속 재배해 생육이 떨어지는지 관찰했습니다. 다른 작물과 돌려짓기 조건을 알아보려는 합성 기록입니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "e1b8f962-14a4-495c-a650-ed62dab2718c",
+          "workType": "ETC",
+          "workedAt": "2026-11-15T07:20:08",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:20:08.950074",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-planting-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-planting-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 구기자 가지를 꺾꽂이해 심고 호광 수분수를 함께 뒀습니다. 가지가 마르지 않고 뿌리내리는지 살펴보려 합니다.",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "CUTTING"
+          },
+          "recordId": "0b0b0041-ac9d-46b0-82a5-9edd3bc4488c",
+          "workType": "PLANTING",
+          "workedAt": "2026-11-15T07:20:41",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:20:42.650975",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-watering-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-watering-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "삽목한 구기자 가지에 물을 주고 흙을 만져 보았습니다. 뿌리가 잘 내릴 때까지 흙이 마르는지 확인하려 합니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "0c67d2cd-eba8-4c56-b87e-9410b78fe4ac",
+          "workType": "WATERING",
+          "workedAt": "2026-11-15T07:21:54",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:21:55.024651",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-fertilizing-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-fertilizing-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "구기자에 합성 비료를 주었습니다. 줄기와 잎이 무성하지만 면적과 질소 성분이 없어 적정량을 계산할 수 없습니다.",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "9e96d709-abe7-4039-8c1a-1fd6dc0d9332",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-11-15T07:22:26",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:22:26.75004",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-pest_control-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-pest_control-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "구기자에 합성 농약을 썼다는 가상 기록입니다. 제품과 병해충이 실제 등록 관계인지 모르므로 사용을 승인하면 안 됩니다.",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "564b1aae-70a9-4e40-8421-95247caab253",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-11-15T07:22:55",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:22:56.472877",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-weeding-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-weeding-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "구기자 밭 골 사이 풀을 손으로 제거했습니다. 농약 제품이나 사용량이 없는 상태에서 제초제 사용을 추천하지 않으려 합니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "25310c80-1e3a-4b7c-b082-3575fdc0eaf7",
+          "workType": "WEEDING",
+          "workedAt": "2026-11-15T07:23:25",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:23:26.218761",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-pruning-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-pruning-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 구기자 새순을 적심했고 두 주 이내의 여린 가지를 유인하려 합니다. 일반 품종의 자르는 길이와 혼동하지 않으려 합니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "e27555eb-9be1-4dd7-8492-8b5888e180e1",
+          "workType": "PRUNING",
+          "workedAt": "2026-11-15T07:23:53",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:23:54.044995",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-harvest-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-harvest-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 구기자 열매가 붉고 과즙이 충분해 일부를 수확했습니다. 품종마다 익는 상태가 다름을 고려하려고 합니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "FRUIT",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "aad13cb6-156d-4ee3-a490-7717c3f48952",
+          "workType": "HARVEST",
+          "workedAt": "2026-11-15T07:24:57",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:24:58.312848",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "development-policy-dev-3-etc-0",
+      "split": "dev",
+      "synthetic": true,
+      "originCaseId": "policy-dev-3-etc-0",
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 구기자 비가림 시설과 수분수를 확인했습니다. 전용 상세가 없어서 품종과 시설 정보는 메모에만 남겼습니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "d3d61856-e1ac-4f91-949e-9848872489ce",
+          "workType": "ETC",
+          "workedAt": "2026-11-15T07:25:31",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 32,
+          "recordedWeatherCondition": "맑음"
+        },
+        "weather": {
+          "source": "SYNTHETIC_LAB",
+          "current": {
+            "observedAt": "2026-11-15T07:25:32.252965",
+            "skyCondition": "맑음",
+            "temperatureC": 32
+          },
+          "forecastDays": []
+        },
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "candidateMode": "PRESERVED_PRIOR_CANDIDATES",
+      "expected": null,
+      "uncoveredNeed": "기존 기록 문맥을 개발용으로 재생. 새 검색이나 의미 판정이 아님."
+    },
+    {
+      "id": "evidence-eval-01",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "강원 일천궁의 심기 조건을 확인합니다. 확인정보(species)=일천궁; 확인정보(region)=강원;",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "DIVISION"
+          },
+          "recordId": "6bae3dce-eae8-526a-a2eb-035282aaf977",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "species": {
+          "fieldPath": "/record/memo",
+          "offset": 36,
+          "quote": "일천궁",
+          "value": "일천궁"
+        },
+        "region": {
+          "fieldPath": "/record/memo",
+          "offset": 54,
+          "quote": "강원",
+          "value": "강원"
+        }
+      },
+      "candidateIds": [
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "4c893198-6390-5e70-82d4-0948c554f31d"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60": "APPLICABLE",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e": "CONDITIONAL",
+        "4c893198-6390-5e70-82d4-0948c554f31d": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-02",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "토천궁에 일천궁 실험 수치를 적용할 수 있는지 확인합니다. 확인정보(species)=토천궁; 확인정보(region)=강원;",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "DIVISION"
+          },
+          "recordId": "fd955044-fa87-53c7-8238-cd0494a06ed7",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "species": {
+          "fieldPath": "/record/memo",
+          "offset": 47,
+          "quote": "토천궁",
+          "value": "토천궁"
+        },
+        "region": {
+          "fieldPath": "/record/memo",
+          "offset": 65,
+          "quote": "강원",
+          "value": "강원"
+        }
+      },
+      "candidateIds": [
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+        "4c893198-6390-5e70-82d4-0948c554f31d"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60": "EXCLUDED",
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e": "CONDITIONAL",
+        "4c893198-6390-5e70-82d4-0948c554f31d": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "토천궁의 구체적 심기 기준"
+    },
+    {
+      "id": "evidence-eval-03",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "가뭄이 계속되는 일천궁의 뿌리 생장기 물 관리를 확인합니다. 확인정보(species)=일천궁; 확인정보(growthStage)=뿌리생장기;",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "a0b79ec5-cbdc-537e-b051-b281688e19bb",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "species": {
+          "fieldPath": "/record/memo",
+          "offset": 48,
+          "quote": "일천궁",
+          "value": "일천궁"
+        },
+        "growthStage": {
+          "fieldPath": "/record/memo",
+          "offset": 71,
+          "quote": "뿌리생장기",
+          "value": "뿌리생장기"
+        }
+      },
+      "candidateIds": [
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501": "APPLICABLE",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c": "APPLICABLE",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-04",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁의 종과 생장 단계는 모르지만 가뭄 관찰 기준을 확인합니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "03ced100-eab3-5fca-9c54-a59bb0ddf0f4",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501": "APPLICABLE",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c": "CONDITIONAL",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-05",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁 비료를 더 줄지 관찰 기준을 확인합니다.",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "251897f3-c150-58a8-901a-412a7e71900b",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "95278e5d-eaf9-5436-982b-b4090b26a33f": "CONDITIONAL",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "면적·성분·토양 검사에 따른 시비량"
+    },
+    {
+      "id": "evidence-eval-06",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "토천궁에 특정 비료를 몇 그램 줄지 궁금합니다. 확인정보(species)=토천궁;",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "c45dba2d-63b2-5561-a8c6-eeb00c60115a",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "species": {
+          "fieldPath": "/record/memo",
+          "offset": 41,
+          "quote": "토천궁",
+          "value": "토천궁"
+        }
+      },
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "95278e5d-eaf9-5436-982b-b4090b26a33f": "CONDITIONAL",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "제품 성분·면적·토양 검사와 시비량"
+    },
+    {
+      "id": "evidence-eval-07",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎 반점을 발견해 병해 관찰과 등록정보 확인 순서를 알고 싶습니다.",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "f388e76a-ccf5-5e00-8e32-4656df60eedc",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "86c42517-b5a6-587d-8cf1-253807bef32e"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "APPLICABLE",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "증상 확정 진단·실제 농약 제품 등록"
+    },
+    {
+      "id": "evidence-eval-08",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "가상 약제를 썼는데 적합한 제품과 용량인지 궁금합니다.",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "f473900b-c0dc-567d-b80b-1be4bfa8f8b3",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "86c42517-b5a6-587d-8cf1-253807bef32e"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "APPLICABLE",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "실제 제품·작물·병해충·용량 등록 관계"
+    },
+    {
+      "id": "evidence-eval-09",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁밭 잡초 관리와 약제 확인 원칙을 알고 싶습니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "84446294-f84d-5a4d-8bb8-042ac68c85bf",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "95278e5d-eaf9-5436-982b-b4090b26a33f": "CONDITIONAL",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "천궁 작업 조건별 제초 방법"
+    },
+    {
+      "id": "evidence-eval-10",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "가상 제초제의 사용량과 사용 가능 여부를 확인하고 싶습니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "7e445a16-ea30-5954-b395-fc55ceb18776",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "95278e5d-eaf9-5436-982b-b4090b26a33f",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "95278e5d-eaf9-5436-982b-b4090b26a33f": "CONDITIONAL",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "현재 제초제의 실제 등록·용량"
+    },
+    {
+      "id": "evidence-eval-11",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁의 가지를 잘라도 되는지 궁금합니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "ee7a1246-a821-5849-8d21-8bf4aae8e0ba",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "ebfeb057-a267-5026-8d4c-881a1e778284": "EXCLUDED",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "천궁에 적용 가능한 가지·순 정리 근거"
+    },
+    {
+      "id": "evidence-eval-12",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "다른 작물의 정리 방법을 천궁에도 써도 되는지 궁금합니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "e5f238fb-c86c-5ba7-9ca5-a84759f6d83b",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "fa68f455-ddd3-5364-be86-b8c6520291c4": "EXCLUDED",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "천궁의 해당 행위 적용 여부"
+    },
+    {
+      "id": "evidence-eval-13",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리줄기를 수확하며 지역과 연생 조건을 확인하려고 합니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": true,
+            "harvestAmount": null,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "RHIZOME",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "4f6a6d15-75c5-585d-9701-a7d02b4b6152",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "ef063f8e-4a83-51b5-890c-d817c7a15778",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "CONDITIONAL",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "종·연생·지역별 수확 시기 세분"
+    },
+    {
+      "id": "evidence-eval-14",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎을 채취했다고 기록한 상충 입력을 점검합니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": true,
+            "harvestAmount": null,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "LEAF",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "ca90ffac-ba43-5750-a0b9-ff3d7b76f58a",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "ef063f8e-4a83-51b5-890c-d817c7a15778",
+        "c1331551-fbb4-59ed-a51f-b30583213308"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "EXCLUDED",
+        "c1331551-fbb4-59ed-a51f-b30583213308": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "천궁 잎 채취에 대한 적용 근거"
+    },
+    {
+      "id": "evidence-eval-15",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "천궁 재배지의 일반적인 고온 위험을 확인하려고 합니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "8a787de1-79e8-5dba-8d1a-3fb361b8fb33",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "53cc6663-43fd-50f5-9399-409886e14e17": "APPLICABLE",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-16",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "천궁",
+          "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+          "usePartCategory": "RHIZOME"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "내년 시장 가격을 알려 달라는 자료 밖 요청입니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "d968e4ba-7955-50f6-9cb6-0a552b7c35b5",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "53cc6663-43fd-50f5-9399-409886e14e17": "APPLICABLE",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "uncoveredNeed": "가격 예측; 조건 선택기에는 질문 의도 판정 기능 없음"
+    },
+    {
+      "id": "evidence-eval-17",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀 씨앗을 심기 전에 토양과 종자 조건을 확인합니다.",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": 1.2,
+            "seedlingUnit": null,
+            "seedlingCount": null,
+            "plantingMethod": "SEED",
+            "seedAmountUnit": "G",
+            "propagationMethod": null
+          },
+          "recordId": "31522a1a-5be5-56fa-856d-fe4c620b7cb1",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "4c893198-6390-5e70-82d4-0948c554f31d": "APPLICABLE",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1": "APPLICABLE",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-18",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "종자가 아닌 포기나누기 입력의 근거 충돌을 확인합니다.",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 8,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "DIVISION"
+          },
+          "recordId": "80365c5a-fbf4-5fc6-a041-2c76b3cb2464",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "4c893198-6390-5e70-82d4-0948c554f31d": "APPLICABLE",
+        "8fc21215-fce5-5278-a773-81ba9d184ba1": "EXCLUDED",
+        "b9ad3cef-0f86-50fd-87b1-8a457466ad60": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d"
+      ],
+      "uncoveredNeed": "참당귀 포기나누기의 농업적 타당성"
+    },
+    {
+      "id": "evidence-eval-19",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리 생산용 노지육묘 이식 참당귀의 생육 중기 물 관리를 확인합니다. 확인정보(harvestPart)=ROOT_BARK; 확인정보(cultivation)=FIELD_TRANSPLANT; 확인정보(growthStage)=생육중기;",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "6d759c8a-a9c4-5b20-b9d8-d309c6fd7759",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 57,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 86,
+          "quote": "FIELD_TRANSPLANT",
+          "value": "FIELD_TRANSPLANT"
+        },
+        "growthStage": {
+          "fieldPath": "/record/memo",
+          "offset": 122,
+          "quote": "생육중기",
+          "value": "생육중기"
+        }
+      },
+      "candidateIds": [
+        "01da4ded-194c-5d9e-969d-7b511a464eb5",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "01da4ded-194c-5d9e-969d-7b511a464eb5": "APPLICABLE",
+        "fc57964c-3dd1-578b-9450-2109172a65de": "CONDITIONAL",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "01da4ded-194c-5d9e-969d-7b511a464eb5"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-20",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "생산 목적과 재배 방법을 모르는 참당귀 물 관리입니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "1fa4ae44-5693-51a8-94c7-bc96acada1ee",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "01da4ded-194c-5d9e-969d-7b511a464eb5",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "01da4ded-194c-5d9e-969d-7b511a464eb5": "CONDITIONAL",
+        "fc57964c-3dd1-578b-9450-2109172a65de": "CONDITIONAL",
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "뿌리용 이식 조건의 확인"
+    },
+    {
+      "id": "evidence-eval-21",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리 생산용 노지육묘 이식 참당귀의 비료 시기를 확인합니다. 확인정보(harvestPart)=ROOT_BARK; 확인정보(cultivation)=FIELD_TRANSPLANT;",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "33d3ca5e-5bba-5fc1-b5bd-daddbe8aa757",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 52,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 81,
+          "quote": "FIELD_TRANSPLANT",
+          "value": "FIELD_TRANSPLANT"
+        }
+      },
+      "candidateIds": [
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47",
+        "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47": "APPLICABLE",
+        "7561d1fb-f962-575f-b0b6-f0ca2fea561f": "EXCLUDED",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47"
+      ],
+      "uncoveredNeed": "현재 면적·토양·제품 기준의 투입량"
+    },
+    {
+      "id": "evidence-eval-22",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎 생산용인데 뿌리용 비료 방법을 써도 되는지 확인합니다. 확인정보(harvestPart)=LEAF;",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "7e271da6-9353-5d1e-821c-ebfa89f8ddcd",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 51,
+          "quote": "LEAF",
+          "value": "LEAF"
+        }
+      },
+      "candidateIds": [
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47",
+        "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47": "EXCLUDED",
+        "7561d1fb-f962-575f-b0b6-f0ca2fea561f": "EXCLUDED",
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "잎 생산용 시비 근거"
+    },
+    {
+      "id": "evidence-eval-23",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리용 직파 참당귀의 병해 관리와 등록 원칙을 확인합니다. 확인정보(harvestPart)=ROOT_BARK; 확인정보(cultivation)=DIRECT_SOWING;",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "57106797-853a-51ee-b50e-07d3a1816676",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 51,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 80,
+          "quote": "DIRECT_SOWING",
+          "value": "DIRECT_SOWING"
+        }
+      },
+      "candidateIds": [
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "CONDITIONAL",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "증상 확정·실제 등록 약제"
+    },
+    {
+      "id": "evidence-eval-24",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎 생산용에 가상 약제를 적용할 수 있는지 확인합니다. 확인정보(harvestPart)=LEAF;",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "4c2910c1-3167-5106-8a19-fd7303391fdb",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 49,
+          "quote": "LEAF",
+          "value": "LEAF"
+        }
+      },
+      "candidateIds": [
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "EXCLUDED",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "잎 생산·수확 조건별 농약 등록"
+    },
+    {
+      "id": "evidence-eval-25",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리용 직파의 초기 잡초 관리 자료를 확인합니다. 확인정보(harvestPart)=ROOT_BARK; 확인정보(cultivation)=DIRECT_SOWING;",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "a1115eea-ff50-5e42-b742-12917cbdea1b",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 46,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 75,
+          "quote": "DIRECT_SOWING",
+          "value": "DIRECT_SOWING"
+        }
+      },
+      "candidateIds": [
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "CONDITIONAL",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "혼합 문단에서 초기 제초 설명 분리"
+    },
+    {
+      "id": "evidence-eval-26",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎 생산용 잡초 관리에 뿌리용 자료가 적용되는지 확인합니다. 확인정보(harvestPart)=LEAF;",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "c1da3200-2e7c-5df5-8764-346ea31ebd92",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 52,
+          "quote": "LEAF",
+          "value": "LEAF"
+        }
+      },
+      "candidateIds": [
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "EXCLUDED",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "잎 생산용 제초 근거"
+    },
+    {
+      "id": "evidence-eval-27",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리용 참당귀의 추대와 노화 잎 정리 조건을 확인합니다. 확인정보(harvestPart)=ROOT_BARK; 확인정보(cultivation)=FIELD_TRANSPLANT;",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "946740fb-008c-5c67-b611-c24ca47c8b80",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 50,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 79,
+          "quote": "FIELD_TRANSPLANT",
+          "value": "FIELD_TRANSPLANT"
+        }
+      },
+      "candidateIds": [
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "CONDITIONAL",
+        "ebfeb057-a267-5026-8d4c-881a1e778284": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "작업·단계별 혼합 문단 분리"
+    },
+    {
+      "id": "evidence-eval-28",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "잎 생산용의 잎 제거가 적절한지 확인합니다. 확인정보(harvestPart)=LEAF;",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "5f9c9c1f-4424-57bb-bd29-8f2408a082cb",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 43,
+          "quote": "LEAF",
+          "value": "LEAF"
+        }
+      },
+      "candidateIds": [
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "EXCLUDED",
+        "ebfeb057-a267-5026-8d4c-881a1e778284": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "잎 생산용 정리 조건"
+    },
+    {
+      "id": "evidence-eval-29",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "플러그묘로 이식한 참당귀의 잎을 수확했습니다. 확인정보(cultivation)=PLUG_TRANSPLANT;",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "LEAF",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "08230d34-03f2-51ad-8bd6-40f53a75a5e0",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 44,
+          "quote": "PLUG_TRANSPLANT",
+          "value": "PLUG_TRANSPLANT"
+        }
+      },
+      "candidateIds": [
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "c1331551-fbb4-59ed-a51f-b30583213308": "APPLICABLE",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299": "CONDITIONAL",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "c1331551-fbb4-59ed-a51f-b30583213308"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-30",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "노지육묘 이식 참당귀 뿌리를 수확했습니다. 확인정보(cultivation)=FIELD_TRANSPLANT;",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "ROOT_BARK",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "9ce7cb27-d346-56cc-88bb-34452c5f8620",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 42,
+          "quote": "FIELD_TRANSPLANT",
+          "value": "FIELD_TRANSPLANT"
+        }
+      },
+      "candidateIds": [
+        "c1331551-fbb4-59ed-a51f-b30583213308",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "c1331551-fbb4-59ed-a51f-b30583213308": "EXCLUDED",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299": "CONDITIONAL",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "뿌리 수확 문단의 재배 방식별 분리"
+    },
+    {
+      "id": "evidence-eval-31",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀의 종과 토양 특성을 확인합니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "f40406cb-500f-5ddd-ac4f-5162099a039a",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "4c893198-6390-5e70-82d4-0948c554f31d": "APPLICABLE",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "APPLICABLE",
+        "53cc6663-43fd-50f5-9399-409886e14e17": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-32",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "참당귀",
+          "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+          "usePartCategory": "ROOT_BARK"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "참당귀의 복용량을 묻는 재배 범위 밖 요청입니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "17ffaa72-664e-5ea1-829d-dc4f3a8dfa94",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+        "53cc6663-43fd-50f5-9399-409886e14e17"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "4c893198-6390-5e70-82d4-0948c554f31d": "APPLICABLE",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "APPLICABLE",
+        "53cc6663-43fd-50f5-9399-409886e14e17": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "uncoveredNeed": "의약 복용; 조건 선택기에는 질문 의도 판정 기능 없음"
+    },
+    {
+      "id": "evidence-eval-33",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 열매 생산을 위해 꺾꽂이한 묘를 심었습니다. 확인정보(variety)=청감; 확인정보(harvestPart)=FRUIT; 확인정보(growthStage)=활착기;",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "CUTTING"
+          },
+          "recordId": "b7b2a022-ff32-575a-9e41-59cf51834d9c",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "variety": {
+          "fieldPath": "/record/memo",
+          "offset": 42,
+          "quote": "청감",
+          "value": "청감"
+        },
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 64,
+          "quote": "FRUIT",
+          "value": "FRUIT"
+        },
+        "growthStage": {
+          "fieldPath": "/record/memo",
+          "offset": 89,
+          "quote": "활착기",
+          "value": "활착기"
+        }
+      },
+      "candidateIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4": "CONDITIONAL",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9": "CONDITIONAL",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "APPLICABLE"
+      },
+      "requiredEvidenceIds": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-34",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "호광을 접붙이기로 심은 입력의 적용 근거를 확인합니다. 확인정보(variety)=호광; 확인정보(harvestPart)=FRUIT;",
+          "detail": {
+            "type": "PLANTING",
+            "seedAmount": null,
+            "seedlingUnit": "JU",
+            "seedlingCount": 12,
+            "plantingMethod": "SEEDLING",
+            "seedAmountUnit": null,
+            "propagationMethod": "GRAFTING"
+          },
+          "recordId": "759c7249-8b07-5cf4-a8f4-8756ccbfabec",
+          "workType": "PLANTING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "variety": {
+          "fieldPath": "/record/memo",
+          "offset": 45,
+          "quote": "호광",
+          "value": "호광"
+        },
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 67,
+          "quote": "FRUIT",
+          "value": "FRUIT"
+        }
+      },
+      "candidateIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4": "EXCLUDED",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9": "EXCLUDED",
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "호광 접붙이기의 농업적 타당성"
+    },
+    {
+      "id": "evidence-eval-35",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "삽식 후 물 관리가 궁금하지만 번식 방식의 구조화된 값은 없습니다. 확인정보(growthStage)=활착기;",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "eb98700d-f8b4-57ba-a6fc-46b6f7a9129c",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "growthStage": {
+          "fieldPath": "/record/memo",
+          "offset": 56,
+          "quote": "활착기",
+          "value": "활착기"
+        }
+      },
+      "candidateIds": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc",
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "CONDITIONAL",
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "삽식 후 조건을 메모에서 사실로 주석하는 후속 방식"
+    },
+    {
+      "id": "evidence-eval-36",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "활착 중인지 모르는 구기자 물 관리입니다.",
+          "detail": {
+            "type": "WATERING",
+            "irrigationAmount": "NORMAL",
+            "irrigationMethod": "DRIP"
+          },
+          "recordId": "814beb84-857a-5ade-98d5-2a7e487d973e",
+          "workType": "WATERING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc",
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc": "CONDITIONAL",
+        "0988a3ac-5d96-5ea1-be6c-92e95609a501": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "생육 단계·번식 방식 확인"
+    },
+    {
+      "id": "evidence-eval-37",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "열매 생산용 구기자에 질소를 더 줄지 관찰 기준을 확인합니다. 확인정보(harvestPart)=FRUIT;",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "4c62f5e7-3ffc-5890-a8fe-bd94287ef29d",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 53,
+          "quote": "FRUIT",
+          "value": "FRUIT"
+        }
+      },
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "APPLICABLE",
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "uncoveredNeed": "면적·성분·토양 검사 기준의 시비량"
+    },
+    {
+      "id": "evidence-eval-38",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "뿌리껍질 생산용에 열매용 시비 자료를 적용할 수 있는지 확인합니다. 확인정보(harvestPart)=ROOT_BARK;",
+          "detail": {
+            "type": "FERTILIZING",
+            "amount": 12.34,
+            "amountUnit": "G",
+            "materialName": "합성 성분 미상 비료",
+            "applicationMethod": "SOIL"
+          },
+          "recordId": "44ae345f-542d-5f5d-af6b-73df78e8216c",
+          "workType": "FERTILIZING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 56,
+          "quote": "ROOT_BARK",
+          "value": "ROOT_BARK"
+        }
+      },
+      "candidateIds": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0": "EXCLUDED",
+        "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "뿌리껍질 생산용 시비 근거"
+    },
+    {
+      "id": "evidence-eval-39",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "비가림 구기자의 병해 예방 관찰과 등록정보를 확인합니다. 확인정보(cultivation)=RAIN_SHELTER;",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "32ae4b6f-f52f-5665-b314-be25f6057c91",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 50,
+          "quote": "RAIN_SHELTER",
+          "value": "RAIN_SHELTER"
+        }
+      },
+      "candidateIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "APPLICABLE",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "실제 병해 진단·제품 등록"
+    },
+    {
+      "id": "evidence-eval-40",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "노지 구기자에 시설 재배 근거를 적용할 수 있는지 확인합니다. 확인정보(cultivation)=OPEN_FIELD;",
+          "detail": {
+            "type": "PEST_CONTROL",
+            "pestName": "합성 실습 병해충(실제 진단 아님)",
+            "pesticideName": "합성 실습 제품(실제 사용 금지)",
+            "pesticideAmount": 2.5,
+            "totalSprayAmount": 1500.0,
+            "pesticideAmountUnit": "ML",
+            "totalSprayAmountUnit": "ML"
+          },
+          "recordId": "ba2ae756-f2cb-5709-963e-7d60efdef54b",
+          "workType": "PEST_CONTROL",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 53,
+          "quote": "OPEN_FIELD",
+          "value": "OPEN_FIELD"
+        }
+      },
+      "candidateIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "EXCLUDED",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3c4d1f18-9803-5b82-b9c3-9826e42b4d76": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "노지의 병해 관리·실제 제품 등록"
+    },
+    {
+      "id": "evidence-eval-41",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "품종은 모르지만 구기자 피복의 잡초 억제 정보를 확인합니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "9a219b50-f68a-5799-b2b9-0a59b92340e0",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b": "APPLICABLE",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-42",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "가상 제초제를 써도 되는지와 피복 대안을 확인합니다.",
+          "detail": {
+            "type": "WEEDING",
+            "weedingMethod": "HAND"
+          },
+          "recordId": "e2243b33-dedd-57a0-a076-8427e1936b70",
+          "workType": "WEEDING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939": "APPLICABLE",
+        "3d02f409-33f0-5586-beb0-e49d8b65ba0a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "3382f1d7-f7ae-5f15-a41a-ccb694a3445b",
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "uncoveredNeed": "현재 제초제 제품 등록 적합성"
+    },
+    {
+      "id": "evidence-eval-43",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "청감 열매 생산용 울타리 수형의 정리 조건을 확인합니다. 확인정보(variety)=청감; 확인정보(harvestPart)=FRUIT; 확인정보(cultivation)=TRELLIS;",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "96396499-b70e-5034-bc0b-bc87a2c2cb24",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "variety": {
+          "fieldPath": "/record/memo",
+          "offset": 46,
+          "quote": "청감",
+          "value": "청감"
+        },
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 68,
+          "quote": "FRUIT",
+          "value": "FRUIT"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 93,
+          "quote": "TRELLIS",
+          "value": "TRELLIS"
+        }
+      },
+      "candidateIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "fa68f455-ddd3-5364-be86-b8c6520291c4": "APPLICABLE",
+        "ebfeb057-a267-5026-8d4c-881a1e778284": "CONDITIONAL",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-44",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "호광에 청감 전용 수형 수치를 적용할 수 있는지 확인합니다. 확인정보(variety)=호광; 확인정보(harvestPart)=FRUIT; 확인정보(cultivation)=TRELLIS;",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "4fe3e423-37d7-51ec-b973-f090810edf2c",
+          "workType": "PRUNING",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "variety": {
+          "fieldPath": "/record/memo",
+          "offset": 48,
+          "quote": "호광",
+          "value": "호광"
+        },
+        "harvestPart": {
+          "fieldPath": "/record/memo",
+          "offset": 70,
+          "quote": "FRUIT",
+          "value": "FRUIT"
+        },
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 95,
+          "quote": "TRELLIS",
+          "value": "TRELLIS"
+        }
+      },
+      "candidateIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "fa68f455-ddd3-5364-be86-b8c6520291c4": "EXCLUDED",
+        "ebfeb057-a267-5026-8d4c-881a1e778284": "EXCLUDED",
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "호광 전용 수형 조건"
+    },
+    {
+      "id": "evidence-eval-45",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "품종 미상 구기자의 열매를 수확했습니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "FRUIT",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "11f91c73-476f-5a11-ac6a-fa7a92673ae1",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "c6c689b0-9d12-5432-b4fa-0e79f528ad94",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26": "CONDITIONAL",
+        "c6c689b0-9d12-5432-b4fa-0e79f528ad94": "EXCLUDED",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "일반 열매 숙도와 청감 조건의 문단 분리"
+    },
+    {
+      "id": "evidence-eval-46",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "구기자 뿌리껍질을 수확했다고 기록했습니다.",
+          "detail": {
+            "type": "HARVEST",
+            "growthPeriod": 6,
+            "amountUnknown": false,
+            "harvestAmount": 12.5,
+            "harvestSource": "CULTIVATED",
+            "isLastHarvest": false,
+            "medicinalPart": "ROOT_BARK",
+            "growthPeriodUnit": "MONTH"
+          },
+          "recordId": "0f0a521c-c9d9-5587-b989-7e86ce691a4f",
+          "workType": "HARVEST",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "c6c689b0-9d12-5432-b4fa-0e79f528ad94",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26": "EXCLUDED",
+        "c6c689b0-9d12-5432-b4fa-0e79f528ad94": "APPLICABLE",
+        "ef063f8e-4a83-51b5-890c-d817c7a15778": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "c6c689b0-9d12-5432-b4fa-0e79f528ad94"
+      ],
+      "uncoveredNeed": "뿌리껍질의 채취 시기·처리 방법"
+    },
+    {
+      "id": "evidence-eval-47",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "비가림 시설의 일반적인 역할을 확인합니다. 확인정보(cultivation)=RAIN_SHELTER;",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "e1b80ac0-f420-5a06-96a9-85064cce6856",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {
+        "cultivation": {
+          "fieldPath": "/record/memo",
+          "offset": 42,
+          "quote": "RAIN_SHELTER",
+          "value": "RAIN_SHELTER"
+        }
+      },
+      "candidateIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "APPLICABLE",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e"
+      ],
+      "uncoveredNeed": null
+    },
+    {
+      "id": "evidence-eval-48",
+      "split": "evaluation",
+      "synthetic": true,
+      "context": {
+        "crop": {
+          "name": "구기자나무",
+          "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+          "usePartCategory": "FRUIT"
+        },
+        "farm": {
+          "name": "합성 실습 농장",
+          "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+          "latitude": 37.1,
+          "longitude": 128.2,
+          "roadAddress": "실습용 가상 주소"
+        },
+        "member": {
+          "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+          "managementType": null,
+          "experienceLevel": null
+        },
+        "record": {
+          "memo": "재배 시설 종류가 확인되지 않은 구기자 기록입니다.",
+          "detail": {
+            "type": "COMMON"
+          },
+          "recordId": "97ef0a21-699b-57db-92ae-75e59c10b1e9",
+          "workType": "ETC",
+          "workedAt": "2026-08-25T10:00:00",
+          "photoCount": 0,
+          "sourceRevision": 1,
+          "recordedTemperatureC": 25,
+          "recordedWeatherCondition": "합성 고정값"
+        },
+        "weather": null,
+        "warnings": [],
+        "schemaVersion": "record-feedback-context.v2"
+      },
+      "explicitFacts": {},
+      "candidateIds": [
+        "86c42517-b5a6-587d-8cf1-253807bef32e",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b"
+      ],
+      "candidateMode": "MANUALLY_CONTROLLED_NOT_RETRIEVED",
+      "expected": {
+        "86c42517-b5a6-587d-8cf1-253807bef32e": "CONDITIONAL",
+        "a9fcb754-1b72-5dd5-962f-c3404887fd7b": "EXCLUDED"
+      },
+      "requiredEvidenceIds": [],
+      "uncoveredNeed": "재배 방식 확인"
+    }
+  ]
+}

@@ -4,12 +4,15 @@ import com.chamchamcham.application.coaching.recordfeedback.generation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.*;
+import java.nio.file.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.ai.document.Document;
 import static org.assertj.core.api.Assertions.*;
 import static com.chamchamcham.lab.CoachingEvidenceSelector.*;
 
 class CoachingEvidenceSelectorTest {
+    @TempDir Path temporary;
     private final ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
     private final Document doc = new Document("test-doc", "검토한 원문", Map.of("sourceId", "test-source"));
 
@@ -111,5 +114,57 @@ class CoachingEvidenceSelectorTest {
         assertThat(mapper.writeValueAsString(c)).isEqualTo(before);
         assertThat(doc.getText()).isEqualTo("검토한 원문");
         assertThat(select(c, Map.of(), List.of(), rules)).isEmpty();
+    }
+
+    Path prepareEvaluation(String name, String expected) throws Exception {
+        Path root = temporary.toRealPath();
+        Path output = root.resolve(".local/rag-api/evidence-selection/runs/" + name);
+        Files.createDirectories(output.getParent());
+        for (String file : CoachingEvidenceEvaluation.CODE_FILES) {
+            var p = root.resolve(file); Files.createDirectories(p.getParent()); Files.writeString(p, "fixture code " + file);
+        }
+        var c = context("천궁", "WATERING", "합성 상황", null);
+        var row = new LinkedHashMap<String, Object>();
+        row.put("id", "one"); row.put("split", "evaluation"); row.put("synthetic", true);
+        row.put("candidateMode", "MANUALLY_CONTROLLED_NOT_RETRIEVED"); row.put("context", c);
+        row.put("explicitFacts", Map.of()); row.put("candidateIds", List.of(doc.getId()));
+        row.put("expected", Map.of(doc.getId(), expected)); row.put("requiredEvidenceIds", List.of("not-in-candidates"));
+        mapper.writeValue(root.resolve("cases.json").toFile(), Map.of("cases", List.of(row)));
+        mapper.writeValue(root.resolve("rules.json").toFile(), Map.of("rules", List.of(Map.of("documentId", doc.getId(), "textSha256", sha(doc.getText()), "constraints", Map.of(), "unresolvedScope", false, "caveats", List.of()))));
+        mapper.writeValue(root.resolve("corpus.json").toFile(), Map.of("documents", List.of(Map.of("id", doc.getId(), "text", doc.getText(), "metadata", doc.getMetadata()))));
+        return output;
+    }
+    void evaluate(Path output) throws Exception {
+        var root = temporary.toRealPath();
+        CoachingEvidenceEvaluation.evaluate(root.resolve("cases.json"), root.resolve("rules.json"), root.resolve("corpus.json"), output);
+    }
+    @Test void expectedAnswersNeverChangeSelectedDocumentsAndMissingCandidatesAreReported() throws Exception {
+        var first = prepareEvaluation("first", "APPLICABLE"); evaluate(first);
+        var one = mapper.readTree(first.resolve("result.json").toFile());
+        assertThat(one.path("summary").path("matchedDecisions").asInt()).isEqualTo(1);
+        assertThat(one.path("summary").path("missingRequiredCandidateCases").asInt()).isEqualTo(1);
+        var second = prepareEvaluation("second", "EXCLUDED"); evaluate(second);
+        var two = mapper.readTree(second.resolve("result.json").toFile());
+        assertThat(two.path("summary").path("matchedDecisions").asInt()).isZero();
+        assertThat(two.path("cases").get(0).path("decisions")).isEqualTo(one.path("cases").get(0).path("decisions"));
+    }
+    @Test void existingRunCannotBeOverwrittenAndInputChangesProduceDifferentIdentity() throws Exception {
+        var first = prepareEvaluation("first", "APPLICABLE"); evaluate(first);
+        var result = Files.readString(first.resolve("result.json"));
+        assertThatThrownBy(() -> evaluate(first)).isInstanceOf(Exception.class);
+        assertThat(Files.readString(first.resolve("result.json"))).isEqualTo(result);
+        var second = prepareEvaluation("second", "APPLICABLE");
+        Files.writeString(temporary.resolve(CoachingEvidenceEvaluation.CODE_FILES.getFirst()), "changed implementation");
+        evaluate(second);
+        var before = mapper.readTree(result).path("inputHashes");
+        var after = mapper.readTree(second.resolve("result.json").toFile()).path("inputHashes");
+        assertThat(after).isNotEqualTo(before);
+    }
+    @Test void invalidRunAndMissingCandidateFailWithoutWritingSuccess() throws Exception {
+        var output = prepareEvaluation("good", "APPLICABLE");
+        assertThatThrownBy(() -> evaluate(output.getParent().resolve("BAD"))).isInstanceOf(IllegalArgumentException.class);
+        mapper.writeValue(temporary.resolve("corpus.json").toFile(), Map.of("documents", List.of()));
+        assertThatThrownBy(() -> evaluate(output)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("candidate");
+        assertThat(output.resolve("result.json")).doesNotExist();
     }
 }
