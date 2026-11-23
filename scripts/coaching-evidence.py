@@ -9,6 +9,7 @@ import re
 ROOT = Path(__file__).resolve().parent.parent
 LAB = Path(".local/rag-api/evidence-selection")
 RUN_NAME = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
+FIELDS = {"cropName", "workType", "species", "variety", "harvestPart", "growthStage", "cultivation", "propagation", "region"}
 
 
 def sha(path: Path) -> str:
@@ -61,6 +62,23 @@ def check_sources(manifest: Path, root: Path) -> dict:
                 raise ValueError("duplicate document id")
             seen.add(did)
             rule = by_id[did]
+            constraints, unstated = rule.get("constraints"), rule.get("notStated")
+            if (not isinstance(constraints, dict) or not isinstance(unstated, list)
+                    or not all(isinstance(field, str) for field in unstated)
+                    or len(set(unstated)) != len(unstated)
+                    or set(constraints) & set(unstated) or set(constraints) | set(unstated) != FIELDS
+                    or type(rule.get("unresolvedScope")) is not bool
+                    or not isinstance(rule.get("caveats"), list) or not rule["caveats"]
+                    or not all(isinstance(value, str) and value.strip() for value in rule["caveats"])):
+                raise ValueError("incomplete or invalid annotation")
+            for constraint in constraints.values():
+                if not isinstance(constraint, dict):
+                    raise ValueError("invalid annotation constraint")
+                state, allowed = constraint.get("state"), constraint.get("allowed")
+                if (state not in {"EXPLICIT", "NOT_STATED", "UNRESTRICTED"} or not isinstance(allowed, list)
+                        or not all(isinstance(value, str) and value.strip() for value in allowed)
+                        or (state == "EXPLICIT") != bool(allowed)):
+                    raise ValueError("invalid annotation constraint")
             text = document["text"]
             if hashlib.sha256(text.encode()).hexdigest() != rule["textSha256"]:
                 raise ValueError("document hash mismatch")

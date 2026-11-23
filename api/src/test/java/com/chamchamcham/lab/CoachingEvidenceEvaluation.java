@@ -36,7 +36,18 @@ public final class CoachingEvidenceEvaluation {
         var inputs = new ArrayList<Path>(List.of(cases, rules, corpus));
         CODE_FILES.forEach(file -> inputs.add(root.resolve(file)));
         Path sourceManifest = root.resolve("docs/verification/coaching-evidence-sources.json");
-        if (Files.exists(sourceManifest)) inputs.add(sourceManifest);
+        if (Files.exists(sourceManifest)) {
+            inputs.add(sourceManifest);
+            var manifest = MAPPER.readTree(sourceManifest.toFile());
+            for (var row : manifest.path("sources")) {
+                addSourceInput(root, inputs, requiredText(row, "rawFile"), requiredText(row, "rawSha256"));
+                addSourceInput(root, inputs, requiredText(row, "selectedFile"), requiredText(row, "selectedSha256"));
+            }
+            var preserved = manifest.path("preservedHashes").fields();
+            while (preserved.hasNext()) {
+                var row = preserved.next(); addSourceInput(root, inputs, row.getKey(), row.getValue().asText());
+            }
+        }
         var before = hashes(root, inputs);
         Files.createDirectories(output.getParent());
         Files.createDirectory(output); // 모든 실행은 독립적이고 기존 성공/실패 결과를 덮어쓰지 않는다.
@@ -51,6 +62,7 @@ public final class CoachingEvidenceEvaluation {
             }
             var byRule = new LinkedHashMap<String, Applicability>();
             for (var row : MAPPER.readTree(rules.toFile()).path("rules")) {
+                validateAnnotation(row);
                 var constraints = MAPPER.convertValue(row.path("constraints"), new TypeReference<Map<String, Constraint>>() {});
                 var caveats = MAPPER.convertValue(row.path("caveats"), new TypeReference<List<String>>() {});
                 if (byRule.putIfAbsent(requiredText(row, "documentId"), new Applicability(requiredText(row, "textSha256"), constraints,
@@ -122,6 +134,32 @@ public final class CoachingEvidenceEvaluation {
             MAPPER.writeValue(output.resolve("failure.json").toFile(), Map.of("complete", false, "error", failure.getClass().getSimpleName()));
             throw failure;
         }
+    }
+
+    private static void validateAnnotation(JsonNode row) {
+        var constraints = row.path("constraints"); var unstated = row.path("notStated"); var caveats = row.path("caveats");
+        if (!constraints.isObject() || !unstated.isArray() || !row.path("unresolvedScope").isBoolean()
+                || !caveats.isArray() || caveats.isEmpty()) throw new IllegalArgumentException("incomplete annotation");
+        for (var caveat : caveats) if (!caveat.isTextual() || caveat.asText().isBlank()) throw new IllegalArgumentException("invalid annotation caveat");
+        var fields = new HashSet<String>();
+        var entries = constraints.fields();
+        while (entries.hasNext()) {
+            var entry = entries.next(); fields.add(entry.getKey()); var constraint = entry.getValue();
+            String state = constraint.path("state").asText(); var allowed = constraint.path("allowed");
+            if (!constraint.isObject() || !Set.of("EXPLICIT", "NOT_STATED", "UNRESTRICTED").contains(state)
+                    || !allowed.isArray() || state.equals("EXPLICIT") == allowed.isEmpty())
+                throw new IllegalArgumentException("invalid annotation constraint");
+            for (var value : allowed) if (!value.isTextual() || value.asText().isBlank()) throw new IllegalArgumentException("invalid annotation value");
+        }
+        for (var field : unstated) if (!field.isTextual() || !fields.add(field.asText())) throw new IllegalArgumentException("overlapping annotation fields");
+        if (!fields.equals(FIELDS)) throw new IllegalArgumentException("incomplete annotation fields");
+    }
+
+    private static void addSourceInput(Path root, List<Path> inputs, String name, String expected) throws Exception {
+        Path path = root.resolve(name).toRealPath();
+        if ((!path.startsWith(root.resolve(".local/rag-api/corpus")) && !path.startsWith(root.resolve(LAB + "/sources")))
+                || !fileSha(path).equals(expected)) throw new IllegalArgumentException("source path/hash mismatch");
+        inputs.add(path);
     }
 
     private static Map<String, String> hashes(Path root, List<Path> inputs) throws Exception {

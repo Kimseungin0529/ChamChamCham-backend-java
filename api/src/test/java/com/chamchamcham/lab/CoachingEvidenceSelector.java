@@ -17,7 +17,7 @@ public final class CoachingEvidenceSelector {
                                 boolean unresolvedScope, List<String> caveats) {}
     public record Fact(String fieldPath, int offset, String quote, String value) {}
     public record Decision(String documentId, Status status, List<String> reasons) {}
-    private static final Set<String> FIELDS = Set.of("cropName", "workType", "species", "variety", "harvestPart", "growthStage", "cultivation", "propagation", "region");
+    static final Set<String> FIELDS = Set.of("cropName", "workType", "species", "variety", "harvestPart", "growthStage", "cultivation", "propagation", "region");
     private static final Set<String> ANNOTATED_FIELDS = Set.of("species", "variety", "harvestPart", "growthStage", "cultivation", "region");
 
     public static List<Decision> select(RecordFeedbackContext context, Map<String, Fact> explicitFacts,

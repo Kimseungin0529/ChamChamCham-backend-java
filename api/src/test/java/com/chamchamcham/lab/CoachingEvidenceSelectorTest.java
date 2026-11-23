@@ -136,7 +136,7 @@ class CoachingEvidenceSelectorTest {
         row.put("explicitFacts", Map.of()); row.put("candidateIds", List.of(doc.getId()));
         row.put("expected", Map.of(doc.getId(), expected)); row.put("requiredEvidenceIds", List.of("not-in-candidates"));
         mapper.writeValue(root.resolve("cases.json").toFile(), Map.of("cases", List.of(row)));
-        mapper.writeValue(root.resolve("rules.json").toFile(), Map.of("rules", List.of(Map.of("documentId", doc.getId(), "textSha256", sha(doc.getText()), "constraints", Map.of(), "unresolvedScope", false, "caveats", List.of()))));
+        mapper.writeValue(root.resolve("rules.json").toFile(), Map.of("rules", List.of(Map.of("documentId", doc.getId(), "textSha256", sha(doc.getText()), "constraints", Map.of(), "notStated", List.of("cropName", "workType", "species", "variety", "harvestPart", "growthStage", "cultivation", "propagation", "region"), "unresolvedScope", false, "caveats", List.of("합성 조건 검토")))));
         mapper.writeValue(root.resolve("corpus.json").toFile(), Map.of("documents", List.of(Map.of("id", doc.getId(), "text", doc.getText(), "metadata", doc.getMetadata()))));
         return output;
     }
@@ -172,5 +172,30 @@ class CoachingEvidenceSelectorTest {
         mapper.writeValue(temporary.resolve("corpus.json").toFile(), Map.of("documents", List.of()));
         assertThatThrownBy(() -> evaluate(output)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("candidate");
         assertThat(output.resolve("result.json")).doesNotExist();
+    }
+    @Test void incompleteAnnotationCannotBecomeApplicable() throws Exception {
+        for (String name : List.of("unresolvedScope", "notStated", "caveats")) {
+            var output = prepareEvaluation("missing-" + name.toLowerCase(), "APPLICABLE");
+            var input = mapper.readTree(temporary.resolve("rules.json").toFile());
+            ((ObjectNode)input.path("rules").get(0)).remove(name);
+            mapper.writeValue(temporary.resolve("rules.json").toFile(), input);
+            assertThatThrownBy(() -> evaluate(output)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("annotation");
+            assertThat(output.resolve("identity.json")).doesNotExist();
+        }
+    }
+    @Test void identityIncludesActualRawSelectedAndPreservedCorpusFiles() throws Exception {
+        var output = prepareEvaluation("source-identity", "APPLICABLE");
+        Path root = temporary.toRealPath(), source = root.resolve(".local/rag-api/corpus");
+        Files.createDirectories(source);
+        for (String name : List.of("raw.html", "selected.txt", "manifest.json", "chunks.json")) Files.writeString(source.resolve(name), name);
+        Path manifest = root.resolve("docs/verification/coaching-evidence-sources.json"); Files.createDirectories(manifest.getParent());
+        mapper.writeValue(manifest.toFile(), Map.of("sources", List.of(Map.of("rawFile", ".local/rag-api/corpus/raw.html", "rawSha256", sha("raw.html"), "selectedFile", ".local/rag-api/corpus/selected.txt", "selectedSha256", sha("selected.txt"))),
+            "preservedHashes", Map.of(".local/rag-api/corpus/manifest.json", sha("manifest.json"), ".local/rag-api/corpus/chunks.json", sha("chunks.json"))));
+        evaluate(output);
+        var inputs = mapper.readTree(output.resolve("result.json").toFile()).path("inputHashes");
+        assertThat(inputs.has(".local/rag-api/corpus/raw.html")).isTrue();
+        assertThat(inputs.has(".local/rag-api/corpus/selected.txt")).isTrue();
+        assertThat(inputs.has(".local/rag-api/corpus/manifest.json")).isTrue();
+        assertThat(inputs.has(".local/rag-api/corpus/chunks.json")).isTrue();
     }
 }
