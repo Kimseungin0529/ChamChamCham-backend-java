@@ -1,6 +1,6 @@
 # 기록 코칭 근거 적합성 점검 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. 2026-11-23 사용자 ㄱㄱ 승인 후 실행 중.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking. 2026-11-23 사용자 ㄱㄱ 승인 범위 실행·검증·리뷰·로컬 커밋 완료.
 
 **Goal:** 보존 자료의 적용 조건을 확인하고, 고정 후보에서 잘못 적용될 근거를 구분하면서 일반 안내를 보존하는 실험을 만든다.
 
@@ -68,16 +68,20 @@
 
 ### Task 4: 자체 검토·전체 검사·사용법
 
-- [ ] 사용자가 검토할 대표 정상/오류/조건부 사례의 입력→후보→사유→출처를 설명한다. 근거 없는 수치나 문헌의 제한 해석을 정답으로 고정하지 않았는지 원문을 다시 대조한다.
-- [ ] `python3 scripts/test-coaching-evidence.py` 및 `./gradlew test --offline --console=plain --no-daemon --max-workers=1`을 실행하고 실패/스킵을 그대로 기록한다. 기존 opt-in DB 검사는 Docker 미기동 때문에 미실행이며 통과로 세지 않는다.
-- [ ] `git diff --check`와 변경 파일 범위를 확인한다. 제품 src/main·기존 corpus·기존 결과 변경이 없는지 확인한다.
-- [ ] 결과·사용법·연속 작업 기록을 작성한다. 채택 판단과 다음 실제 검색/답변/API 단계의 필요 승인을 명시한다. 도구 실행과 의미 판정을 분리하고 전문가 검증 부재를 공개한다.
-- [ ] 로컬 커밋 `docs(rag): 근거 조건 점검 결과와 재실행 방법 정리`. 원격 Git 작업은 하지 않는다.
+- [x] 사용자가 검토할 대표 정상/오류/조건부 사례의 입력→후보→사유→출처를 설명한다. 근거 없는 수치나 문헌의 제한 해석을 정답으로 고정하지 않았는지 원문을 다시 대조한다.
+- [x] `python3 scripts/test-coaching-evidence.py` 및 `./gradlew test --offline --console=plain --no-daemon --max-workers=1`을 실행하고 실패/스킵을 그대로 기록한다. 기존 opt-in DB 검사는 Docker 미기동 때문에 미실행이며 통과로 세지 않는다.
+- [x] `git diff --check`와 변경 파일 범위를 확인한다. 제품 src/main·기존 corpus·기존 결과 변경이 없는지 확인한다.
+- [x] 결과·사용법·연속 작업 기록을 작성한다. 채택 판단과 다음 실제 검색/답변/API 단계의 필요 승인을 명시한다. 도구 실행과 의미 판정을 분리하고 전문가 검증 부재를 공개한다.
+- [x] 로컬 커밋 `docs(rag): 근거 조건 점검 결과와 재실행 방법 정리`. 원격 Git 작업은 하지 않는다.
 
 ## 계획 자체 점검
 
 - 자료 조사, 원문 보존, 조건 분류, 일반 안내 유지, 신규 평가, 미실행 보고는 Task 1~4에 대응한다.
 - 사용자 기록 필드 추가·실시간 웹 검색·자동 농약 판정·챗봇·모델 학습은 범위에 없다.
 - 실제 DB 검색과 생성 품질 검증은 다음 큰 단위다. 이 단위의 통과를 최종 정확도 향상으로 주장하지 않는다.
-- 첫 단위는 직접 순서대로 구현한다. 별도 병렬 구현은 필요 없다. 구현 시작 전 이 범위의 사용자 승인을 받는다.
+- 첫 단위는 직접 순서대로 구현한다. 별도 병렬 구현은 필요 없다. 2026-11-23 사용자 승인을 받아 실행했으며 다음 큰 단위는 별도 승인한다.
 - 읽기 전용 별도 설계 검토에서 추가 원문 경로, 판정 우선순위, 조건 주석과 후보 본문 동일성의 누락 3개를 지적받아 위 설계/작업에 반영했다. 이는 농업 내용 검증이나 구현 검사가 아니다.
+
+## 완료 기록
+
+실제 결과와 판단은 `docs/verification/coaching-evidence-results.md` 및 `coaching-evidence-evaluation.json`을 따른다. Python9/Java22/전체1439(1423pass,16skip,0fail). 최종 run은 evidence-final이며 기존48개 재검증이다. Docker/API/모델 기동, 제품 코드/DB 변경, 원격 Git 쓰기 없음.
