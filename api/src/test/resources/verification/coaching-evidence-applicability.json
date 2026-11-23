@@ -1,0 +1,1341 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "documentId": "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+      "textSha256": "9b2ec57351a65b4f174f1056875258951008e4b9325c4b4a4974b56ad1a0bf7a",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "참당귀는 다년생 식물로서 산형과의 2~3년생 초본 식물입니다. ",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "일반 생육/종 구분 자료. 현재 기록의 작업 안내 근거와는 구분"
+      ]
+    },
+    {
+      "documentId": "4c893198-6390-5e70-82d4-0948c554f31d",
+      "textSha256": "1fbdf15807100994a21e11f204b41459ad430ec33d5c4c779120fcbbcd2fa527",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "참당귀는 재배 시 토양은 토심이 깊고 물 빠짐이 좋으면서 수분 ",
+        "offset": 325,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "토양·돌려짓기 일반 설명, 품종별 정량 권장 없음"
+      ]
+    },
+    {
+      "documentId": "8fc21215-fce5-5278-a773-81ba9d184ba1",
+      "textSha256": "84b1678284fc7eb390e4b18d0dd13f29371e4744fd3b95e154eaef5b0e07b61f",
+      "constraints": {
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "SEED"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "참당귀는 주로 종자에 의해 번식합니다. 산지에 야생하는 식물이며",
+        "offset": 513,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "종자 번식과 종자 발아 처리 조건"
+      ]
+    },
+    {
+      "documentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "textSha256": "3f6113f5cd1e414809843cb11abc0c5d659e3808fd9eee963989c217f60fcf31",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "재배는 밭에 바로 씨를 뿌리는 직파법과 육묘상에서 일정 기간 묘",
+        "offset": 738,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "직파·온상·노지육묘와 정량/수확이 혼재하여 세분 전 보류"
+      ]
+    },
+    {
+      "documentId": "c1331551-fbb4-59ed-a51f-b30583213308",
+      "textSha256": "1dd1b3d79f0f4d619250a3d4ed5bd28bcac53077de8c9af1e5dd8ff47fc1960c",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "LEAF"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLUG_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "식가공용 소재로 1년생 참당귀 잎 생산을 위해 플러그 육묘상에서",
+        "offset": 1329,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "잎 생산용 플러그묘 이식 실험 조건"
+      ]
+    },
+    {
+      "documentId": "fc57964c-3dd1-578b-9450-2109172a65de",
+      "textSha256": "296d7c5651b4c8af810be473b158c5a1028251563be5f51cda58d50203a63331",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cham",
+        "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+        "quote": "최근 여름철 고온 현상으로 인해 참당귀 재배가 강원도 지역을 제",
+        "offset": 1588,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "여름철/멀칭 실험 수치와 일반 안내 혼재; 고온 조건 미확인시 보류"
+      ]
+    },
+    {
+      "documentId": "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+      "textSha256": "49a8af1efec3e1a547484169a0d70819af3ac3385840b0bc4f71d86c38cb1485",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-cn",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-cn.selected.txt",
+        "quote": "천궁은 꽃이 피지만 종자를 맺지 못하므로 번식방법으로 일천궁은 ",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "일천궁과 토천궁의 번식 방법 분기가 혼재; 분리 전 보류"
+      ]
+    },
+    {
+      "documentId": "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+      "textSha256": "f70caaec7d49dd6ef7c587a1dae5b6cd07a62f0674ed3ca589649cbc344bbbb2",
+      "constraints": {
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "일천궁"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "뿌리생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "variety",
+        "harvestPart",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-cn",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-cn.selected.txt",
+        "quote": "일천궁은 뿌리가 얕아 가뭄에 피해를 많이 받는 작물로서 뿌리와 ",
+        "offset": 210,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "일천궁 뿌리 생장기의 수량 실험 포함"
+      ]
+    },
+    {
+      "documentId": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "textSha256": "704be33488cd03fe7905678c6b55abcac0e9293dc6cc75c8ced560dc5783fa50",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-cn",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-cn.selected.txt",
+        "quote": "수확적기는 잎과 줄기가 누렇게 변하는 시기가 알맞습니다. 뿌리줄",
+        "offset": 416,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "종·연생·지역별 시기 분기 혼재; 분리 전 보류"
+      ]
+    },
+    {
+      "documentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "textSha256": "7c10c764ad5d2f4d70a8698248400c0c9345b1376afcc07d21f2c06aadfc3ab2",
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-goji",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+        "quote": "구기자 삽목용 가지는 연필보다 조금 굵은 걸 선택하고, 전정가위",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 삽목과 청감/호광 혼식 조건 혼재"
+      ]
+    },
+    {
+      "documentId": "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+      "textSha256": "a5d02f7e2e8b02d94f1c44efb0764c5f38984daf9b4a3b0864b0724adbef261e",
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RAIN_SHELTER"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-goji",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+        "quote": "섞어 심을 땐, 주품종과 수분수를 1주씩 교대로 심는 것이 가장",
+        "offset": 416,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "청감/호광 혼식 비율과 비가림 조건 혼재"
+      ]
+    },
+    {
+      "documentId": "fa68f455-ddd3-5364-be86-b8c6520291c4",
+      "textSha256": "7315fbb8cefbeb7b03e3471e550bb034795d450df10117ddb86a10052700468b",
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "TRELLIS"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-goji",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+        "quote": "구기자를 키울 땐 두 가지 수형으로 재배할 수 있는데요. 줄기 ",
+        "offset": 804,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "청감 울타리 수형의 정량 높이 설명"
+      ]
+    },
+    {
+      "documentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "textSha256": "35a4ec3776fc8073897978889e6ad95b503dad980af1db4fdada2a0550f63466",
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-goji",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+        "quote": "구기자의 수확량을 늘리는 방법 또 하나는 ‘적심’입니다. 쉽게 ",
+        "offset": 1334,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 적심과 청감 적심 길이가 섞여 있음"
+      ]
+    },
+    {
+      "documentId": "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+      "textSha256": "22d9b64ddf8ac8b1e7fd3a1038a8045e3ab6c5f00c243f975005e199f3daf721",
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "nongsaro-goji",
+        "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+        "quote": "품종별로 차이가 있지만, 구기자는 8월 하순부터 11월 중순 까",
+        "offset": 1758,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 열매 수확과 청감 숙도 설명 혼재"
+      ]
+    },
+    {
+      "documentId": "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+      "textSha256": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+      "constraints": {
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "일천궁"
+          ]
+        },
+        "region": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "강원"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cn-spacing",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cn-spacing.selected.txt",
+        "quote": "◦ 천궁 재배 시 1m 이랑을 조성하여, 30×20cm(3열) ",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "강원 일천궁 재식 간격 실험, 타 지역/종 자동 일반화 금지"
+      ]
+    },
+    {
+      "documentId": "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+      "textSha256": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+      "constraints": {
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cropName",
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "psis-general",
+        "selectedFile": ".local/rag-api/corpus/psis-general.selected.txt",
+        "quote": "국내의 농약은 농약관리법에 규정된 절차에 따라 약효, 약해 및 ",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "등록 원칙만 제공하며 실제 제품/작물/대상/횟수의 적합성은 미확인",
+        "GENERAL_PRINCIPLE_ONLY_NOT_PRODUCT_APPROVAL"
+      ]
+    },
+    {
+      "documentId": "53cc6663-43fd-50f5-9399-409886e14e17",
+      "textSha256": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "PLANTING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "100000732652",
+        "selectedFile": ".local/rag-api/corpus/100000732652.selected.txt",
+        "quote": "천궁·당귀는 여름철 기온이 28℃~30℃ 이상 지속되면 생육이 ",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "천궁 고온/재배지 일반 관리. 당귀 종 불명으로 참당귀에 적용하지 않음"
+      ]
+    },
+    {
+      "documentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "textSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "100000802838",
+        "selectedFile": ".local/rag-api/corpus/100000802838.selected.txt",
+        "quote": "약용작물 가운데 천궁, 당귀는 서늘하고 통풍이 잘되는 산지 등에",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "고온기 관찰·영양·병해충 복수 안내, 실제 현재 고온 여부 필요"
+      ]
+    },
+    {
+      "documentId": "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+      "textSha256": "f9799c5493b15d44ef12ee62e48f1c334467a7ee6d064a91fedb106688258510",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "kofpi-goji",
+        "selectedFile": ".local/rag-api/corpus/kofpi-goji.selected.txt",
+        "quote": "• 구기자는 비료를 많이 요구하는 작물로 적절한 시비가 필요함\n",
+        "offset": 0,
+        "page": 17
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "열매 생산과 질소 과용 관계에 한정. 정량 권장 아님"
+      ]
+    },
+    {
+      "documentId": "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc",
+      "textSha256": "9234e8b0bb78e198d00f21f35dbbbf9485583f411fdb1b53ce9555cb7ddbbddf",
+      "constraints": {
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "활착기"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "CUTTING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "cultivation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "kofpi-goji",
+        "selectedFile": ".local/rag-api/corpus/kofpi-goji.selected.txt",
+        "quote": "• 삽식후에는 충분히 관수하여 토양이 마르지 않게 하여 활착이 ",
+        "offset": 134,
+        "page": 15
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "삽식 후 활착 단계의 관수 설명"
+      ]
+    },
+    {
+      "documentId": "86c42517-b5a6-587d-8cf1-253807bef32e",
+      "textSha256": "e6f4a79ea97dde1458ee0b2a8bd6b1cfa255f365784e3bad3f092a5d9d9a59c0",
+      "constraints": {
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RAIN_SHELTER"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "kofpi-goji",
+        "selectedFile": ".local/rag-api/corpus/kofpi-goji.selected.txt",
+        "quote": "• 일반재배 하우스에 천장개폐시설을 설치하고 비올 때는 천창을 ",
+        "offset": 192,
+        "page": 13
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "시설 피복 조건과 탄저병 예방 설명"
+      ]
+    },
+    {
+      "documentId": "01da4ded-194c-5d9e-969d-7b511a464eb5",
+      "textSha256": "7fa5de8acd9f44408e8010e1b3864fe7425322857503a8e2566d6bc55df64e56",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "생육중기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cham-manual",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+        "quote": "관수 및 배수\n• 생육 중기에는 적당한 관수로 습기를 유지\n• ",
+        "offset": 0,
+        "page": 27
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지육묘 이식 부분. 저장 이미지 page27/인쇄28 상위 범위 대조"
+      ]
+    },
+    {
+      "documentId": "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47",
+      "textSha256": "74e85d7256c554bb3082ee8013f1f75f2da502a47ed75e2b8907d4c7ba8e49cb",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cham-manual",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+        "quote": "추비 시기\n- 6월 하순(잎 생장기)과 8월 상순(뿌리 성장기)",
+        "offset": 57,
+        "page": 27
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지육묘 이식 부분의 시기/비료 설명"
+      ]
+    },
+    {
+      "documentId": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "textSha256": "762ea0e57e8e9f5cefa9632237cddbe520b75378cd06c2fdb6a03cb852354216",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cham-manual",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+        "quote": "기타 관리\n• 배토 작업: 생육 후기(8월 이후) 뿌리 발육을 ",
+        "offset": 165,
+        "page": 27
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "배토·추대·노화잎 관리가 혼재; 작업별/생육기 세분 전 보류"
+      ]
+    },
+    {
+      "documentId": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "textSha256": "3ec7f6ffe758ea7e72f69e97c1dc27a12994d0021dd5a8d98d3914705201ca98",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING",
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cham-manual",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+        "quote": "직파재배 시 관리 요령\n토양 관리\n• 배수 정비 필수(습해 예방",
+        "offset": 290,
+        "page": 32
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "뿌리용 직파재배 부분. 초기 제초와 월동/방제 안내 혼재"
+      ]
+    },
+    {
+      "documentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "textSha256": "ce2a9777d4d960a1df9786f5f4b2a6d09295cb142a0c3f42c32a668d3fd5eb64",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "gangwon-cham-manual",
+        "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+        "quote": "직파재배 시 관리 요령\n비료 관리\n• 기비: 퇴비 및 기본 비료",
+        "offset": 405,
+        "page": 32
+      },
+      "unresolvedScope": true,
+      "caveats": [
+        "유묘/성묘 시비 조건 혼재; 생육기 세분 전 보류"
+      ]
+    },
+    {
+      "documentId": "c6c689b0-9d12-5432-b4fa-0e79f528ad94",
+      "textSha256": "f043ab504703102bc1e7c4971cb8e513bb4af84ee28e10b74c79e1185cf6c37d",
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "chungbuk-goji",
+        "selectedFile": ".local/rag-api/evidence-selection/sources/chungbuk-goji.selected.txt",
+        "quote": "뿌리의 껍질을 지골피(Lycii cortex)라 한다.",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "지골피가 뿌리껍질이라는 부위 구분만 지원. 시기/채취 방법은 미확보"
+      ]
+    },
+    {
+      "documentId": "3382f1d7-f7ae-5f15-a41a-ccb694a3445b",
+      "textSha256": "e0c7e3d0c50a0783f64a23595ffbc4f9d7fdf112f1d063b799731d1815fec8bd",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "chungbuk-goji",
+        "selectedFile": ".local/rag-api/evidence-selection/sources/chungbuk-goji.selected.txt",
+        "quote": "비닐과 부직포피복은 잡초방제 효과가 크며",
+        "offset": 32,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "피복의 일반적 잡초 억제 설명만 선택. 현행 제초제 사용 여부 판단하지 않음"
+      ]
+    },
+    {
+      "documentId": "0988a3ac-5d96-5ea1-be6c-92e95609a501",
+      "textSha256": "0d7aa183028170874027bbd2d036178953b4a0211553297709bf559ed2e86dc5",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cn-1388",
+        "selectedFile": ".local/rag-api/evidence-selection/sources/rda-cn-1388.selected.txt",
+        "quote": "가뭄이 계속되면 물대기를 하는 것이 좋습니다.",
+        "offset": 0,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "정량 없는 가뭄 관찰/물관리 안내. 실제 가뭄 진단으로 해석하지 않음"
+      ]
+    },
+    {
+      "documentId": "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+      "textSha256": "89d67d76037724ad81b6206d52f2f2e2f0a8a6b7ef646fbef2be482789b752b6",
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "species",
+        "variety",
+        "harvestPart",
+        "growthStage",
+        "cultivation",
+        "propagation",
+        "region"
+      ],
+      "reference": {
+        "sourceId": "rda-cn-1388",
+        "selectedFile": ".local/rag-api/evidence-selection/sources/rda-cn-1388.selected.txt",
+        "quote": "천궁의 병해충도 기후나 재배 환경조건과 밀접한 관련이 있습니다.",
+        "offset": 27,
+        "page": null
+      },
+      "unresolvedScope": false,
+      "caveats": [
+        "기후·재배조건과 병해의 관계 및 병명 예시. 진단/제품 추천 아님"
+      ]
+    }
+  ],
+  "reviewNote": "NOT_STATED는 제한 필터를 만들지 않으며 문단이 모든 조건에서 참임을 뜻하지 않는다. 범위 분기/해결되지 않은 모호함은 unresolvedScope로 별도 보류. workType은 검토자가 부여한 관련 작업 분류다."
+}
