@@ -20,7 +20,7 @@ DB/벡터/모델은 이전 실습 위치에 그대로 있다. 이 실험을 위�
 
 ```bash
 python3 scripts/coaching-evidence.py check-sources
-python3 scripts/coaching-evidence.py summary --run evidence-v1
+python3 scripts/coaching-evidence.py summary --run evidence-final
 ```
 
 확인 명령은 원문/선택 본문·기존 corpus의 해시, 문단 ID/본문 해시/출처/인용 위치를 대조한다. 조건의 농업적 의미를 자동 인증하는 검사는 아니다. 자료가 없거나 다르면 덮어쓰지 않고 실패한다.
