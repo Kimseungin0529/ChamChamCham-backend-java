@@ -1,0 +1,331 @@
+{
+  "run": "retrieval-eval-final",
+  "inputHashes": {
+    ".local/rag-api/corpus/100000732652.html": "aee7c5da8c32db50f058a051a087e1485cb24b17ffb807f90300ccb187d15419",
+    ".local/rag-api/corpus/100000732652.selected.txt": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+    ".local/rag-api/corpus/100000802838.html": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+    ".local/rag-api/corpus/100000802838.selected.txt": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+    ".local/rag-api/corpus/chunks.json": "a20ed1bce4c6c671d0c30f28b3cd499fd45c63d81b32567eee0d68d23496be1b",
+    ".local/rag-api/corpus/gangwon-cham-manual.pdf": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+    ".local/rag-api/corpus/gangwon-cham-manual.selected.txt": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+    ".local/rag-api/corpus/gangwon-cn-spacing.html": "452519fe6c2b5ad61afeb184be06225ed406d1d9ab759831822dca240ef29e00",
+    ".local/rag-api/corpus/gangwon-cn-spacing.selected.txt": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+    ".local/rag-api/corpus/kofpi-goji.pdf": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+    ".local/rag-api/corpus/kofpi-goji.selected.txt": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+    ".local/rag-api/corpus/manifest.json": "ff46ef7c39191bf60af531e90378baef2b6d13c100a30e52d0f3bf69be4ec908",
+    ".local/rag-api/corpus/nongsaro-cn.html": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+    ".local/rag-api/corpus/nongsaro-cn.selected.txt": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+    ".local/rag-api/corpus/nongsaro-goji.html": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+    ".local/rag-api/corpus/nongsaro-goji.selected.txt": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+    ".local/rag-api/corpus/psis-general.html": "bde83bea22d5eaa374490318d24fe72f853a808ce931503146d93f378685d6bc",
+    ".local/rag-api/corpus/psis-general.selected.txt": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+    ".local/rag-api/corpus/rda-cham.html": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+    ".local/rag-api/corpus/rda-cham.selected.txt": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+    ".local/rag-api/evidence-selection/corpus.json": "23d63297be46d9df2b81321f0aac7740628f999dfe85e37f320edb0b595adbc4",
+    ".local/rag-api/evidence-selection/sources/chungbuk-goji.html": "08f7d83cf663d0a7158760af8788a26908a49ac2e3a8f0978ce292f1cdc8f823",
+    ".local/rag-api/evidence-selection/sources/chungbuk-goji.selected.txt": "e44708a52c36091f3826f4d8b50a5d282c6948423e7fb49f0c9f3733bea6ad4b",
+    ".local/rag-api/evidence-selection/sources/rda-cn-1388.html": "70ff8b5cc3c1eba1ec90cb3fe1d2d24904976c79c420d5c5ab5b2b865566b73c",
+    ".local/rag-api/evidence-selection/sources/rda-cn-1388.selected.txt": "e9e1b83ad4566a524860cd2755039e7032620a9b806d7fae3078d54985e3cf92",
+    ".local/rag-api/retrieval-expansion/prepared.json": "0daed9660d6043b02c85289fec3b941c0be803795136602c412c29bd0516dace",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-doraji.html": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-doraji.text.txt": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-lettuce.html": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-lettuce.text.txt": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-pepper-facility.html": "15dd50ed2a20b4a1ca6733cbb4d09f29cd73c2fcdb6fd8b3b61ef7747b0a9c29",
+    ".local/rag-api/retrieval-expansion/sources/nongsaro-pepper-facility.text.txt": "eac904c177f027eed7353dd5fd68212f666ef8bffc65589076d9521f8bb72d96",
+    ".local/rag-api/retrieval-expansion/sources/rda-doraji.html": "1d425148aa62682e68d025e7aa9074bc1e553ba85c2056912ed21aab4c4e6bc5",
+    ".local/rag-api/retrieval-expansion/sources/rda-doraji.text.txt": "be71c50076191f846dfbbc13159d6101a8a1fb04cd24d9971a788ce0b67918d8",
+    ".local/rag-api/retrieval-expansion/sources/rda-pepper-harvest.html": "e7e3e1654d9e14f3f34dfc8fc83d6f576c664eac645af5a76ca52ed1b126efe8",
+    ".local/rag-api/retrieval-expansion/sources/rda-pepper-harvest.text.txt": "f7b90425f2509a215023742f7297f265f312634a8e549f0322f25b9ad1bed2ad",
+    ".local/rag-api/retrieval-expansion/sources/rda-pepper-water.html": "ec7a26f86f25627a7af24e9b01adba9d82ffbc356368e32c2bc22a660cbd8b69",
+    ".local/rag-api/retrieval-expansion/sources/rda-pepper-water.text.txt": "203a7a9321b39e3c4899bcb30c84d966f13df7317954640af0f0cdfcc241c86f",
+    "api/build.gradle.kts": "8027a19d1c14aabee7c25cc6ac6d0b4834aa483e892ba1ea3f3f8571e3fdc789",
+    "api/src/test/java/com/chamchamcham/lab/CoachingEvidenceSelector.java": "d2130c58ceef079d8312ada9f983bb3f1732bde550fdc76bfe270b31d6f7f852",
+    "api/src/test/java/com/chamchamcham/lab/CoachingRetrievalLab.java": "7383c464638546679f8e6fb4c1bfee2566b6b0147817c168005e26e75ec190d8",
+    "api/src/test/resources/verification/coaching-evidence-applicability.json": "2bb921361ea3ba767c828318df8590ee9915d3edf56f2ed81d1b5b3da0a6ee3d",
+    "api/src/test/resources/verification/coaching-evidence-cases.json": "e1f936327c741bae995f4ce29efdccab4ef1de4cf2c7c4cce556cff93b9994fa",
+    "api/src/test/resources/verification/coaching-retrieval-cases.json": "f19083785ac826d7208b7e7e0d550e91a9a39e7ea638b4cecbf062e6adb24f6e",
+    "api/src/test/resources/verification/coaching-retrieval-corpus.json": "9c09033a921507a97507b024a52214e602ef4a65d5b5213b54987769419631cf",
+    "application/src/main/java/com/chamchamcham/application/coaching/recordfeedback/generation/RecordFeedbackRetrievalQueryPlanner.java": "2e290e475b8dc8d0688748c05644e0ab8547a39cbd43d1e10fd7a7af54608ad0",
+    "compose.coaching-retrieval.yml": "3ec652a84a11992a912f93efb2e1c628dcdb7445c298d191995f08f0be7ce66c",
+    "docs/verification/coaching-retrieval-sources.json": "939bc9d3b529301392b20fb2f925bc535685bf2ea0a9d2322278e6cd98339a58",
+    "scripts/coaching-retrieval.py": "88d8218793747021c1a65ecb631b31e0444a4f412ee1d4acd827cf7001adc1b6"
+  },
+  "resultSha256": "122d628505c14da5538e3e2f512220643bafbb0eeb88651a92a6c29155de96ed",
+  "summary": {
+    "split": "regression",
+    "independentEvaluation": false,
+    "cases": 96,
+    "arms": {
+      "baseline": {
+        "cases": 48,
+        "documents": 251,
+        "required": 20,
+        "recovered": 20,
+        "forbidden": 4,
+        "emptyCases": 0,
+        "applicableRequired": 17,
+        "applicableRecovered": 17,
+        "casesWithRequired": 20,
+        "allRequiredRecoveredCases": 20
+      },
+      "split": {
+        "cases": 48,
+        "documents": 360,
+        "required": 20,
+        "recovered": 20,
+        "forbidden": 4,
+        "emptyCases": 0,
+        "applicableRequired": 17,
+        "applicableRecovered": 17,
+        "casesWithRequired": 20,
+        "allRequiredRecoveredCases": 20
+      },
+      "expanded": {
+        "cases": 96,
+        "documents": 495,
+        "required": 36,
+        "recovered": 35,
+        "forbidden": 7,
+        "emptyCases": 3,
+        "applicableRequired": 29,
+        "applicableRecovered": 29,
+        "casesWithRequired": 36,
+        "allRequiredRecoveredCases": 35
+      },
+      "selected": {
+        "cases": 96,
+        "documents": 53,
+        "required": 36,
+        "recovered": 25,
+        "forbidden": 0,
+        "emptyCases": 53,
+        "applicableRequired": 29,
+        "applicableRecovered": 25,
+        "casesWithRequired": 36,
+        "allRequiredRecoveredCases": 25
+      }
+    },
+    "chatRequests": 0,
+    "automaticMemoExtraction": false,
+    "answerAccuracyEvaluated": false
+  },
+  "database": {
+    "baseline": {
+      "added": 26,
+      "count": 26,
+      "snapshotSha256": "4504b34c9fdc28e50a53b800c8e47707aed49d1c52fb165387cb4679af9b9090"
+    },
+    "split": {
+      "added": 63,
+      "count": 63,
+      "snapshotSha256": "3d24ebe667dffb8a46e3c02b8c92c19db623e4cf95d482f20b137048d9966c2b"
+    },
+    "expanded": {
+      "added": 82,
+      "count": 82,
+      "snapshotSha256": "81af2746e1ba1d076e6a39866a49b4867fc44b65cbbc635beba4cad0e104754f"
+    }
+  },
+  "medianSearchMs": {
+    "baseline": 125.818,
+    "split": 125.4545415,
+    "expanded": 122.681375
+  },
+  "missingDeclaredEvidence": [
+    {
+      "caseId": "eval-2-pest_control-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "제품별 등록/용량/횟수 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-2-weeding-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "개별 제초제 등록 관계 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-3-watering-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "과거 번식이력 문맥 부재/정량물량 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-3-harvest-1",
+      "arm": "expanded",
+      "measurement": {
+        "documents": 9,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 1
+      },
+      "gaps": [
+        "뿌리껍질 명칭만 확보; 시기/방법 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-3-harvest-1",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "뿌리껍질 명칭만 확보; 시기/방법 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-4-watering-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "파종/생육단계 차이와 실물량 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-4-harvest-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "목적별 수확 조건 미확인/채종자료 미확보"
+      ]
+    },
+    {
+      "caseId": "eval-5-planting-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "노지/시설 조건 차이"
+      ]
+    },
+    {
+      "caseId": "eval-5-watering-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "시설 관수 수치를 노지에 전용 금지"
+      ]
+    },
+    {
+      "caseId": "eval-5-harvest-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "실제 부위/생산목적 차이"
+      ]
+    },
+    {
+      "caseId": "eval-5-etc-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "가격/수익 추정은 자료 범위 밖"
+      ]
+    },
+    {
+      "caseId": "eval-6-harvest-0",
+      "arm": "selected",
+      "measurement": {
+        "documents": 0,
+        "required": 1,
+        "recovered": 0,
+        "forbidden": 0
+      },
+      "gaps": [
+        "상추 유형/실제 수확부위 차이"
+      ]
+    }
+  ],
+  "limitations": [
+    "합성상황·수동조건주석·동일작성자의문헌대조",
+    "답변생성/농업전문가평가 아님",
+    "selected 시간은 같은 expanded 검색 시간을 재게시; 독립 측정 아님",
+    "원래96평가에노출된뒤조건주석수정;최종은회귀",
+    "적용가능사전근거4/29손실;제품미채택"
+  ],
+  "verification": {
+    "javaTests": 1452,
+    "javaPassed": 1435,
+    "javaSkipped": 17,
+    "javaFailures": 0,
+    "pythonTests": 62,
+    "pythonSkipped": 2,
+    "postgresRollbackProbePassed": true,
+    "independentReviewImportantFixed": 6,
+    "independentReviewMinorFixed": 1,
+    "independentRereview": false,
+    "persistence": {
+      "reingestAdded": {
+        "baseline": 0,
+        "split": 0,
+        "expanded": 0
+      },
+      "sameAfterRestart": true,
+      "tables": {
+        "baseline": "26:64393c905db79b461139e1bcb02b80a7",
+        "split": "63:85a7a389207b8a12927bc670ea1e5a49",
+        "expanded": "82:7d8e7351e172c3793977bbedf3288edc"
+      },
+      "backupBytes": 922348,
+      "backupSha256": "5069c45f307d56158d37b9c2913965cfeab931313a3dd8e781ec329ce1e3e59d",
+      "volumesPreserved": [
+        "ccc-coaching-retrieval-postgres",
+        "ccc-coaching-retrieval-postgres-v2"
+      ]
+    }
+  }
+}

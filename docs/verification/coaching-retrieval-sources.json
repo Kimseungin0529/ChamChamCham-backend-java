@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "sourceId": "rda-cham",
+      "url": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+      "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+      "fetchedAt": "2026-11-14T19:02:53.825239+00:00",
+      "bytes": 25655,
+      "textChars": 2955,
+      "title": "고품질 참당귀 생산을 위한 재배기술",
+      "cropName": "참당귀",
+      "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。",
+      "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+      "exclusions": "메뉴·연락처·광고·의약 효능·민간요법·가공 조리법·과거 농약 사용량 제외. 명시적으로 선택한 문단만 사용.",
+      "groups": [
+        [
+          "참당귀는 다년생 식물로서",
+          "참당귀는 7~8월의"
+        ],
+        [
+          "참당귀는 재배 시 토양은"
+        ],
+        [
+          "참당귀는 주로 종자에",
+          "특히 종자에는"
+        ],
+        [
+          "재배는 밭에 바로",
+          "노지 육묘는",
+          "직파재배는"
+        ],
+        [
+          "식가공용 소재로 1년생",
+          "수량성과 품질 등을"
+        ],
+        [
+          "최근 여름철 고온",
+          "비닐 멀칭은",
+          "두둑의 지중온도를"
+        ]
+      ],
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/rda-cham.html",
+      "selectedFile": ".local/rag-api/corpus/rda-cham.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "nongsaro-cn",
+      "url": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+      "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+      "fetchedAt": "2026-11-14T19:02:53.871432+00:00",
+      "bytes": 44269,
+      "textChars": 2404,
+      "title": "천궁의 재배와 이용",
+      "cropName": "천궁",
+      "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。",
+      "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+      "exclusions": "메뉴·연락처·광고·의약 효능·민간요법·가공 조리법·과거 농약 사용량 제외. 명시적으로 선택한 문단만 사용.",
+      "groups": [
+        [
+          "천궁은 꽃이 피지만 종자를 맺지 못하므로 번식방법"
+        ],
+        [
+          "일천궁은 뿌리가 얕아"
+        ],
+        [
+          "수확적기는 잎과 줄기가 누렇게"
+        ]
+      ],
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/nongsaro-cn.html",
+      "selectedFile": ".local/rag-api/corpus/nongsaro-cn.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "nongsaro-goji",
+      "url": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+      "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+      "fetchedAt": "2026-11-14T19:02:53.829492+00:00",
+      "bytes": 35615,
+      "textChars": 3269,
+      "title": "생과형 청감 구기자 재배기술 및 활용 방법",
+      "cropName": "구기자나무",
+      "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。",
+      "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+      "exclusions": "메뉴·연락처·광고·의약 효능·민간요법·가공 조리법·과거 농약 사용량 제외. 명시적으로 선택한 문단만 사용.",
+      "groups": [
+        [
+          "구기자 삽목용 가지는",
+          "구기자는 같은 품종의"
+        ],
+        [
+          "섞어 심을 땐"
+        ],
+        [
+          "구기자를 키울 땐"
+        ],
+        [
+          "구기자의 수확량을 늘리는 방법",
+          "구기자 적심 작업은",
+          "그리고 적심 후"
+        ],
+        [
+          "품종별로 차이가 있지만"
+        ]
+      ],
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/nongsaro-goji.html",
+      "selectedFile": ".local/rag-api/corpus/nongsaro-goji.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "gangwon-cn-spacing",
+      "url": "https://www.ares.gangwon.kr/gwares/know_how/research/application_data?articleSeq=32320",
+      "rawSha256": "452519fe6c2b5ad61afeb184be06225ed406d1d9ab759831822dca240ef29e00",
+      "fetchedAt": "2026-11-14T19:02:53.924229+00:00",
+      "bytes": 176736,
+      "textChars": 4374,
+      "title": "강원지역 천궁(일천궁)재배를 위한 적정 재식주수",
+      "cropName": "천궁",
+      "applicability": "2020 연구/2021 게시. 강원 일천궁 재식 간격 실험. 다른 종·지역 자동 적용 금지。",
+      "selectedSha256": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+      "exclusions": "메뉴·연락처·광고·의약 효능·민간요법·가공 조리법·과거 농약 사용량 제외. 명시적으로 선택한 문단만 사용.",
+      "groups": [
+        [
+          "◦ 천궁 재배 시 1m 이랑"
+        ]
+      ],
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/gangwon-cn-spacing.html",
+      "selectedFile": ".local/rag-api/corpus/gangwon-cn-spacing.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "psis-general",
+      "url": "https://psis.rda.go.kr/psis/cont/contentMain.ps?menuId=PS00316",
+      "rawSha256": "bde83bea22d5eaa374490318d24fe72f853a808ce931503146d93f378685d6bc",
+      "fetchedAt": "2026-11-14T19:04:20.442338+00:00",
+      "title": "농약사용시 일반적 주의사항",
+      "cropName": "GENERAL",
+      "applicability": "일반 등록 원칙만. 개별 제품의 등록·사용량·적합성은 확인되지 않음。",
+      "selectedSha256": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+      "exclusions": "메뉴·연락처·광고·의약 효능·민간요법·가공 조리법·과거 농약 사용량 제외. 명시적으로 선택한 문단만 사용.",
+      "groups": [
+        [
+          "국내의 농약은 농약관리법에",
+          "유사한 병해충에 등록된"
+        ]
+      ],
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/psis-general.html",
+      "selectedFile": ".local/rag-api/corpus/psis-general.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "100000732652",
+      "title": "천궁·당귀 재배 전에 안전 재배지인지 확인하세요",
+      "url": "https://www.rda.go.kr/board/board.do?dataNo=100000732652&mode=view&prgId=day_farmprmninfoEntry",
+      "published": "2017-03-23",
+      "retrievedAt": "2026-11-14T04:48:01.802137+00:00",
+      "rawSha256": "aee7c5da8c32db50f058a051a087e1485cb24b17ffb807f90300ccb187d15419",
+      "selectedSha256": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+      "selectedParagraphs": [
+        "천궁·당귀는 여름철 기온이 28℃~30℃ 이상 지속되면 생육이 크게 부진하고 말라죽는 등 고온에 약한 작물이다. 해마다 기후부적지에 재배해 실패하는 농가가 많기 때문에 미리 재배 적정지인지 확인해야 한다.",
+        "- 저위 생산지는 기후조건이 맞지 않는 지역을 말한다. 재배 가능지는 기후학적으로 볼 때 비교적 위험도가 있어 여름철 고온피해를 입을 수 있는 지역을 말하며, 관수나 해가림 등 재배 노력에 따라 결과가 달라질 수 있다.",
+        "- 재배 적합지는 기후학적으로 볼 때 비교적 안전한 지역을 말한다. 그러나 천궁의 경우 기후에 워낙 민감해 기상이변이 심한 해에는 재배 적합지에서도 피해가 있어 물 관리 등에 신경 써야 한다.",
+        "농촌진흥청 약용작물과 김용일 농업연구사는 “천궁과 당귀는 기후에 워낙 민감해 월평균 온도가 생육 적정온도 대비 1℃~2℃만 올라도 큰 피해를 볼 수 있으므로 재배 적합지인지를 꼭 확인하고 관수 등을 철저히 관리해 여름철 혹서기에 대비해야 한다.”라고 전했다."
+      ],
+      "exclusions": "탐색 메뉴, 연락처, 인체 효능 각주, 당시 기상 전망·웹서비스 현황. 위 명시 문단 외 모두 제외.",
+      "license": "원문 공공누리 표시 및 농촌진흥청 출처 유지. 웹 문서이므로 page 없음.",
+      "cropName": "천궁",
+      "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。",
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/100000732652.html",
+      "selectedFile": ".local/rag-api/corpus/100000732652.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "100000802838",
+      "title": "고온 취약한 약용작물, 재배 관리 필수",
+      "url": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+      "published": "2025-05-27",
+      "retrievedAt": "2026-11-14T04:48:07.105979+00:00",
+      "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+      "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+      "selectedParagraphs": [
+        "약용작물 가운데 천궁, 당귀는 서늘하고 통풍이 잘되는 산지 등에서 자라기 때문에 고온이나 직사광선, 수분 스트레스에 매우 취약하다.",
+        "천궁*은 30도(℃) 이상 덥고 습한 환경에 노출되면 생육이 좋지 않고 뿌리썩음병 발생률이 높아지는 경향이 있다. 당귀**도 덥고 습한 때 줄기 쓰러짐과 잎자루 부패가 자주 발생한다. 특히, 당귀는 고온 스트레스에 취약해 집중 관리가 필요하다.",
+        "고온기에는 작물의 증발산* 속도가 빠르므로 토양과 작물이 마르지 않도록 물을 자주 줘 잎마름, 생장 정지 등 생리 장애를 예방해야 한다.",
+        "* 증발산이란 토양과 식물체에서 수분이 대기 중으로 이동하는 것으로, 증발(토양 표면, 수면, 식물체 표면에서 발생)과 증산(식물이 수분을 잎의 기공을 통해 증기로 방출)을 합쳐 부르는 말",
+        "또한, 호흡작용이 활발해져 에너지 소모가 증가하므로 영양 관리에도 신경 써야 한다. 질소(N) 비료를 지나치게 많이 주면, 병해충 발생이 증가할 수 있으므로 질소 대신 칼슘(Ca), 칼륨(K), 마그네슘(Mg) 등을 공급해 작물의 열 견딤성을 높인다.",
+        "진딧물·응애류 같은 해충, 탄저병·시들음병 같은 병 발생도 주의해야 한다.",
+        "기온이 25~30도(℃)를 넘으면 해충 번식 속도가 급격히 빨라지므로, 예방 관찰과 함께 재배지 잡초를 제거한다. 아울러 병에 걸린 식물은 즉시 제거해 확산을 차단한다. 병해충 발생이 의심되면 ‘농사로(www.nongsaro.go.kr)-작목별 병해충 정보’를 참고해 증상 확인 뒤, 관련 약제를 뿌려준다."
+      ],
+      "exclusions": "탐색 메뉴, 연락처, 인체 효능 각주, 당시 기상 전망·웹서비스 현황. 위 명시 문단 외 모두 제외.",
+      "license": "원문 공공누리 표시 및 농촌진흥청 출처 유지. 웹 문서이므로 page 없음.",
+      "cropName": "천궁",
+      "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。",
+      "origin": "PRESERVED",
+      "rawFile": ".local/rag-api/corpus/100000802838.html",
+      "selectedFile": ".local/rag-api/corpus/100000802838.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "url": "https://gis.kofpi.or.kr/dad_user/assets/static/farmTech/%EC%95%BD%EC%9A%A9%EB%A5%98/%EA%B5%AC%EA%B8%B0%EC%9E%90.pdf",
+      "rawSha256": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+      "fetchedAt": "2026-11-14T19:04:52.800595+00:00",
+      "sourceId": "kofpi-goji",
+      "rawFile": ".local/rag-api/corpus/kofpi-goji.pdf",
+      "title": "알기 쉬운 구기자나무 재배·관리 매뉴얼",
+      "published": "2013-12",
+      "cropName": "구기자나무",
+      "selectedSha256": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+      "applicability": "2013년 매뉴얼 일반 재배. 품종 미상. 정량·과거 농약 권장·의약 효능 제외. 현대 청감 조건으로 덮어쓰지 않음.",
+      "exclusions": "약제·희석비율·수량성·효능·민간요법·종류별 수분수비율·표/본문 상충 정량 시비 제외. PDF17쪽 본문 vs 표 가리시비 분할 상충 기록.",
+      "pdfPages": [
+        17,
+        15,
+        13
+      ],
+      "origin": "PRESERVED",
+      "selectedFile": ".local/rag-api/corpus/kofpi-goji.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "url": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+      "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+      "fetchedAt": "2026-11-14T19:17:03.279463+00:00",
+      "sourceId": "gangwon-cham-manual",
+      "rawFile": ".local/rag-api/corpus/gangwon-cham-manual.pdf",
+      "title": "참당귀 생산·가공·유통 매뉴얼",
+      "published": "2024-12",
+      "posted": "2025-01-08",
+      "listingUrl": "https://www.ares.gangwon.kr/gwares/promotion/promotion/book",
+      "cropName": "참당귀",
+      "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+      "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지.",
+      "exclusions": "의약 효능/가공/가격/레시피/과거 약제/단위·면적 없는 정량 비료 처방 제외. 숫자가 있는 표는 적재하지 않음.",
+      "extraction": "Apple Vision OCR 후 PDF27/32쪽 PNG와 직접 대조·전사. OCR 병중해를 원문 병충해로 교정. page는 PDF 물리 순서(인쇄28/33).",
+      "pdfPages": [
+        27,
+        32
+      ],
+      "origin": "PRESERVED",
+      "selectedFile": ".local/rag-api/corpus/gangwon-cham-manual.selected.txt",
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "원문/선택 본문 해시 일치. 문단별 적용 조건은 별도 주석이며 전문가 검증이 아님."
+    },
+    {
+      "sourceId": "chungbuk-goji",
+      "url": "https://ares.chungbuk.go.kr/home/sub.php?menukey=1151",
+      "finalUrl": "https://ares.chungbuk.go.kr/home/sub.php?menukey=1151",
+      "fetchedAt": "2026-11-23T05:39:42.906154+00:00",
+      "rawSha256": "08f7d83cf663d0a7158760af8788a26908a49ac2e3a8f0978ce292f1cdc8f823",
+      "rawFile": ".local/rag-api/evidence-selection/sources/chungbuk-goji.html",
+      "origin": "NEW_RESEARCH",
+      "selectedFile": ".local/rag-api/evidence-selection/sources/chungbuk-goji.selected.txt",
+      "selectedSha256": "e44708a52c36091f3826f4d8b50a5d282c6948423e7fb49f0c9f3733bea6ad4b",
+      "title": "충청북도농업기술원 구기자 재배기술",
+      "publicationDate": null,
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "발행일 미표시. 일반 관찰/부위 구분만 선택. 현재 농약 등록 적합성·시비량 근거로 사용하지 않음.",
+      "exclusions": "의약 효능·복용·과거 약제·정량 권장 제외. 구기자 제초제 일괄 금지 문장은 현행 등록정보 미대조로 제외."
+    },
+    {
+      "sourceId": "rda-cn-1388",
+      "url": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1388",
+      "finalUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1388",
+      "fetchedAt": "2026-11-23T05:39:43.071348+00:00",
+      "rawSha256": "70ff8b5cc3c1eba1ec90cb3fe1d2d24904976c79c420d5c5ab5b2b865566b73c",
+      "rawFile": ".local/rag-api/evidence-selection/sources/rda-cn-1388.html",
+      "origin": "NEW_RESEARCH",
+      "selectedFile": ".local/rag-api/evidence-selection/sources/rda-cn-1388.selected.txt",
+      "selectedSha256": "e9e1b83ad4566a524860cd2755039e7032620a9b806d7fae3078d54985e3cf92",
+      "title": "농촌진흥청 약용작물 천궁 재배기술",
+      "publicationDate": null,
+      "reviewState": "VERIFIED_BYTES",
+      "reviewNote": "발행일 미표시. 일반 관찰/부위 구분만 선택. 현재 농약 등록 적합성·시비량 근거로 사용하지 않음.",
+      "exclusions": "의약 효능·복용·과거 약제·정량 권장 제외. 구기자 제초제 일괄 금지 문장은 현행 등록정보 미대조로 제외."
+    },
+    {
+      "sourceId": "rda-doraji",
+      "url": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1267",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/rda-doraji.html",
+      "rawSha256": "1d425148aa62682e68d025e7aa9074bc1e553ba85c2056912ed21aab4c4e6bc5",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/rda-doraji.text.txt",
+      "selectedSha256": "be71c50076191f846dfbbc13159d6101a8a1fb04cd24d9971a788ce0b67918d8",
+      "retrievedAt": "2026-11-25T04:30:55.377476+00:00",
+      "title": "약용작물 어떻게 심고 관리해야 하나요",
+      "publishedAt": null,
+      "selection": "도라지 단락만 사용. 타작물 약제·정량 권장 제외.",
+      "ingested": true
+    },
+    {
+      "sourceId": "nongsaro-doraji",
+      "url": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS65512&mvpNo=703",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-doraji.html",
+      "rawSha256": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-doraji.text.txt",
+      "selectedSha256": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+      "retrievedAt": "2026-11-25T04:30:55.739327+00:00",
+      "title": "도라지 재배기술",
+      "publishedAt": "2009",
+      "selection": "과거 제초제/타작물약제/유기인제 배수·의약효능 제외. 수확 목적은 입력에 없으면 보류.",
+      "ingested": true
+    },
+    {
+      "sourceId": "nongsaro-lettuce",
+      "url": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?cntntsNo=220176&menuId=PS65512&mvpNo=1711",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-lettuce.html",
+      "rawSha256": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-lettuce.text.txt",
+      "selectedSha256": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+      "retrievedAt": "2026-11-25T04:30:56.057496+00:00",
+      "title": "상추 노지재배기술",
+      "publishedAt": "2019",
+      "selection": "노지/잎상추/플러그육묘 문맥. 결구·수경에 자동 적용하지 않음. 정량 시비표 제외.",
+      "ingested": true
+    },
+    {
+      "sourceId": "nongsaro-pepper-facility",
+      "url": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS00069&mvpClipNo=4&mvpNo=770",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-pepper-facility.html",
+      "rawSha256": "15dd50ed2a20b4a1ca6733cbb4d09f29cd73c2fcdb6fd8b3b61ef7747b0a9c29",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/nongsaro-pepper-facility.text.txt",
+      "selectedSha256": "eac904c177f027eed7353dd5fd68212f666ef8bffc65589076d9521f8bb72d96",
+      "retrievedAt": "2026-11-25T04:30:56.354583+00:00",
+      "title": "시설풋고추 아주심기 후 환경 관리",
+      "publishedAt": null,
+      "selection": "시설풋고추 범위. 노지에 관수 수치 자동 적용 금지.",
+      "ingested": true
+    },
+    {
+      "sourceId": "rda-pepper-water",
+      "url": "https://www.rda.go.kr/board/board.do?boardId=farmlcltinfo&dataNo=100000804071&mode=updateCnt&prgId=day_farmlcltinfoEntry",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/rda-pepper-water.html",
+      "rawSha256": "ec7a26f86f25627a7af24e9b01adba9d82ffbc356368e32c2bc22a660cbd8b69",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/rda-pepper-water.text.txt",
+      "selectedSha256": "203a7a9321b39e3c4899bcb30c84d966f13df7317954640af0f0cdfcc241c86f",
+      "retrievedAt": "2026-11-25T04:30:56.687567+00:00",
+      "title": "가뭄·폭염 고추 토양수분관리",
+      "publishedAt": "2025-07-28",
+      "selection": "참고 전용: 공개누리4유형 변경금지 표시와 토양수분 단위 대응 모호성을 고려해 이번 적재 제외.",
+      "ingested": false
+    },
+    {
+      "sourceId": "rda-pepper-harvest",
+      "url": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1042",
+      "rawFile": ".local/rag-api/retrieval-expansion/sources/rda-pepper-harvest.html",
+      "rawSha256": "e7e3e1654d9e14f3f34dfc8fc83d6f576c664eac645af5a76ca52ed1b126efe8",
+      "selectedFile": ".local/rag-api/retrieval-expansion/sources/rda-pepper-harvest.text.txt",
+      "selectedSha256": "f7b90425f2509a215023742f7297f265f312634a8e549f0322f25b9ad1bed2ad",
+      "retrievedAt": "2026-11-25T04:30:56.842165+00:00",
+      "title": "고추 안정생산 포장관리와 적기 수확",
+      "publishedAt": null,
+      "selection": "과거 전문약제 일괄살포/엽면시비농도 제외. 풋/홍고추 구분, 물리관리와 일반 수확만.",
+      "ingested": true
+    }
+  ],
+  "preservedHashes": {
+    ".local/rag-api/corpus/manifest.json": "ff46ef7c39191bf60af531e90378baef2b6d13c100a30e52d0f3bf69be4ec908",
+    ".local/rag-api/corpus/chunks.json": "a20ed1bce4c6c671d0c30f28b3cd499fd45c63d81b32567eee0d68d23496be1b",
+    ".local/rag-api/evidence-selection/corpus.json": "23d63297be46d9df2b81321f0aac7740628f999dfe85e37f320edb0b595adbc4",
+    "api/src/test/resources/verification/coaching-evidence-applicability.json": "2bb921361ea3ba767c828318df8590ee9915d3edf56f2ed81d1b5b3da0a6ee3d",
+    "api/src/test/resources/verification/coaching-evidence-cases.json": "e1f936327c741bae995f4ce29efdccab4ef1de4cf2c7c4cce556cff93b9994fa"
+  },
+  "limitations": [
+    "새 원문2개/선택4문단은 검토 자료이며 DB에 적재하지 않음",
+    "조건 해석은 에이전트 예비 검토이며 농업 전문가 검증 아님"
+  ],
+  "notice": "검색 비교용 출처. 기존11원문 불변, 신규6개 검토. 원문/발췌는 Git 제외. 공개 자료도 적용조건·발행일·이용조건을 따로 확인한다."
+}
