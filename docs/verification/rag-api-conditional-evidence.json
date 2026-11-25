@@ -1,0 +1,170 @@
+{
+  "definition": "청감 재배 자료가 품종 미확인 구기자 상황의 검색 결과에 포함되는지 관찰. 관련 없는 문서 확정 또는 전체 precision 아님.",
+  "casesWithConditionalDocuments": 13,
+  "eligibleUnconfirmedCultivarCases": 13,
+  "conditionalDocumentsAcrossCases": 46,
+  "rows": [
+    {
+      "caseId": "eval-3-etc-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-etc-2",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4"
+      ],
+      "retrievedUnique": 3
+    },
+    {
+      "caseId": "eval-3-fertilizing-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "retrievedUnique": 5
+    },
+    {
+      "caseId": "eval-3-fertilizing-2",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-harvest-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "retrievedUnique": 5
+    },
+    {
+      "caseId": "eval-3-pest_control-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-pest_control-2",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4"
+      ],
+      "retrievedUnique": 4
+    },
+    {
+      "caseId": "eval-3-planting-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-pruning-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-watering-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "retrievedUnique": 6
+    },
+    {
+      "caseId": "eval-3-watering-2",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "fa68f455-ddd3-5364-be86-b8c6520291c4",
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4"
+      ],
+      "retrievedUnique": 4
+    },
+    {
+      "caseId": "eval-3-weeding-1",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "retrievedUnique": 4
+    },
+    {
+      "caseId": "eval-3-weeding-2",
+      "cultivarConfirmed": false,
+      "conditionalDocumentIds": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "ebfeb057-a267-5026-8d4c-881a1e778284",
+        "fa68f455-ddd3-5364-be86-b8c6520291c4"
+      ],
+      "retrievedUnique": 4
+    }
+  ],
+  "semanticProblemFlags": {
+    "CONDITION_SCOPE": 7,
+    "CITATION_SCOPE": 5,
+    "STATED_ACTION_INVENTED": 9,
+    "VARIANT_UNCONFIRMED": 1,
+    "QUESTION_UNANSWERED": 3,
+    "CITATION_LINK_WEAK": 4,
+    "UNSUPPORTED_JUDGMENT": 9,
+    "WORK_TYPE_CONFUSION": 2,
+    "INPUT_CONTRADICTION": 1,
+    "CAUSAL_EXPLANATION_WEAK": 1,
+    "INPUT_REJECTED": 3,
+    "OUTCOME_UNCONFIRMED": 1,
+    "STATED_TIME_INVENTED": 1,
+    "REGISTRATION_CHECK_OMITTED": 1,
+    "UNSUPPORTED_ACTION": 1,
+    "LANGUAGE_QUALITY": 1,
+    "OUTCOME_INVENTED": 1,
+    "CULTIVAR_SCOPE": 9,
+    "REDUNDANT_ACTION": 1,
+    "AMOUNT_INVENTED": 1,
+    "SOURCE_MEANING_REVERSED": 1,
+    "HARVEST_PART_CONFUSION": 1,
+    "MODEL_SERVER_ERROR_MISCLASSIFIED": 7
+  }
+}

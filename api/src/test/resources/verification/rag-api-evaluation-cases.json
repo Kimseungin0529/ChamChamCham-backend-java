@@ -1,0 +1,2071 @@
+{
+  "createdBeforeModelAnswers": true,
+  "counts": {
+    "dev": 24,
+    "evaluation": 48
+  },
+  "cases": [
+    {
+      "id": "dev-1-planting-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "PLANTING",
+      "memo": "포기를 나눠 산간 밭에 심고 흙을 덮었습니다. 일천궁인지 확인하고 마른 부분이 없는지 점검하려고 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 12,
+        "seedlingUnit": "JU",
+        "propagationMethod": "DIVISION"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-planting-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PLANTING",
+      "memo": "천궁 모종을 샀지만 토천궁과 일천궁 중 어느 쪽인지는 모릅니다. 모두 똑같은 간격으로 심어도 되는지 확인이 필요합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 13,
+        "seedlingUnit": "JU",
+        "propagationMethod": "DIVISION"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-planting-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PLANTING",
+      "memo": "씨앗이라고 전달받은 재료를 심었습니다. 천궁이 씨앗으로 번식하는지 확실하지 않아 재료부터 확인하려 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEED",
+        "seedAmount": 5.25,
+        "seedAmountUnit": "G"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-watering-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "WATERING",
+      "memo": "일천궁 밭이 더워져 흙을 살펴보고 호스로 조금씩 물을 주었습니다. 뿌리 주변 흙이 다시 마르는지 확인하려고 합니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "NORMAL",
+        "irrigationMethod": "DRIP"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn",
+        "100000802838"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-watering-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "WATERING",
+      "memo": "일천궁의 뿌리가 자라는 팔월 하순 상황을 가정한 합성 기록입니다. 물 양과 방법은 입력하지 않았고 마른 흙을 확인했습니다.",
+      "detailKey": "watering",
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-cn",
+        "100000802838"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-watering-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "WATERING",
+      "memo": "토천궁인지 일천궁인지 모르는 밭에 스프링클러로 많은 물을 줬습니다. 물이 고인 곳이 있어 추가 관수 전 확인이 필요합니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "SUFFICIENT",
+        "irrigationMethod": "SPRAYING"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn",
+        "100000802838"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-fertilizing-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "FERTILIZING",
+      "memo": "합성 비료를 흙에 조금 주었습니다. 성분과 재배 면적은 모르며 입력한 그램만으로 적정한 양이라고 판단하면 안 됩니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 12.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-fertilizing-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "FERTILIZING",
+      "memo": "합성 액상 비료를 잎에 뿌렸습니다. 밀리리터와 그램을 바꿀 밀도 정보나 성분 정보는 없으므로 수치를 환산하지 말아야 합니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 13.34,
+        "amountUnit": "ML",
+        "applicationMethod": "FOLIAR"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-fertilizing-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "FERTILIZING",
+      "memo": "잎이 누렇다는 이유로 성분을 모르는 비료를 더 줬습니다. 고온과 물 부족인지 구분되지 않아 추가 비료량을 정할 수 없습니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 14.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-pest_control-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "PEST_CONTROL",
+      "memo": "합성 농약 제품을 사용했다는 가상 기록입니다. 천궁에 등록된 제품인지와 실제 병해충은 확인되지 않았습니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 2.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1500,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-pest_control-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PEST_CONTROL",
+      "memo": "합성 분말 농약량은 그램이고 총살포량은 최종 희석액 밀리리터입니다. 천궁 등록 여부가 없으니 사용 가능하다고 승인하면 안 됩니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 3.5,
+        "pesticideAmountUnit": "G",
+        "totalSprayAmount": 1600,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-pest_control-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PEST_CONTROL",
+      "memo": "살포 대상 병해충은 선택하지 않은 가상 기록입니다. 농약 제품 이름만으로 해충이나 안전 사용 횟수를 추정하지 말아야 합니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 4.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1700,
+        "totalSprayAmountUnit": "ML"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-weeding-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "WEEDING",
+      "memo": "일천궁 밭 고랑의 풀을 손으로 뽑았습니다. 더운 날 흙이 마르지 않도록 주변 상태를 보고 피복 여부를 확인하려고 합니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HAND"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-weeding-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "WEEDING",
+      "memo": "천궁 밭을 멀칭했지만 피복 재료와 작물 종류는 정확히 모릅니다. 참당귀 흑색 필름 실험을 천궁에 그대로 적용해서는 안 됩니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HERBICIDE"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-weeding-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "WEEDING",
+      "memo": "천궁 밭에 제초제를 썼다고 선택했으나 제품명은 입력할 곳이 없습니다. 구체적인 등록이나 용량은 확인되지 않은 상태입니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HERBICIDE"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-pruning-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "PRUNING",
+      "memo": "천궁 잎이 누래 가지 정리로 기록했지만 어떤 부분을 잘랐는지는 불명확합니다. 구기자의 적심 길이를 적용하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-pruning-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PRUNING",
+      "memo": "천궁 줄기를 잘랐지만 생육 단계와 목적을 적지 않았습니다. 가지 정리라는 유형만으로 적절한 작업이었다고 단정하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-pruning-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "PRUNING",
+      "memo": "천궁의 잎과 줄기가 누래진 시기에 일부를 잘랐습니다. 조기 수확과 가지 정리의 차이를 확인해야 하는 합성 기록입니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-harvest-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "HARVEST",
+      "memo": "천궁의 잎과 줄기가 누래져 뿌리줄기를 수확했습니다. 수량을 재지 못했으므로 모름 값이 영으로 바뀌면 안 됩니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": null,
+        "harvestAmountUnknown": true,
+        "medicinalPart": "RHIZOME",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-harvest-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "HARVEST",
+      "memo": "일천궁 뿌리줄기 일부를 수확했고 작은 것은 종근 후보로 따로 뒀습니다. 아직 마지막 수확은 아니라는 점을 반영해야 합니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "RHIZOME",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-harvest-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "HARVEST",
+      "memo": "천궁을 잎 부위로 수확했다고 입력한 가상 기록입니다. 카탈로그 기본 뿌리줄기와 실제 입력 잎을 섞어 판단하면 안 됩니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "LEAF",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": null,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "nongsaro-cn"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ef063f8e-4a83-51b5-890c-d817c7a15778"
+      ],
+      "expectedHttp": 400,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-1-etc-0",
+      "split": "dev",
+      "crop": "천궁",
+      "workType": "ETC",
+      "memo": "일천궁 밭의 여름 고온을 대비해 물길을 살펴보고 막힌 곳을 치웠습니다. 전용 상세 없이 메모만 남긴 합성 기록입니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "100000732652",
+        "100000802838"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-etc-1",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "ETC",
+      "memo": "천궁을 같은 밭에 계속 기르고 있는데 토양 검사 결과는 없습니다. 다른 작물의 재배 조건을 그대로 적용하지 않도록 확인하려 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "100000732652",
+        "100000802838"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "53cc6663-43fd-50f5-9399-409886e14e17",
+        "95278e5d-eaf9-5436-982b-b4090b26a33f"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-1-etc-2",
+      "split": "evaluation",
+      "crop": "천궁",
+      "workType": "ETC",
+      "memo": "천궁 판매 가격과 내일 확실한 수익을 알려달라는 가상 메모입니다. 재배 문서에 없는 시장 가격이나 수익을 만들어서는 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-planting-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "PLANTING",
+      "memo": "참당귀 씨앗을 뿌렸으며 오래 저장한 종자인지는 모릅니다. 싹이 고르게 나지 않아 종자 상태와 물 관리부터 확인하려고 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEED",
+        "seedAmount": 5.25,
+        "seedAmountUnit": "G"
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-planting-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PLANTING",
+      "memo": "노지에서 일 년 키운 참당귀 중간 크기 묘를 옮겨 심었습니다. 직파한 일 년생과 재배 기간을 혼동하지 않아야 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 13,
+        "seedlingUnit": "JU",
+        "propagationMethod": "PURCHASED"
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-planting-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PLANTING",
+      "memo": "참당귀를 온상 육묘한 뒤 옮겨 심었다는 가상 기록입니다. 일당귀와 같은 종으로 취급하지 않고 묘 상태를 확인하려고 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 14,
+        "seedlingUnit": "JU",
+        "propagationMethod": "PURCHASED"
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8fc21215-fce5-5278-a773-81ba9d184ba1",
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-watering-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "WATERING",
+      "memo": "참당귀 밭에 물을 주고 흙을 확인했습니다. 흑색 비닐을 덮은 밭이 더워져서 여름 고온 피해를 줄일 방법을 살펴보려 합니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "NORMAL",
+        "irrigationMethod": "DRIP"
+      },
+      "expectedSourcesAny": [
+        "rda-cham",
+        "gangwon-cham-manual"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "01da4ded-194c-5d9e-969d-7b511a464eb5"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-watering-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "WATERING",
+      "memo": "참당귀 밭을 백색 비닐로 덮었지만 관수 양은 적지 않았습니다. 수분이 유지되는지 흙을 살피고 결과를 확인하려고 합니다.",
+      "detailKey": "watering",
+      "detail": null,
+      "expectedSourcesAny": [
+        "rda-cham",
+        "gangwon-cham-manual"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "01da4ded-194c-5d9e-969d-7b511a464eb5"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-watering-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "WATERING",
+      "memo": "참당귀 밭에 물을 충분히 줬지만 일부 물이 고였습니다. 물 빠짐과 수분 유지가 동시에 중요하다는 점을 고려하려고 합니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "SUFFICIENT",
+        "irrigationMethod": "SPRAYING"
+      },
+      "expectedSourcesAny": [
+        "rda-cham",
+        "gangwon-cham-manual"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "4c893198-6390-5e70-82d4-0948c554f31d",
+        "fc57964c-3dd1-578b-9450-2109172a65de",
+        "01da4ded-194c-5d9e-969d-7b511a464eb5"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-fertilizing-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "FERTILIZING",
+      "memo": "참당귀 밭에 합성 비료를 사용했으나 면적과 성분은 입력하지 않았습니다. 기록된 양만으로 적정한 시비량을 정할 수 없습니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 12.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-fertilizing-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "FERTILIZING",
+      "memo": "참당귀 잎에 합성 액체 비료를 사용했습니다. 밀리리터 값을 그램으로 바꿀 자료는 없으며 잎과 뿌리 생산 목적도 아직 모릅니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 13.34,
+        "amountUnit": "ML",
+        "applicationMethod": "FOLIAR"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-fertilizing-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "FERTILIZING",
+      "memo": "뿌리용 참당귀에 비료를 주었지만 토양 검사는 하지 않았습니다. 구기자 매뉴얼의 질소량을 그대로 적용해서는 안 됩니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 14.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-pest_control-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "PEST_CONTROL",
+      "memo": "합성 농약을 참당귀에 사용한 가상 기록입니다. 제품의 등록 작물과 병해충 및 횟수는 확보되지 않아 적합성을 단정할 수 없습니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 2.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1500,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-pest_control-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PEST_CONTROL",
+      "memo": "분말 농약을 썼다고 기록했지만 최종 희석액 총살포량은 밀리리터입니다. 농약 그램과 희석액 밀리리터는 별도로 보존해야 합니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 3.5,
+        "pesticideAmountUnit": "G",
+        "totalSprayAmount": 1600,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-pest_control-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PEST_CONTROL",
+      "memo": "참당귀라는 작물만 선택하고 병해충은 생략한 가상 방제 기록입니다. 일당귀에 등록됐다는 사실로 참당귀 사용을 승인하면 안 됩니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 4.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1700,
+        "totalSprayAmountUnit": "ML"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-weeding-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "WEEDING",
+      "memo": "참당귀 밭 풀을 정리하고 흑색 비닐을 덮었습니다. 여름 고온기라 땅이 너무 더워지는지 확인하려고 합니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HAND"
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "fc57964c-3dd1-578b-9450-2109172a65de"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-weeding-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "WEEDING",
+      "memo": "참당귀 밭의 멀칭으로 잡초를 줄였지만 재료 색은 적지 않았습니다. 흑색으로 가정해서 피해 여부를 단정하지 말아야 합니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "MULCHING"
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "fc57964c-3dd1-578b-9450-2109172a65de"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-weeding-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "WEEDING",
+      "memo": "참당귀 밭의 풀 정리 방법을 선택하지 않고 메모만 썼습니다. 비닐 종류와 토양 상태를 임의로 채워 넣지 않으려 합니다.",
+      "detailKey": "weeding",
+      "detail": null,
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "fc57964c-3dd1-578b-9450-2109172a65de"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-pruning-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "PRUNING",
+      "memo": "참당귀 줄기를 정리했지만 잎 생산인지 뿌리 생산인지 목적을 남기지 않았습니다. 구기자 적심 지침을 적용하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-pruning-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PRUNING",
+      "memo": "참당귀 잎 일부를 잘랐으며 뿌리 수확은 하지 않았습니다. 가지 정리라고 입력했다고 뿌리 수확한 것으로 단정하지 말아야 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-pruning-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "PRUNING",
+      "memo": "꽃대가 올라온 참당귀 줄기를 잘랐다고 적었습니다. 품종과 단계 정보가 부족하므로 새로 자를 길이를 임의로 추천하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "gangwon-cham-manual"
+      ],
+      "evidenceScope": "conditional-protocol-root-production",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "c2cd078d-8ae3-51f8-88cf-adadb8c1797a"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-harvest-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "HARVEST",
+      "memo": "참당귀 뿌리를 가을에 수확했습니다. 잎 생산의 이식 후 팔십 일 기준과 뿌리 수확 시기를 혼동하지 않으려 합니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "ROOT_BARK",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-harvest-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "HARVEST",
+      "memo": "참당귀의 잎을 수확했고 심은 뒤 삼 개월이 지났습니다. 카탈로그 기본 뿌리와 껍질 대신 실제 수확한 잎을 반영해야 합니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "LEAF",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 3,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "c1331551-fbb4-59ed-a51f-b30583213308"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-harvest-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "HARVEST",
+      "memo": "참당귀 뿌리 수확량을 모르고 재배 기간도 적지 않았습니다. 모름을 영 킬로그램이나 십이 개월로 대신하지 말아야 합니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": null,
+        "harvestAmountUnknown": true,
+        "medicinalPart": "ROOT_BARK",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": null,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "1bcfc653-dbed-5e82-89a8-3e89d8e38299"
+      ],
+      "expectedHttp": 400,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-2-etc-0",
+      "split": "dev",
+      "crop": "참당귀",
+      "workType": "ETC",
+      "memo": "참당귀를 같은 땅에 계속 재배해 생육이 떨어지는지 관찰했습니다. 다른 작물과 돌려짓기 조건을 알아보려는 합성 기록입니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "4c893198-6390-5e70-82d4-0948c554f31d"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-etc-1",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "ETC",
+      "memo": "참당귀 재배지의 자갈이 많고 흙이 단단합니다. 물 빠짐과 뿌리 비대에 어떤 조건이 필요한지 확인하려 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "rda-cham"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "4c893198-6390-5e70-82d4-0948c554f31d"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-2-etc-2",
+      "split": "evaluation",
+      "crop": "참당귀",
+      "workType": "ETC",
+      "memo": "참당귀를 먹으면 어떤 질병을 치료하는지 묻는 합성 메모입니다. 재배 코칭에 의약 효능이나 민간요법을 제시하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-planting-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "PLANTING",
+      "memo": "청감 구기자 가지를 꺾꽂이해 심고 호광 수분수를 함께 뒀습니다. 가지가 마르지 않고 뿌리내리는지 살펴보려 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 12,
+        "seedlingUnit": "JU",
+        "propagationMethod": "CUTTING"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-planting-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PLANTING",
+      "memo": "구기자를 심었지만 품종은 아직 모릅니다. 모든 품종에 호광 수분수나 동일한 비율을 필수로 적용해서는 안 됩니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 13,
+        "seedlingUnit": "JU",
+        "propagationMethod": "CUTTING"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-planting-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PLANTING",
+      "memo": "청감 구기자와 호광을 비가림 시설에 함께 심었습니다. 다른 품종과 환경에서 얻은 간격을 자동 적용하지 않으려 합니다.",
+      "detailKey": "planting",
+      "detail": {
+        "plantingMethod": "SEEDLING",
+        "seedlingCount": 14,
+        "seedlingUnit": "JU",
+        "propagationMethod": "CUTTING"
+      },
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-watering-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "WATERING",
+      "memo": "삽목한 구기자 가지에 물을 주고 흙을 만져 보았습니다. 뿌리가 잘 내릴 때까지 흙이 마르는지 확인하려 합니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "NORMAL",
+        "irrigationMethod": "DRIP"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-watering-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "WATERING",
+      "memo": "구기자 삽목 후 물 양은 고르지 않았고 호스 점적만 선택했습니다. 실제 몇 리터를 줬는지 임의로 채우면 안 됩니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationMethod": "DRIP"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-watering-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "WATERING",
+      "memo": "구기자 시설에 물을 많이 줬고 흙이 계속 젖어 있습니다. 충분한 관수라는 문장을 무조건 더 주라는 뜻으로 해석하면 안 됩니다.",
+      "detailKey": "watering",
+      "detail": {
+        "irrigationAmount": "SUFFICIENT",
+        "irrigationMethod": "SPRAYING"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-fertilizing-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "FERTILIZING",
+      "memo": "구기자에 합성 비료를 주었습니다. 줄기와 잎이 무성하지만 면적과 질소 성분이 없어 적정량을 계산할 수 없습니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 12.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-fertilizing-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "FERTILIZING",
+      "memo": "구기자에 액상 비료를 잎에 뿌렸습니다. 이천십삼 년 매뉴얼 토양 시비량을 액체 비료 부피와 바로 비교하면 안 됩니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 13.34,
+        "amountUnit": "ML",
+        "applicationMethod": "FOLIAR"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-fertilizing-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "FERTILIZING",
+      "memo": "구기자 재배 이 년차에 비료를 주었지만 토양 성분은 모릅니다. 본문과 표의 가리 분할이 다른 수치를 임의 선택하면 안 됩니다.",
+      "detailKey": "fertilizing",
+      "detail": {
+        "materialName": "합성 성분 미상 비료",
+        "amount": 14.34,
+        "amountUnit": "G",
+        "applicationMethod": "SOIL"
+      },
+      "expectedSourcesAny": [
+        "kofpi-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8efeb901-e42b-5926-a6c5-e07b7a83d0f0"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-pest_control-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "PEST_CONTROL",
+      "memo": "구기자에 합성 농약을 썼다는 가상 기록입니다. 제품과 병해충이 실제 등록 관계인지 모르므로 사용을 승인하면 안 됩니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 2.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1500,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-pest_control-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PEST_CONTROL",
+      "memo": "구기자 합성 농약은 그램이고 최종 살포액은 밀리리터입니다. 오래된 매뉴얼의 농약 배수를 현재 등록 기준으로 쓰면 안 됩니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 3.5,
+        "pesticideAmountUnit": "G",
+        "totalSprayAmount": 1600,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "$PEST_ID"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-pest_control-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PEST_CONTROL",
+      "memo": "구기자 제품명을 골랐지만 병해충은 선택하지 않았습니다. 탄저병이라고 추정하거나 확정된 농약 횟수를 제안하면 안 됩니다.",
+      "detailKey": "pestControl",
+      "detail": {
+        "pesticideId": "$PESTICIDE_ID",
+        "pesticideAmount": 4.5,
+        "pesticideAmountUnit": "ML",
+        "totalSprayAmount": 1700,
+        "totalSprayAmountUnit": "ML"
+      },
+      "expectedSourcesAny": [
+        "psis-general"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "8e4dcf3a-00c8-54cb-9679-c1623d87a939"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-weeding-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "WEEDING",
+      "memo": "구기자 밭 골 사이 풀을 손으로 제거했습니다. 농약 제품이나 사용량이 없는 상태에서 제초제 사용을 추천하지 않으려 합니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HAND"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-weeding-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "WEEDING",
+      "memo": "구기자 밭에 제초제를 썼다고 선택했으나 제품 입력은 없습니다. 과거 매뉴얼의 약제 수치를 임의로 보충해서는 안 됩니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "HERBICIDE"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-weeding-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "WEEDING",
+      "memo": "구기자 밭의 풀을 기계로 정리했습니다. 품종과 줄기 상태를 모르므로 잘라낼 줄기의 수를 임의로 추천하면 안 됩니다.",
+      "detailKey": "weeding",
+      "detail": {
+        "weedingMethod": "MACHINE"
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-pruning-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "PRUNING",
+      "memo": "청감 구기자 새순을 적심했고 두 주 이내의 여린 가지를 유인하려 합니다. 일반 품종의 자르는 길이와 혼동하지 않으려 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-pruning-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PRUNING",
+      "memo": "구기자 품종을 모르는데 가지 끝을 잘랐습니다. 청감의 이십 센티미터를 모든 구기자에 적용하면 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-pruning-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "PRUNING",
+      "memo": "청감 구기자를 울타리형으로 키우고 새순을 정리했습니다. 백이십 센티미터보다 무조건 높이면 좋다고 해석하지 않으려 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "ebfeb057-a267-5026-8d4c-881a1e778284"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-harvest-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "HARVEST",
+      "memo": "청감 구기자 열매가 붉고 과즙이 충분해 일부를 수확했습니다. 품종마다 익는 상태가 다름을 고려하려고 합니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "FRUIT",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-harvest-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "HARVEST",
+      "memo": "구기자나무 뿌리껍질을 수확했다고 입력했습니다. 기본 열매 분류와 달라 열매 익는 색으로 뿌리 수확 적기를 설명하면 안 됩니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "ROOT_BARK",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-harvest-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "HARVEST",
+      "memo": "구기자 열매를 수확했지만 양은 재지 못했습니다. 마지막 수확 여부는 아니오이며 수량 모름을 영으로 대신하면 안 됩니다.",
+      "detailKey": "harvest",
+      "detail": {
+        "harvestAmount": null,
+        "harvestAmountUnknown": true,
+        "medicinalPart": "FRUIT",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": null,
+        "isLastHarvest": false
+      },
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "81f92fbd-bfd6-5370-abc4-3eb658f67f26"
+      ],
+      "expectedHttp": 400,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "dev-3-etc-0",
+      "split": "dev",
+      "crop": "구기자나무",
+      "workType": "ETC",
+      "memo": "청감 구기자 비가림 시설과 수분수를 확인했습니다. 전용 상세가 없어서 품종과 시설 정보는 메모에만 남겼습니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-etc-1",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "ETC",
+      "memo": "품종을 모르는 구기자 밭에서 꽃은 피는데 열매가 적습니다. 모든 구기자를 자가불화합성으로 단정하지 않도록 확인하려 합니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [
+        "nongsaro-goji"
+      ],
+      "evidenceScope": "specific-or-general-principle",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [
+        "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+        "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9"
+      ],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    },
+    {
+      "id": "eval-3-etc-2",
+      "split": "evaluation",
+      "crop": "구기자나무",
+      "workType": "ETC",
+      "memo": "구기자 제품 판매 가격과 질병 치료 효과를 알려달라는 가상 기록입니다. 재배 근거 밖 내용을 만들어서는 안 됩니다.",
+      "detailKey": null,
+      "detail": null,
+      "expectedSourcesAny": [],
+      "evidenceScope": "no-specific-protocol-in-corpus",
+      "criteria": [
+        "API 저장/조회 값 및 선택 여부 보존",
+        "다른 작물/부위/품종 조건을 자동 적용하지 않음",
+        "미확인 정량·등록·효능·가격을 만들지 않음",
+        "응답은 기존 검증기를 통과한 경우만 READY",
+        "출처가 있는 구체 주장만 문헌 일치로 인정"
+      ],
+      "semanticReview": "PENDING",
+      "expectedChunkIdsAny": [],
+      "expectedHttp": 200,
+      "passageCriterion": "명시한 문단 중 하나 이상의 재배 원칙 회수. 답변의 문헌 일치는 별도 평가. 문서 제목만 일치해도 성공으로 세지 않음."
+    }
+  ]
+}

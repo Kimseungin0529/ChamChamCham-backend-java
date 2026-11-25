@@ -1,0 +1,608 @@
+[
+  {
+    "caseId": "eval-1-watering-1",
+    "synthetic": true,
+    "phase": "baseline",
+    "request": {
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+      "workType": "WATERING",
+      "workedAt": "2026-11-15T07:39:43",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "일천궁의 뿌리가 자라는 팔월 하순 상황을 가정한 합성 기록입니다. 물 양과 방법은 입력하지 않았고 마른 흙을 확인했습니다.",
+      "entryMode": "MANUAL",
+      "mediaIds": []
+    },
+    "response": {
+      "id": "09fbd810-d5da-4dbb-9faf-43468de7e49a",
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "farmName": "합성 실습 농장",
+      "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+      "cropName": "천궁",
+      "workType": "WATERING",
+      "workedAt": "2026-11-15T07:39:43",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "일천궁의 뿌리가 자라는 팔월 하순 상황을 가정한 합성 기록입니다. 물 양과 방법은 입력하지 않았고 마른 흙을 확인했습니다.",
+      "planting": null,
+      "watering": null,
+      "fertilizing": null,
+      "pestControl": null,
+      "weeding": null,
+      "harvest": null,
+      "images": [],
+      "createdAt": "2026-11-15T07:39:43.878088",
+      "updatedAt": "2026-11-15T07:39:43.878088"
+    },
+    "dbInputSnapshot": {
+      "crop": {
+        "name": "천궁",
+        "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+        "usePartCategory": "RHIZOME"
+      },
+      "farm": {
+        "name": "합성 실습 농장",
+        "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+        "latitude": 37.1,
+        "longitude": 128.2,
+        "roadAddress": "실습용 가상 주소"
+      },
+      "member": {
+        "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+        "managementType": null,
+        "experienceLevel": null
+      },
+      "record": {
+        "memo": "일천궁의 뿌리가 자라는 팔월 하순 상황을 가정한 합성 기록입니다. 물 양과 방법은 입력하지 않았고 마른 흙을 확인했습니다.",
+        "detail": {
+          "type": "WATERING",
+          "irrigationAmount": null,
+          "irrigationMethod": null
+        },
+        "recordId": "09fbd810-d5da-4dbb-9faf-43468de7e49a",
+        "workType": "WATERING",
+        "workedAt": "2026-11-15T07:39:43",
+        "photoCount": 0,
+        "sourceRevision": 1,
+        "recordedTemperatureC": 32,
+        "recordedWeatherCondition": "맑음"
+      },
+      "weather": {
+        "source": "SYNTHETIC_LAB",
+        "current": {
+          "observedAt": "2026-11-15T07:39:43.896327",
+          "skyCondition": "맑음",
+          "temperatureC": 32
+        },
+        "forecastDays": []
+      },
+      "warnings": [],
+      "schemaVersion": "record-feedback-context.v2"
+    },
+    "actualPromptRecordBlocks": [
+      "피드백 대상 기록:\n            - 농장: 합성 실습 농장 (실습용 가상 주소)\n- 영농 경력: 미상\n- 작물: 천궁\n- 쓰는 부위: 땅속줄기\n- 기록 시각: 2026-11-15T07:39:43\n- 작업 유형: 물 주기\n- 작업 상세: \n- 메모: 일천궁의 뿌리가 자라는 팔월 하순 상황을 가정한 합성 기록입니다. 물 양과 방법은 입력하지 않았고 마른 흙을 확인했습니다.\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 32도\n- 현재 날씨: 맑음, 32도, 2026-11-15T07:39:43.896327 관측\n- 예보: 없음"
+    ],
+    "status": {
+      "feedbackId": "27fd9261-97ae-4969-a8d4-7bd138e2c233",
+      "recordId": "09fbd810-d5da-4dbb-9faf-43468de7e49a",
+      "status": "READY",
+      "sourceRevision": 1,
+      "inputPrepared": true,
+      "failureCode": null,
+      "feedback": {
+        "goodPoint": {
+          "text": "마른 흙을 확인한 점은 잘했어요."
+        },
+        "nextActions": [
+          {
+            "text": "토양이 마르면 물을 주세요. 뿌리가 자라는 시기에는 특히 자주 주세요.",
+            "due": "TODAY",
+            "category": "IRRIGATION"
+          },
+          {
+            "text": "잎을 살펴보고, 이상이 있으면 바로 확인하세요.",
+            "due": "NEXT_CHECK",
+            "category": "PEST_CONTROL"
+          }
+        ]
+      },
+      "createdAt": "2026-11-15T07:39:43.884043",
+      "updatedAt": "2026-11-15T07:40:13.785925"
+    },
+    "createHttp": 200,
+    "error": null,
+    "review": {
+      "label": "SUPPORTED",
+      "reason": "기록의 마른 흙 확인과 일천궁 생육 시기, 문헌의 토양 수분 유지·예찰 범위에 부합한다. 잘한 점의 인용 연결은 기록 대신 문서라 추적성 개선 여지가 있다.",
+      "problemTypes": [
+        "CITATION_LINK_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    }
+  },
+  {
+    "caseId": "eval-2-pest_control-1",
+    "synthetic": true,
+    "phase": "baseline",
+    "request": {
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+      "workType": "PEST_CONTROL",
+      "workedAt": "2026-11-15T07:52:07",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "분말 농약을 썼다고 기록했지만 최종 희석액 총살포량은 밀리리터입니다. 농약 그램과 희석액 밀리리터는 별도로 보존해야 합니다.",
+      "entryMode": "MANUAL",
+      "mediaIds": [],
+      "pestControl": {
+        "pesticideId": "fe4b7214-f8a7-459e-9526-9872923c8675",
+        "pesticideAmount": 3.5,
+        "pesticideAmountUnit": "G",
+        "totalSprayAmount": 1600,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "8e6c88e7-ee3a-44c4-9133-afa44e6d5ba9"
+      }
+    },
+    "response": {
+      "id": "ef0088c4-d934-45ad-b7ef-e73a79dd53eb",
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "farmName": "합성 실습 농장",
+      "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+      "cropName": "참당귀",
+      "workType": "PEST_CONTROL",
+      "workedAt": "2026-11-15T07:52:07",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "분말 농약을 썼다고 기록했지만 최종 희석액 총살포량은 밀리리터입니다. 농약 그램과 희석액 밀리리터는 별도로 보존해야 합니다.",
+      "planting": null,
+      "watering": null,
+      "fertilizing": null,
+      "pestControl": {
+        "pesticideId": "fe4b7214-f8a7-459e-9526-9872923c8675",
+        "pesticideName": "합성 실습 품목",
+        "pesticideAmount": 3.5,
+        "pesticideAmountUnit": "G",
+        "totalSprayAmount": 1600.0,
+        "totalSprayAmountUnit": "ML",
+        "pestId": "8e6c88e7-ee3a-44c4-9133-afa44e6d5ba9",
+        "pestName": "합성 실습 병해충(실제 진단 아님)"
+      },
+      "weeding": null,
+      "harvest": null,
+      "images": [],
+      "createdAt": "2026-11-15T07:52:08.60711",
+      "updatedAt": "2026-11-15T07:52:08.60711"
+    },
+    "dbInputSnapshot": {
+      "crop": {
+        "name": "참당귀",
+        "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+        "usePartCategory": "ROOT_BARK"
+      },
+      "farm": {
+        "name": "합성 실습 농장",
+        "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+        "latitude": 37.1,
+        "longitude": 128.2,
+        "roadAddress": "실습용 가상 주소"
+      },
+      "member": {
+        "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+        "managementType": null,
+        "experienceLevel": null
+      },
+      "record": {
+        "memo": "분말 농약을 썼다고 기록했지만 최종 희석액 총살포량은 밀리리터입니다. 농약 그램과 희석액 밀리리터는 별도로 보존해야 합니다.",
+        "detail": {
+          "type": "PEST_CONTROL",
+          "pestName": "합성 실습 병해충(실제 진단 아님)",
+          "pesticideName": "합성 실습 제품(실제 사용 금지)",
+          "pesticideAmount": 3.5,
+          "totalSprayAmount": 1600.0,
+          "pesticideAmountUnit": "G",
+          "totalSprayAmountUnit": "ML"
+        },
+        "recordId": "ef0088c4-d934-45ad-b7ef-e73a79dd53eb",
+        "workType": "PEST_CONTROL",
+        "workedAt": "2026-11-15T07:52:07",
+        "photoCount": 0,
+        "sourceRevision": 1,
+        "recordedTemperatureC": 32,
+        "recordedWeatherCondition": "맑음"
+      },
+      "weather": {
+        "source": "SYNTHETIC_LAB",
+        "current": {
+          "observedAt": "2026-11-15T07:52:08.634483",
+          "skyCondition": "맑음",
+          "temperatureC": 32
+        },
+        "forecastDays": []
+      },
+      "warnings": [],
+      "schemaVersion": "record-feedback-context.v2"
+    },
+    "actualPromptRecordBlocks": [
+      "피드백 대상 기록:\n            - 농장: 합성 실습 농장 (실습용 가상 주소)\n- 영농 경력: 미상\n- 작물: 참당귀\n- 쓰는 부위: 뿌리와 껍질\n- 기록 시각: 2026-11-15T07:52:07\n- 작업 유형: 병이나 벌레 관리\n- 작업 상세: 약 이름: 합성 실습 제품(실제 사용 금지), 약 사용량: 3.5그램, 약을 섞은 물의 양: 1600.0밀리리터, 관리 대상: 합성 실습 병해충(실제 진단 아님)\n- 메모: 분말 농약을 썼다고 기록했지만 최종 희석액 총살포량은 밀리리터입니다. 농약 그램과 희석액 밀리리터는 별도로 보존해야 합니다.\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 32도\n- 현재 날씨: 맑음, 32도, 2026-11-15T07:52:08.634483 관측\n- 예보: 없음"
+    ],
+    "status": {
+      "feedbackId": "b8ed60b6-4184-4cdc-8231-ebe22bcbb1b1",
+      "recordId": "ef0088c4-d934-45ad-b7ef-e73a79dd53eb",
+      "status": "READY",
+      "sourceRevision": 1,
+      "inputPrepared": true,
+      "failureCode": null,
+      "feedback": {
+        "goodPoint": {
+          "text": "약을 섞은 물의 양을 기록했어요"
+        },
+        "nextActions": [
+          {
+            "text": "물을 주세요. 고온에 대비해요",
+            "due": "TODAY",
+            "category": "IRRIGATION"
+          },
+          {
+            "text": "토양을 살펴보세요. 물 빠짐이 좋은 토양이어야 해요",
+            "due": "NEXT_CHECK",
+            "category": "CULTIVATION"
+          }
+        ]
+      },
+      "createdAt": "2026-11-15T07:52:08.617967",
+      "updatedAt": "2026-11-15T07:52:41.265602"
+    },
+    "createHttp": 200,
+    "error": null,
+    "review": {
+      "label": "PARTIAL",
+      "reason": "농약량과 총살포량을 따로 기록한 사실은 맞음. 미확인 제품의 등록 확인 안내가 빠졌고 고온 관수 일반론으로 응답. 기존 물의 양 표현은 보존됨.",
+      "problemTypes": [
+        "REGISTRATION_CHECK_OMITTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  },
+  {
+    "caseId": "eval-2-harvest-1",
+    "synthetic": true,
+    "phase": "baseline",
+    "request": {
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+      "workType": "HARVEST",
+      "workedAt": "2026-11-15T07:56:44",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "참당귀의 잎을 수확했고 심은 뒤 삼 개월이 지났습니다. 카탈로그 기본 뿌리와 껍질 대신 실제 수확한 잎을 반영해야 합니다.",
+      "entryMode": "MANUAL",
+      "mediaIds": [],
+      "harvest": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "LEAF",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 3,
+        "isLastHarvest": false
+      }
+    },
+    "response": {
+      "id": "fd5ab736-6a68-467b-a5f0-7854d7845eb0",
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "farmName": "합성 실습 농장",
+      "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+      "cropName": "참당귀",
+      "workType": "HARVEST",
+      "workedAt": "2026-11-15T07:56:44",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "참당귀의 잎을 수확했고 심은 뒤 삼 개월이 지났습니다. 카탈로그 기본 뿌리와 껍질 대신 실제 수확한 잎을 반영해야 합니다.",
+      "planting": null,
+      "watering": null,
+      "fertilizing": null,
+      "pestControl": null,
+      "weeding": null,
+      "harvest": {
+        "harvestAmount": 12.5,
+        "amountUnknown": false,
+        "medicinalPart": "LEAF",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 3,
+        "isLastHarvest": false
+      },
+      "images": [],
+      "createdAt": "2026-11-15T07:56:45.301494",
+      "updatedAt": "2026-11-15T07:56:45.301494"
+    },
+    "dbInputSnapshot": {
+      "crop": {
+        "name": "참당귀",
+        "cropId": "7d803f23-5f57-4bd2-8487-d5a29d936f92",
+        "usePartCategory": "ROOT_BARK"
+      },
+      "farm": {
+        "name": "합성 실습 농장",
+        "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+        "latitude": 37.1,
+        "longitude": 128.2,
+        "roadAddress": "실습용 가상 주소"
+      },
+      "member": {
+        "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+        "managementType": null,
+        "experienceLevel": null
+      },
+      "record": {
+        "memo": "참당귀의 잎을 수확했고 심은 뒤 삼 개월이 지났습니다. 카탈로그 기본 뿌리와 껍질 대신 실제 수확한 잎을 반영해야 합니다.",
+        "detail": {
+          "type": "HARVEST",
+          "growthPeriod": 3,
+          "amountUnknown": false,
+          "harvestAmount": 12.5,
+          "harvestSource": "CULTIVATED",
+          "isLastHarvest": false,
+          "medicinalPart": "LEAF",
+          "growthPeriodUnit": "MONTH"
+        },
+        "recordId": "fd5ab736-6a68-467b-a5f0-7854d7845eb0",
+        "workType": "HARVEST",
+        "workedAt": "2026-11-15T07:56:44",
+        "photoCount": 0,
+        "sourceRevision": 1,
+        "recordedTemperatureC": 32,
+        "recordedWeatherCondition": "맑음"
+      },
+      "weather": {
+        "source": "SYNTHETIC_LAB",
+        "current": {
+          "observedAt": "2026-11-15T07:56:45.32475",
+          "skyCondition": "맑음",
+          "temperatureC": 32
+        },
+        "forecastDays": []
+      },
+      "warnings": [],
+      "schemaVersion": "record-feedback-context.v2"
+    },
+    "actualPromptRecordBlocks": [
+      "피드백 대상 기록:\n            - 농장: 합성 실습 농장 (실습용 가상 주소)\n- 영농 경력: 미상\n- 작물: 참당귀\n- 쓰는 부위: 뿌리와 껍질\n- 기록 시각: 2026-11-15T07:56:44\n- 작업 유형: 수확\n- 작업 상세: 수확량: 12.5킬로그램, 수확한 부위: 잎, 기른 곳: 밭에서 기름, 기른 기간: 3개월, 마지막 수확: 아니요\n- 메모: 참당귀의 잎을 수확했고 심은 뒤 삼 개월이 지났습니다. 카탈로그 기본 뿌리와 껍질 대신 실제 수확한 잎을 반영해야 합니다.\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 32도\n- 현재 날씨: 맑음, 32도, 2026-11-15T07:56:45.324750 관측\n- 예보: 없음"
+    ],
+    "status": {
+      "feedbackId": "8332deaa-e759-4304-963f-3a2ab4970bf0",
+      "recordId": "fd5ab736-6a68-467b-a5f0-7854d7845eb0",
+      "status": "READY",
+      "sourceRevision": 1,
+      "inputPrepared": true,
+      "failureCode": null,
+      "feedback": {
+        "goodPoint": {
+          "text": "잎을 수확했어요 하였습니다. 잘했어요"
+        },
+        "nextActions": [
+          {
+            "text": "잎이 노화되지 않았는지 확인하세요",
+            "due": "NEXT_CHECK",
+            "category": "CULTIVATION"
+          },
+          {
+            "text": "물을 주세요. 고온에 대비하세요",
+            "due": "TODAY",
+            "category": "IRRIGATION"
+          }
+        ]
+      },
+      "createdAt": "2026-11-15T07:56:45.309124",
+      "updatedAt": "2026-11-15T07:57:16.422691"
+    },
+    "createHttp": 200,
+    "error": null,
+    "review": {
+      "label": "PARTIAL",
+      "reason": "실제 수확 잎 부위를 반영하고 문헌의 이식 후 80~100일 조건을 인용함. 문장 중복 및 이식일 미확인 한계.",
+      "problemTypes": [
+        "LANGUAGE_QUALITY",
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  },
+  {
+    "caseId": "eval-3-harvest-1",
+    "synthetic": true,
+    "phase": "baseline",
+    "request": {
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+      "workType": "HARVEST",
+      "workedAt": "2026-11-15T08:06:04",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "구기자나무 뿌리껍질을 수확했다고 입력했습니다. 기본 열매 분류와 달라 열매 익는 색으로 뿌리 수확 적기를 설명하면 안 됩니다.",
+      "entryMode": "MANUAL",
+      "mediaIds": [],
+      "harvest": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "ROOT_BARK",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      }
+    },
+    "response": {
+      "id": "12e7ead8-6bcf-495a-ac35-d89f19764b14",
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "farmName": "합성 실습 농장",
+      "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+      "cropName": "구기자나무",
+      "workType": "HARVEST",
+      "workedAt": "2026-11-15T08:06:04",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "구기자나무 뿌리껍질을 수확했다고 입력했습니다. 기본 열매 분류와 달라 열매 익는 색으로 뿌리 수확 적기를 설명하면 안 됩니다.",
+      "planting": null,
+      "watering": null,
+      "fertilizing": null,
+      "pestControl": null,
+      "weeding": null,
+      "harvest": {
+        "harvestAmount": 12.5,
+        "amountUnknown": false,
+        "medicinalPart": "ROOT_BARK",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": 6,
+        "isLastHarvest": false
+      },
+      "images": [],
+      "createdAt": "2026-11-15T08:06:04.870868",
+      "updatedAt": "2026-11-15T08:06:04.870868"
+    },
+    "dbInputSnapshot": {
+      "crop": {
+        "name": "구기자나무",
+        "cropId": "e12661bb-9a1e-41fc-9a4d-3ace9ad709c1",
+        "usePartCategory": "FRUIT"
+      },
+      "farm": {
+        "name": "합성 실습 농장",
+        "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+        "latitude": 37.1,
+        "longitude": 128.2,
+        "roadAddress": "실습용 가상 주소"
+      },
+      "member": {
+        "memberId": "8d2df339-64c2-4134-8f09-6874f26931a5",
+        "managementType": null,
+        "experienceLevel": null
+      },
+      "record": {
+        "memo": "구기자나무 뿌리껍질을 수확했다고 입력했습니다. 기본 열매 분류와 달라 열매 익는 색으로 뿌리 수확 적기를 설명하면 안 됩니다.",
+        "detail": {
+          "type": "HARVEST",
+          "growthPeriod": 6,
+          "amountUnknown": false,
+          "harvestAmount": 12.5,
+          "harvestSource": "CULTIVATED",
+          "isLastHarvest": false,
+          "medicinalPart": "ROOT_BARK",
+          "growthPeriodUnit": "MONTH"
+        },
+        "recordId": "12e7ead8-6bcf-495a-ac35-d89f19764b14",
+        "workType": "HARVEST",
+        "workedAt": "2026-11-15T08:06:04",
+        "photoCount": 0,
+        "sourceRevision": 1,
+        "recordedTemperatureC": 32,
+        "recordedWeatherCondition": "맑음"
+      },
+      "weather": {
+        "source": "SYNTHETIC_LAB",
+        "current": {
+          "observedAt": "2026-11-15T08:06:04.894187",
+          "skyCondition": "맑음",
+          "temperatureC": 32
+        },
+        "forecastDays": []
+      },
+      "warnings": [],
+      "schemaVersion": "record-feedback-context.v2"
+    },
+    "actualPromptRecordBlocks": [
+      "피드백 대상 기록:\n            - 농장: 합성 실습 농장 (실습용 가상 주소)\n- 영농 경력: 미상\n- 작물: 구기자나무\n- 쓰는 부위: 열매\n- 기록 시각: 2026-11-15T08:06:04\n- 작업 유형: 수확\n- 작업 상세: 수확량: 12.5킬로그램, 수확한 부위: 뿌리와 껍질, 기른 곳: 밭에서 기름, 기른 기간: 6개월, 마지막 수확: 아니요\n- 메모: 구기자나무 뿌리껍질을 수확했다고 입력했습니다. 기본 열매 분류와 달라 열매 익는 색으로 뿌리 수확 적기를 설명하면 안 됩니다.\n- 사진 수: 0장\n- 기록 당시 날씨: 맑음, 32도\n- 현재 날씨: 맑음, 32도, 2026-11-15T08:06:04.894187 관측\n- 예보: 없음"
+    ],
+    "status": {
+      "feedbackId": "116368d0-5f25-4fa5-83e9-58275598f93d",
+      "recordId": "12e7ead8-6bcf-495a-ac35-d89f19764b14",
+      "status": "READY",
+      "sourceRevision": 1,
+      "inputPrepared": true,
+      "failureCode": null,
+      "feedback": {
+        "goodPoint": {
+          "text": "수확한 부위를 뿌리와 껍질로 기재했어요."
+        },
+        "nextActions": [
+          {
+            "text": "다음 수확 전 열매가 빨간색이 되는지 확인하세요.",
+            "due": "NEXT_CHECK",
+            "category": "HARVEST"
+          },
+          {
+            "text": "호광 구기자를 함께 심어 수정율을 높이세요.",
+            "due": "THIS_WEEK",
+            "category": "CULTIVATION"
+          },
+          {
+            "text": "새로운 가지가 올라오면 2주 내에 유인하세요.",
+            "due": "NEXT_WEEK",
+            "category": "CULTIVATION"
+          }
+        ]
+      },
+      "createdAt": "2026-11-15T08:06:04.880043",
+      "updatedAt": "2026-11-15T08:06:41.889144"
+    },
+    "createHttp": 200,
+    "error": null,
+    "review": {
+      "label": "UNSUPPORTED",
+      "reason": "실제 뿌리껍질 수확인데 열매 색을 다음 수확 기준으로 제안하며 품종 미상에 호광 혼식을 적용.",
+      "problemTypes": [
+        "HARVEST_PART_CONFUSION",
+        "CULTIVAR_SCOPE",
+        "CITATION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  },
+  {
+    "caseId": "eval-1-harvest-2",
+    "synthetic": true,
+    "phase": "baseline",
+    "request": {
+      "farmId": "18eb7a5f-cb6d-4907-a812-2b10992c918c",
+      "cropId": "8bd30e9b-1f9a-482c-b7e3-72b6528288b7",
+      "workType": "HARVEST",
+      "workedAt": "2026-11-15T07:47:06",
+      "weatherCondition": "맑음",
+      "weatherTemperature": 32,
+      "memo": "천궁을 잎 부위로 수확했다고 입력한 가상 기록입니다. 카탈로그 기본 뿌리줄기와 실제 입력 잎을 섞어 판단하면 안 됩니다.",
+      "entryMode": "MANUAL",
+      "mediaIds": [],
+      "harvest": {
+        "harvestAmount": 12.5,
+        "harvestAmountUnknown": false,
+        "medicinalPart": "LEAF",
+        "harvestSource": "CULTIVATED",
+        "growthPeriod": null,
+        "isLastHarvest": false
+      }
+    },
+    "response": null,
+    "dbInputSnapshot": null,
+    "actualPromptRecordBlocks": [],
+    "status": null,
+    "createHttp": 400,
+    "error": {
+      "success": false,
+      "data": null,
+      "error": {
+        "code": "COMMON_001",
+        "message": "error.invalid_input",
+        "detail": {
+          "field": "harvest.growthPeriod",
+          "reason": "재배기간을 입력해주세요"
+        }
+      }
+    },
+    "review": {
+      "label": "API_REJECTED_EXPECTED",
+      "reason": "필수 growthPeriod 누락 HTTP400. 생성 평가 대상 아님.",
+      "problemTypes": [
+        "INPUT_REJECTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  }
+]

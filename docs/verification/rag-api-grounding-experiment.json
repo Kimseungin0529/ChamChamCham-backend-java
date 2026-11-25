@@ -1,0 +1,64 @@
+{
+  "run": "grounding-regression-v1",
+  "purpose": "48건 결과를 본 뒤 선택한 조정용 8건. 독립 평가 아님.",
+  "generationReady": 8,
+  "executed": 8,
+  "baselineUnsupported": 8,
+  "candidateUnsupported": 8,
+  "decision": "미채택. 원래 프롬프트 소스 해시 일치 확인 후 복귀.",
+  "reviews": {
+    "eval-1-planting-2": {
+      "label": "UNSUPPORTED",
+      "reason": "씨앗 심기 기록은 보존했으나 번식 재료의 적합성 미확인 상태에서 잘했다고 판단. 문헌이 해당 씨앗 심기를 지지하지 않음.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-fertilizing-1": {
+      "label": "UNSUPPORTED",
+      "reason": "방제/관수 혼동은 줄었으나 고온 특성을 근거로 미확인 엽면 비료 사용을 잘했다고 단정.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-pest_control-1": {
+      "label": "UNSUPPORTED",
+      "reason": "물 주세요했어요라는 비문과 관수 혼동을 해소하지 못함. 실제 방제의 등록 확인도 없음.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-etc-1": {
+      "label": "UNSUPPORTED",
+      "reason": "토양 검사 결과가 없는데 검사를 했다고 하는 행동 창작이 그대로 남음.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-fertilizing-2": {
+      "label": "UNSUPPORTED",
+      "reason": "실제 11월 시비 기록을 문헌의 8월 상순 작업으로 바꾸는 문제가 남음.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-planting-1": {
+      "label": "UNSUPPORTED",
+      "reason": "품종 미상에 호광 권고, 기록에 없는 직각/대각 절단을 했다고 basis에 추가하고 가리비료를 많이 주라고 근거 범위를 확대.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-watering-1": {
+      "label": "UNSUPPORTED",
+      "reason": "물 준 양 창작은 사라졌지만 품종 미상에 청감의 1:1 혼식을 적용함.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-fertilizing-2": {
+      "label": "UNSUPPORTED",
+      "reason": "문헌 의미 반전은 사라졌지만 미확인 비료 사용 칭찬과 품종 미상에 청감 수형·호광 권고가 남음.",
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  },
+  "limits": "모든 문장이 동일하게 나쁘다는 의미는 아님. 선택된 상황의 핵심 근거 문제를 해소하지 못함. 실제 환경 시간·입력 시각 차이가 있는 탐색적 회귀.",
+  "addedInstructions": [
+    "문헌의 권장 행동과 사용자가 이미 완료한 행동은 다르다.",
+    "메모의 계획, 질문, 미확인 사항을 완료한 행동이나 확인된 결과로 바꾸지 않는다.",
+    "잘한 점에서도 실제 기록에 없는 행동, 작업 시각, 효과를 만들지 않는다.",
+    "농약을 뿌린 기록은 물을 준 기록이 아니며 서로 바꾸어 해석하지 않는다.",
+    "문헌의 품종, 재배 방식, 부위, 생육 단계 조건이 기록과 맞는지 확인하고 미확인 조건을 일반화하지 않는다.",
+    "등록 조건이나 사용 적합성이 확인되지 않은 약제 사용을 적절했다고 단정하지 않는다.",
+    "예보가 없으면 비나 맑음의 미래 날씨를 만들어 행동의 근거로 쓰지 않는다."
+  ],
+  "candidatePromptSourceSha256": "34333ba632eb82cba16026a4689fe02bf655ecfb6f5ee197f38ce74c4b6e32a7",
+  "baselinePromptSourceSha256": "723b181f6885e549ba7a9fefc005a9c3f43a9f2f59d16c27dca788612f723f3d",
+  "finalPromptSourceSha256": "723b181f6885e549ba7a9fefc005a9c3f43a9f2f59d16c27dca788612f723f3d"
+}

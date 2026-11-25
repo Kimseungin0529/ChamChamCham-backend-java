@@ -1,0 +1,26 @@
+[
+  {
+    "sourceId": "100000732652",
+    "title": "천궁·당귀 재배 전에 안전 재배지인지 확인하세요",
+    "url": "https://www.rda.go.kr/board/board.do?dataNo=100000732652&mode=view&prgId=day_farmprmninfoEntry",
+    "published": "2017-03-23",
+    "retrievedAt": "2026-11-14T04:48:01.802137+00:00",
+    "rawSha256": "aee7c5da8c32db50f058a051a087e1485cb24b17ffb807f90300ccb187d15419",
+    "selectedSha256": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+    "exclusions": "탐색 메뉴, 연락처, 인체 효능 각주, 당시 기상 전망·웹서비스 현황. 위 명시 문단 외 모두 제외.",
+    "license": "원문 공공누리 표시 및 농촌진흥청 출처 유지. 웹 문서이므로 page 없음.",
+    "selectedParagraphCount": 4
+  },
+  {
+    "sourceId": "100000802838",
+    "title": "고온 취약한 약용작물, 재배 관리 필수",
+    "url": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+    "published": "2025-05-27",
+    "retrievedAt": "2026-11-14T04:48:07.105979+00:00",
+    "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+    "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+    "exclusions": "탐색 메뉴, 연락처, 인체 효능 각주, 당시 기상 전망·웹서비스 현황. 위 명시 문단 외 모두 제외.",
+    "license": "원문 공공누리 표시 및 농촌진흥청 출처 유지. 웹 문서이므로 page 없음.",
+    "selectedParagraphCount": 7
+  }
+]

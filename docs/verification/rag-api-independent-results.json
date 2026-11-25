@@ -1,0 +1,483 @@
+{
+  "run": "independent-v1",
+  "split": "evaluation",
+  "planned": 48,
+  "completed": 48,
+  "missing": [],
+  "incomplete": [],
+  "httpExpected": {
+    "passed": 48,
+    "denominator": 48
+  },
+  "generation": {
+    "ready": 38,
+    "acceptedRequests": 45,
+    "statusCounts": {
+      "READY": 38,
+      "FAILED": 7
+    }
+  },
+  "rejection": {
+    "expectedRejected": 3,
+    "partialStoragePrevented": 3
+  },
+  "preservation": {
+    "passed": 45,
+    "denominator": 45
+  },
+  "retrieval": {
+    "passageHits": 30,
+    "eligibleWithExpectedPassage": 30,
+    "wrongCropMetadataDocuments": 0
+  },
+  "latencySeconds": {
+    "measuredAcceptedRequests": 45,
+    "excludedResumedOrUnmeasured": 0,
+    "medianAcceptedRequest": 33.87,
+    "min": 27.623,
+    "max": 68.395
+  },
+  "semanticReviewCounts": {
+    "PARTIAL": 8,
+    "UNSUPPORTED": 26,
+    "SUPPORTED": 4,
+    "NOT_GENERATED": 7,
+    "API_REJECTED_EXPECTED": 3
+  },
+  "limits": [
+    "합성 상황/선택 문헌 범위. 전체 농업 정확도 아님.",
+    "READY는 형식 검증, 문헌 일치는 별도 검토.",
+    "다른 작물 문서 수는 메타데이터 기준. 본문 적용 조건은 별도 검토.",
+    "반복 실행은 독립 사례 수에 더하지 않음."
+  ],
+  "phase": "지침 보완 전 baseline / 이후 보완판 점수 아님",
+  "caseSha256": "37e8dce2ce5b959c6c6fb54cf9abbe67041ea0d05ee5559c54e25aa2881331d6",
+  "sourceProtocol": "rag-api-evaluation-protocol.json",
+  "modelManifest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "interpretation": "동일한 3작물·합성 48상황에 대한 API/검색/형식/문헌 일치 예비 결과. 전체 농업 정확도 아님.",
+  "reviews": {
+    "eval-1-planting-1": {
+      "label": "PARTIAL",
+      "reason": "종류별 심기 간격을 확인하라는 행동은 적절하나, basis가 강원 일천궁 실험 간격을 지역 조건 없이 일반화한다.",
+      "problemTypes": [
+        "CONDITION_SCOPE",
+        "CITATION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-planting-2": {
+      "label": "UNSUPPORTED",
+      "reason": "확인하려는 계획을 이미 재료를 확인한 행동으로 바꾸어 칭찬한다. 씨앗 번식 가능성의 모호함을 해결하지 않고 얕은 뿌리 특성을 적용한다.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "VARIANT_UNCONFIRMED",
+        "QUESTION_UNANSWERED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-watering-1": {
+      "label": "SUPPORTED",
+      "reason": "기록의 마른 흙 확인과 일천궁 생육 시기, 문헌의 토양 수분 유지·예찰 범위에 부합한다. 잘한 점의 인용 연결은 기록 대신 문서라 추적성 개선 여지가 있다.",
+      "problemTypes": [
+        "CITATION_LINK_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-watering-2": {
+      "label": "UNSUPPORTED",
+      "reason": "물이 고였다는 기록에서 적합한 물 관리였다는 basis를 뒷받침할 근거가 없다. 후속 확인 행동은 있으나 기존 많은 관수를 적절했다고 판단한다.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-fertilizing-1": {
+      "label": "UNSUPPORTED",
+      "reason": "비료 살포 기록을 물 관리에 주의를 기울인 행동으로 바꿔 basis에 넣었다. 미확인 비료 사용을 칭찬할 근거도 제시하지 못했다.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "UNSUPPORTED_JUDGMENT"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-fertilizing-2": {
+      "label": "UNSUPPORTED",
+      "reason": "원인을 구분하지 못하고 성분 미상 비료를 더 준 행동을 잘했다고 명시하지만 인용된 고온 문단은 이를 뒷받침하지 않는다.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-pest_control-1": {
+      "label": "UNSUPPORTED",
+      "reason": "농약 살포 기록에 없는 물 주기 행동을 했다고 칭찬한다. 등록 라벨 확인 안내는 PSIS 원칙에 맞지만 작업 혼동이 남는다.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "WORK_TYPE_CONFUSION"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-pest_control-2": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 초벌. 사람/농업전문가 미검토."
+    },
+    "eval-1-weeding-1": {
+      "label": "UNSUPPORTED",
+      "reason": "등록 제품·조건을 모르는 제초제 사용을 잘했다고 승인하며 메모의 멀칭과 구조화 방법의 상충을 다루지 않음.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT",
+        "INPUT_CONTRADICTION"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-weeding-2": {
+      "label": "UNSUPPORTED",
+      "reason": "제품·등록 여부 미확인인데 제초제 사용을 잘했다고 판단.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-pruning-1": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-pruning-2": {
+      "label": "PARTIAL",
+      "reason": "작업 사실은 보존하나 조기 수확과 가지 정리 차이에 답하지 않음. 고온 관수 근거를 뿌리 발생 이전이라는 미확인 단계로 좁힘.",
+      "problemTypes": [
+        "QUESTION_UNANSWERED",
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-harvest-1": {
+      "label": "PARTIAL",
+      "reason": "종근 후보 보관 사실은 기록/문헌에 일치. 고온 관수 안내는 문헌에 있으나 뿌리썩음병 때문에 자주 관수한다는 인과 설명은 부정확.",
+      "problemTypes": [
+        "CAUSAL_EXPLANATION_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-harvest-2": {
+      "label": "API_REJECTED_EXPECTED",
+      "reason": "필수 growthPeriod 누락 HTTP400. 생성 평가 대상 아님.",
+      "problemTypes": [
+        "INPUT_REJECTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-etc-1": {
+      "label": "UNSUPPORTED",
+      "reason": "토양 검사 결과가 없다는 메모를 토양 검사 결과를 확인했다는 행동으로 바꿈.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-1-etc-2": {
+      "label": "UNSUPPORTED",
+      "reason": "가격 질문에 가격 수치는 만들지 않았으나 기록에 없는 물주기를 했다고 칭찬.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "QUESTION_UNANSWERED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-planting-1": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-planting-2": {
+      "label": "SUPPORTED",
+      "reason": "온상 육묘 후 이식한 기록과 참당귀 고온·배수 자료에 근거.",
+      "problemTypes": [
+        "CITATION_LINK_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-watering-1": {
+      "label": "PARTIAL",
+      "reason": "백색 비닐의 고온 완화 효과와 조건부 관수는 근거 있음. 실제 피해가 줄었다는 결과는 아직 관찰하지 않음.",
+      "problemTypes": [
+        "OUTCOME_UNCONFIRMED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-watering-2": {
+      "label": "SUPPORTED",
+      "reason": "넓게 뿌림 방식과 관수 기록 보존. 추가 관수 전 토양·배수 확인 안내는 문헌과 일치.",
+      "problemTypes": [
+        "CITATION_LINK_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-fertilizing-1": {
+      "label": "UNSUPPORTED",
+      "reason": "자재·성분·생산 목적이 불명인 엽면 비료 사용을 기온 자료로 잘했다고 판단.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT",
+        "CITATION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-fertilizing-2": {
+      "label": "UNSUPPORTED",
+      "reason": "실제 11월 기록인데 문헌의 8월 상순 시비를 사용자가 한 시점으로 만들어냄.",
+      "problemTypes": [
+        "STATED_TIME_INVENTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-pest_control-1": {
+      "label": "PARTIAL",
+      "reason": "농약량과 총살포량을 따로 기록한 사실은 맞음. 미확인 제품의 등록 확인 안내가 빠졌고 고온 관수 일반론으로 응답. 기존 물의 양 표현은 보존됨.",
+      "problemTypes": [
+        "REGISTRATION_CHECK_OMITTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-pest_control-2": {
+      "label": "UNSUPPORTED",
+      "reason": "방제 기록을 관수를 잘한 행동으로 바꾸고 고랭지 이동을 구체적 실행 근거 없이 권고.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "WORK_TYPE_CONFUSION"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-weeding-1": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-weeding-2": {
+      "label": "PARTIAL",
+      "reason": "빠진 방법·비닐 종류를 기록값으로 채우지 않음. 백색 비닐 권고는 문헌에 있으나 현재 재료·재배 조건과 호환성은 미확인.",
+      "problemTypes": [
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-pruning-1": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-pruning-2": {
+      "label": "UNSUPPORTED",
+      "reason": "고랭지 적지 문헌을 현재 농장을 해발 300~700미터로 이동하라는 실행 권고로 확대.",
+      "problemTypes": [
+        "CONDITION_SCOPE",
+        "UNSUPPORTED_ACTION"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-harvest-1": {
+      "label": "PARTIAL",
+      "reason": "실제 수확 잎 부위를 반영하고 문헌의 이식 후 80~100일 조건을 인용함. 문장 중복 및 이식일 미확인 한계.",
+      "problemTypes": [
+        "LANGUAGE_QUALITY",
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-harvest-2": {
+      "label": "API_REJECTED_EXPECTED",
+      "reason": "필수 growthPeriod 누락 HTTP400. 생성 평가 대상 아님.",
+      "problemTypes": [
+        "INPUT_REJECTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-etc-1": {
+      "label": "UNSUPPORTED",
+      "reason": "자갈/단단한 흙만 관찰한 기록을 뿌리 비대가 안 되는 결과로 단정하고 일률적인 매일 관수를 권고.",
+      "problemTypes": [
+        "OUTCOME_INVENTED",
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-2-etc-2": {
+      "label": "UNSUPPORTED",
+      "reason": "의약 효능은 만들지 않았으나 기록에 없는 관수 수행을 칭찬.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-planting-1": {
+      "label": "UNSUPPORTED",
+      "reason": "품종 미상인데 청감용 호광 혼식·수형 수치를 일반 적용.",
+      "problemTypes": [
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-planting-2": {
+      "label": "PARTIAL",
+      "reason": "청감·호광 혼식과 청감 수형 문헌은 일치. 이미 함께 심은 호광을 다시 심으라는 중복 권고이며 현재 수형 미확인.",
+      "problemTypes": [
+        "REDUNDANT_ACTION",
+        "CONDITION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-watering-1": {
+      "label": "UNSUPPORTED",
+      "reason": "물 준 양이 미상인데 충분히 줬다고 기록을 바꿈. 미확인 품종에 혼식 일반화.",
+      "problemTypes": [
+        "AMOUNT_INVENTED",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-watering-2": {
+      "label": "UNSUPPORTED",
+      "reason": "持续한 젖은 흙을 잘했다고 판단하며 미확인 품종에 호광 혼식을 일반 권고.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-fertilizing-1": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-fertilizing-2": {
+      "label": "UNSUPPORTED",
+      "reason": "문헌의 질소 과용→줄기잎 무성/과실 감소를 무성하게 자라지 않음으로 반전. 청감 수형을 품종 미상 기록에 적용.",
+      "problemTypes": [
+        "SOURCE_MEANING_REVERSED",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-pest_control-1": {
+      "label": "UNSUPPORTED",
+      "reason": "총살포량은 기록과 같지만 등록 원칙을 다른 품종 진단으로 바꾸고 품종 미상에 호광 혼식을 권고.",
+      "problemTypes": [
+        "CITATION_SCOPE",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-pest_control-2": {
+      "label": "UNSUPPORTED",
+      "reason": "등록·병해충 미확인 농약 사용을 잘했다고 승인. 등록 원칙 인용으로 혼식 권고를 뒷받침함.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT",
+        "CITATION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-weeding-1": {
+      "label": "UNSUPPORTED",
+      "reason": "제품 미확인 제초제 사용을 잘했다고 판단. 뒤의 제품 확인 권고는 타당해도 최초 적합성 판단 근거는 없음.",
+      "problemTypes": [
+        "UNSUPPORTED_JUDGMENT"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-weeding-2": {
+      "label": "NOT_GENERATED",
+      "reason": "당시 STRUCTURED_OUTPUT_INVALID로 기록됐지만 원시 trace는 TransientAiException 2회(모델 HTTP 오류)였다. 모델 서버 생성 실패이며 제품 형식 검증만의 실패로 해석하지 않는다.",
+      "problemTypes": [
+        "MODEL_SERVER_ERROR_MISCLASSIFIED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-pruning-1": {
+      "label": "UNSUPPORTED",
+      "reason": "품종 미상을 명시했는데 청감의 20센티미터·120센티미터·좌우 50센티미터 수형을 일반 적용.",
+      "problemTypes": [
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-pruning-2": {
+      "label": "SUPPORTED",
+      "reason": "청감 울타리형·새순 정리 기록과 청감 20센티미터 적심/연한 가지 유인 문헌이 일치. 높이를 무조건 늘리는 주장은 없음.",
+      "problemTypes": [
+        "CITATION_LINK_WEAK"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-harvest-1": {
+      "label": "UNSUPPORTED",
+      "reason": "실제 뿌리껍질 수확인데 열매 색을 다음 수확 기준으로 제안하며 품종 미상에 호광 혼식을 적용.",
+      "problemTypes": [
+        "HARVEST_PART_CONFUSION",
+        "CULTIVAR_SCOPE",
+        "CITATION_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-harvest-2": {
+      "label": "API_REJECTED_EXPECTED",
+      "reason": "필수 growthPeriod 누락 HTTP400. 수량 모름 자체의 거부로 해석하지 않음.",
+      "problemTypes": [
+        "INPUT_REJECTED"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-etc-1": {
+      "label": "UNSUPPORTED",
+      "reason": "함께 심었다는 기록이 없는데 혼식을 했다고 칭찬. 품종 미상인데 청감의 호광·적심 조건을 적용.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    },
+    "eval-3-etc-2": {
+      "label": "UNSUPPORTED",
+      "reason": "가격·의약 수치는 만들지 않았으나 함께 심었다는 미기록 행동을 칭찬하고 품종 미상에 청감 수형을 권고.",
+      "problemTypes": [
+        "STATED_ACTION_INVENTED",
+        "CULTIVAR_SCOPE"
+      ],
+      "reviewer": "Codex 문헌·기록 대조 예비 검토(농업 전문가 검토 아님)"
+    }
+  },
+  "failureDiagnosis": "미생성7건 모두 TransientAiException 2회. 당시 지연 HTTP 오류가 STRUCTURED_OUTPUT_INVALID로 오분류됨. 원시 응답/상태를 변경하지 않음.",
+  "modelCallLatencySeconds": {
+    "successfulModelCalls": {
+      "n": 38,
+      "median": 30.291581417,
+      "min": 24.133528667,
+      "max": 36.190141083
+    },
+    "failedModelCalls": {
+      "n": 14,
+      "median": 30.640712270999998,
+      "min": 26.874228917,
+      "max": 32.987040125
+    },
+    "observerTotalSecondsNote": "case seconds는 DB 사전 수량 조회·2초 간격 상태조회·최종 DB/응답 수집을 포함하며 순수 HTTP 응답 시간 아님."
+  }
+}

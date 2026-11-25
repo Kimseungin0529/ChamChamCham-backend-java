@@ -1,0 +1,457 @@
+[
+  {
+    "id": "required-farmId",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/farmId",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "required-cropId",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/cropId",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "required-workType",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/workType",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "required-workedAt",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/workedAt",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "required-weatherTemperature",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/weatherTemperature",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "memo-too-short",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/memo",
+        "op": "set",
+        "value": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "memo-too-long",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/memo",
+        "op": "set",
+        "value": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "memo-blank",
+    "base": "watering",
+    "mutations": [
+      {
+        "path": "/memo",
+        "op": "set",
+        "value": "                              "
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "missing-detail-planting",
+    "base": "planting-seed",
+    "mutations": [
+      {
+        "path": "/planting",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_002"
+  },
+  {
+    "id": "missing-detail-fertilizing",
+    "base": "fertilizing",
+    "mutations": [
+      {
+        "path": "/fertilizing",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_002"
+  },
+  {
+    "id": "missing-detail-pestControl",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_002"
+  },
+  {
+    "id": "missing-detail-harvest",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_002"
+  },
+  {
+    "id": "seed-missing-amount",
+    "base": "planting-seed",
+    "mutations": [
+      {
+        "path": "/planting/seedAmount",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "seedling-missing-count",
+    "base": "planting-seedling",
+    "mutations": [
+      {
+        "path": "/planting/seedlingCount",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "seed-with-seedling",
+    "base": "planting-seed",
+    "mutations": [
+      {
+        "path": "/planting/seedlingCount",
+        "op": "set",
+        "value": 1
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "seedling-with-seed",
+    "base": "planting-seedling",
+    "mutations": [
+      {
+        "path": "/planting/seedAmount",
+        "op": "set",
+        "value": 1
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "seed-amount-below-min",
+    "base": "planting-seed",
+    "mutations": [
+      {
+        "path": "/planting/seedAmount",
+        "op": "set",
+        "value": 0.009
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "seedling-count-zero",
+    "base": "planting-seedling",
+    "mutations": [
+      {
+        "path": "/planting/seedlingCount",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "fertilizer-blank",
+    "base": "fertilizing",
+    "mutations": [
+      {
+        "path": "/fertilizing/materialName",
+        "op": "set",
+        "value": " "
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "fertilizer-amount-zero",
+    "base": "fertilizing",
+    "mutations": [
+      {
+        "path": "/fertilizing/amount",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "pesticide-amount-zero",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/pesticideAmount",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "spray-amount-zero",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/totalSprayAmount",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "spray-unit-invalid",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/totalSprayAmountUnit",
+        "op": "set",
+        "value": "L"
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_002"
+  },
+  {
+    "id": "pesticide-id-missing",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/pesticideId",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "pesticide-id-nonexistent",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/pesticideId",
+        "op": "set",
+        "value": "00000000-0000-0000-0000-000000009991"
+      }
+    ],
+    "status": 404,
+    "code": "PESTICIDE_001"
+  },
+  {
+    "id": "pest-id-nonexistent",
+    "base": "pest-control",
+    "mutations": [
+      {
+        "path": "/pestControl/pestId",
+        "op": "set",
+        "value": "00000000-0000-0000-0000-000000009992"
+      }
+    ],
+    "status": 404,
+    "code": "PESTICIDE_002"
+  },
+  {
+    "id": "harvest-amount-zero",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/harvestAmount",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "harvest-known-missing",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/harvestAmount",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "harvest-unknown-with-amount",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/harvestAmountUnknown",
+        "op": "set",
+        "value": true
+      }
+    ],
+    "status": 400,
+    "code": "FARMING_003"
+  },
+  {
+    "id": "harvest-period-zero",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/growthPeriod",
+        "op": "set",
+        "value": 0
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "harvest-period-missing",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/growthPeriod",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "harvest-last-missing",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/isLastHarvest",
+        "op": "remove",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_001"
+  },
+  {
+    "id": "harvest-source-null",
+    "base": "harvest",
+    "mutations": [
+      {
+        "path": "/harvest/harvestSource",
+        "op": "set",
+        "value": null
+      }
+    ],
+    "status": 400,
+    "code": "COMMON_002"
+  },
+  {
+    "id": "fertilizer-long-database-limit",
+    "base": "fertilizing",
+    "mutations": [
+      {
+        "path": "/fertilizing/materialName",
+        "op": "set",
+        "value": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+      }
+    ],
+    "status": 500,
+    "code": "COMMON_999"
+  },
+  {
+    "id": "decimal-overflow",
+    "base": "fertilizing",
+    "mutations": [
+      {
+        "path": "/fertilizing/amount",
+        "op": "set",
+        "value": 100000000000000
+      }
+    ],
+    "status": 500,
+    "code": "COMMON_999"
+  }
+]

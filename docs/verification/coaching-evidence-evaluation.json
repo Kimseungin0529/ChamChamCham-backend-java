@@ -1,0 +1,80 @@
+{
+  "run": "evidence-final",
+  "originalRun": "evidence-v1",
+  "repeatIsNotNewEvaluation": true,
+  "summary": {
+    "developmentSituations": 24,
+    "evaluationSituations": 48,
+    "evaluationCandidatePairs": 127,
+    "matchedDecisions": 127,
+    "exactSituations": 48,
+    "expectedByStatus": {
+      "APPLICABLE": 37,
+      "CONDITIONAL": 23,
+      "EXCLUDED": 67
+    },
+    "correctByStatus": {
+      "APPLICABLE": 37,
+      "CONDITIONAL": 23,
+      "EXCLUDED": 67
+    },
+    "baselineUnfilteredExcludedRetained": 67,
+    "missingRequiredCandidateCases": 1,
+    "casesWithUncoveredNeed": 36,
+    "casesWithoutApplicableDocument": 19,
+    "modelRequests": 0,
+    "retrievalExecuted": false,
+    "semanticAnswerEvaluation": false
+  },
+  "inputHashes": {
+    ".local/rag-api/corpus/100000732652.html": "aee7c5da8c32db50f058a051a087e1485cb24b17ffb807f90300ccb187d15419",
+    ".local/rag-api/corpus/100000732652.selected.txt": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+    ".local/rag-api/corpus/100000802838.html": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+    ".local/rag-api/corpus/100000802838.selected.txt": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+    ".local/rag-api/corpus/chunks.json": "a20ed1bce4c6c671d0c30f28b3cd499fd45c63d81b32567eee0d68d23496be1b",
+    ".local/rag-api/corpus/gangwon-cham-manual.pdf": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+    ".local/rag-api/corpus/gangwon-cham-manual.selected.txt": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+    ".local/rag-api/corpus/gangwon-cn-spacing.html": "452519fe6c2b5ad61afeb184be06225ed406d1d9ab759831822dca240ef29e00",
+    ".local/rag-api/corpus/gangwon-cn-spacing.selected.txt": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+    ".local/rag-api/corpus/kofpi-goji.pdf": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+    ".local/rag-api/corpus/kofpi-goji.selected.txt": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+    ".local/rag-api/corpus/manifest.json": "ff46ef7c39191bf60af531e90378baef2b6d13c100a30e52d0f3bf69be4ec908",
+    ".local/rag-api/corpus/nongsaro-cn.html": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+    ".local/rag-api/corpus/nongsaro-cn.selected.txt": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+    ".local/rag-api/corpus/nongsaro-goji.html": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+    ".local/rag-api/corpus/nongsaro-goji.selected.txt": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+    ".local/rag-api/corpus/psis-general.html": "bde83bea22d5eaa374490318d24fe72f853a808ce931503146d93f378685d6bc",
+    ".local/rag-api/corpus/psis-general.selected.txt": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+    ".local/rag-api/corpus/rda-cham.html": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+    ".local/rag-api/corpus/rda-cham.selected.txt": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+    ".local/rag-api/evidence-selection/corpus.json": "23d63297be46d9df2b81321f0aac7740628f999dfe85e37f320edb0b595adbc4",
+    ".local/rag-api/evidence-selection/sources/chungbuk-goji.html": "08f7d83cf663d0a7158760af8788a26908a49ac2e3a8f0978ce292f1cdc8f823",
+    ".local/rag-api/evidence-selection/sources/chungbuk-goji.selected.txt": "e44708a52c36091f3826f4d8b50a5d282c6948423e7fb49f0c9f3733bea6ad4b",
+    ".local/rag-api/evidence-selection/sources/rda-cn-1388.html": "70ff8b5cc3c1eba1ec90cb3fe1d2d24904976c79c420d5c5ab5b2b865566b73c",
+    ".local/rag-api/evidence-selection/sources/rda-cn-1388.selected.txt": "e9e1b83ad4566a524860cd2755039e7032620a9b806d7fae3078d54985e3cf92",
+    "api/build.gradle.kts": "e4b007ef7984596388ca323dee86a7e04d6962c5bd6f1b20d23948f57f22ea13",
+    "api/src/test/java/com/chamchamcham/lab/CoachingEvidenceEvaluation.java": "ccdf1890362b774973033b32cc86cff5a8b54a3f5e5f6c6515535fc01a9a97da",
+    "api/src/test/java/com/chamchamcham/lab/CoachingEvidenceSelector.java": "d2130c58ceef079d8312ada9f983bb3f1732bde550fdc76bfe270b31d6f7f852",
+    "api/src/test/resources/verification/coaching-evidence-applicability.json": "2bb921361ea3ba767c828318df8590ee9915d3edf56f2ed81d1b5b3da0a6ee3d",
+    "api/src/test/resources/verification/coaching-evidence-cases.json": "e1f936327c741bae995f4ce29efdccab4ef1de4cf2c7c4cce556cff93b9994fa",
+    "application/src/main/java/com/chamchamcham/application/coaching/recordfeedback/generation/HarvestFeedbackDetail.java": "3c18a208bc4bd3650a605c5dc58cbf6f107a17bb3a2aa98f39ffab8f13f7e72c",
+    "application/src/main/java/com/chamchamcham/application/coaching/recordfeedback/generation/PlantingFeedbackDetail.java": "36c2f354e5b680f5e11b16198042d1ebd02bfeb96cc06b605d337497a1051194",
+    "application/src/main/java/com/chamchamcham/application/coaching/recordfeedback/generation/RecordFeedbackContext.java": "7a1dc6956c4e7a4f292bfbd7d863ee1e93b17751025d77d4d15dff8f65094d49",
+    "application/src/main/java/com/chamchamcham/application/coaching/recordfeedback/generation/RecordFeedbackRecordContext.java": "7afd5a1c132ce7af5dead015a1b8bcbc2fa390b0d6b4f42b66dbd5c76d660abb",
+    "docs/verification/coaching-evidence-sources.json": "9a1a9c3c0bd2c1ef2a4807315b1add6e9a452c1242ccbb45f70941491c4dc8f2",
+    "scripts/coaching-evidence.py": "29a5f66d748292f9ba06d7ec6bf2ed0c1a9cee06e912dadfc940660a823edc9f"
+  },
+  "resultSha256": "7b478bd926f8c58f84d5f25cbb16b3ad394f65e1410988fc7a52ed7092a4b63d",
+  "validation": {
+    "pythonTests": 9,
+    "selectorAndEvaluationTests": 22,
+    "rootTests": 1439,
+    "passed": 1423,
+    "skipped": 16,
+    "failures": 0
+  },
+  "limitations": [
+    "통제 후보의 수동 조건 판정 일치; 검색/자연어 추출/답변 정확도 아님",
+    "조건 주석과 기대값 작성자가 동일; 전문가 평가 없음"
+  ]
+}

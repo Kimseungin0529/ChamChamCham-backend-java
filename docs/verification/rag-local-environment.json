@@ -1,0 +1,46 @@
+{
+  "images": {
+    "pgvector/pgvector:0.8.5-pg16": {
+      "id": "sha256:405e59721305d49a4e570e38ec1fa7f3b2151efcc71c19a2009501dd975a39c7",
+      "digests": [
+        "pgvector/pgvector@sha256:1d533553fefe4f12e5d80c7b80622ba0c382abb5758856f52983d8789179f0fb"
+      ]
+    },
+    "ollama/ollama:latest": {
+      "id": "sha256:88ccff954f5fe575ba39317bf52a730c43cfd08789c09bac8f2a90d664b72a7b",
+      "digests": [
+        "ollama/ollama@sha256:910d0d8107b538fb0894e63163eb195de0cc7aefcbc666dc62d3b18f71124592"
+      ]
+    }
+  },
+  "ollamaVersion": {
+    "version": "0.40.16"
+  },
+  "model": {
+    "name": "bge-m3:latest",
+    "model": "bge-m3:latest",
+    "modified_at": "2026-11-14T05:48:35.421893008Z",
+    "size": 1157672605,
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "bert",
+      "families": [
+        "bert"
+      ],
+      "parameter_size": "566.70M",
+      "quantization_level": "F16",
+      "context_length": 8192,
+      "embedding_length": 1024,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "embedding"
+    ]
+  },
+  "exitCode": 0,
+  "comparisons": 48,
+  "captured": 37,
+  "insufficient": 11
+}

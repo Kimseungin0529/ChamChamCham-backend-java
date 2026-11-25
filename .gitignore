@@ -42,6 +42,8 @@ out/
 ### Kotlin ###
 .kotlin
 .omx/
+.local/rag/
+.local/rag-api/
 
 ### Local-only dev tools ###
 scripts/verify-farming-record-api.sh

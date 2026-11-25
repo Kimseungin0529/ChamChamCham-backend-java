@@ -1,0 +1,26 @@
+[
+  {
+    "sourceId": "gangwon-cn-root",
+    "url": "https://ares.gangwon.kr/gwares/know_how/research/application_data?articleSeq=32318",
+    "error": "URLError",
+    "excludedReason": "공개 페이지 원문 확보 실패(URLError). 웹 검색 요약만으로 문단 적재하지 않음."
+  },
+  {
+    "sourceId": "rda-goji-pruning",
+    "url": "https://www.rda.go.kr/board/board.do?dataNo=100000761447&mode=view&prgId=day_farmlcltinfoEntry",
+    "rawSha256": "91a8523ada74f4101fdc7538aa76531412b9226655441069969fdfb362d1f7b7",
+    "fetchedAt": "2026-11-14T19:02:54.195443+00:00",
+    "bytes": 187098,
+    "textChars": 6205,
+    "excludedReason": "과거 특정 겨울 기온에 따른 시기 조정 기사. 현재 예보·모든 품종 조건으로 일반화하지 않음. 더 구체적인2024청감자료를조건부사용."
+  },
+  {
+    "sourceId": "psis",
+    "url": "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps",
+    "rawSha256": "68ad5740c7a347905954d9538bd3f664ad9c12d5ea06ec24ea9a58fc73a2b08e",
+    "fetchedAt": "2026-11-14T19:02:56.545733+00:00",
+    "bytes": 216434,
+    "textChars": 7508,
+    "excludedReason": "전체 작물 공개 목록 한 페이지. 3개 대상 작물의 제품별 완전한 현행 등록자료로 볼 수 없어 적재하지 않음."
+  }
+]

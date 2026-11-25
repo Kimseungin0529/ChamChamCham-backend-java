@@ -42,8 +42,56 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
+// 명시적으로 요청할 때만 test 소스의 로컬 실습 실행기를 사용한다. bootJar에는 포함되지 않는다.
+tasks.register<JavaExec>("ragApiLabRun") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.RagApiLabApplication")
+    maxHeapSize = "768m"
+}
+
+tasks.register<JavaExec>("ragApiLabIngest") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.RagApiLabIngest")
+    maxHeapSize = "512m"
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
+}
+
+// DB/API를 시작하지 않는 정책 비교 입력 내보내기. 제품 PromptBuilder를 그대로 사용한다.
+tasks.register<JavaExec>("coachingPolicyExport") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingPolicyExport")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "256m"
+}
+
+// 보존 자료의 조건 선별만 비교한다. DB/API/모델은 시작하지 않는다.
+tasks.register<JavaExec>("coachingEvidenceEvaluate") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingEvidenceEvaluation")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "256m"
+    doFirst {
+        val run = providers.gradleProperty("evidenceRun").orNull
+            ?: throw GradleException("-PevidenceRun=<new-run-name>을 지정하세요")
+        require(Regex("[a-z0-9][a-z0-9-]{0,63}").matches(run)) { "잘못된 evidenceRun" }
+        args(run)
+    }
+}
+
+// 승인한 로컬 전용 DB/임베딩으로만 실제 검색을 비교한다. 기본 test에서는 실행하지 않는다.
+tasks.register<JavaExec>("coachingRetrievalEvaluate") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingRetrievalLab")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "512m"
 }
