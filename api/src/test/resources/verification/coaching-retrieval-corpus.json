@@ -1,0 +1,5438 @@
+{
+  "schemaVersion": 1,
+  "notice": "Source ranges, never crop-agnostic recommendations. Baseline26, split same26, expanded includes prior4 + reviewed new excerpts. v2 평가 뒤 독립리뷰에서 미지원 목적/유형/태풍 조건4개를 확인해 보류. 같은96개 후속실행은 회귀이며 새독립평가 아님.",
+  "segments": [
+    {
+      "id": "a9fcb754-1b72-5dd5-962f-c3404887fd7b",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 0,
+      "length": 323,
+      "textSha256": "9b2ec57351a65b4f174f1056875258951008e4b9325c4b4a4974b56ad1a0bf7a",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 0,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "일반 생육/종 구분 자료. 현재 기록의 작업 안내 근거와는 구분"
+      ]
+    },
+    {
+      "id": "4c893198-6390-5e70-82d4-0948c554f31d",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 325,
+      "length": 186,
+      "textSha256": "1fbdf15807100994a21e11f204b41459ad430ec33d5c4c779120fcbbcd2fa527",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 1,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "토양·돌려짓기 일반 설명, 품종별 정량 권장 없음"
+      ]
+    },
+    {
+      "id": "8fc21215-fce5-5278-a773-81ba9d184ba1",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 513,
+      "length": 223,
+      "textSha256": "84b1678284fc7eb390e4b18d0dd13f29371e4744fd3b95e154eaef5b0e07b61f",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 2,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "SEED"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "종자 번식과 종자 발아 처리 조건"
+      ]
+    },
+    {
+      "id": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 738,
+      "length": 589,
+      "textSha256": "3f6113f5cd1e414809843cb11abc0c5d659e3808fd9eee963989c217f60fcf31",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "직파·온상·노지육묘와 정량/수확이 혼재하여 세분 전 보류"
+      ]
+    },
+    {
+      "id": "0d4e2d7d-911f-5c3a-a0f4-29b4086f7439",
+      "parentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "sourceId": "rda-cham",
+      "offset": 738,
+      "length": 91,
+      "textSha256": "041ece1198ffdc2a5190bdaae12707457d1782e1a3df7b04d11c9893a3a89112",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "직파와 육묘이식의 방법 구분. 특정 재배법의 수치 처방 아님."
+      ]
+    },
+    {
+      "id": "4ce5438f-8db2-5f71-b63e-ddd4d3f1986f",
+      "parentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "sourceId": "rda-cham",
+      "offset": 829,
+      "length": 183,
+      "textSha256": "52dd39f19a06e15189aa71dc70892fafafc866c5e6a2117f390fbab6cbbac53b",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HOTBED_TRANSPLANT"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "온상 육묘·뿌리생산 문맥의 수치. 다른 방식에 적용하지 않음."
+      ]
+    },
+    {
+      "id": "480b41ce-6fe7-5c45-a12f-5d9e1bef228e",
+      "parentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "sourceId": "rda-cham",
+      "offset": 1012,
+      "length": 79,
+      "textSha256": "01467477399bbe1942402ab9de12230ad84f04ebf92066e1dfb91cd58f038cf9",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HOTBED_TRANSPLANT"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "온상육묘 이식 뿌리 수확의 원문 문맥."
+      ]
+    },
+    {
+      "id": "8db2cb7f-9eef-53e1-92bc-ae539f0766d6",
+      "parentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "sourceId": "rda-cham",
+      "offset": 1091,
+      "length": 83,
+      "textSha256": "8529a99cd7b7385da586a9d335ded61303020602e90b0f8a05f60c650ec79b96",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "노지육묘 이식과 뿌리 수확 문맥."
+      ]
+    },
+    {
+      "id": "eaa191c5-56c9-5a7e-a295-7daa5c61bf35",
+      "parentId": "1bcfc653-dbed-5e82-89a8-3e89d8e38299",
+      "sourceId": "rda-cham",
+      "offset": 1174,
+      "length": 153,
+      "textSha256": "4f0aa65ef50f719afa7fdef388ff31e384df4fe59bbd794d9beeb84fbee1a17f",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 3,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "c1331551-fbb4-59ed-a51f-b30583213308",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 1329,
+      "length": 257,
+      "textSha256": "1dd1b3d79f0f4d619250a3d4ed5bd28bcac53077de8c9af1e5dd8ff47fc1960c",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 4,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "LEAF"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLUG_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "잎 생산용 플러그묘 이식 실험 조건"
+      ]
+    },
+    {
+      "id": "fc57964c-3dd1-578b-9450-2109172a65de",
+      "parentId": null,
+      "sourceId": "rda-cham",
+      "offset": 1588,
+      "length": 503,
+      "textSha256": "296d7c5651b4c8af810be473b158c5a1028251563be5f51cda58d50203a63331",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 5,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "여름철/멀칭 실험 수치와 일반 안내 혼재; 고온 조건 미확인시 보류"
+      ]
+    },
+    {
+      "id": "38c1ec74-dff4-5b6b-9da9-c884114be6ff",
+      "parentId": "fc57964c-3dd1-578b-9450-2109172a65de",
+      "sourceId": "rda-cham",
+      "offset": 1588,
+      "length": 111,
+      "textSha256": "2dc5eb2699cce757324228dd513beebd6eb28d05f860dd67d5df77d6951a4b02",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 5,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고온기"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "고온기 일반 관수 안내. 물량/횟수 없음."
+      ]
+    },
+    {
+      "id": "59ae7864-ed72-541d-824f-eabcf1951dbe",
+      "parentId": "fc57964c-3dd1-578b-9450-2109172a65de",
+      "sourceId": "rda-cham",
+      "offset": 1699,
+      "length": 227,
+      "textSha256": "5d711d552ce8d284b1912e8d2395d973f7b05ce74d15029792b5788b01c052c3",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 5,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "b9c14f53-10ae-5873-8a84-4b8082e5c85b",
+      "parentId": "fc57964c-3dd1-578b-9450-2109172a65de",
+      "sourceId": "rda-cham",
+      "offset": 1926,
+      "length": 165,
+      "textSha256": "216fe1e3e7d75e86e64b4b38b382fd1a04bc5b15858a54b87863996047c30877",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "rda-cham",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1919",
+        "documentTitle": "고품질 참당귀 생산을 위한 재배기술 [적용: 발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。]",
+        "sourceTitle": "고품질 참당귀 생산을 위한 재배기술",
+        "rawSha256": "4a0edc0736a3bb1bdda5ddbe54e96da6276b67a664d5149aa631caca2fea9bad",
+        "selectedSha256": "61f6e015cc650e957cac423fdcf7d03049b1970b99cc665b55de18c5c31afbb3",
+        "chunkIndex": 5,
+        "applicability": "발행일 미표시. 고랭지·뿌리/잎 생산 구분. 약리 효능 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+      "parentId": null,
+      "sourceId": "nongsaro-cn",
+      "offset": 0,
+      "length": 208,
+      "textSha256": "49a8af1efec3e1a547484169a0d70819af3ac3385840b0bc4f71d86c38cb1485",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 0,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "일천궁과 토천궁의 번식 방법 분기가 혼재; 분리 전 보류"
+      ]
+    },
+    {
+      "id": "707918b4-eb59-536a-8f95-e38b2ca17875",
+      "parentId": "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+      "sourceId": "nongsaro-cn",
+      "offset": 0,
+      "length": 68,
+      "textSha256": "603d26ffb8ad0bd83b4ef6d626b7bcfde0ba6fe73f811b1d50e172baaef3aa2f",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 0,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "d5cc2401-b465-57b6-8173-c1dce8067118",
+      "parentId": "6844e5ba-4a7c-5ead-bb07-3d39615b5c0e",
+      "sourceId": "nongsaro-cn",
+      "offset": 68,
+      "length": 140,
+      "textSha256": "e96362ded9aab24765ffe66b5bc714aa58840fa6052cac766b1c653af0eb3f79",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 0,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "토천궁"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "토천궁 노두 번식. 과거 종구소독 권고의 개별 약제 적합성은 미확인."
+      ]
+    },
+    {
+      "id": "9d8186e1-0a36-5aa2-80e7-113dbff0c28c",
+      "parentId": null,
+      "sourceId": "nongsaro-cn",
+      "offset": 210,
+      "length": 204,
+      "textSha256": "f70caaec7d49dd6ef7c587a1dae5b6cd07a62f0674ed3ca589649cbc344bbbb2",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 1,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "일천궁"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "뿌리생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "harvestPart",
+        "propagation",
+        "region",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "일천궁 뿌리 생장기의 수량 실험 포함"
+      ]
+    },
+    {
+      "id": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "parentId": null,
+      "sourceId": "nongsaro-cn",
+      "offset": 416,
+      "length": 258,
+      "textSha256": "704be33488cd03fe7905678c6b55abcac0e9293dc6cc75c8ced560dc5783fa50",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 2,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "종·연생·지역별 시기 분기 혼재; 분리 전 보류"
+      ]
+    },
+    {
+      "id": "b521ad1d-3808-5858-b4f2-4beaea01e600",
+      "parentId": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "sourceId": "nongsaro-cn",
+      "offset": 416,
+      "length": 79,
+      "textSha256": "fc692781e5f8abaa8e82f8ab8d494a2d6b92ce44db3b45e624ab39cd980384a3",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 2,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리줄기 수확 외관 일반 설명. 특정 날짜 처방 아님."
+      ]
+    },
+    {
+      "id": "8def8dd8-3406-5ae2-b025-ea10aa80e96c",
+      "parentId": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "sourceId": "nongsaro-cn",
+      "offset": 495,
+      "length": 80,
+      "textSha256": "ff71706b51d1c8b548e9a927332dcbdd7b2c396f6afdd29edd3774b96c43ac39",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 2,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "6cbfb4ef-eac9-570b-b89f-dfcea161c34d",
+      "parentId": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "sourceId": "nongsaro-cn",
+      "offset": 575,
+      "length": 44,
+      "textSha256": "f12b4ed0c69a2fff3214ed2321e3385814d83355ef65cb5742f75c8cd2d020c5",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 2,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "일천궁"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "일천궁 뿌리줄기 용도 구분."
+      ]
+    },
+    {
+      "id": "940217db-fe0f-5eaa-bc3a-8b4a417f260c",
+      "parentId": "ef063f8e-4a83-51b5-890c-d817c7a15778",
+      "sourceId": "nongsaro-cn",
+      "offset": 619,
+      "length": 55,
+      "textSha256": "d40f6240c99d9b0594252d309f8a3a35ec1d075fd4a451477abfc70878db8c58",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "nongsaro-cn",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=249",
+        "documentTitle": "천궁의 재배와 이용 [적용: 2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。]",
+        "sourceTitle": "천궁의 재배와 이용",
+        "rawSha256": "eaa906e5eb8f189448098cea4e709fd5052906b9fb33018cd36c6a9566c36b29",
+        "selectedSha256": "a046e55b8c2c6aa7d99be7a1b81b07d766fee8302fb450d811bd4793f2b16bb5",
+        "chunkIndex": 2,
+        "applicability": "2004년 자료. 일천궁/토천궁 구분 확인 필요. 현재 농약 사용 근거 제외。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RHIZOME"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "토천궁"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "토천궁 근경/노두 용도 구분."
+      ]
+    },
+    {
+      "id": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "parentId": null,
+      "sourceId": "nongsaro-goji",
+      "offset": 0,
+      "length": 414,
+      "textSha256": "7c10c764ad5d2f4d70a8698248400c0c9345b1376afcc07d21f2c06aadfc3ab2",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 삽목과 청감/호광 혼식 조건 혼재"
+      ]
+    },
+    {
+      "id": "1ac6ad3d-efef-5acd-9b89-88053f239df4",
+      "parentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "sourceId": "nongsaro-goji",
+      "offset": 0,
+      "length": 136,
+      "textSha256": "2783023a3b0b1266fe1504600c0c8b0f1ed7e041dde4c77441b2b0442b034b5d",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "CUTTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "삽목용 가지 준비. 원문 품종 전용 수분수 조건과 분리."
+      ]
+    },
+    {
+      "id": "356d73f2-52cf-58d0-aadf-2e1d3cea7a63",
+      "parentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "sourceId": "nongsaro-goji",
+      "offset": 136,
+      "length": 25,
+      "textSha256": "c5e37ba7c840188d5ae8f05f2d00878cb59543774a9275bd7a2e5f6d2eb9776b",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "cf154da0-efd9-564c-91db-81f064c89451",
+      "parentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "sourceId": "nongsaro-goji",
+      "offset": 161,
+      "length": 73,
+      "textSha256": "59eb102619ef46445163e07528a156415f40af807132a19d3bf49551acba435c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "76a3b142-8457-51aa-8723-152e3dae7b0f",
+      "parentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "sourceId": "nongsaro-goji",
+      "offset": 234,
+      "length": 111,
+      "textSha256": "ac6a01136eb3cb7b49f4ebcdf48dbb9205ac3fcdc345271eb29c1d374952e7d2",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "150ebc3b-aeea-511c-b80f-d2aa322cf5b1",
+      "parentId": "980df189-d6c8-50ea-91e1-10ba1baea4d4",
+      "sourceId": "nongsaro-goji",
+      "offset": 345,
+      "length": 69,
+      "textSha256": "9d6555b73a3eaa0c584f8aebe88ccb98d849b47d363dca5ae3be46fde49582c2",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 0,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "청감 전용 호광 수분수. 품종/열매생산 조건 유지."
+      ]
+    },
+    {
+      "id": "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+      "parentId": null,
+      "sourceId": "nongsaro-goji",
+      "offset": 416,
+      "length": 386,
+      "textSha256": "a5d02f7e2e8b02d94f1c44efb0764c5f38984daf9b4a3b0864b0724adbef261e",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 1,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RAIN_SHELTER"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "청감/호광 혼식 비율과 비가림 조건 혼재"
+      ]
+    },
+    {
+      "id": "59d45280-3e5d-5d60-979d-7b74724f94c7",
+      "parentId": "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+      "sourceId": "nongsaro-goji",
+      "offset": 416,
+      "length": 245,
+      "textSha256": "ed672ae729f289c1f8ec841ebae43d15c5dd0e4773f761cb42e66835f7506ed0",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 1,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "7a3a4663-d943-5dab-8957-76b03a45a370",
+      "parentId": "9df1bc8a-d812-5d10-8364-38e7ff5bc0b9",
+      "sourceId": "nongsaro-goji",
+      "offset": 661,
+      "length": 141,
+      "textSha256": "6f2830facb2199f3c9ac046eef038299121bc1553ea3851b070e6edf96b84c3c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 1,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RAIN_SHELTER"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "fa68f455-ddd3-5364-be86-b8c6520291c4",
+      "parentId": null,
+      "sourceId": "nongsaro-goji",
+      "offset": 804,
+      "length": 528,
+      "textSha256": "7315fbb8cefbeb7b03e3471e550bb034795d450df10117ddb86a10052700468b",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 2,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "TRELLIS"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "청감 울타리 수형의 정량 높이 설명"
+      ]
+    },
+    {
+      "id": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "parentId": null,
+      "sourceId": "nongsaro-goji",
+      "offset": 1334,
+      "length": 422,
+      "textSha256": "35a4ec3776fc8073897978889e6ad95b503dad980af1db4fdada2a0550f63466",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 적심과 청감 적심 길이가 섞여 있음"
+      ]
+    },
+    {
+      "id": "7f96140b-3eda-583e-9ba8-f14c0c432c43",
+      "parentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "sourceId": "nongsaro-goji",
+      "offset": 1334,
+      "length": 79,
+      "textSha256": "820626d75193ac6ee44327e3927073e9d0b987d75ee029e1ca0a03c427cf4357",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "적심의 정의만 설명. 수치·시기·특정 품종 안내 아님."
+      ]
+    },
+    {
+      "id": "8e8a644b-d105-5233-a466-c4d1a9803aab",
+      "parentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "sourceId": "nongsaro-goji",
+      "offset": 1413,
+      "length": 58,
+      "textSha256": "0a8c163cd661982f7a4f42f623ebda57b81c2a740b623be554372e0d8f2fd661",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "5962cfdf-1772-583c-8d52-53539a8117aa",
+      "parentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "sourceId": "nongsaro-goji",
+      "offset": 1471,
+      "length": 91,
+      "textSha256": "e66e569d940de9e30dcc4aad9eb613621d00aa1cd155b5da1ad0f57504b0ac68",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "ec4afc42-3551-58d1-ae6d-632cc23a377e",
+      "parentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "sourceId": "nongsaro-goji",
+      "offset": 1562,
+      "length": 128,
+      "textSha256": "f010ff9b3a157ac8a39b9f8797e3ed16539718f55a4d28add0439849b1d9091b",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "4db5b750-338c-5960-b21f-b7dc41866bb3",
+      "parentId": "ebfeb057-a267-5026-8d4c-881a1e778284",
+      "sourceId": "nongsaro-goji",
+      "offset": 1690,
+      "length": 66,
+      "textSha256": "40a9f1d397307a9597a5b3c3d24b3e3d0647e84ac4cae794acbc42c22a3797bb",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 3,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "새순생장기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+      "parentId": null,
+      "sourceId": "nongsaro-goji",
+      "offset": 1758,
+      "length": 150,
+      "textSha256": "22d9b64ddf8ac8b1e7fd3a1038a8045e3ab6c5f00c243f975005e199f3daf721",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 4,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "일반 열매 수확과 청감 숙도 설명 혼재"
+      ]
+    },
+    {
+      "id": "3b84ee35-db17-517e-8473-a0cedbf05866",
+      "parentId": "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+      "sourceId": "nongsaro-goji",
+      "offset": 1758,
+      "length": 106,
+      "textSha256": "e238c251b3410ecf7ae1e0a8488e08623aa81e5c74f7f61103e06e84b34f1db3",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 4,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "열매숙도 설명과 청감 추가 숙성 조건을 분리. 수확 날짜는 지역·품종에 따라 다름."
+      ]
+    },
+    {
+      "id": "9bc1c96f-7896-5dc9-9c10-335705051f8d",
+      "parentId": "81f92fbd-bfd6-5370-abc4-3eb658f67f26",
+      "sourceId": "nongsaro-goji",
+      "offset": 1864,
+      "length": 44,
+      "textSha256": "223d87c3807d973e953b440d13a16e3d84afd4ce0a0962cba3e6906f12f1e539",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "nongsaro-goji",
+        "sourceUrl": "https://nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=3209",
+        "documentTitle": "생과형 청감 구기자 재배기술 및 활용 방법 [적용: 2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。]",
+        "sourceTitle": "생과형 청감 구기자 재배기술 및 활용 방법",
+        "rawSha256": "7b89dc83f0b9242681a045bc360144ae76851e745b69c010523a7cac1b11e3eb",
+        "selectedSha256": "d99dc5b03069c5162ca35e9f63f6c250cfc953f8bcdc2bc92c095aa9acaef55b",
+        "chunkIndex": 4,
+        "applicability": "2024년. 청감 품종·호광 수분수·비가림·울타리형 조건. 다른 품종에 자동 적용 금지。"
+      },
+      "constraints": {
+        "variety": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "청감"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "열매숙도 설명과 청감 추가 숙성 조건을 분리. 수확 날짜는 지역·품종에 따라 다름."
+      ]
+    },
+    {
+      "id": "b9ad3cef-0f86-50fd-87b1-8a457466ad60",
+      "parentId": null,
+      "sourceId": "gangwon-cn-spacing",
+      "offset": 0,
+      "length": 87,
+      "textSha256": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "gangwon-cn-spacing",
+        "sourceUrl": "https://www.ares.gangwon.kr/gwares/know_how/research/application_data?articleSeq=32320",
+        "documentTitle": "강원지역 천궁(일천궁)재배를 위한 적정 재식주수 [적용: 2020 연구/2021 게시. 강원 일천궁 재식 간격 실험. 다른 종·지역 자동 적용 금지。]",
+        "sourceTitle": "강원지역 천궁(일천궁)재배를 위한 적정 재식주수",
+        "rawSha256": "452519fe6c2b5ad61afeb184be06225ed406d1d9ab759831822dca240ef29e00",
+        "selectedSha256": "dc79f903f52c7e0b0c16390a2abea395d019d4a2e9ca0f7780b908820b0f992e",
+        "chunkIndex": 0,
+        "applicability": "2020 연구/2021 게시. 강원 일천궁 재식 간격 실험. 다른 종·지역 자동 적용 금지。"
+      },
+      "constraints": {
+        "species": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "일천궁"
+          ]
+        },
+        "region": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "강원"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "강원 일천궁 재식 간격 실험, 타 지역/종 자동 일반화 금지"
+      ]
+    },
+    {
+      "id": "8e4dcf3a-00c8-54cb-9679-c1623d87a939",
+      "parentId": null,
+      "sourceId": "psis-general",
+      "offset": 0,
+      "length": 268,
+      "textSha256": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "GENERAL",
+        "sourceId": "psis-general",
+        "sourceUrl": "https://psis.rda.go.kr/psis/cont/contentMain.ps?menuId=PS00316",
+        "documentTitle": "농약사용시 일반적 주의사항 [적용: 일반 등록 원칙만. 개별 제품의 등록·사용량·적합성은 확인되지 않음。]",
+        "sourceTitle": "농약사용시 일반적 주의사항",
+        "rawSha256": "bde83bea22d5eaa374490318d24fe72f853a808ce931503146d93f378685d6bc",
+        "selectedSha256": "08374e371c43ab2ca4aa393379af5e9a064306ce35bb34788a30321d0431fcb7",
+        "chunkIndex": 0,
+        "applicability": "일반 등록 원칙만. 개별 제품의 등록·사용량·적합성은 확인되지 않음。"
+      },
+      "constraints": {
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cropName",
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "등록 원칙만 제공하며 실제 제품/작물/대상/횟수의 적합성은 미확인",
+        "GENERAL_PRINCIPLE_ONLY_NOT_PRODUCT_APPROVAL"
+      ]
+    },
+    {
+      "id": "53cc6663-43fd-50f5-9399-409886e14e17",
+      "parentId": null,
+      "sourceId": "100000732652",
+      "offset": 0,
+      "length": 490,
+      "textSha256": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000732652",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000732652&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "천궁·당귀 재배 전에 안전 재배지인지 확인하세요 [천궁용]",
+        "rawSha256": "aee7c5da8c32db50f058a051a087e1485cb24b17ffb807f90300ccb187d15419",
+        "selectedSha256": "c3e5f7b349da31bc8dd61c37e0b4f44eabc52cacdddeaee01ef4715ef7014f5e",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "PLANTING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "천궁 고온/재배지 일반 관리. 당귀 종 불명으로 참당귀에 적용하지 않음"
+      ]
+    },
+    {
+      "id": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "parentId": null,
+      "sourceId": "100000802838",
+      "offset": 0,
+      "length": 748,
+      "textSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "고온기 관찰·영양·병해충 복수 안내, 실제 현재 고온 여부 필요"
+      ]
+    },
+    {
+      "id": "952d6d2c-a2c5-52db-a6a7-a60b5392caf1",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 0,
+      "length": 73,
+      "textSha256": "e7571c280a27541db2ed43302551066534179ebbcde226f7fcbd4b96488149f2",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "c173e981-4688-5388-8c9c-e4453f00507a",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 73,
+      "length": 65,
+      "textSha256": "18d455d2b5899bf06721a17897f35f7f16e44b5d1b89bdf4e500f3597fae46d1",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "ecf00c77-d936-539d-bbc9-254c8cbe1856",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 138,
+      "length": 72,
+      "textSha256": "298c315fe8c912721cc1423b91536144c2d4e08b58c1e9c2d8a333434a71f209",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "bd8c16aa-0f0f-5316-b7df-76181ad81cba",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 210,
+      "length": 77,
+      "textSha256": "4d468b3066dd072c5e6c3479c015c5dd1d09334b156a8ed63e5a5c74be6c4e2c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고온기"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "천궁/당귀 고온기 관리 문맥의 관수. 실제 토양/배수 확인을 대체하지 않음."
+      ]
+    },
+    {
+      "id": "a98180b1-5ca2-518d-b2c3-3834e1c58684",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 287,
+      "length": 106,
+      "textSha256": "dad1f08ebce04e04ed49921042497674652cb8d1758689bb3fe8ae8a29c2fce6",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "17cf7446-71d2-5b37-a90f-8c48294a9fa4",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 393,
+      "length": 141,
+      "textSha256": "1cc3eaa6e4827e7ec47d48859a57f8d37d33d58f053b07aa242dbebf79a97394",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "FERTILIZING",
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "1a24eff8-8317-5293-91c8-1242ba9464ac",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 534,
+      "length": 42,
+      "textSha256": "d9b8ef7cfbc9544855f308d73d809c0845f12e9c2e04109ba061cd8dedc473c1",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "관찰/위생관리 근거. 진단·개별 제품 적합성은 확인하지 않음."
+      ]
+    },
+    {
+      "id": "9d781db8-36e0-595a-b7f4-d4d7c61fba02",
+      "parentId": "95278e5d-eaf9-5436-982b-b4090b26a33f",
+      "sourceId": "100000802838",
+      "offset": 576,
+      "length": 172,
+      "textSha256": "08dbcee09f9e11dc183bc263fd7cc428ce927bdb1e6ef0d9e5ee3223dfdb312e",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceId": "100000802838",
+        "sourceUrl": "https://www.rda.go.kr/board/board.do?dataNo=100000802838&mode=view&prgId=day_farmprmninfoEntry",
+        "documentTitle": "고온 취약한 약용작물, 재배 관리 필수 [천궁용]",
+        "rawSha256": "302e96782ffaf2de665225e7ef43411e873e5b20828a67e08d84d6c7f8a2b3b9",
+        "selectedSha256": "54b19efa4fe4eead7ac789276cc2265574b0cd4438e57eb19de3d4d4545ed2f6",
+        "chunkIndex": 0,
+        "applicability": "천궁 고온·재배지 관리. 당귀 종 불명확하여 참당귀에는 적용하지 않음。"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "관찰/위생관리 근거. 진단·개별 제품 적합성은 확인하지 않음."
+      ]
+    },
+    {
+      "id": "8efeb901-e42b-5926-a6c5-e07b7a83d0f0",
+      "parentId": null,
+      "sourceId": "kofpi-goji",
+      "offset": 0,
+      "length": 132,
+      "textSha256": "f9799c5493b15d44ef12ee62e48f1c334467a7ee6d064a91fedb106688258510",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "kofpi-goji",
+        "sourceUrl": "https://gis.kofpi.or.kr/dad_user/assets/static/farmTech/%EC%95%BD%EC%9A%A9%EB%A5%98/%EA%B5%AC%EA%B8%B0%EC%9E%90.pdf",
+        "documentTitle": "알기 쉬운 구기자나무 재배·관리 매뉴얼 [2013 일반·정량 미적용]",
+        "rawSha256": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+        "selectedSha256": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+        "chunkIndex": 0,
+        "page": 17,
+        "applicability": "2013년 매뉴얼 일반 재배. 품종 미상. 정량·과거 농약 권장·의약 효능 제외. 현대 청감 조건으로 덮어쓰지 않음."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "열매 생산과 질소 과용 관계에 한정. 정량 권장 아님"
+      ]
+    },
+    {
+      "id": "2f3bbe88-4eea-54b5-a1ef-0e1c724355dc",
+      "parentId": null,
+      "sourceId": "kofpi-goji",
+      "offset": 134,
+      "length": 56,
+      "textSha256": "9234e8b0bb78e198d00f21f35dbbbf9485583f411fdb1b53ce9555cb7ddbbddf",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "kofpi-goji",
+        "sourceUrl": "https://gis.kofpi.or.kr/dad_user/assets/static/farmTech/%EC%95%BD%EC%9A%A9%EB%A5%98/%EA%B5%AC%EA%B8%B0%EC%9E%90.pdf",
+        "documentTitle": "알기 쉬운 구기자나무 재배·관리 매뉴얼 [2013 일반·정량 미적용]",
+        "rawSha256": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+        "selectedSha256": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+        "chunkIndex": 1,
+        "page": 15,
+        "applicability": "2013년 매뉴얼 일반 재배. 품종 미상. 정량·과거 농약 권장·의약 효능 제외. 현대 청감 조건으로 덮어쓰지 않음."
+      },
+      "constraints": {
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "활착기"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "CUTTING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "PLANTING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "harvestPart",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "삽식 후 활착 단계의 관수 설명"
+      ]
+    },
+    {
+      "id": "86c42517-b5a6-587d-8cf1-253807bef32e",
+      "parentId": null,
+      "sourceId": "kofpi-goji",
+      "offset": 192,
+      "length": 107,
+      "textSha256": "e6f4a79ea97dde1458ee0b2a8bd6b1cfa255f365784e3bad3f092a5d9d9a59c0",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceId": "kofpi-goji",
+        "sourceUrl": "https://gis.kofpi.or.kr/dad_user/assets/static/farmTech/%EC%95%BD%EC%9A%A9%EB%A5%98/%EA%B5%AC%EA%B8%B0%EC%9E%90.pdf",
+        "documentTitle": "알기 쉬운 구기자나무 재배·관리 매뉴얼 [2013 일반·정량 미적용]",
+        "rawSha256": "4115576ac639573f7518a7989dfbbb637ababb8b2c44ba22462ed36f589a2e9d",
+        "selectedSha256": "cc5934e528cb34a79de799affed7b6b905b7c5af8b20bf6ec9b6c5b8ddd0059e",
+        "chunkIndex": 2,
+        "page": 13,
+        "applicability": "2013년 매뉴얼 일반 재배. 품종 미상. 정량·과거 농약 권장·의약 효능 제외. 현대 청감 조건으로 덮어쓰지 않음."
+      },
+      "constraints": {
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "RAIN_SHELTER"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "시설 피복 조건과 탄저병 예방 설명"
+      ]
+    },
+    {
+      "id": "01da4ded-194c-5d9e-969d-7b511a464eb5",
+      "parentId": null,
+      "sourceId": "gangwon-cham-manual",
+      "offset": 0,
+      "length": 55,
+      "textSha256": "7fa5de8acd9f44408e8010e1b3864fe7425322857503a8e2566d6bc55df64e56",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 0,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "생육중기"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지육묘 이식 부분. 저장 이미지 page27/인쇄28 상위 범위 대조"
+      ]
+    },
+    {
+      "id": "1715d947-8adf-5f7e-a8b8-3b26d6d3eb47",
+      "parentId": null,
+      "sourceId": "gangwon-cham-manual",
+      "offset": 57,
+      "length": 106,
+      "textSha256": "74e85d7256c554bb3082ee8013f1f75f2da502a47ed75e2b8907d4c7ba8e49cb",
+      "groups": [
+        "baseline",
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 1,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지육묘 이식 부분의 시기/비료 설명"
+      ]
+    },
+    {
+      "id": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "parentId": null,
+      "sourceId": "gangwon-cham-manual",
+      "offset": 165,
+      "length": 123,
+      "textSha256": "762ea0e57e8e9f5cefa9632237cddbe520b75378cd06c2fdb6a03cb852354216",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 2,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "배토·추대·노화잎 관리가 혼재; 작업별/생육기 세분 전 보류"
+      ]
+    },
+    {
+      "id": "b3cc6f83-2b47-59b4-a0eb-6de0270e6789",
+      "parentId": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 165,
+      "length": 6,
+      "textSha256": "7bce1a06b75cab467c4e40691f02c050ab484cd6215eaab55312f3fc686022a3",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 2,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "0e8b6f18-f19b-5ec5-b110-0768c485293f",
+      "parentId": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 171,
+      "length": 40,
+      "textSha256": "2e50645ba4237498c606ef4d5460ce9a3dbd92b4641ba294b92c652229020da5",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 2,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지이식재배 문맥. 조기 추대 개체 제거는 꽃대만 자르는 작업과 다름."
+      ]
+    },
+    {
+      "id": "a0cedb65-1658-52f5-a6b7-44d1daf3a460",
+      "parentId": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 211,
+      "length": 35,
+      "textSha256": "abd777e99efdcd82c04aa73f441066207772faeb3abc05edf46989b84fc81e3a",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 2,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지이식재배 문맥. 조기 추대 개체 제거는 꽃대만 자르는 작업과 다름."
+      ]
+    },
+    {
+      "id": "71a2b34f-0a4b-5571-ac67-cb3ca9b90e57",
+      "parentId": "c2cd078d-8ae3-51f8-88cf-adadb8c1797a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 246,
+      "length": 42,
+      "textSha256": "adb00f7dc8bc46d20184fd2e5b633b131de882449940bc3f1c107500925b788c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 노지육묘 이식재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 2,
+        "page": 27,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PRUNING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 노지이식재배 문맥. 조기 추대 개체 제거는 꽃대만 자르는 작업과 다름."
+      ]
+    },
+    {
+      "id": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "parentId": null,
+      "sourceId": "gangwon-cham-manual",
+      "offset": 290,
+      "length": 113,
+      "textSha256": "3ec7f6ffe758ea7e72f69e97c1dc27a12994d0021dd5a8d98d3914705201ca98",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 3,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING",
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "뿌리용 직파재배 부분. 초기 제초와 월동/방제 안내 혼재"
+      ]
+    },
+    {
+      "id": "36375d4d-5915-5759-8679-e37004a7d54f",
+      "parentId": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 290,
+      "length": 19,
+      "textSha256": "3886ca159e6d79ab48d1f8a78c1f80af6af18a6198161d8023ddb1736ea20ed4",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 3,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING",
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "4499686a-b009-585c-b0bc-b13c6fb199c2",
+      "parentId": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 309,
+      "length": 18,
+      "textSha256": "1797b24200ed4892b663093d85b36a6773a7358490a3ce67f870704149313c14",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 3,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 직파재배 토양관리. 원문 문맥 유지."
+      ]
+    },
+    {
+      "id": "ce7dfb15-6d8f-5784-8387-072dbce4dd0e",
+      "parentId": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 327,
+      "length": 33,
+      "textSha256": "e302c8fecfa6a76a57a7e0bf16956dbde0ca3408d60946e844e5f22c025d4a9c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 3,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "ETC"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 직파재배 토양관리. 원문 문맥 유지."
+      ]
+    },
+    {
+      "id": "74774427-39f7-55aa-9940-ee8a89ff7424",
+      "parentId": "3d02f409-33f0-5586-beb0-e49d8b65ba0a",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 360,
+      "length": 43,
+      "textSha256": "f173dd588d8b567b6982b95c5992a6525cca80adf65f3175380c485417f31d3f",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 3,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING",
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "parentId": null,
+      "sourceId": "gangwon-cham-manual",
+      "offset": 405,
+      "length": 92,
+      "textSha256": "ce2a9777d4d960a1df9786f5f4b2a6d09295cb142a0c3f42c32a668d3fd5eb64",
+      "groups": [
+        "baseline"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "유묘/성묘 시비 조건 혼재; 생육기 세분 전 보류"
+      ]
+    },
+    {
+      "id": "3b1e1b16-b263-51ff-8a41-4971412a0351",
+      "parentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 405,
+      "length": 19,
+      "textSha256": "47f6d2b530b76546e0bb5568356540387903a0c36e756c9827e27505e5e31b48",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "0da6ff6a-03f4-5a0f-ab97-5c16a47c53b3",
+      "parentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 424,
+      "length": 25,
+      "textSha256": "60a4a2e47b781e7fcc3675fae4b8f3aca8d5e097e951cf1d1daa8dbe603a78f1",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "c77e2be9-7a88-55b2-943f-262f95cb89b8",
+      "parentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 449,
+      "length": 5,
+      "textSha256": "440a3151f5248f4a11973f40be6fe7376b1c8c5513c8b334fa8f1ea9a267d28c",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "분할 후에도 자료 범위/세부 조건 미해결. 자동 확정하지 않음."
+      ]
+    },
+    {
+      "id": "d1689479-3f14-5a04-88eb-c6513f4adb4f",
+      "parentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 454,
+      "length": 21,
+      "textSha256": "2484cb4a9a031003e0da5a9772e1c11db691e9c0cd72950d400ceb8a9db2d67f",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "유묘기"
+          ]
+        }
+      },
+      "notStated": [
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 직파재배의 해당 생육기 안내. 정량 처방 아님."
+      ]
+    },
+    {
+      "id": "af69efcd-b611-5c61-ba2a-9969b84a16b6",
+      "parentId": "7561d1fb-f962-575f-b0b6-f0ca2fea561f",
+      "sourceId": "gangwon-cham-manual",
+      "offset": 475,
+      "length": 22,
+      "textSha256": "bc294560ba0915b828d2e573dde63e21a7fd92b46dfc8c8d751e0142343654a7",
+      "groups": [
+        "split",
+        "expanded"
+      ],
+      "metadata": {
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "참당귀",
+        "sourceId": "gangwon-cham-manual",
+        "sourceUrl": "https://www.ares.gangwon.kr/upload/board/BDAAAA26/862cc326-6f63-4870-ab66-6107643996cf",
+        "documentTitle": "참당귀 생산·가공·유통 매뉴얼 [뿌리용 직파재배]",
+        "rawSha256": "29851e0f5a16bd86619e2074c2521f878a1f1a774d309f2b48710c713ec493b1",
+        "selectedSha256": "19715a4ac8a03cb75451d00086ec151a62b62fa74f3bcc3818245afe305e5f6a",
+        "chunkIndex": 4,
+        "page": 32,
+        "applicability": "뿌리용 노지육묘 이식재배(PDF27쪽) 및 직파(PDF32쪽)로 구분. 잎 전용 생산 조건과 혼용 금지."
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "DIRECT_SOWING"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "참당귀"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "성묘기"
+          ]
+        }
+      },
+      "notStated": [
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "뿌리용 직파재배의 해당 생육기 안내. 정량 처방 아님."
+      ]
+    },
+    {
+      "id": "c6c689b0-9d12-5432-b4fa-0e79f528ad94",
+      "parentId": null,
+      "sourceId": "chungbuk-goji",
+      "offset": 0,
+      "length": 30,
+      "textSha256": "f043ab504703102bc1e7c4971cb8e513bb4af84ee28e10b74c79e1185cf6c37d",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "sourceId": "chungbuk-goji",
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceUrl": "https://ares.chungbuk.go.kr/home/sub.php?menukey=1151",
+        "chunkIndex": 0
+      },
+      "constraints": {
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        },
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "지골피가 뿌리껍질이라는 부위 구분만 지원. 시기/채취 방법은 미확보"
+      ]
+    },
+    {
+      "id": "3382f1d7-f7ae-5f15-a41a-ccb694a3445b",
+      "parentId": null,
+      "sourceId": "chungbuk-goji",
+      "offset": 32,
+      "length": 22,
+      "textSha256": "e0c7e3d0c50a0783f64a23595ffbc4f9d7fdf112f1d063b799731d1815fec8bd",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "sourceId": "chungbuk-goji",
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "구기자나무",
+        "sourceUrl": "https://ares.chungbuk.go.kr/home/sub.php?menukey=1151",
+        "chunkIndex": 1
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "구기자나무"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WEEDING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "피복의 일반적 잡초 억제 설명만 선택. 현행 제초제 사용 여부 판단하지 않음"
+      ]
+    },
+    {
+      "id": "0988a3ac-5d96-5ea1-be6c-92e95609a501",
+      "parentId": null,
+      "sourceId": "rda-cn-1388",
+      "offset": 0,
+      "length": 25,
+      "textSha256": "0d7aa183028170874027bbd2d036178953b4a0211553297709bf559ed2e86dc5",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "sourceId": "rda-cn-1388",
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1388",
+        "chunkIndex": 0
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "정량 없는 가뭄 관찰/물관리 안내. 실제 가뭄 진단으로 해석하지 않음"
+      ]
+    },
+    {
+      "id": "3c4d1f18-9803-5b82-b9c3-9826e42b4d76",
+      "parentId": null,
+      "sourceId": "rda-cn-1388",
+      "offset": 27,
+      "length": 67,
+      "textSha256": "89d67d76037724ad81b6206d52f2f2e2f0a8a6b7ef646fbef2be482789b752b6",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "sourceId": "rda-cn-1388",
+        "sourceType": "TECH_DOCUMENT",
+        "cropName": "천궁",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1388",
+        "chunkIndex": 1
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "천궁"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "기후·재배조건과 병해의 관계 및 병명 예시. 진단/제품 추천 아님"
+      ]
+    },
+    {
+      "id": "f52b5b22-3dd2-5359-b628-3ec560a8e058",
+      "parentId": null,
+      "sourceId": "rda-doraji",
+      "offset": 1962,
+      "length": 78,
+      "textSha256": "eda95db40b9d9b6adec53e885e9392e8e78401552bbd09a95dd1550da592c0b2",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "rda-doraji",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1267",
+        "documentTitle": "약용작물 어떻게 심고 관리해야 하나요",
+        "sourceTitle": "약용작물 어떻게 심고 관리해야 하나요",
+        "rawSha256": "1d425148aa62682e68d025e7aa9074bc1e553ba85c2056912ed21aab4c4e6bc5",
+        "selectedSha256": "be71c50076191f846dfbbc13159d6101a8a1fb04cd24d9971a788ce0b67918d8",
+        "label": "doraji-direct"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "SEED"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "도라지 단락만 사용. 타작물 약제·정량 권장 제외."
+      ]
+    },
+    {
+      "id": "3b1308e0-a517-56eb-96c6-6449d8cac56e",
+      "parentId": null,
+      "sourceId": "rda-doraji",
+      "offset": 2356,
+      "length": 86,
+      "textSha256": "3b2f408c3e452fee8edbc30f11bb8fb2592684c3df1744510e0718574827de91",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "rda-doraji",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1267",
+        "documentTitle": "약용작물 어떻게 심고 관리해야 하나요",
+        "sourceTitle": "약용작물 어떻게 심고 관리해야 하나요",
+        "rawSha256": "1d425148aa62682e68d025e7aa9074bc1e553ba85c2056912ed21aab4c4e6bc5",
+        "selectedSha256": "be71c50076191f846dfbbc13159d6101a8a1fb04cd24d9971a788ce0b67918d8",
+        "label": "doraji-sow-water"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING",
+            "WATERING"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "SEED"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "발아기"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "harvestPart",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "도라지 단락만 사용. 타작물 약제·정량 권장 제외."
+      ]
+    },
+    {
+      "id": "75d464cd-1d39-5274-83d8-c1ed419f5315",
+      "parentId": null,
+      "sourceId": "nongsaro-doraji",
+      "offset": 1125,
+      "length": 82,
+      "textSha256": "1671457b68fdc51a91b55882b0d2113b46c5b6627e4cce2b38e5de0da5aac5a6",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-doraji",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS65512&mvpNo=703",
+        "documentTitle": "도라지 재배기술",
+        "sourceTitle": "도라지 재배기술",
+        "rawSha256": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+        "selectedSha256": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+        "label": "doraji-thin"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ETC"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "유묘기"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "과거 제초제/타작물약제/유기인제 배수·의약효능 제외. 수확 목적은 입력에 없으면 보류."
+      ]
+    },
+    {
+      "id": "cf41d8aa-4220-56e1-a566-3a56db7e4ec7",
+      "parentId": null,
+      "sourceId": "nongsaro-doraji",
+      "offset": 1343,
+      "length": 164,
+      "textSha256": "fb0e5e943f4e64018a979fb3f458f477536dbf76985bf3075132dedb7885ed38",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-doraji",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS65512&mvpNo=703",
+        "documentTitle": "도라지 재배기술",
+        "sourceTitle": "도라지 재배기술",
+        "rawSha256": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+        "selectedSha256": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+        "label": "doraji-fertilizer"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FERTILIZING"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "과거 제초제/타작물약제/유기인제 배수·의약효능 제외. 수확 목적은 입력에 없으면 보류."
+      ]
+    },
+    {
+      "id": "210ed8b0-abc8-5a55-9283-cda7f187fefc",
+      "parentId": null,
+      "sourceId": "nongsaro-doraji",
+      "offset": 1517,
+      "length": 61,
+      "textSha256": "30efc0646f52ab7fe96c930cf95832e497c228e8a8c052fdf1aaa9b06dfbde97",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-doraji",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS65512&mvpNo=703",
+        "documentTitle": "도라지 재배기술",
+        "sourceTitle": "도라지 재배기술",
+        "rawSha256": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+        "selectedSha256": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+        "label": "doraji-pests"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PEST_CONTROL"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "과거 제초제/타작물약제/유기인제 배수·의약효능 제외. 수확 목적은 입력에 없으면 보류."
+      ]
+    },
+    {
+      "id": "19acad5f-8f52-540b-8a4b-fb19f05e0e51",
+      "parentId": null,
+      "sourceId": "nongsaro-doraji",
+      "offset": 1881,
+      "length": 75,
+      "textSha256": "8416461cea80ad5eb14392021e3d9fb394171419810db4ac1b1af249df0557b7",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "도라지",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-doraji",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS65512&mvpNo=703",
+        "documentTitle": "도라지 재배기술",
+        "sourceTitle": "도라지 재배기술",
+        "rawSha256": "c977583d807eedc009a67409299f5d88e34ac7961852e9433e384a395181a0dc",
+        "selectedSha256": "e5a80528d38ac026e229e396ae03099613fa2858b887145eae9aabe0e4164963",
+        "label": "doraji-harvest"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "도라지"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "ROOT_BARK"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "과거 제초제/타작물약제/유기인제 배수·의약효능 제외. 수확 목적은 입력에 없으면 보류.",
+        "식용/약용 생산목적이 섞인 원문이며 현재 입력만으로 수확연수 확정 불가."
+      ]
+    },
+    {
+      "id": "ea260f76-e95a-5d59-98a5-5d867783f247",
+      "parentId": null,
+      "sourceId": "nongsaro-lettuce",
+      "offset": 1065,
+      "length": 64,
+      "textSha256": "5c203b17e8e2d18b44f4544a1f7db9abdd69b6078581bf78782c5af92bc3042a",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "상추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-lettuce",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?cntntsNo=220176&menuId=PS65512&mvpNo=1711",
+        "documentTitle": "상추 노지재배기술",
+        "sourceTitle": "상추 노지재배기술",
+        "rawSha256": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+        "selectedSha256": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+        "label": "lettuce-light-seed"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "상추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "propagation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "SEED"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "harvestPart",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "노지/잎상추/플러그육묘 문맥. 결구·수경에 자동 적용하지 않음. 정량 시비표 제외."
+      ]
+    },
+    {
+      "id": "bd44a2b9-4f0e-5285-bea0-50b2ba1a0d85",
+      "parentId": null,
+      "sourceId": "nongsaro-lettuce",
+      "offset": 1204,
+      "length": 68,
+      "textSha256": "717c479a298c2a0bf6529088043b18f2bc89d580a2dd57da2f58dfe5b904faaf",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "상추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-lettuce",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?cntntsNo=220176&menuId=PS65512&mvpNo=1711",
+        "documentTitle": "상추 노지재배기술",
+        "sourceTitle": "상추 노지재배기술",
+        "rawSha256": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+        "selectedSha256": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+        "label": "lettuce-nursery-water"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "상추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLUG_NURSERY"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "유묘기"
+          ]
+        }
+      },
+      "notStated": [
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "노지/잎상추/플러그육묘 문맥. 결구·수경에 자동 적용하지 않음. 정량 시비표 제외."
+      ]
+    },
+    {
+      "id": "1cc2ea28-bce8-56e5-b9fa-7273621a7a33",
+      "parentId": null,
+      "sourceId": "nongsaro-lettuce",
+      "offset": 1590,
+      "length": 73,
+      "textSha256": "82bd33325bfee7268561d14fb5b678ff5bbf73191a9039be6bd110992aa91d8b",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "상추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-lettuce",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?cntntsNo=220176&menuId=PS65512&mvpNo=1711",
+        "documentTitle": "상추 노지재배기술",
+        "sourceTitle": "상추 노지재배기술",
+        "rawSha256": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+        "selectedSha256": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+        "label": "lettuce-transplant-water"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "상추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "활착기"
+          ]
+        }
+      },
+      "notStated": [
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": false,
+      "caveats": [
+        "노지/잎상추/플러그육묘 문맥. 결구·수경에 자동 적용하지 않음. 정량 시비표 제외."
+      ]
+    },
+    {
+      "id": "3c8538e6-dbbd-5f82-91d8-1bc6b6d35bda",
+      "parentId": null,
+      "sourceId": "nongsaro-lettuce",
+      "offset": 1670,
+      "length": 287,
+      "textSha256": "f89d7a4e68cf75f2a34d1bfa9695041bf6abc1ececc931b7229cf6db1ae593a0",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "상추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-lettuce",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?cntntsNo=220176&menuId=PS65512&mvpNo=1711",
+        "documentTitle": "상추 노지재배기술",
+        "sourceTitle": "상추 노지재배기술",
+        "rawSha256": "9c697d37199d0f1c187d00ec451eea2901b352159830d36404e2d90409b4db2b",
+        "selectedSha256": "e3e509ec48c884c27ded3f516513a3e4dbca720df12b90fc85b4d49fb3975abb",
+        "label": "lettuce-leaf-harvest"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "상추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "LEAF"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FIELD_TRANSPLANT"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "노지/잎상추/플러그육묘 문맥. 결구·수경에 자동 적용하지 않음. 정량 시비표 제외.",
+        "잎상추/결구상추 유형이 구조화되지 않음. LEAF와노지이식만으로확정금지."
+      ]
+    },
+    {
+      "id": "5b3a3c77-4e80-584a-bf0c-91a123acfba9",
+      "parentId": null,
+      "sourceId": "nongsaro-pepper-facility",
+      "offset": 1051,
+      "length": 138,
+      "textSha256": "d75dbd5ecd747e59b1846e991d4720b3c011062b19c16c13bbe84a41a10a97b6",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "고추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-pepper-facility",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS00069&mvpClipNo=4&mvpNo=770",
+        "documentTitle": "시설풋고추 아주심기 후 환경 관리",
+        "sourceTitle": "시설풋고추 아주심기 후 환경 관리",
+        "rawSha256": "15dd50ed2a20b4a1ca6733cbb4d09f29cd73c2fcdb6fd8b3b61ef7747b0a9c29",
+        "selectedSha256": "eac904c177f027eed7353dd5fd68212f666ef8bffc65589076d9521f8bb72d96",
+        "label": "pepper-facility-water"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FACILITY"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "시설풋고추 범위. 노지에 관수 수치 자동 적용 금지.",
+        "시설 풋고추의 생산 목적을 현재 구조화 사실로 검사하지 못함. 시설 여부만으로 적용 확정 금지."
+      ]
+    },
+    {
+      "id": "72e79111-8a5d-5423-b39c-5ed216016d2f",
+      "parentId": null,
+      "sourceId": "nongsaro-pepper-facility",
+      "offset": 783,
+      "length": 133,
+      "textSha256": "b28ff563bcba4e1846a7b27f7f1f81991b43e575dcf37dda8959a1c694622e30",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "고추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "nongsaro-pepper-facility",
+        "sourceUrl": "https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?menuId=PS00069&mvpClipNo=4&mvpNo=770",
+        "documentTitle": "시설풋고추 아주심기 후 환경 관리",
+        "sourceTitle": "시설풋고추 아주심기 후 환경 관리",
+        "rawSha256": "15dd50ed2a20b4a1ca6733cbb4d09f29cd73c2fcdb6fd8b3b61ef7747b0a9c29",
+        "selectedSha256": "eac904c177f027eed7353dd5fd68212f666ef8bffc65589076d9521f8bb72d96",
+        "label": "pepper-facility-setting"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "PLANTING"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FACILITY"
+          ]
+        },
+        "growthStage": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "활착기"
+          ]
+        }
+      },
+      "notStated": [
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "시설풋고추 범위. 노지에 관수 수치 자동 적용 금지.",
+        "시설 풋고추의 생산 목적이 구조화되지 않음. 시설/활착기만으로 확정 금지."
+      ]
+    },
+    {
+      "id": "26e7b53b-6426-54ac-a2da-97e070996482",
+      "parentId": null,
+      "sourceId": "rda-pepper-harvest",
+      "offset": 1591,
+      "length": 72,
+      "textSha256": "4598ab6a7e59df1cec0569cf0c0c077d9a045936f1294aba566655c871dece18",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "고추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "rda-pepper-harvest",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1042",
+        "documentTitle": "고추 안정생산 포장관리와 적기 수확",
+        "sourceTitle": "고추 안정생산 포장관리와 적기 수확",
+        "rawSha256": "e7e3e1654d9e14f3f34dfc8fc83d6f576c664eac645af5a76ca52ed1b126efe8",
+        "selectedSha256": "f7b90425f2509a215023742f7297f265f312634a8e549f0322f25b9ad1bed2ad",
+        "label": "pepper-drainage"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "WATERING",
+            "ETC"
+          ]
+        },
+        "cultivation": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "OPEN_FIELD"
+          ]
+        }
+      },
+      "notStated": [
+        "growthStage",
+        "harvestPart",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "과거 전문약제 일괄살포/엽면시비농도 제외. 풋/홍고추 구분, 물리관리와 일반 수확만.",
+        "태풍이후 복구 여부를 구조화된 사실로 검사하지 못함. 노지관수에 일반화 금지."
+      ]
+    },
+    {
+      "id": "221f68c9-6f44-5252-86b2-e07b1a602809",
+      "parentId": null,
+      "sourceId": "rda-pepper-harvest",
+      "offset": 1832,
+      "length": 142,
+      "textSha256": "768d57e0f49f003f25c45bdbf9536be79a4ad7a821d2b2b9f934975d6d7a05ee",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "고추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "rda-pepper-harvest",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1042",
+        "documentTitle": "고추 안정생산 포장관리와 적기 수확",
+        "sourceTitle": "고추 안정생산 포장관리와 적기 수확",
+        "rawSha256": "e7e3e1654d9e14f3f34dfc8fc83d6f576c664eac645af5a76ca52ed1b126efe8",
+        "selectedSha256": "f7b90425f2509a215023742f7297f265f312634a8e549f0322f25b9ad1bed2ad",
+        "label": "pepper-green-harvest"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "과거 전문약제 일괄살포/엽면시비농도 제외. 풋/홍고추 구분, 물리관리와 일반 수확만.",
+        "풋고추/홍고추는 생산 목적이며 품종 필드로 대체하지 않음. 현재 입력에 생산목적 구조화 필드가 없어 조건부."
+      ]
+    },
+    {
+      "id": "5cb63ee6-a9a1-53f1-97c6-472898991bf8",
+      "parentId": null,
+      "sourceId": "rda-pepper-harvest",
+      "offset": 2226,
+      "length": 120,
+      "textSha256": "25104aa73afb271289c23416d496b28692873d5d2965b0d2ac116b723f5ccacf",
+      "groups": [
+        "expanded"
+      ],
+      "metadata": {
+        "cropName": "고추",
+        "sourceType": "TECH_DOCUMENT",
+        "sourceId": "rda-pepper-harvest",
+        "sourceUrl": "https://www.rda.go.kr/middlePopOpenPopNongsaroDBView.do?no=1042",
+        "documentTitle": "고추 안정생산 포장관리와 적기 수확",
+        "sourceTitle": "고추 안정생산 포장관리와 적기 수확",
+        "rawSha256": "e7e3e1654d9e14f3f34dfc8fc83d6f576c664eac645af5a76ca52ed1b126efe8",
+        "selectedSha256": "f7b90425f2509a215023742f7297f265f312634a8e549f0322f25b9ad1bed2ad",
+        "label": "pepper-red-harvest"
+      },
+      "constraints": {
+        "cropName": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "고추"
+          ]
+        },
+        "workType": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "HARVEST"
+          ]
+        },
+        "harvestPart": {
+          "state": "EXPLICIT",
+          "allowed": [
+            "FRUIT"
+          ]
+        }
+      },
+      "notStated": [
+        "cultivation",
+        "growthStage",
+        "propagation",
+        "region",
+        "species",
+        "variety"
+      ],
+      "unresolvedScope": true,
+      "caveats": [
+        "과거 전문약제 일괄살포/엽면시비농도 제외. 풋/홍고추 구분, 물리관리와 일반 수확만.",
+        "풋고추/홍고추는 생산 목적이며 품종 필드로 대체하지 않음. 현재 입력에 생산목적 구조화 필드가 없어 조건부."
+      ]
+    }
+  ]
+}

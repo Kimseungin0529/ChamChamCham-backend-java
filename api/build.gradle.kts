@@ -86,3 +86,12 @@ tasks.register<JavaExec>("coachingEvidenceEvaluate") {
         args(run)
     }
 }
+
+// 승인한 로컬 전용 DB/임베딩으로만 실제 검색을 비교한다. 기본 test에서는 실행하지 않는다.
+tasks.register<JavaExec>("coachingRetrievalEvaluate") {
+    dependsOn(tasks.testClasses)
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.chamchamcham.lab.CoachingRetrievalLab")
+    workingDir = rootProject.projectDir
+    maxHeapSize = "512m"
+}

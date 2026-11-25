@@ -1,0 +1,21 @@
+name: ccc-coaching-retrieval
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:1d533553fefe4f12e5d80c7b80622ba0c382abb5758856f52983d8789179f0fb
+    pull_policy: never
+    mem_limit: 1g
+    cpus: 1
+    environment:
+      POSTGRES_DB: ccc_coaching_retrieval
+      POSTGRES_USER: ccc_coaching_retrieval
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?전용 도구로 준비하세요}
+    ports: ["127.0.0.1:15434:5432"]
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ccc_coaching_retrieval -d ccc_coaching_retrieval"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  postgres:
+    name: ccc-coaching-retrieval-postgres-v2
